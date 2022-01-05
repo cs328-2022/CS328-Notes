@@ -1,0 +1,34 @@
+name: preview-pull-request
+on: 
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  preview_pull_request:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9.7]
+    steps:
+      - uses: actions/checkout@v2
+
+    # Install Python and dependencies
+    - name: Setup Python 3.9.7
+      uses: actions/setup-python@v2
+      with: 
+        python-version: '3.9.7'
+        cache: 'pip'
+
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+
+    # Build the book
+    - name: Build the book
+      run: jupyter-book build CS328-Notes
+
+    # Deploy book's HTML output to gh-pages branch
+    - name: Deploy on GitHub pages
+      uses: peaceiris/actions-gh-pages@v3
+        with: 
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: CS328-Notes/_build/html
