@@ -26,9 +26,10 @@ jobs:
     - name: Build the book
       run: jupyter-book build CS328-Notes
 
-    # Deploy book's HTML output to gh-pages branch
-    - name: Deploy on GitHub pages
-      uses: peaceiris/actions-gh-pages@v3
-        with: 
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: CS328-Notes/_build/html
+    # Archive jupyter book output
+    - name: Archive Artifacts
+    - uses: actions/upload-artifact@v2
+      with:
+        path: CS328-Notes/_build/html
+        retention-days: 90
+        
