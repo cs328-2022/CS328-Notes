@@ -5,5 +5,5 @@ format: jb-book
 root: intro
 parts:
 - caption: Foundations
-  chapters:
+  chapters:   
   - file: notebooks/2022-01-03-representations-probability.ipynb
