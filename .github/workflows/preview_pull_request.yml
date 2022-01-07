@@ -31,7 +31,7 @@ jobs:
 
       # Archive jupyter book output
       - name: Archive Artifacts
-      - uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           path: CS328-Notes/_build/html
           retention-days: 90
