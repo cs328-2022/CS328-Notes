@@ -1,13 +1,13 @@
 name: deploy
 # Triggers on push (or merged_pull_request) to main branch
-on: 
+on:
   push:
     branches: [main]
 jobs:
   build-and-deploy-book:
     runs-on: ubuntu-latest
     strategy:
-      matrix: 
+      matrix:
         python-version: [3.9.7]
     steps:
       - uses: actions/checkout@v2
@@ -15,10 +15,10 @@ jobs:
       # Install Python and dependencies
       - name: Setup Python 3.9.7
         uses: actions/setup-python@v2
-        with: 
+        with:
           python-version: '3.9.7'
           cache: 'pip'
-      
+
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
@@ -29,7 +29,6 @@ jobs:
       # Deploy book's HTML output to gh-pages branch
       - name: Deploy on GitHub pages
         uses: peaceiris/actions-gh-pages@v3
-        with: 
+        with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: CS328-Notes/_build/html
-      
