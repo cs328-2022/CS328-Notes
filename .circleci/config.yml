@@ -17,7 +17,7 @@ jobs:
             sudo pip install -r requirements.txt
       - run:
           command: jupyter-book build CS328-Notes
-          no_output_timeout: 10m
+          no_output_timeout: 30m
       - store_artifacts:
           path: CS328-Notes/_build/html
           destination: CS328-Notes
