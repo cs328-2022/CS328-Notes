@@ -1,5 +1,7 @@
-name: preview-pull-request
-on: 
+name: Preview Pull Request
+on:
+  push:
+    branches: [main]
   pull_request:
     branches: [ main ]
 
