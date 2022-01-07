@@ -11,12 +11,9 @@ jobs:
     #   - MINICONDA_PATH: ~/miniconda
     steps:
       - checkout
-      # - run: ./build_tools/circle/checkout_merge_commit.sh
       - run:
           name: install python dependencies
           command: |
-            # python -m virtualenv venv
-            # . venv/bin/activate
             sudo pip install -r requirements.txt
       - run:
           command: jupyter-book build CS328-Notes
