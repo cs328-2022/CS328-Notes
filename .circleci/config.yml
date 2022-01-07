@@ -1,0 +1,33 @@
+version: 2
+
+jobs:
+  build_jupyter_book:
+    docker:
+      - image: circleci/python:3.6.4
+    # environment:
+    #   - OMP_NUM_THREADS: 1
+    #   - MKL_NUM_THREADS: 2
+    #   - OPENBLAS_NUM_THREADS: 2
+    #   - MINICONDA_PATH: ~/miniconda
+    steps:
+      - checkout
+      - run:
+          name: install python dependencies
+          command: |
+            sudo pip install -r requirements.txt
+      - run:
+          command: jupyter-book build CS328-Notes
+          no_output_timeout: 30m
+      - store_artifacts:
+          path: CS328-Notes/_build/html
+          destination: CS328-Notes
+
+workflows:
+  version: 2
+  build_jupyter_book:
+    jobs:
+      # TODO add lint step
+      # - lint
+      - build_jupyter_book
+          # requires:
+          #   - lint
