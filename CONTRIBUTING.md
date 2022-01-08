@@ -7,7 +7,7 @@ Some content taken from scikit-learn contributing document.
 - Crash Course in Contributing to Scikit-Learn & Open Source Projects: [Video](https://www.youtube.com/watch?v=5OL8XoMMOfA), [Transcript](https://github.com/data-umbrella/event-transcripts/blob/main/2020/05-andreas-mueller-contributing.md)
 - Example of Submitting a Pull Request to scikit-learn: [Video](https://www.youtube.com/watch?v=PU1WyDPGePI), [Transcript](https://github.com/data-umbrella/event-transcripts/blob/main/2020/06-reshama-shaikh-sklearn-pr.md)
 
-## How to Contribute: 
+## How to Contribute:
 1. [Create an account](https://github.com/) on GitHub if you do not already have one.
 2. Fork the [project repository](https://github.com/cs328-2022/CS328-Notes): click on the ‘Fork’ button near the top of the page. This creates a copy of the code under your account on the GitHub user account. For more details on how to fork a repository see [this guide](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
 3. Clone your fork of the CS328-Notes repo from your GitHub account to your local disk:
@@ -59,3 +59,6 @@ git merge upstream/main
 Subsequently, you might need to solve the conflicts. You can refer to the [Git documentation related to resolving merge conflict using the command line](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line).
 
 ## Adding Pages to CS328-Notes book
+1. Add the Markdown/IPYNB file in the `CS328-Notes/notebooks` directory.
+2. Add the filename to the Table to Content file `CS328-Notes/_toc.yml`.
+3.
