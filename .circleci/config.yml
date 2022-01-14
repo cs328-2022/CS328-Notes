@@ -3,20 +3,17 @@ version: 2
 jobs:
   build_jupyter_book:
     docker:
-      - image: circleci/python:3.6.4
-    # environment:
-    #   - OMP_NUM_THREADS: 1
-    #   - MKL_NUM_THREADS: 2
-    #   - OPENBLAS_NUM_THREADS: 2
-    #   - MINICONDA_PATH: ~/miniconda
+      - image: continuumio/miniconda
+    environment:
+      - OMP_NUM_THREADS: 1
+      - MKL_NUM_THREADS: 2
+      - OPENBLAS_NUM_THREADS: 2
+      - MINICONDA_PATH: ~/miniconda
     steps:
       - checkout
+      - run: chmod +x ./build_tools/circle/checkout_merge_commit.sh; ./build_tools/circle/checkout_merge_commit.sh
       - run:
-          name: install python dependencies
-          command: |
-            sudo pip install -r requirements.txt
-      - run:
-          command: jupyter-book build CS328-Notes
+          command: chmod +x ./build_tools/circle/build_jupyter_book.sh; ./build_tools/circle/build_jupyter_book.sh
           no_output_timeout: 30m
       - store_artifacts:
           path: CS328-Notes/_build/html

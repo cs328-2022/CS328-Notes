@@ -7,4 +7,3 @@ parts:
 - caption: Foundations
   chapters:
   - file: notebooks/2022-01-03-representations-probability.ipynb
-  - file: notebooks/sample.md
