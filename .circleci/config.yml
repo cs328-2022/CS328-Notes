@@ -11,20 +11,10 @@ jobs:
       - MINICONDA_PATH: ~/miniconda
     steps:
       - checkout
-      - run: sudo bash ./build_tools/circle/checkout_merge_commit.sh
-      - run: sudo bash ./build_tools/circle/checksum_python_files.sh /tmp/checksum.txt
-      - restore_cache:
-          keys:
-            - v3-{{ .Branch }}-{{ checksum "/tmp/checksum.txt" }}
-            - v3-{{ .Branch }}
-            - v3-main
+      - run: chmod +x ./build_tools/circle/checkout_merge_commit.sh; ./build_tools/circle/checkout_merge_commit.sh
       - run:
-          command: sudo bash ./build_tools/circle/build_jupyter_book.sh
+          command: chmod +x ./build_tools/circle/build_jupyter_book.sh; ./build_tools/circle/build_jupyter_book.sh
           no_output_timeout: 30m
-      - save_cache:
-          paths:
-            - CS328-Notes/_build/.jupyter_cache
-          key: v3-{{ .Branch }}-{{ checksum "/tmp/checksum.txt" }}
       - store_artifacts:
           path: CS328-Notes/_build/html
           destination: CS328-Notes
