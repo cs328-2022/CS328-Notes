@@ -4,6 +4,9 @@
 format: jb-book
 root: intro
 parts:
+- caption: Logistics
+  chapters:
+  - file: notebooks/CONTRIBUTING.md
 - caption: Foundations
   chapters:
   - file: notebooks/2022-01-03-representations-probability.ipynb
