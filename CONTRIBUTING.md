@@ -1,6 +1,6 @@
-Contributing to CS328 Notes
+# Contributing to CS328 Notes
 
-Some content taken from scikit-learn contributing document.
+A portion of content taken from scikit-learn contributing document.
 
 ## Video Resources
 - Useful Playlist on Youtube: [Playlist](https://www.youtube.com/playlist?list=PLBKcU7Ik-ir-b1fwjNabO3b8ebs9ez5ga)
@@ -41,7 +41,12 @@ git merge upstream/main
 git checkout -b my_feature
 ```
 and start making changes. Always use a feature branch. It’s good practice to never work on the `main` branch!
-9. Develop the feature on your feature branch on your computer, using Git to do the version control. When you’re done editing, add changed files using `git add` and then `git commit`:
+9. Install pre-commit to run code style checks before each commit:
+```bash
+pip install pre-commit
+pre-commit install
+```
+10. Develop the feature on your feature branch on your computer, using Git to do the version control. When you’re done editing, add changed files using `git add` and then `git commit`:
 ```bash
 git add modified_files
 git commit
@@ -60,5 +65,11 @@ Subsequently, you might need to solve the conflicts. You can refer to the [Git d
 
 ## Adding Pages to CS328-Notes book
 1. Add the Markdown/IPYNB file in the `CS328-Notes/notebooks` directory.
-2. Add the filename to the Table to Content file `CS328-Notes/_toc.yml`.
-3.
+2. In case the Markdown/IPYNB file import images/gifs/data-files, make sure to place the files in a new folder in assets directory `CS328-Notes\assets\<same-name-as-of-IPYNB-MD-file>`.
+3. Add the filename to the Table to Content file `CS328-Notes/_toc.yml`.
+4. Build the jupyter-book on your local machine using `jupyter-book build CS328-Notes`. The html output will be placed in `CS328-Notes/_build/html` and is for your reference only. The published html pages are generated automatically on github.
+
+## Passing Checks on PR and preview
+1. Make sure all the check pass in the Pull Request.
+2. You can preview the temporary build of the pull request on web by clicking on `Details` link of `ci/circleci:build_jupyter_book artifact` check. This would how exactly the E-book would be once the pull request is merged.
+3. Resolve the merge conflicts in PR, if any.
