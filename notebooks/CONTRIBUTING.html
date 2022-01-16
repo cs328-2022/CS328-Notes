@@ -124,6 +124,11 @@
    Data Representations
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022-01-03-representations-probability-notebook.html">
+   [CODE] 🧑‍💻Data Representations
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -227,8 +232,18 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-myst-markdown-features">
+   Using MyST markdown features
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#passing-checks-on-pr-and-preview">
    Passing Checks on PR and preview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pull-request-checklist">
+   Pull Request Checklist
   </a>
  </li>
 </ul>
@@ -267,8 +282,18 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-myst-markdown-features">
+   Using MyST markdown features
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#passing-checks-on-pr-and-preview">
    Passing Checks on PR and preview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pull-request-checklist">
+   Pull Request Checklist
   </a>
  </li>
 </ul>
@@ -368,12 +393,32 @@ git merge upstream/main
 <li><p>Build the jupyter-book on your local machine using <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">build</span> <span class="pre">CS328-Notes</span></code>. The html output will be placed in <code class="docutils literal notranslate"><span class="pre">CS328-Notes/_build/html</span></code> and is for your reference only. The published html pages are generated automatically on github.</p></li>
 </ol>
 </div>
+<div class="section" id="using-myst-markdown-features">
+<h2>Using MyST markdown features<a class="headerlink" href="#using-myst-markdown-features" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Jupyter Book supports MyST markdown. Refer <a class="reference external" href="https://jupyterbook.org/content/myst.html">Here</a>.</p></li>
+<li><p>Refer <a class="reference external" href="https://jupyterbook.org/content/index.html">Here</a> for a more broad overview.</p></li>
+<li><p>Please refer <a class="reference external" href="https://jupyterbook.org/content/executable/index.html">here</a> as well.</p></li>
+</ol>
+</div>
 <div class="section" id="passing-checks-on-pr-and-preview">
 <h2>Passing Checks on PR and preview<a class="headerlink" href="#passing-checks-on-pr-and-preview" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
 <li><p>Make sure all the check pass in the Pull Request.</p></li>
-<li><p>You can preview the temporary build of the pull request on web by clicking on <code class="docutils literal notranslate"><span class="pre">Details</span></code> link of <code class="docutils literal notranslate"><span class="pre">ci/circleci:build_jupyter_book</span> <span class="pre">artifact</span></code> check. This would how exactly the E-book would be once the pull request is merged.</p></li>
+<li><p>You can preview the temporary build of the pull request on web by clicking on <code class="docutils literal notranslate"><span class="pre">Details</span></code> link of <code class="docutils literal notranslate"><span class="pre">ci/circleci:build_jupyter_book</span> <span class="pre">artifact</span></code> check. This is how exactly the E-book would look once the pull request is merged.</p></li>
 <li><p>Resolve the merge conflicts in PR, if any.</p></li>
+</ol>
+</div>
+<div class="section" id="pull-request-checklist">
+<h2>Pull Request Checklist<a class="headerlink" href="#pull-request-checklist" title="Permalink to this headline">¶</a></h2>
+<p>Before a PR can be merged, it needs to be approved by a TA. Please prefix the title of your pull request with [MRG] if the PR is complete and should be subjected to a detailed review. An incomplete contribution – where you expect to do more work before receiving a full review – should be prefixed [WIP] (to indicate a work in progress) and changed to [MRG] when it matures, before the assigned deadline with all checks passing and no merge conflicts.</p>
+<ol>
+<li><p>Give your pull request a helpful title</p>
+<p><code class="docutils literal notranslate"><span class="pre">[WIP</span> <span class="pre">or</span> <span class="pre">MRG]</span> <span class="pre">CS328</span> <span class="pre">Submission</span> <span class="pre">:</span> <span class="pre">Group</span> <span class="pre">&lt;Group</span> <span class="pre">No.&gt;</span></code></p>
+</li>
+<li><p>Please make sure the name of md/ipynb files is in format <code class="docutils literal notranslate"><span class="pre">mm_dd_yy_topic_name</span></code>, where date is of the day when the corresponding lecture was conducted.</p></li>
+<li><p>Follow the PR template. The template will automatically open when creating a PR.</p></li>
+<li><p>Make sure all the checks are passing with no merge conflicts.</p></li>
 </ol>
 </div>
 </div>
