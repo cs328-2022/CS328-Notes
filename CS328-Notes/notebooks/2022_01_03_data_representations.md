@@ -93,7 +93,7 @@ plt.close(fig)
 
 :::{admonition} Tensor values in MNIST dataset
 :class: dropdown
-```{figure} ../assets/2022-01-03-representations-probability/mnist_gray_values.gif
+```{figure} ../assets/2022_01_03_data_representations/mnist_gray_values.gif
 ---
 name: mnist-tensor
 ---
@@ -104,7 +104,7 @@ Tensor values in MNIST dataset images.
 
 :::{admonition} Tensor values in CIFAR dataset
 :class: dropdown
-```{figure} ../assets/2022-01-03-representations-probability/cifar_frog_rgb.png
+```{figure} ../assets/2022_01_03_data_representations/cifar_frog_rgb.png
 ---
 name: cifar-frog-tensor
 ---

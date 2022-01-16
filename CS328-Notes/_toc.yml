@@ -10,5 +10,6 @@ parts:
   - file: notebooks/deadlines.md
 - caption: Foundations
   chapters:
-  - file: notebooks/2022-01-03-representations-probability.md
-  - file: notebooks/2022-01-03-representations-probability-notebook.ipynb
+  - file: notebooks/2022_01_03_data_representations.md
+  - file: notebooks/2022_01_03_data_representations_notebook.ipynb
+  - file: notebooks/2022_01_03_distance_function.md
