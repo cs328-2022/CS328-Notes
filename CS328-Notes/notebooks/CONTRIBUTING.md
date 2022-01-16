@@ -69,7 +69,23 @@ A portion of content taken from scikit-learn contributing document.
 3. Add the filename to the Table to Content file `CS328-Notes/_toc.yml`.
 4. Build the jupyter-book on your local machine using `jupyter-book build CS328-Notes`. The html output will be placed in `CS328-Notes/_build/html` and is for your reference only. The published html pages are generated automatically on github.
 
+## Using MyST markdown features
+1. Jupyter Book supports MyST markdown. Refer [Here](https://jupyterbook.org/content/myst.html).
+2. Refer [Here](https://jupyterbook.org/content/index.html) for a more broad overview.
+3. Please refer [here](https://jupyterbook.org/content/executable/index.html) as well.
+
 ## Passing Checks on PR and preview
 1. Make sure all the check pass in the Pull Request.
-2. You can preview the temporary build of the pull request on web by clicking on `Details` link of `ci/circleci:build_jupyter_book artifact` check. This would how exactly the E-book would be once the pull request is merged.
+2. You can preview the temporary build of the pull request on web by clicking on `Details` link of `ci/circleci:build_jupyter_book artifact` check. This is how exactly the E-book would look once the pull request is merged.
 3. Resolve the merge conflicts in PR, if any.
+
+
+## Pull Request Checklist
+Before a PR can be merged, it needs to be approved by a TA. Please prefix the title of your pull request with [MRG] if the PR is complete and should be subjected to a detailed review. An incomplete contribution – where you expect to do more work before receiving a full review – should be prefixed [WIP] (to indicate a work in progress) and changed to [MRG] when it matures, before the assigned deadline with all checks passing and no merge conflicts.
+
+1. Give your pull request a helpful title
+
+   `[WIP or MRG] CS328 Submission : Group <Group No.>`
+2. Please make sure the name of md/ipynb files is in format `mm_dd_yy_topic_name`, where date is of the day when the corresponding lecture was conducted.
+3. Follow the PR template. The template will automatically open when creating a PR.
+4. Make sure all the checks are passing with no merge conflicts.

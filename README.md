@@ -4,7 +4,11 @@
 
 Notes compiled by the students of CS328 - 2022 students as part of Scribe Notes assignment.
 
-[Website](cs328-2022.github.io/cs328-notes/) generated with [Jupyter Book](https://jupyterbook.org/).
+[Website](https://cs328-2022.github.io/CS328-Notes)
 
 ## Contributing
 Refer [Contributing Page](https://cs328-2022.github.io/CS328-Notes/notebooks/CONTRIBUTING.html).
+
+<hr/>
+
+_powered by [Jupyter Book](https://jupyterbook.org/)_

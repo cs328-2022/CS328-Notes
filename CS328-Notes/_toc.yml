@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: intro
+root: intro.md
 parts:
 - caption: Logistics
   chapters:
@@ -10,4 +10,5 @@ parts:
   - file: notebooks/deadlines.md
 - caption: Foundations
   chapters:
-  - file: notebooks/2022-01-03-representations-probability.ipynb
+  - file: notebooks/2022-01-03-representations-probability.md
+  - file: notebooks/2022-01-03-representations-probability-notebook.ipynb
