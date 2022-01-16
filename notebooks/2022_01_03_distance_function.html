@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Deadlines &#8212; CS328-2022 Notes</title>
+    <title>Distance Function &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -51,8 +53,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Data Representations" href="2022_01_03_data_representations.html" />
-    <link rel="prev" title="Contributing to CS328 Notes" href="CONTRIBUTING.html" />
+    <link rel="prev" title="[CODE] 🧑‍💻Data Representations" href="2022_01_03_data_representations_notebook.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -101,14 +102,14 @@
   Logistics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="CONTRIBUTING.html">
    Contributing to CS328 Notes
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
    Deadlines
   </a>
  </li>
@@ -118,7 +119,7 @@
   Foundations
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_01_03_data_representations.html">
    Data Representations
@@ -129,8 +130,8 @@
    [CODE] 🧑‍💻Data Representations
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_01_03_distance_function.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Distance Function
   </a>
  </li>
@@ -175,7 +176,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/deadlines.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_03_distance_function.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -195,7 +196,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/yadav-sachin/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/deadlines.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/yadav-sachin/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_03_distance_function.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -216,6 +217,19 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nice-to-have-metric-properties">
+   Nice to have metric properties
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -223,24 +237,67 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Deadlines</h1>
+                <h1>Distance Function</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nice-to-have-metric-properties">
+   Nice to have metric properties
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="deadlines">
-<h1>Deadlines<a class="headerlink" href="#deadlines" title="Permalink to this headline">¶</a></h1>
-<p>The below order was decided by a random permutation with a fixed seed value.</p>
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQrNEV7uvcGd_lThIbbCqnpeiC4ThI7NlpTO4GAoS4HTc9UU04TWbYb8L6Js7MF4nGnhTiWnTj6OKFW/pubhtml?gid=812220480&amp;single=true&amp;widget=true&amp;headers=false" width=900px height=500px></iframe>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You can open a PR as soon as you start working with the assigned lectures with <code class="docutils literal notranslate"><span class="pre">[WIP]</span></code> mentioned in the PR title. Once done, before the deadline, change <code class="docutils literal notranslate"><span class="pre">[WIP]</span></code> to <code class="docutils literal notranslate"><span class="pre">[MRG]</span></code> in the PR title indicating a submssion with all checks passing and no merge conflicts.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="distance-function">
+<h1>Distance Function<a class="headerlink" href="#distance-function" title="Permalink to this headline">¶</a></h1>
+<p>After object representation, next we need distance functions for objects.</p>
+<dl class="simple myst">
+<dt>Distance</dt><dd><p>A function <span class="math notranslate nohighlight">\(d\)</span>, given two objects <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>; produces a real number.</p>
+</dd>
+</dl>
+<div class="math notranslate nohighlight">
+\[ d(x, y) \rightarrow \mathbb{R} \geq 0\]</div>
+<div class="section" id="nice-to-have-metric-properties">
+<h2>Nice to have metric properties<a class="headerlink" href="#nice-to-have-metric-properties" title="Permalink to this headline">¶</a></h2>
+<p>It would be nice, if my distance function have these below properties. But it is not necessary for the distance function to follow any of the property below.</p>
+<p>Nice if, he distance between two different objects is always greater than zero.</p>
+<div class="math notranslate nohighlight" id="equation-property-1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-property-1" title="Permalink to this equation">¶</a></span>\[\begin{split}d(x, y) &amp;= 0 \; iff \; x = y \\
+d(x, y) &amp;\geq 0\end{split}\]</div>
+<p>It would be nice if symmetric.</p>
+<div class="math notranslate nohighlight" id="equation-property-2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-property-2" title="Permalink to this equation">¶</a></span>\[d(x, y) = d(y, x)\]</div>
+<p>Nice, if follows triangle inequality.</p>
+<div class="math notranslate nohighlight" id="equation-property-3">
+<span class="eqno">(3)<a class="headerlink" href="#equation-property-3" title="Permalink to this equation">¶</a></span>\[d(x, y) + d(y, z) \geq d(x, z)\]</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The above three properties are “nice to have” and not necessary for a distance function to follow.</p>
+</div>
+<p>Also good, if we are able to calculate “average”.</p>
+<dl class="simple myst">
+<dt>Average</dt><dd><p><span class="math notranslate nohighlight">\(\min_{x} \sum^{}_{i} d(p_{i}, x)\)</span>. The object <span class="math notranslate nohighlight">\(x\)</span> which minimizes the sum of distance from the objects in a given set to <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</dd>
+</dl>
+<p>It would be nice, if average can be calculated easily.</p>
+<dl class="simple myst">
+<dt>Eucledian Distance</dt><dd><p><span class="math notranslate nohighlight">\(d(x, y) = \sqrt{\sum_{i} (x_{i} - y{i})^{2}}\)</span>. The length of line segment joint vector <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> in Eucledian space.</p>
+</dd>
+</dl>
+<p>Eucledian distance follows all of the nice properties (including “easy average”) that we have mentioned above.</p>
 </div>
 </div>
 
@@ -269,19 +326,12 @@
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="CONTRIBUTING.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_01_03_data_representations_notebook.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Contributing to CS328 Notes</p>
+            <p class="prev-next-title">[CODE] 🧑‍💻Data Representations</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="2022_01_03_data_representations.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Representations</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
