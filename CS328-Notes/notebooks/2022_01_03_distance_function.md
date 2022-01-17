@@ -14,7 +14,7 @@ It would be nice, if my distance function have these below properties. But it is
 Nice if, he distance between two different objects is always greater than zero.
 ```{math}
 :label: property_1
-d(x, y) &= 0 \; iff \; x = y \\
+d(x, y) &= 0 \rightarrow x = y \\
 d(x, y) &\geq 0
 ```
 
