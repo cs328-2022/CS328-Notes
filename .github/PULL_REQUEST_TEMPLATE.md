@@ -3,7 +3,7 @@ Thanks for contributing a pull request! Please ensure you have taken a look at
 the contribution guidelines: https://cs328-2022.github.io/CS328-Notes/notebooks/CONTRIBUTING.html
 -->
 
-<!-- Please make sure the name of files is in format yy_mm_dd_topic_name -->
+<!-- Please make sure the name of files is in format yyyy_mm_dd_topic_name -->
 
 #### Lectures
 <!-- Date here means, the date when the specific lecture was conducted -->

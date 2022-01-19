@@ -86,6 +86,6 @@ Before a PR can be merged, it needs to be approved by a TA. Please prefix the ti
 1. Give your pull request a helpful title
 
    `[WIP or MRG] CS328 Submission : Group <Group No.>`
-2. Please make sure the name of md/ipynb files is in format `mm_dd_yy_topic_name`, where date is of the day when the corresponding lecture was conducted.
+2. Please make sure the name of md/ipynb files is in format `yyyy_mm_dd_topic_name`, where date is of the day when the corresponding lecture was conducted.
 3. Follow the PR template. The template will automatically open when creating a PR.
 4. Make sure all the checks are passing with no merge conflicts.

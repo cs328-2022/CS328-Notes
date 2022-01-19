@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-np.random.seed(14012022)
+np.random.seed(18012022)
 groups_df = pd.read_csv("groups.csv")
 groups = groups_df.to_numpy()
 np.random.shuffle(groups)
