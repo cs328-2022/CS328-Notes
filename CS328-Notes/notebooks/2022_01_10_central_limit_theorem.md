@@ -1,1 +1,1 @@
-# Central Limit Theorem
+# Lecture 3: Central Limit Theorem

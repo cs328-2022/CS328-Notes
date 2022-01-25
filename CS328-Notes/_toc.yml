@@ -13,4 +13,5 @@ parts:
   - file: notebooks/2022_01_03_data_representations.md
   - file: notebooks/2022_01_03_data_representations_notebook.ipynb
   - file: notebooks/2022_01_03_distance_function.md
+  - file: notebooks/2022_01_06_object_representations.md
   - file: notebooks/2022_01_10_central_limit_theorem
