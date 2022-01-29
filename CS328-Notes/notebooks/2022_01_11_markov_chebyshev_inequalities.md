@@ -35,7 +35,7 @@ Markov's inequality is not useful when  $ a < E(x) $
 Markov's inequality does not consider left hand side of expectation ( $\mu$)  and hence does not give any information on its distribution.
 
 
-In case of a in left hand side of  $ \mu $ ,therefore for all X  $\frac{\operatorname{E}[X]}{a} \leq 1 $
+In case of a in left hand side of  $ \mu $ ,therefore for all $X$,   $\frac{\operatorname{E}[X]}{a} \leq 1 $
 
 
 $$
@@ -54,11 +54,11 @@ $$
 $$
 \operatorname{Pr}(|X-\mathbf{E}[X]| \geq a) \leq \frac{\operatorname{Var}[X]}{a^{2}}
 $$
-- We can analytically verify that on increasing sigma, probability of $|X-\mathbf{E}[X]| \geq a$ increase as distribution spread out. Also, with an increase in a, it is less probable to find X in said interval.
+- We can analytically verify that on increasing $\sigma$, probability of $|X-\mathbf{E}[X]| \geq a$ increase as distribution spread out. Also, with an increase in $a$, it is less probable to find $X$ in that interval.
 
 ````{prf:proof}
 
-In markov's inequality  Y is non negative similarly, $ Y^{2}$ is also non negative.
+In markov's inequality  $Y$ is non negative similarly, $ Y^{2}$ is also non negative.
 
 $$
 \begin{array}{l}
