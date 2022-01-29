@@ -1,6 +1,4 @@
-# Lecture 5
-
-### Chernoff Bound
+# Chernoff Bound
 
 Let $X_{i}$ be the random variable such that probability of $X_{i}=1$ is $p$ and $X_{i}=0$ with probability $(1-p)$ and all $X_{i}$s are independent of each other.
 Let
@@ -30,7 +28,17 @@ P(S \geq (1+\delta)np) \leq  e^{-\frac{\delta^2}{2+\delta}np}
 :label: property_5
 P(S\leq(1-\gamma)np) \leq e^{-\gamma^2 \frac{ np}{2}}
 ```
-<b>Proof : </b>
+
+```{figure} ../assets/2022_01_14_chernoff_bound/chernoff_tails.png
+---
+height: 250px
+name: chernoff-tails-fig
+---
+A Schematic of upper and lower tails of chernoff bound
+```
+
+
+````{prf:proof}
 Apply Markov's inequality, for any $t> 0$, we have
 
 $$P(S \geq (1+\delta)\mu) = P(e^{tS} \geq e^{t(1+\delta)\mu)} ) \leq \frac{E[e^{tS}]}{e^{t(1+\delta)\mu)}}$$
@@ -44,14 +52,20 @@ $$ \frac{ e^{np(e^t-1)} }{e^{t(1+\delta)np}} = \frac{ e^{np(1+\delta-1)} }{e^{(1
 $$ P(S \geq (1+\delta)\mu) \leq  \Big(\frac{ e^{\delta} }{(1+\delta)^{1+\delta}}\Big)^{np} $$
 
 Now taking natural logarithm on the right side of above equation and using the inequality
+```
 $$ln(1+x) > \frac{x}{1+x} \geq \frac{x}{1+x/2}$$
 
 $$np(\delta - (1+\delta)ln(1+\delta)) \leq np\Big(\delta - (1+\delta)\frac{\delta}{1+\delta/2}\Big) = np\Big(\frac{(\delta^2 + 2\delta) - (2\delta + 2\delta^2}{2+\delta}\Big) = -\frac{\delta^2}{2+\delta}np$$
 
 Taking exponent on the sides
 
+
+```{math}
 $$ \Big(\frac{ e^{\delta} }{(1+\delta)^{1+\delta}}\Big)^{np} \leq e^{-\frac{\delta^2}{2+\delta}np} $$
 
 $$ P(S \geq (1+\delta)np) \leq  e^{-\frac{\delta^2}{2+\delta}np} $$
+```
 
 Similarly, the lower tail can be derived.
+````
+z
