@@ -4,19 +4,26 @@
 
 Let $X$ be a non-negative random variable and $a>0$ then the probablity that $X$ is atleast $a$ is less than equal to the Expectation of $X$ divided by $a$:
 
-$$P(x \geqslant a) \leqslant \frac{E(x)}{a} \hspace{0.5cm} \text { For any } a>0$$
+$$P(X \geqslant a) \leqslant \frac{E[X]}{a} \hspace{0.5cm} \text { For any } a>0$$
 
+````{prf:proof}
+Consider
 
+$$ E(X)=\int_{0}^{\infty} x p(x) d x $$
 
-$$ E(x)=\int_{0}^{\infty} x p(x) d x$$
+$$ E(X)=\int_{0}^{a} x p(x) d x+\int_{a}^{\infty} x p(x) d x $$
 
+$$ \geq \int_{a}^{\infty} x p(x) d x  $$
 
-$$ E(x)=\int_{0}^{a} x p(x) d x+\int_{a}^{\infty} x p(x) d x $$
+$$ \geq \int_{a}^{\infty} a p(x) d  $$
 
-We have
-```{math}
-x \geqslant 0, p(x) \geqslant 0  \hspace{1cm}    \text{and} \hspace{1cm}  x \geqslant a, p(x \geqslant a) \hspace{0.5cm} \text{respectively}
-```
+$$ = a \int_{a}^{\infty} p(x) = a P[X \geq a] dx  $$
+
+$$  E(X) \geq a P[X \geq a] $$
+
+$$ \therefore P(X \geqslant a) \leqslant \frac{E[X]}{a} $$
+
+````
 
 ```{tip}
 Markov's inequality is not useful when  $ a < E(x) $
@@ -99,18 +106,6 @@ In proof we saw that $(X-\mathbf{E}[X])^{2}$  is  better than $(X-\mathbf{E}[X])
 What is so special about working with $X^{2}$ and why not other functions?
 
 - Moment generating functions of $X$ are stronger bound than $X^{2}$
-
-<!-- ```{math}
-\begin{array}{c}
-Y=\exp (t x) \quad \text { for some } t \in \text { real nos. } \\
-\\
-\text{MGF with kth term }\\
-
-E\left[e^{t x}\right]=1+t E[x]+\frac{t^{2}}{2 !} E\left[x^{2}\right]+\cdots \\
-\frac{t^{k}}{k !}\left[x^{k}\right]+\cdots
-\end{array}
-
-``` -->
 
 For a random variable $X$, let $ Y = \text{exp}(tX) $ for some $t \in \mathbb{R} $ . The moment generating function of $X$ is defined as expectation of $Y$.
 
