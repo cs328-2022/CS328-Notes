@@ -73,6 +73,7 @@ A portion of content taken from scikit-learn contributing document.
 1. Jupyter Book supports MyST markdown. Refer [Here](https://jupyterbook.org/content/myst.html).
 2. Refer [Here](https://jupyterbook.org/content/index.html) for a more broad overview.
 3. Please refer [here](https://jupyterbook.org/content/executable/index.html) as well.
+4. Use [`Sphinx-proof` syntax](https://sphinx-proof.readthedocs.io/en/latest/syntax.html) for Proofs, algorithms, properties, lemma, etc.
 
 ## Passing Checks on PR and preview
 1. Make sure all the check pass in the Pull Request.
