@@ -13,6 +13,6 @@ parts:
   - file: notebooks/2022_01_03_data_representations.md
   - file: notebooks/2022_01_03_data_representations_notebook.ipynb
   - file: notebooks/2022_01_03_distance_function.md
-  - file: notebooks/2022_01_11_markov.md
+  - file: notebooks/2022_01_11_markov_chebyshev_inequalities.md
   - file: notebooks/2022_01_13_chernoff_bound.md
   - file: notebooks/2022_01_13_chernoff_bound_tails.ipynb

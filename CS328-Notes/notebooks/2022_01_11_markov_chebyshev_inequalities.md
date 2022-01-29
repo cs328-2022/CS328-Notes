@@ -1,4 +1,4 @@
-# Markov's Inequality
+# Markov and Chebyshev Inequalities
 
 Let $X$ be a non-negative random variable and $a>0$ then the probablity that $X$ is atleast $a$ is less than equal to the Expectation of $X$ divided by $a$:
 
