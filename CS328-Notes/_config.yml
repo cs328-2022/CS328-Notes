@@ -47,3 +47,7 @@ parse:
     - substitution
     - colon_fence
     - amsmath
+
+sphinx:
+  extra_extensions:
+    - sphinx_proof
