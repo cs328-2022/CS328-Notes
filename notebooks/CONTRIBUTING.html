@@ -251,6 +251,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-instructions">
+   General Instructions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#pull-request-checklist">
    Pull Request Checklist
   </a>
@@ -298,6 +303,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#passing-checks-on-pr-and-preview">
    Passing Checks on PR and preview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-instructions">
+   General Instructions
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -417,6 +427,16 @@ git merge upstream/main
 <li><p>Make sure all the check pass in the Pull Request.</p></li>
 <li><p>You can preview the temporary build of the pull request on web by clicking on <code class="docutils literal notranslate"><span class="pre">Details</span></code> link of <code class="docutils literal notranslate"><span class="pre">ci/circleci:build_jupyter_book</span> <span class="pre">artifact</span></code> check. This is how exactly the E-book would look once the pull request is merged.</p></li>
 <li><p>Resolve the merge conflicts in PR, if any.</p></li>
+</ol>
+</div>
+<div class="section" id="general-instructions">
+<h2>General Instructions<a class="headerlink" href="#general-instructions" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Please add captions to figures/images, wherever seems suitable.</p></li>
+<li><p>For each external resource (image, content, etc.), please give due credit to the original source.</p></li>
+<li><p>All mathematical symbols (like x, y, d, C, set A) in the text needs to be inside <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">$</span></code>. This makes easy to differentiate these symbols from general text.</p></li>
+<li><p>In case, you are importing CSV or other data files in your code, put these files in corresponding assets folder. Then import the file in program from the assets directory.</p></li>
+<li><p>We can incorporate features from <a class="reference external" href="https://sphinx-proof.readthedocs.io/en/latest/syntax.html">Sphinx-Proof</a> extension for writing Algorithms, theorems, Lemmas, etc. The extension is enabled in the notebook.</p></li>
 </ol>
 </div>
 <div class="section" id="pull-request-checklist">
