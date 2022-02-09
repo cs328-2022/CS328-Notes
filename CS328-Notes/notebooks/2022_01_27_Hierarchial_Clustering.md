@@ -18,7 +18,7 @@
 
 - Consider the cluster centroids as points with weights $W_i^j$ and then recluster them.
 
-``` Note
+``` {Note}
 The weight is equal to number of points associated with the center $C_i$ in a cluster.
 ```
 #### Example
