@@ -80,6 +80,13 @@ A portion of content taken from scikit-learn contributing document.
 2. You can preview the temporary build of the pull request on web by clicking on `Details` link of `ci/circleci:build_jupyter_book artifact` check. This is how exactly the E-book would look once the pull request is merged.
 3. Resolve the merge conflicts in PR, if any.
 
+## General Instructions
+1. Please add captions to figures/images, wherever seems suitable.
+2. For each external resource (image, content, etc.), please give due credit to the original source.
+3. All mathematical symbols (like x, y, d, C, set A) in the text needs to be inside `$ $`. This makes easy to differentiate these symbols from general text.
+4. In case, you are importing CSV or other data files in your code, put these files in corresponding assets folder. Then import the file in program from the assets directory.
+5. We can incorporate features from [Sphinx-Proof](https://sphinx-proof.readthedocs.io/en/latest/syntax.html) extension for writing Algorithms, theorems, Lemmas, etc. The extension is enabled in the notebook.
+
 
 ## Pull Request Checklist
 Before a PR can be merged, it needs to be approved by a TA. Please prefix the title of your pull request with [MRG] if the PR is complete and should be subjected to a detailed review. An incomplete contribution – where you expect to do more work before receiving a full review – should be prefixed [WIP] (to indicate a work in progress) and changed to [MRG] when it matures, before the assigned deadline with all checks passing and no merge conflicts.
