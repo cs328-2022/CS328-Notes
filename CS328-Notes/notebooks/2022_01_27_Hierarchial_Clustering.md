@@ -14,7 +14,7 @@
   - Let $X_1, X_2, .... , X_p$ be the partitions.
 
 - In parallel compute a clustering for each $X_i$
-  - $C_1^i,....,C_1^k$ be the clustering, define $W_i^j = |C_i^j|$
+  - $C_1^i,....,C_k^i$ be the clustering, define $W_i^j = |C_i^j|$
 
 - Consider the cluster centroids as points with weights $W_i^j$ and then recluster them.
 
@@ -37,7 +37,7 @@ The weight is equal to number of points associated with the center $C_i$ in a cl
 
 - **Theorem (GNMO00, AJM09)**: Overall we get a 4$\gamma(1+\beta)$ + 2$\beta$ approx.
 
-- **Setting** $\beta = \gamma$ = O(logk) would give a O$(logk)^2$ approx.
+- **Setting** $\beta = \gamma$ = O(logk) would give a O$(log^2k)$ approx.
 
 ### Hierarchical clustering
 
