@@ -84,3 +84,7 @@ There can be many ways, some of them are-
 
 ![Image](../assets/Image.png)
 ![Image](../assets/Image1.png)
+
+```{Note}
+All the images are taken from the slides provided by the Prof. Anirban Dasgupta.
+```
