@@ -36,6 +36,7 @@ A portion of content taken from scikit-learn contributing document.
     git fetch upstream
     git merge upstream/main
     ```
+    In case you face error `Permission denied (publickey)`, you need to [add SSH key to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
 8. Create a feature branch to hold your development changes:
     ```bash
     git checkout -b my_feature
