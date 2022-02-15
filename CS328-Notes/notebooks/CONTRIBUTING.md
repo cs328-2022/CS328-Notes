@@ -36,6 +36,7 @@ A portion of content taken from scikit-learn contributing document.
     git fetch upstream
     git merge upstream/main
     ```
+    In case you face error `Permission denied (publickey)`, you need to [add SSH key to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
 8. Create a feature branch to hold your development changes:
     ```bash
     git checkout -b my_feature
@@ -79,6 +80,13 @@ A portion of content taken from scikit-learn contributing document.
 1. Make sure all the check pass in the Pull Request.
 2. You can preview the temporary build of the pull request on web by clicking on `Details` link of `ci/circleci:build_jupyter_book artifact` check. This is how exactly the E-book would look once the pull request is merged.
 3. Resolve the merge conflicts in PR, if any.
+
+## General Instructions
+1. Please add captions to figures/images, wherever seems suitable.
+2. For each external resource (image, content, etc.), please give due credit to the original source.
+3. All mathematical symbols (like x, y, d, C, set A) in the text needs to be inside `$ $`. This makes easy to differentiate these symbols from general text.
+4. In case, you are importing CSV or other data files in your code, put these files in corresponding assets folder. Then import the file in program from the assets directory.
+5. We can incorporate features from [Sphinx-Proof](https://sphinx-proof.readthedocs.io/en/latest/syntax.html) extension for writing Algorithms, theorems, Lemmas, etc. The extension is enabled in the notebook.
 
 
 ## Pull Request Checklist
