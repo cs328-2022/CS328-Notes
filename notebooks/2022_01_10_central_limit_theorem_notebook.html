@@ -58,6 +58,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="K-means" href="2022_01_24_K-means.html" />
     <link rel="prev" title="Object Representations" href="2022_01_06_object_representations_notebook.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -148,6 +149,21 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Central Limit Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_24_K-means.html">
+   K-means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_25_K-means%2B%2B.html">
+   Lloyd’s algorithm, convergence?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_27_Hierarchial_Clustering.html">
+   Why does k-means++ work?
   </a>
  </li>
 </ul>
@@ -586,8 +602,8 @@ Var(\sum_{i=1}^{n}X_i) = \sum_{i=1}^{n}Var(X_i)
 <hr class="docutils" />
 <p>Consider <span class="math notranslate nohighlight">\(X\)</span> as the random variable.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="1c47908a-c7b0-4257-b577-5be6ecd80a02" name="455590f8-3cb6-43db-bb1d-8c00d1de353a" type="radio">
-</input><label class="tabbed-label" for="1c47908a-c7b0-4257-b577-5be6ecd80a02">
+<input checked="checked" id="9a791ebf-a856-4cbc-a8bf-1713c51ed06d" name="83cd1d7c-0031-4713-97ed-ecc0ef9c2fe5" type="radio">
+</input><label class="tabbed-label" for="9a791ebf-a856-4cbc-a8bf-1713c51ed06d">
 Bernoulli</label><div class="tabbed-content docutils">
 <ul class="simple">
 <li><p>In Bernoulli distribution, r.v. can take only two possible values 0 or 1 with <span class="math notranslate nohighlight">\(X=1\)</span> occuring with probability <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
@@ -615,8 +631,8 @@ Bernoulli</label><div class="tabbed-content docutils">
 <p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Bernoulli distribution with <span class="math notranslate nohighlight">\(p = 0.4\)</span></span><a class="headerlink" href="#bernoulli-p-m-f" title="Permalink to this image">¶</a></p>
 </div>
 </div>
-<input id="f082521c-9413-4bbd-b1e1-6576d279f526" name="455590f8-3cb6-43db-bb1d-8c00d1de353a" type="radio">
-</input><label class="tabbed-label" for="f082521c-9413-4bbd-b1e1-6576d279f526">
+<input id="954a7f78-bcb1-412d-9efd-08ae70c4ed19" name="83cd1d7c-0031-4713-97ed-ecc0ef9c2fe5" type="radio">
+</input><label class="tabbed-label" for="954a7f78-bcb1-412d-9efd-08ae70c4ed19">
 Binomial</label><div class="tabbed-content docutils">
 <ul class="simple">
 <li><p>In n Binomial events, we can get the probability of getting <span class="math notranslate nohighlight">\(r\)</span> events <span class="math notranslate nohighlight">\((r\le n)\)</span> with favourable odds <span class="math notranslate nohighlight">\(p\)</span> and the rest with unfavourable odds <span class="math notranslate nohighlight">\(q\)</span> <span class="math notranslate nohighlight">\((q = 1-p)\)</span>.</p></li>
@@ -644,8 +660,8 @@ Binomial</label><div class="tabbed-content docutils">
 <p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Binomial distribution of 100 trials and <span class="math notranslate nohighlight">\(p = 0.25\)</span> (left), <span class="math notranslate nohighlight">\(p = 0.5\)</span> (middle), and  <span class="math notranslate nohighlight">\(p = 0.75\)</span> (right)</span><a class="headerlink" href="#binomial-p-m-f" title="Permalink to this image">¶</a></p>
 </div>
 </div>
-<input id="fdc49580-ec44-4135-b1d2-3c20918ff9ee" name="455590f8-3cb6-43db-bb1d-8c00d1de353a" type="radio">
-</input><label class="tabbed-label" for="fdc49580-ec44-4135-b1d2-3c20918ff9ee">
+<input id="240093a2-051e-48ae-9a32-97ba17025d0c" name="83cd1d7c-0031-4713-97ed-ecc0ef9c2fe5" type="radio">
+</input><label class="tabbed-label" for="240093a2-051e-48ae-9a32-97ba17025d0c">
 Gaussian</label><div class="tabbed-content docutils">
 <ul class="simple">
 <li><p>The normal/gaussian distribution can be expressed in terms of its expectation value and variance.</p></li>
@@ -843,6 +859,13 @@ Below is an image of a Galton Board <a class="reference external" href="https://
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Object Representations</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022_01_24_K-means.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">K-means</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             

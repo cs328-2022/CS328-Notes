@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Deadlines &#8212; CS328-2022 Notes</title>
+    <title>K-means &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -46,6 +46,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -56,8 +58,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Data Representations" href="2022_01_03_data_representations.html" />
-    <link rel="prev" title="Contributing to CS328 Notes" href="CONTRIBUTING.html" />
+    <link rel="next" title="Lloyd’s algorithm, convergence?" href="2022_01_25_K-means%2B%2B.html" />
+    <link rel="prev" title="Central Limit Theorem" href="2022_01_10_central_limit_theorem_notebook.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -106,14 +108,14 @@
   Logistics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="CONTRIBUTING.html">
    Contributing to CS328 Notes
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
    Deadlines
   </a>
  </li>
@@ -123,7 +125,7 @@
   Foundations
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_01_03_data_representations.html">
    Data Representations
@@ -149,8 +151,8 @@
    Central Limit Theorem
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_01_24_K-means.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    K-means
   </a>
  </li>
@@ -205,7 +207,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/deadlines.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_24_K-means.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -225,10 +227,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/deadlines.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_24_K-means.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/deadlines.md"><button
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_24_K-means.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -248,6 +250,19 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alternative-view">
+   Alternative View
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -255,24 +270,73 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Deadlines</h1>
+                <h1>K-means</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alternative-view">
+   Alternative View
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="deadlines">
-<h1>Deadlines<a class="headerlink" href="#deadlines" title="Permalink to this headline">¶</a></h1>
-<p>The below order was decided by a random permutation with a fixed seed value.</p>
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQrNEV7uvcGd_lThIbbCqnpeiC4ThI7NlpTO4GAoS4HTc9UU04TWbYb8L6Js7MF4nGnhTiWnTj6OKFW/pubhtml?gid=812220480&amp;single=true&amp;widget=true&amp;headers=false" width=900px height=500px></iframe>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You can open a PR as soon as you start working with the assigned lectures with <code class="docutils literal notranslate"><span class="pre">[WIP]</span></code> mentioned in the PR title. Once done, before the deadline, change <code class="docutils literal notranslate"><span class="pre">[WIP]</span></code> to <code class="docutils literal notranslate"><span class="pre">[MRG]</span></code> in the PR title indicating a submssion with all checks passing and no merge conflicts.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="k-means">
+<h1>K-means<a class="headerlink" href="#k-means" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Distance function L2 type.</p></li>
+<li><p>C = <span class="math notranslate nohighlight">\({C_1,C_2,.......,C_k}\)</span>, cost(C) = <span class="math notranslate nohighlight">\(\sum_x\)</span> <span class="math notranslate nohighlight">\(\underset{c_x}{min}\)</span> <span class="math notranslate nohighlight">\(d(x,Cx)^2\)</span>,</p></li>
+<li><p>where d is euclidean distance. <span class="math notranslate nohighlight">\(C_x\)</span> is chosen as the nearest point to data X.</p></li>
+</ul>
+<div class="section" id="alternative-view">
+<h2>Alternative View<a class="headerlink" href="#alternative-view" title="Permalink to this headline">¶</a></h2>
+<p><strong>Objective</strong> : Define best k-clustering of the data by -</p>
+<ul class="simple">
+<li><p>Minimizing the variance of each cluster. i.e,  the cost of K-mean is the variance of the point in each cluster.</p></li>
+<li><p>The mean <span class="math notranslate nohighlight">\(C_i\)</span> = <span class="math notranslate nohighlight">\(\frac{1}{|C_i|}\)</span> <span class="math notranslate nohighlight">\(\sum_{x \epsilon C_i}\)</span>x is the expected location of a point.</p></li>
+<li><p>Therefore, variance of <span class="math notranslate nohighlight">\(C_i\)</span>  = <span class="math notranslate nohighlight">\(\sum_{x \epsilon C_i}x\)</span> <span class="math notranslate nohighlight">\(||x - C_i||^2\)</span></p></li>
+</ul>
+<p><img alt="image" src="../_images/Image2.jpeg" /></p>
+<p>Connection with max likelihood estimation :</p>
+<p>Consider the likelihood of set points if center is u, co-variance is <span class="math notranslate nohighlight">\(𝜎^2\)</span>I. Take Gaussian PDF.</p>
+<p>p(<span class="math notranslate nohighlight">\(x_1,x_2,.......x_k | 𝜇,\sigma\)</span>) <span class="math notranslate nohighlight">\(\propto\)</span> <span class="math notranslate nohighlight">\(\underset{i}{\prod}\)</span> exp(-<span class="math notranslate nohighlight">\(\frac{|x_i-\mu|^2}{𝜎^2}\)</span>)  <span class="math notranslate nohighlight">\(\propto\)</span> exp(-<span class="math notranslate nohighlight">\(\underset{i}{\sum}\)</span> <span class="math notranslate nohighlight">\(\frac{|x_i-\mu|^2}{𝜎^2}\)</span>)</p>
+<p>Taking log of probability likelihood,</p>
+<p>log(p(<span class="math notranslate nohighlight">\(x_1,x_2,.......x_k | 𝜇,\sigma\)</span>)) <span class="math notranslate nohighlight">\(\propto\)</span> <span class="math notranslate nohighlight">\(\underset{i}{\sum}\)</span> <span class="math notranslate nohighlight">\(|X_i - 𝜇^2|\)</span> + function(<span class="math notranslate nohighlight">\(\sigma\)</span>,dimension).</p>
+<p>Likelihood of gaussian is exactly the same as K-means cost of each set of data points.</p>
+<p><strong>Choosing Optimal position for Center</strong></p>
+<p>Given partition C, C is the proposed center then C must be equal to u. i.e, if  optimal center is given then optimal partition can be determined and vice versa.</p>
+<p><strong>Lloyd’s algorithm</strong> (Iterative algorithm)</p>
+<p>Steps:-</p>
+<ol class="simple">
+<li><p>Find current centers of partition.</p></li>
+<li><p>Assign Points to nearest centers.</p></li>
+<li><p>Recalculate centers.</p></li>
+<li><p>Iterate the above 3 steps.</p></li>
+</ol>
+<p>Stopping Criteria:-</p>
+<ol class="simple">
+<li><p>When no points change clusters.</p></li>
+<li><p>When cluster centers don’t shift much.</p></li>
+</ol>
+<p><strong>Analysis</strong></p>
+<ul class="simple">
+<li><p>K centers, N points, d dimensions</p></li>
+<li><p>Time taken to calculate the new cluster - O(kNd)</p></li>
+<li><p>Time for the new center - O(Nd).</p></li>
+</ul>
 </div>
 </div>
 
@@ -301,17 +365,17 @@
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="CONTRIBUTING.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_01_10_central_limit_theorem_notebook.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Contributing to CS328 Notes</p>
+            <p class="prev-next-title">Central Limit Theorem</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="2022_01_03_data_representations.html" title="next page">
+    <a class='right-next' id="next-link" href="2022_01_25_K-means%2B%2B.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Representations</p>
+        <p class="prev-next-title">Lloyd’s algorithm, convergence?</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

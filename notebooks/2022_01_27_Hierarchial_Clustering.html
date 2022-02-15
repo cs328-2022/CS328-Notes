@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Deadlines &#8212; CS328-2022 Notes</title>
+    <title>Why does k-means++ work? &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -46,6 +46,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -56,8 +58,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Data Representations" href="2022_01_03_data_representations.html" />
-    <link rel="prev" title="Contributing to CS328 Notes" href="CONTRIBUTING.html" />
+    <link rel="prev" title="Lloyd’s algorithm, convergence?" href="2022_01_25_K-means%2B%2B.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -106,14 +107,14 @@
   Logistics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="CONTRIBUTING.html">
    Contributing to CS328 Notes
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
    Deadlines
   </a>
  </li>
@@ -123,7 +124,7 @@
   Foundations
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_01_03_data_representations.html">
    Data Representations
@@ -159,8 +160,8 @@
    Lloyd’s algorithm, convergence?
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_01_27_Hierarchial_Clustering.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Why does k-means++ work?
   </a>
  </li>
@@ -205,7 +206,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/deadlines.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_27_Hierarchial_Clustering.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -225,10 +226,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/deadlines.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_27_Hierarchial_Clustering.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/deadlines.md"><button
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_27_Hierarchial_Clustering.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -248,6 +249,46 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parallelizing-k-means">
+   Parallelizing K-means
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#so-how-good-is-the-solution">
+     So how good is the solution?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hierarchical-clustering">
+   Hierarchical clustering
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divisive-clustering">
+   Divisive clustering
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#agglomerative-clustering">
+   Agglomerative clustering
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -255,24 +296,155 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Deadlines</h1>
+                <h1>Why does k-means++ work?</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parallelizing-k-means">
+   Parallelizing K-means
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#so-how-good-is-the-solution">
+     So how good is the solution?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hierarchical-clustering">
+   Hierarchical clustering
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divisive-clustering">
+   Divisive clustering
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#agglomerative-clustering">
+   Agglomerative clustering
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="deadlines">
-<h1>Deadlines<a class="headerlink" href="#deadlines" title="Permalink to this headline">¶</a></h1>
-<p>The below order was decided by a random permutation with a fixed seed value.</p>
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQrNEV7uvcGd_lThIbbCqnpeiC4ThI7NlpTO4GAoS4HTc9UU04TWbYb8L6Js7MF4nGnhTiWnTj6OKFW/pubhtml?gid=812220480&amp;single=true&amp;widget=true&amp;headers=false" width=900px height=500px></iframe>
+  <div class="tex2jax_ignore mathjax_ignore section" id="why-does-k-means-work">
+<h1>Why does k-means++ work?<a class="headerlink" href="#why-does-k-means-work" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Consider a cluster C that OPT uses. If we select a point from there then that cluster is covered “pretty well”.</p>
+<ul>
+<li><p>cost incurred by our center is with some constant * cost incurred by OPT.</p></li>
+</ul>
+</li>
+<li><p>If we select two points from the same OPT cluster, it must be because the contribution of other clusters to the OPT cost is small.</p></li>
+</ul>
+<div class="section" id="parallelizing-k-means">
+<h2>Parallelizing K-means<a class="headerlink" href="#parallelizing-k-means" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Suppose the data is distributed on multiple machines.</p></li>
+<li><p>So can we parallelize K-means??</p></li>
+<li><p>Partition the data,</p>
+<ul>
+<li><p>Let <span class="math notranslate nohighlight">\(X_1, X_2, .... , X_p\)</span> be the partitions.</p></li>
+</ul>
+</li>
+<li><p>In parallel compute a clustering for each <span class="math notranslate nohighlight">\(X_i\)</span></p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(C_1^i,....,C_k^i\)</span> be the clustering, define <span class="math notranslate nohighlight">\(W_i^j = |C_i^j|\)</span></p></li>
+</ul>
+</li>
+<li><p>Consider the cluster centroids as points with weights <span class="math notranslate nohighlight">\(W_i^j\)</span> and then recluster them.</p></li>
+</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You can open a PR as soon as you start working with the assigned lectures with <code class="docutils literal notranslate"><span class="pre">[WIP]</span></code> mentioned in the PR title. Once done, before the deadline, change <code class="docutils literal notranslate"><span class="pre">[WIP]</span></code> to <code class="docutils literal notranslate"><span class="pre">[MRG]</span></code> in the PR title indicating a submssion with all checks passing and no merge conflicts.</p>
+<p>The weight is equal to number of points associated with the center <span class="math notranslate nohighlight">\(C_i\)</span> in a cluster.</p>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Let there are four machines and we want to run k-means algorithm.</p></li>
+<li><p>Therefore, we let each machine run k-means on their data set and come up with k centers. (Phase 1)</p></li>
+<li><p>we will assign these k centers their weight which will be equal to the number of points associated with that particular center.</p></li>
+<li><p>Therefore, we have 4k centers and now we can shift these to one center cluster and run k means algorithm on these 4k points. (Phase 2)</p></li>
+</ul>
+</div>
+<div class="section" id="so-how-good-is-the-solution">
+<h3>So how good is the solution?<a class="headerlink" href="#so-how-good-is-the-solution" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Suppose the algorithm in phase 1 gave a <span class="math notranslate nohighlight">\(\beta\)</span> approximation solution and the algorithm in phase 2 gave <span class="math notranslate nohighlight">\(\gamma\)</span> approximation solution.</p></li>
+<li><p><strong>Theorem (GNMO00, AJM09)</strong>: Overall we get a 4<span class="math notranslate nohighlight">\(\gamma(1+\beta)\)</span> + 2<span class="math notranslate nohighlight">\(\beta\)</span> approx.</p></li>
+<li><p><strong>Setting</strong> <span class="math notranslate nohighlight">\(\beta = \gamma\)</span> = O(logk) would give a O<span class="math notranslate nohighlight">\((log^2k)\)</span> approx.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="hierarchical-clustering">
+<h2>Hierarchical clustering<a class="headerlink" href="#hierarchical-clustering" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>k-means/K-median worked on the intuition that clusters are “balls” in high dimension.</p></li>
+<li><p>Also we have to know the number of centers we are working with.</p></li>
+<li><p>So what can we do when we do not know the target number of clusters?</p></li>
+<li><p>can we produce a family of clustering, for each k?</p></li>
+<li><p>There are two ways-</p></li>
+</ul>
+<ol class="simple">
+<li><p>Top-down/divisive: Keep on creating bi-partition (applying 2-means)</p></li>
+<li><p>Bottom-up/agglomerative: start from individual point and keep on aggregating.</p></li>
+</ol>
+</div>
+<div class="section" id="divisive-clustering">
+<h2>Divisive clustering<a class="headerlink" href="#divisive-clustering" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This is a top-down clustering approach, initially all the data points belong to one cluster and then keep on creating bi-partition recursively (applying 2-means)</p></li>
+</ul>
+</div>
+<div class="section" id="agglomerative-clustering">
+<h2>Agglomerative clustering<a class="headerlink" href="#agglomerative-clustering" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This is bottom-up clustering approach, initially each data point is a cluster of its own, then keep on merging closest set of data points to build larger clusters from smaller ones.</p></li>
+</ul>
+<p><strong>Algo:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- keep a current list of clusters
+- Initially, each point in its own cluster
+- while #clusters&gt;1:
+    - choose closest pair
+    - merge them,
+    - update list by deleting these and adding new cluster.
+</pre></div>
+</div>
+<blockquote>
+<div><p>But how do we define closest pair or the closeness between two clusters?</p>
+</div></blockquote>
+<p>There can be many ways, some of them are-</p>
+<ol class="simple">
+<li><p>Closest pair: single linkage clustering -&gt; <span class="math notranslate nohighlight">\(d_1\)</span>(C,C’) = <span class="math notranslate nohighlight">\(\underset{x \epsilon C,y \epsilon C'}{min}\)</span> d(x,y)</p></li>
+<li><p>Furthest pair: complete link clustering -&gt; <span class="math notranslate nohighlight">\(d_2\)</span>(C,C’) = <span class="math notranslate nohighlight">\(\underset{x \epsilon C,y \epsilon C'}{max}\)</span> d(x,y)</p></li>
+<li><p>Average of all pairs: average link      -&gt; <span class="math notranslate nohighlight">\(d_3\)</span>(C,C’) = <span class="math notranslate nohighlight">\(\underset{x \epsilon C,y \epsilon C'}{avg}\)</span> d(x,y)</p></li>
+</ol>
+<p><img alt="Image" src="../_images/Image.png" />
+<img alt="Image" src="../_images/Image1.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All the images are taken from the slides provided by the Prof. Anirban Dasgupta.</p>
+</div>
 </div>
 </div>
 
@@ -301,19 +473,12 @@
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="CONTRIBUTING.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_01_25_K-means%2B%2B.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Contributing to CS328 Notes</p>
+            <p class="prev-next-title">Lloyd’s algorithm, convergence?</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="2022_01_03_data_representations.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Representations</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
