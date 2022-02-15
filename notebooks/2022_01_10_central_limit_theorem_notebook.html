@@ -58,7 +58,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="K-means" href="2022_01_24_K-means.html" />
+    <link rel="next" title="Markov and Chebyshev Inequalities" href="2022_01_11_markov_chebyshev_inequalities.html" />
     <link rel="prev" title="Object Representations" href="2022_01_06_object_representations_notebook.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -149,6 +149,21 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Central Limit Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_11_markov_chebyshev_inequalities.html">
+   Markov and Chebyshev Inequalities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound.html">
+   Chernoff Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound_tails.html">
+   Plot of chernoff bound
   </a>
  </li>
  <li class="toctree-l1">
@@ -602,8 +617,8 @@ Var(\sum_{i=1}^{n}X_i) = \sum_{i=1}^{n}Var(X_i)
 <hr class="docutils" />
 <p>Consider <span class="math notranslate nohighlight">\(X\)</span> as the random variable.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="cc8ad45b-5e11-4f18-8a1f-827349009c8c" name="e748f0c5-63cb-415e-8eaa-9844d1367be6" type="radio">
-</input><label class="tabbed-label" for="cc8ad45b-5e11-4f18-8a1f-827349009c8c">
+<input checked="checked" id="dc6b985a-6af6-4da1-bf14-9606ab2606de" name="75355e38-2cc1-4d3d-a881-60503bb1735b" type="radio">
+</input><label class="tabbed-label" for="dc6b985a-6af6-4da1-bf14-9606ab2606de">
 Bernoulli</label><div class="tabbed-content docutils">
 <ul class="simple">
 <li><p>In Bernoulli distribution, r.v. can take only two possible values 0 or 1 with <span class="math notranslate nohighlight">\(X=1\)</span> occuring with probability <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
@@ -631,8 +646,8 @@ Bernoulli</label><div class="tabbed-content docutils">
 <p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Bernoulli distribution with <span class="math notranslate nohighlight">\(p = 0.4\)</span></span><a class="headerlink" href="#bernoulli-p-m-f" title="Permalink to this image">¶</a></p>
 </div>
 </div>
-<input id="7fca9c6b-44e1-4345-a504-ab48e1d68022" name="e748f0c5-63cb-415e-8eaa-9844d1367be6" type="radio">
-</input><label class="tabbed-label" for="7fca9c6b-44e1-4345-a504-ab48e1d68022">
+<input id="9d7893d1-a7d5-4f6d-abb5-ac0f7bdc7656" name="75355e38-2cc1-4d3d-a881-60503bb1735b" type="radio">
+</input><label class="tabbed-label" for="9d7893d1-a7d5-4f6d-abb5-ac0f7bdc7656">
 Binomial</label><div class="tabbed-content docutils">
 <ul class="simple">
 <li><p>In n Binomial events, we can get the probability of getting <span class="math notranslate nohighlight">\(r\)</span> events <span class="math notranslate nohighlight">\((r\le n)\)</span> with favourable odds <span class="math notranslate nohighlight">\(p\)</span> and the rest with unfavourable odds <span class="math notranslate nohighlight">\(q\)</span> <span class="math notranslate nohighlight">\((q = 1-p)\)</span>.</p></li>
@@ -660,8 +675,8 @@ Binomial</label><div class="tabbed-content docutils">
 <p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Binomial distribution of 100 trials and <span class="math notranslate nohighlight">\(p = 0.25\)</span> (left), <span class="math notranslate nohighlight">\(p = 0.5\)</span> (middle), and  <span class="math notranslate nohighlight">\(p = 0.75\)</span> (right)</span><a class="headerlink" href="#binomial-p-m-f" title="Permalink to this image">¶</a></p>
 </div>
 </div>
-<input id="77de201b-a585-46d3-8a86-f49dc2941318" name="e748f0c5-63cb-415e-8eaa-9844d1367be6" type="radio">
-</input><label class="tabbed-label" for="77de201b-a585-46d3-8a86-f49dc2941318">
+<input id="5b617085-9e79-49f0-9477-32cb5c8c2a10" name="75355e38-2cc1-4d3d-a881-60503bb1735b" type="radio">
+</input><label class="tabbed-label" for="5b617085-9e79-49f0-9477-32cb5c8c2a10">
 Gaussian</label><div class="tabbed-content docutils">
 <ul class="simple">
 <li><p>The normal/gaussian distribution can be expressed in terms of its expectation value and variance.</p></li>
@@ -860,10 +875,10 @@ Below is an image of a Galton Board <a class="reference external" href="https://
             <p class="prev-next-title">Object Representations</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="2022_01_24_K-means.html" title="next page">
+    <a class='right-next' id="next-link" href="2022_01_11_markov_chebyshev_inequalities.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">K-means</p>
+        <p class="prev-next-title">Markov and Chebyshev Inequalities</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

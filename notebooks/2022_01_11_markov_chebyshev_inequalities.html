@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Why does k-means++ work? &#8212; CS328-2022 Notes</title>
+    <title>Markov and Chebyshev Inequalities &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -58,7 +58,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Lloyd’s algorithm, convergence?" href="2022_01_25_K-means%2B%2B.html" />
+    <link rel="next" title="Chernoff Bound" href="2022_01_13_chernoff_bound.html" />
+    <link rel="prev" title="Central Limit Theorem" href="2022_01_10_central_limit_theorem_notebook.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -150,8 +151,8 @@
    Central Limit Theorem
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_01_11_markov_chebyshev_inequalities.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Markov and Chebyshev Inequalities
   </a>
  </li>
@@ -175,8 +176,8 @@
    Lloyd’s algorithm, convergence?
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_27_Hierarchial_Clustering.html">
    Why does k-means++ work?
   </a>
  </li>
@@ -221,7 +222,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_27_Hierarchial_Clustering.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_11_markov_chebyshev_inequalities.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -241,10 +242,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_27_Hierarchial_Clustering.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_11_markov_chebyshev_inequalities.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_27_Hierarchial_Clustering.md"><button
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_11_markov_chebyshev_inequalities.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -270,36 +271,36 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#parallelizing-k-means">
-   Parallelizing K-means
+  <a class="reference internal nav-link" href="#markov-inequality">
+   Markov Inequality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chebyshev-s-inequality">
+   Chebyshev’s Inequality
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example">
-     Example
+    <a class="reference internal nav-link" href="#motivation">
+     Motivation:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#so-how-good-is-the-solution">
-     So how good is the solution?
+    <a class="reference internal nav-link" href="#chebyshevs-inequality-is-given-as">
+     Chebyshev’s inequality is given as:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-we-visualize-markov-s-inequality-and-chebyshev-s-inequality">
+     How do we visualize Markov’s Inequality and Chebyshev’s inequality?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#moment-genrating-functions">
+     Moment Genrating Functions
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hierarchical-clustering">
-   Hierarchical clustering
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#divisive-clustering">
-   Divisive clustering
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#agglomerative-clustering">
-   Agglomerative clustering
-  </a>
  </li>
 </ul>
 
@@ -311,7 +312,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Why does k-means++ work?</h1>
+                <h1>Markov and Chebyshev Inequalities</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -322,36 +323,36 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#parallelizing-k-means">
-   Parallelizing K-means
+  <a class="reference internal nav-link" href="#markov-inequality">
+   Markov Inequality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chebyshev-s-inequality">
+   Chebyshev’s Inequality
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example">
-     Example
+    <a class="reference internal nav-link" href="#motivation">
+     Motivation:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#so-how-good-is-the-solution">
-     So how good is the solution?
+    <a class="reference internal nav-link" href="#chebyshevs-inequality-is-given-as">
+     Chebyshev’s inequality is given as:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-we-visualize-markov-s-inequality-and-chebyshev-s-inequality">
+     How do we visualize Markov’s Inequality and Chebyshev’s inequality?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#moment-genrating-functions">
+     Moment Genrating Functions
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hierarchical-clustering">
-   Hierarchical clustering
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#divisive-clustering">
-   Divisive clustering
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#agglomerative-clustering">
-   Agglomerative clustering
-  </a>
  </li>
 </ul>
 
@@ -362,103 +363,113 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="why-does-k-means-work">
-<h1>Why does k-means++ work?<a class="headerlink" href="#why-does-k-means-work" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>Consider a cluster C that OPT uses. If we select a point from there then that cluster is covered “pretty well”.</p>
-<ul>
-<li><p>cost incurred by our center is with some constant * cost incurred by OPT.</p></li>
-</ul>
-</li>
-<li><p>If we select two points from the same OPT cluster, it must be because the contribution of other clusters to the OPT cost is small.</p></li>
-</ul>
-<div class="section" id="parallelizing-k-means">
-<h2>Parallelizing K-means<a class="headerlink" href="#parallelizing-k-means" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Suppose the data is distributed on multiple machines.</p></li>
-<li><p>So can we parallelize K-means??</p></li>
-<li><p>Partition the data,</p>
-<ul>
-<li><p>Let <span class="math notranslate nohighlight">\(X_1, X_2, .... , X_p\)</span> be the partitions.</p></li>
-</ul>
-</li>
-<li><p>In parallel compute a clustering for each <span class="math notranslate nohighlight">\(X_i\)</span></p>
-<ul>
-<li><p><span class="math notranslate nohighlight">\(C_1^i,....,C_k^i\)</span> be the clustering, define <span class="math notranslate nohighlight">\(W_i^j = |C_i^j|\)</span></p></li>
-</ul>
-</li>
-<li><p>Consider the cluster centroids as points with weights <span class="math notranslate nohighlight">\(W_i^j\)</span> and then recluster them.</p></li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The weight is equal to number of points associated with the center <span class="math notranslate nohighlight">\(C_i\)</span> in a cluster.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="markov-and-chebyshev-inequalities">
+<h1>Markov and Chebyshev Inequalities<a class="headerlink" href="#markov-and-chebyshev-inequalities" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="markov-inequality">
+<h2>Markov Inequality<a class="headerlink" href="#markov-inequality" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a non-negative random variable and <span class="math notranslate nohighlight">\(a&gt;0\)</span> then the probablity that <span class="math notranslate nohighlight">\(X\)</span> is atleast <span class="math notranslate nohighlight">\(a\)</span> is less than equal to the Expectation of <span class="math notranslate nohighlight">\(X\)</span> divided by <span class="math notranslate nohighlight">\(a\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[P(X \geqslant a) \leqslant \frac{E[X]}{a} \hspace{0.5cm} \text { For any } a&gt;0\]</div>
+<div class="proof admonition" id="proof">
+<p>Proof. Consider</p>
+<div class="math notranslate nohighlight">
+\[ E(X)=\int_{0}^{\infty} x p(x) d x \]</div>
+<div class="math notranslate nohighlight">
+\[ E(X)=\int_{0}^{a} x p(x) d x+\int_{a}^{\infty} x p(x) d x \]</div>
+<div class="math notranslate nohighlight">
+\[ \geq \int_{a}^{\infty} x p(x) d x  \]</div>
+<div class="math notranslate nohighlight">
+\[ \geq \int_{a}^{\infty} a p(x) d  \]</div>
+<div class="math notranslate nohighlight">
+\[ = a \int_{a}^{\infty} p(x) = a P[X \geq a] dx  \]</div>
+<div class="math notranslate nohighlight">
+\[  E(X) \geq a P[X \geq a] \]</div>
+<div class="math notranslate nohighlight">
+\[ \therefore P(X \geqslant a) \leqslant \frac{E[X]}{a} \]</div>
 </div>
-<div class="section" id="example">
-<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Let there are four machines and we want to run k-means algorithm.</p></li>
-<li><p>Therefore, we let each machine run k-means on their data set and come up with k centers. (Phase 1)</p></li>
-<li><p>we will assign these k centers their weight which will be equal to the number of points associated with that particular center.</p></li>
-<li><p>Therefore, we have 4k centers and now we can shift these to one center cluster and run k means algorithm on these 4k points. (Phase 2)</p></li>
-</ul>
-</div>
-<div class="section" id="so-how-good-is-the-solution">
-<h3>So how good is the solution?<a class="headerlink" href="#so-how-good-is-the-solution" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Suppose the algorithm in phase 1 gave a <span class="math notranslate nohighlight">\(\beta\)</span> approximation solution and the algorithm in phase 2 gave <span class="math notranslate nohighlight">\(\gamma\)</span> approximation solution.</p></li>
-<li><p><strong>Theorem (GNMO00, AJM09)</strong>: Overall we get a 4<span class="math notranslate nohighlight">\(\gamma(1+\beta)\)</span> + 2<span class="math notranslate nohighlight">\(\beta\)</span> approx.</p></li>
-<li><p><strong>Setting</strong> <span class="math notranslate nohighlight">\(\beta = \gamma\)</span> = O(logk) would give a O<span class="math notranslate nohighlight">\((log^2k)\)</span> approx.</p></li>
-</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Markov’s inequality is not useful when  <span class="math notranslate nohighlight">\( a &lt; E(x) \)</span></p>
 </div>
 </div>
-<div class="section" id="hierarchical-clustering">
-<h2>Hierarchical clustering<a class="headerlink" href="#hierarchical-clustering" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="chebyshev-s-inequality">
+<h2>Chebyshev’s Inequality<a class="headerlink" href="#chebyshev-s-inequality" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="motivation">
+<h3>Motivation:<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h3>
+<p>Markov’s inequality does not consider left hand side of expectation ( <span class="math notranslate nohighlight">\(\mu\)</span>)  and hence does not give any information on its distribution.</p>
+<p>In case of a in left hand side of  <span class="math notranslate nohighlight">\( \mu \)</span> ,therefore for all <span class="math notranslate nohighlight">\(X\)</span>,   <span class="math notranslate nohighlight">\(\frac{\operatorname{E}[X]}{a} \leq 1 \)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\operatorname{Pr}(X \geq a) \leq \frac{\operatorname{E}[X]}{a}
+\]</div>
 <ul class="simple">
-<li><p>k-means/K-median worked on the intuition that clusters are “balls” in high dimension.</p></li>
-<li><p>Also we have to know the number of centers we are working with.</p></li>
-<li><p>So what can we do when we do not know the target number of clusters?</p></li>
-<li><p>can we produce a family of clustering, for each k?</p></li>
-<li><p>There are two ways-</p></li>
-</ul>
-<ol class="simple">
-<li><p>Top-down/divisive: Keep on creating bi-partition (applying 2-means)</p></li>
-<li><p>Bottom-up/agglomerative: start from individual point and keep on aggregating.</p></li>
-</ol>
-</div>
-<div class="section" id="divisive-clustering">
-<h2>Divisive clustering<a class="headerlink" href="#divisive-clustering" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>This is a top-down clustering approach, initially all the data points belong to one cluster and then keep on creating bi-partition recursively (applying 2-means)</p></li>
+<li><p>This statement is not at all useful as it implies that the probability of the said event is less than 1 which is trivial.</p></li>
+<li><p>So we want to define a bound on the probability, that X takes values large than expectation by a ( <span class="math notranslate nohighlight">\(\mu + a\)</span> ) and smaller than expectation by a ( <span class="math notranslate nohighlight">\( \mu - a \)</span> ).</p></li>
+<li><p>Chebyshev’s inequality is a better version /improvement on Markov’s inequality.</p></li>
 </ul>
 </div>
-<div class="section" id="agglomerative-clustering">
-<h2>Agglomerative clustering<a class="headerlink" href="#agglomerative-clustering" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="chebyshevs-inequality-is-given-as">
+<h3>Chebyshev’s inequality is given as:<a class="headerlink" href="#chebyshevs-inequality-is-given-as" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\operatorname{Pr}(|X-\mathbf{E}[X]| \geq a) \leq \frac{\operatorname{Var}[X]}{a^{2}}
+\]</div>
 <ul class="simple">
-<li><p>This is bottom-up clustering approach, initially each data point is a cluster of its own, then keep on merging closest set of data points to build larger clusters from smaller ones.</p></li>
+<li><p>We can analytically verify that on increasing <span class="math notranslate nohighlight">\(\sigma\)</span>, probability of <span class="math notranslate nohighlight">\(|X-\mathbf{E}[X]| \geq a\)</span> increase as distribution spread out. Also, with an increase in <span class="math notranslate nohighlight">\(a\)</span>, it is less probable to find <span class="math notranslate nohighlight">\(X\)</span> in that interval.</p></li>
 </ul>
-<p><strong>Algo:</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- keep a current list of clusters
-- Initially, each point in its own cluster
-- while #clusters&gt;1:
-    - choose closest pair
-    - merge them,
-    - update list by deleting these and adding new cluster.
-</pre></div>
+<div class="proof admonition" id="proof">
+<p>Proof. In markov’s inequality  <span class="math notranslate nohighlight">\(Y\)</span> is non negative similarly, <span class="math notranslate nohighlight">\( Y^{2}\)</span> is also non negative.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{l}
+Y=X-E[X] \\
+Y^{2}=\left(X-E[X )^{2} \quad\right. \\
+P\left[Y^{2} \geqslant a^{2}\right] \leq  \left .\frac{\sigma^{2}}{a^{2}}\right. \\
+\text { where } \quad  \sigma^{2}=E\left[Y^{2}\right]
+\end{array}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>We can say that</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\operatorname{Pr}(|X-\mathbf{E}[X]| \geq a)=\operatorname{Pr}\left((X-\mathbf{E}[X])^{2} \geq a^{2}\right)
+\]</div>
+<ul class="simple">
+<li><p>Hence</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\operatorname{Pr}\left((X-\mathbf{E}[X])^{2} \geq a^{2}\right) \leq \frac{\mathbf{E}\left[(X-\mathbf{E}[X])^{2}\right]}{a^{2}}=\frac{\operatorname{Var}[X]}{a^{2}}
+\]</div>
 </div>
-<blockquote>
-<div><p>But how do we define closest pair or the closeness between two clusters?</p>
-</div></blockquote>
-<p>There can be many ways, some of them are-</p>
-<ol class="simple">
-<li><p>Closest pair: single linkage clustering -&gt; <span class="math notranslate nohighlight">\(d_1\)</span>(C,C’) = <span class="math notranslate nohighlight">\(\underset{x \epsilon C,y \epsilon C'}{min}\)</span> d(x,y)</p></li>
-<li><p>Furthest pair: complete link clustering -&gt; <span class="math notranslate nohighlight">\(d_2\)</span>(C,C’) = <span class="math notranslate nohighlight">\(\underset{x \epsilon C,y \epsilon C'}{max}\)</span> d(x,y)</p></li>
-<li><p>Average of all pairs: average link      -&gt; <span class="math notranslate nohighlight">\(d_3\)</span>(C,C’) = <span class="math notranslate nohighlight">\(\underset{x \epsilon C,y \epsilon C'}{avg}\)</span> d(x,y)</p></li>
-</ol>
-<p><img alt="Image" src="../_images/Image.png" />
-<img alt="Image" src="../_images/Image1.png" /></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>All the images are taken from the slides provided by the Prof. Anirban Dasgupta.</p>
+</div>
+<div class="section" id="how-do-we-visualize-markov-s-inequality-and-chebyshev-s-inequality">
+<h3>How do we visualize Markov’s Inequality and Chebyshev’s inequality?<a class="headerlink" href="#how-do-we-visualize-markov-s-inequality-and-chebyshev-s-inequality" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="visulizing-chebyshev">
+<a class="reference internal image-reference" href="../_images/VIsualizing_chebyshev's.png"><img alt="../_images/VIsualizing_chebyshev's.png" src="../_images/VIsualizing_chebyshev's.png" style="height: 250px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">A Schematic of region bounded by chebyshev inequality</span><a class="headerlink" href="#visulizing-chebyshev" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>The area of left green shaded interval is less than <span class="math notranslate nohighlight">\(\frac{\mu}{\mu +c}\)</span></p></li>
+<li><p>The area of the toatal green-shaded interval is less than <span class="math notranslate nohighlight">\(\frac{\operatorname{Var}[X]}{a^{2}}\)</span> .</p></li>
+<li><p>Typically Chebyshev’s inequality is stronger than Markov’s, but we can not say that in general, its true. In certain conditions, the reverse is true.</p></li>
+</ul>
+</div>
+<div class="section" id="moment-genrating-functions">
+<h3>Moment Genrating Functions<a class="headerlink" href="#moment-genrating-functions" title="Permalink to this headline">¶</a></h3>
+<p>In proof we saw that <span class="math notranslate nohighlight">\((X-\mathbf{E}[X])^{2}\)</span>  is  better than <span class="math notranslate nohighlight">\((X-\mathbf{E}[X])\)</span></p>
+<p>What is so special about working with <span class="math notranslate nohighlight">\(X^{2}\)</span> and why not other functions?</p>
+<ul class="simple">
+<li><p>Moment generating functions of <span class="math notranslate nohighlight">\(X\)</span> are stronger bound than <span class="math notranslate nohighlight">\(X^{2}\)</span></p></li>
+</ul>
+<p>For a random variable <span class="math notranslate nohighlight">\(X\)</span>, let <span class="math notranslate nohighlight">\( Y = \text{exp}(tX) \)</span> for some <span class="math notranslate nohighlight">\(t \in \mathbb{R} \)</span> . The moment generating function of <span class="math notranslate nohighlight">\(X\)</span> is defined as expectation of <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[E[e^{tX}] = 1 + tE[X] + \frac{t^2}{2!}E[X^2] + ... + \frac{t^{k}}{k!}E[X^{k}]\]</div>
+<p>Let us take the second derivative of <span class="math notranslate nohighlight">\(E[e^{tX}]\)</span> with respect to <span class="math notranslate nohighlight">\(t\)</span> at <span class="math notranslate nohighlight">\(t=0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\Big(\frac{d^2}{dt^2}(E[e^{tX}])\Big)_{t=0} = E[X^2] \]</div>
+<p>Similarly taking the <span class="math notranslate nohighlight">\(k\)</span>-th derivative of the moment generating function with <span class="math notranslate nohighlight">\(t=0\)</span>, we can get the <span class="math notranslate nohighlight">\(k\)</span>-th moment of <span class="math notranslate nohighlight">\(X\)</span>.</p>
 </div>
 </div>
 </div>
@@ -488,12 +499,19 @@
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_01_25_K-means%2B%2B.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_01_10_central_limit_theorem_notebook.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Lloyd’s algorithm, convergence?</p>
+            <p class="prev-next-title">Central Limit Theorem</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022_01_13_chernoff_bound.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chernoff Bound</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
