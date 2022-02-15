@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object Representations &#8212; CS328-2022 Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Central Limit Theorem" href="2022_01_10_central_limit_theorem_notebook.html" />
+    <link rel="prev" title="Distance Function" href="2022_01_03_distance_function.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CS328-2022 Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Course Description
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Logistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="CONTRIBUTING.html">
+   Contributing to CS328 Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
+   Deadlines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations.html">
+   Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations_notebook.html">
+   [CODE] 🧑‍💻Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
+   Distance Function
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Object Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_10_central_limit_theorem_notebook.html">
+   Central Limit Theorem
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_06_object_representations_notebook.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs328-2022/CS328-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_06_object_representations_notebook.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_06_object_representations_notebook.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distance-functions">
+   Distance Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#l-p-norm">
+     1.
+     <span class="math notranslate nohighlight">
+      \(L_p\)
+     </span>
+     Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jaccard-distance">
+     2. Jaccard Distance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edit-distance">
+     3. Edit Distance
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Object Representations</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distance-functions">
+   Distance Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#l-p-norm">
+     1.
+     <span class="math notranslate nohighlight">
+      \(L_p\)
+     </span>
+     Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jaccard-distance">
+     2. Jaccard Distance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edit-distance">
+     3. Edit Distance
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="object-representations">
+<h1>Object Representations<a class="headerlink" href="#object-representations" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Data science involves using scientific tools, algorithms and data models to statistically analyse and extract knowledge from large volumes of processed/unprocessed collected data.</p></li>
+<li><p>Mathematically, an object can be represented in 2 ways:</p>
+<ul>
+<li><p>Object Representation: To depict isolated objects like vectors (words in a document), sequences (DNA), etc.</p></li>
+<li><p>Network Representation: To show interaction among objects like graphs (friendship network, road connections), etc.</p></li>
+</ul>
+</li>
+<li><p>The most common representation for documents is called ‘bag of words’ representation.</p>
+<ul>
+<li><p>First, the document sentences are tokenized.</p></li>
+<li><p>Then their base forms are derived via stemming and lemmatization.</p></li>
+<li><p>The collected lexemes are then converted to n-gram or skip-gram models. As n increases, the size of the word dictionary and thus, the memory required to store it increases, but contextual information is captured more efficiently.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It implies that as we move from unigram to bigram, the connection between mathematical similarity and intuitional similarity becomes tighter.</p>
+</div>
+</div>
+<div class="section" id="distance-functions">
+<h2>Distance Functions<a class="headerlink" href="#distance-functions" title="Permalink to this headline">¶</a></h2>
+<p>Distance is a measure of similarity between objects. It is desirable (useful in divergence functions and clustering algorithms) that these functions (<span class="math notranslate nohighlight">\(d\)</span>) have the following properties:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(d(x,x)=0, d(x,y) \ge 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d(x,y) = d(y,x)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d(x,y) + d(y,z) \ge d(x,z)\)</span>  (Triangle Inequality)</p></li>
+</ol>
+<p>A function satisfying these properties implies:</p>
+<div class="math notranslate nohighlight">
+\[
+d(x,y) = 0 =&gt; x = y
+\]</div>
+<p>It is further useful to have a simple calculation for a point <span class="math notranslate nohighlight">\(x\)</span> that gives the least sum over distances with other points <span class="math notranslate nohighlight">\(p\)</span> in space.</p>
+<div class="math notranslate nohighlight">
+\[
+\min\limits_{x} \sum_{i} d(p_i,x)
+\]</div>
+<div class="section" id="l-p-norm">
+<h3>1. <span class="math notranslate nohighlight">\(L_p\)</span> Norm<a class="headerlink" href="#l-p-norm" title="Permalink to this headline">¶</a></h3>
+<hr class="docutils" />
+<p>The <span class="math notranslate nohighlight">\(l_p\)</span> norm between two <span class="math notranslate nohighlight">\(d\)</span> dimensional objects (like vectors) <span class="math notranslate nohighlight">\(x\)</span>,<span class="math notranslate nohighlight">\(y\)</span> can be computed as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+L_p(x,y) = (\sum_{i=1}^{d} |x_i - y_i|^{p})^{1/p}
+\]</div>
+<p>It satisfies all the aforementioned metric properties.</p>
+<p><strong>A. <span class="math notranslate nohighlight">\(L_1\)</span> norm</strong></p>
+<div class="math notranslate nohighlight">
+\[
+L_1(x,y) = |x_1-y_1| + |x_2-y_2| + ... |x_d-y_d|
+\]</div>
+<p>For one-dimensional points, <span class="math notranslate nohighlight">\(\min\limits_{x} {\sum_{i}} d(p_i,x)\)</span> occurs at the median of the points lying on the line.</p>
+<div class="figure align-default" id="line-mid">
+<img alt="../_images/line_mid_1.jpeg" src="../_images/line_mid_1.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">‘Centre’ of <span class="math notranslate nohighlight">\(L_1\)</span> norm is the median.</span><a class="headerlink" href="#line-mid" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>B. <span class="math notranslate nohighlight">\(L_2\)</span> norm</strong></p>
+<div class="math notranslate nohighlight">
+\[
+L_2(x,y) = |x_1-y_1|^{2} + |x_2-y_2|^{2} + ... |x_d-y_d|^{2}
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(d\)</span> dimensional point <span class="math notranslate nohighlight">\(x\)</span> such that its sum of distances from other <span class="math notranslate nohighlight">\(d\)</span> dimensional points <span class="math notranslate nohighlight">\({p_1, p_2, ... p_n}\)</span> is minimum can be computed as follows for each dimension:</p>
+<div class="math notranslate nohighlight">
+\[
+\min\limits_{x} \sum_{i=1}^{n} |p_i-x|^{2} =&gt; \frac{\partial \sum_{i=1}^{n} |p_i-x|^{2} }{\partial x} = 0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^{n} 2(p_i - x) = 0 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+x = \frac{\sum_{i=1}^{n} p_i}{n}
+\]</div>
+<p><strong>C. <span class="math notranslate nohighlight">\(L_\infty\)</span> norm</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(S_i\)</span> = <span class="math notranslate nohighlight">\(|x_i - y_i|\)</span>. We define the <span class="math notranslate nohighlight">\(L_\infty\)</span> norm as,</p>
+<div class="math notranslate nohighlight">
+\[
+L_\infty(x,y) = \lim_{p \to \infty} (\sum_{i=1}^{d} S_i^{p})^{1/p}
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(S_1\)</span> be the maximum distance between two coordinates of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> i.e. <span class="math notranslate nohighlight">\(S_i &lt; S_1 \forall \:i\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{p \to \infty}(|S_1|^{p}\sum_{i=1}^{d} (\frac{S_i}{S_1})^{p})^{1/p}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+S_1\lim_{p \to \infty}(1+\sum_{i=2}^{d} (\frac{S_i}{S_1})^{p})^{1/p} ≈ S_1
+\]</div>
+</div>
+<div class="section" id="jaccard-distance">
+<h3>2. Jaccard Distance<a class="headerlink" href="#jaccard-distance" title="Permalink to this headline">¶</a></h3>
+<hr class="docutils" />
+<p>Jaccard Distance (<span class="math notranslate nohighlight">\(JD\)</span>) is a distance function used to measure dissimilarity between <em>sets</em>. Other distance functions like Euclidean distance can not be used for sets. This is because if the two words are very similar, then their embedding representations are bound to be very similar and in some cases, sparse. Using Euclidean distance on high dimensional vectors and sets is computationally expensive and may not yield the correct result.</p>
+<p>Consider two sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> in space <span class="math notranslate nohighlight">\(S\)</span>. The Jaccard Similarity <span class="math notranslate nohighlight">\(JS(A, B)\)</span> is defined as,</p>
+<div class="math notranslate nohighlight">
+\[
+JS(A,B) = \frac{|A\cap B|}{|A\cup B|}
+\]</div>
+<p>If the two sets are mutually exclusive, <span class="math notranslate nohighlight">\(|A\cap B|=0\)</span>. Hence, <span class="math notranslate nohighlight">\(JS(A,B)=0\)</span>.
+Similarly, if <span class="math notranslate nohighlight">\(A=B\)</span>, <span class="math notranslate nohighlight">\(JS(A,B)=1\)</span></p>
+<p>The Jaccard Distance (<span class="math notranslate nohighlight">\(JD\)</span>) between 2 sets <span class="math notranslate nohighlight">\(A,B\)</span> is given as,</p>
+<div class="math notranslate nohighlight">
+\[
+JD(A,B)=1-JS(A,B)
+\]</div>
+<p>This implies, <span class="math notranslate nohighlight">\(A=B \iff JD(A,B)=0\)</span></p>
+<p>Additionally Jaccard Distance follows all the three metrics of a distance function, even the triangle inequality rule.</p>
+</div>
+<div class="section" id="edit-distance">
+<h3>3. Edit Distance<a class="headerlink" href="#edit-distance" title="Permalink to this headline">¶</a></h3>
+<hr class="docutils" />
+<p>Edit Distance is defined as the minimum number of specific kinds of operations (each with a mentioned cost) required to modify an object of a class to another object of the same class. The objective is to minimise the cost associated with edit distance while modifying an entity. The higher the edit distance, the higher is the difference between the entities.</p>
+<p>The permissible operations for strings <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are:</p>
+<ol class="simple">
+<li><p>Insertion (cost=1): Adding a character in <span class="math notranslate nohighlight">\(A\)</span> at the desired position <span class="math notranslate nohighlight">\(i\)</span> so that the character at position <span class="math notranslate nohighlight">\(i\)</span> of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> match.
+Consider strings <span class="math notranslate nohighlight">\(A\)</span> = ‘sittig’ and <span class="math notranslate nohighlight">\(B\)</span> = ‘sitting’. We can insert an ‘n’ at the 6th position to match the characters at that position.</p></li>
+<li><p>Deletion (cost=1): Removing a character in <span class="math notranslate nohighlight">\(A\)</span> at the desired position <span class="math notranslate nohighlight">\(i\)</span> so that the character at position <span class="math notranslate nohighlight">\(i\)</span> of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> match.
+Consider strings <span class="math notranslate nohighlight">\(A\)</span> = ‘brack’ and <span class="math notranslate nohighlight">\(B\)</span> = ‘back’. We can delete the ‘r’ at the 2nd position to match the character ‘a’ at the 2nd position of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
+<li><p>Substitution (cost=1): Replacing a character in <span class="math notranslate nohighlight">\(A\)</span> at the desired position <span class="math notranslate nohighlight">\(i\)</span> so that the character at position <span class="math notranslate nohighlight">\(i\)</span> of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> match.
+Consider strings <span class="math notranslate nohighlight">\(A\)</span> = ‘herlo’ and <span class="math notranslate nohighlight">\(B\)</span> = ‘hello’. We can substitute the ‘r’ at the 3rd position with an ‘l’ to match the characters at that position.</p></li>
+</ol>
+<p>Edit Distance for two strings <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> is the minimum cost of the mentioned operations to convert <span class="math notranslate nohighlight">\(A\)</span> into <span class="math notranslate nohighlight">\(B\)</span> or vice-versa.</p>
+<p>Similar to <span class="math notranslate nohighlight">\(L_p\)</span> <em>norm</em> and <em>Jaccard Distance</em>, Edit Distance obeys all three mentioned metrics of distance functions.
+Let <span class="math notranslate nohighlight">\(d(x,y)\)</span> be the edit distance (or minimum cost of operations) for two strings <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>; defined as the cost to modify <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<ol class="simple">
+<li><p>a) <span class="math notranslate nohighlight">\(d(x,x)=0\)</span><br />
+This is trivial as the minimum number of operations (and cost) to change string <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(x\)</span> is 0.<br />
+b) <span class="math notranslate nohighlight">\(d(x,y)&gt;0 \iff x\neq y\)</span><br />
+If <span class="math notranslate nohighlight">\(x\)</span> is not equal to <span class="math notranslate nohighlight">\(y\)</span>, there will be atleast one operation with an associated cost <span class="math notranslate nohighlight">\(c_i\)</span> required to change or modify <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d(x,y)=d(y,x)\)</span><br />
+Consider the cost required to update <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(y\)</span> (or edit distance of <span class="math notranslate nohighlight">\(x,y\)</span>) is <span class="math notranslate nohighlight">\(c\)</span>. We can argue that the minimum cost required to update <span class="math notranslate nohighlight">\(y\)</span> to <span class="math notranslate nohighlight">\(x\)</span> is <span class="math notranslate nohighlight">\(c\)</span> by replacing insertion with deletion, deletion with insertion for <span class="math notranslate nohighlight">\(d(y,x)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d(x,y)+d(y,z)\geq d(x,z)\)</span><br />
+Let <span class="math notranslate nohighlight">\(d(x,y)=c_1\;,\; d(y,z)=c_2\)</span>. We can argue that <span class="math notranslate nohighlight">\(d(x,y)+d(y,z)&lt; d(x,z)\)</span> is FALSE. This can be done by contradiction. <br />
+Let <span class="math notranslate nohighlight">\(d(x,y)+d(y,z)&lt; d(x,z)\)</span> with <span class="math notranslate nohighlight">\(\;d(x,y)=c_1\;,\; d(y,z)=c_2\)</span><br />
+Or, <span class="math notranslate nohighlight">\(\;c_1+c_2&lt; d(x,z)\)</span><br />
+However, we can easily argue that we can update <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(z\)</span> by updating <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(y\)</span> and then updating <span class="math notranslate nohighlight">\(y\)</span> to <span class="math notranslate nohighlight">\(z\)</span>. Since edit distance gives the minimum number of operations associated with the cost, <span class="math notranslate nohighlight">\(d(x,z)\)</span> can be <span class="math notranslate nohighlight">\(c_1+c_2\)</span> at max. Therefore, our assumption is wrong.<br />
+Hence, <span class="math notranslate nohighlight">\(\;d(x,y)+d(y,z)\geq d(x,z)\)</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs328-2022/CS328-Notes",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022_01_03_distance_function.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Distance Function</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022_01_10_central_limit_theorem_notebook.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Central Limit Theorem</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Students of CS328 2022<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

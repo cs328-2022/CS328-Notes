@@ -1,0 +1,868 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Central Limit Theorem &#8212; CS328-2022 Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Object Representations" href="2022_01_06_object_representations_notebook.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CS328-2022 Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Course Description
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Logistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="CONTRIBUTING.html">
+   Contributing to CS328 Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
+   Deadlines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations.html">
+   Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations_notebook.html">
+   [CODE] 🧑‍💻Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
+   Distance Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_06_object_representations_notebook.html">
+   Object Representations
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Central Limit Theorem
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_10_central_limit_theorem_notebook.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs328-2022/CS328-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_10_central_limit_theorem_notebook.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_10_central_limit_theorem_notebook.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_01_10_central_limit_theorem_notebook.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_01_10_central_limit_theorem_notebook.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-and-statistics-recap">
+   Probability and Statistics - Recap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-variables">
+   Random Variables
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#discrete-and-continuous-r-v">
+     Discrete and Continuous r.v.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#expectation">
+     Expectation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variance">
+     Variance
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-common-distributions">
+   Some common distributions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intuition-for-clt">
+   Intuition for CLT
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#probability-distributions">
+     1. Probability distributions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sampling-a-distribution">
+     2. Sampling a distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normal-or-gaussian-distribution">
+     3. Normal or Gaussian distribution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Central Limit Theorem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#even-if-you-are-not-normal-the-average-is-normal">
+     Even if you are not normal, the average is normal.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formal-statement-of-clt">
+   Formal Statement of CLT
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#galton-board-experiment-an-application-of-clt">
+   Galton Board Experiment - An Application of CLT
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Central Limit Theorem</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-and-statistics-recap">
+   Probability and Statistics - Recap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-variables">
+   Random Variables
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#discrete-and-continuous-r-v">
+     Discrete and Continuous r.v.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#expectation">
+     Expectation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variance">
+     Variance
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-common-distributions">
+   Some common distributions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intuition-for-clt">
+   Intuition for CLT
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#probability-distributions">
+     1. Probability distributions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sampling-a-distribution">
+     2. Sampling a distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normal-or-gaussian-distribution">
+     3. Normal or Gaussian distribution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Central Limit Theorem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#even-if-you-are-not-normal-the-average-is-normal">
+     Even if you are not normal, the average is normal.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formal-statement-of-clt">
+   Formal Statement of CLT
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#galton-board-experiment-an-application-of-clt">
+   Galton Board Experiment - An Application of CLT
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="central-limit-theorem">
+<h1>Central Limit Theorem<a class="headerlink" href="#central-limit-theorem" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="probability-and-statistics-recap">
+<h2>Probability and Statistics - Recap<a class="headerlink" href="#probability-and-statistics-recap" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Random experiments are experiments whose outcome cannot be predicted with certainty.</p>
+<ul>
+<li><p>Tossing a coin</p></li>
+</ul>
+</li>
+<li><p>Sample space is the set of all possible outcomes of a random experiment.</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(S = {H, T}\)</span></p></li>
+</ul>
+</li>
+<li><p>An outcome is just an element of the sample space.</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(H\)</span> is the outcome corresponding to getting a heads on a coin toss</p></li>
+</ul>
+</li>
+<li><p>An event is a subset of the sample space.</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(A = {H}\)</span> Event <span class="math notranslate nohighlight">\(A\)</span> occurs when you get a heads on a single coin toss</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="random-variables">
+<h2>Random Variables<a class="headerlink" href="#random-variables" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Random variable is a function that maps the sample space to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> (real numbers).</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(x : S\)</span> → <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> (w is used to indicate an event)</p></li>
+</ul>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x =  \left\{ \begin{array}{lr} 1, &amp; \text{if } w = \{H\}\\ 0, &amp; \text{if } w = \{T\}\\ \end{array}\right\}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>The cumulative distribution function (c.d.f) is a function <span class="math notranslate nohighlight">\(F: \mathbb{R}\)</span> → <span class="math notranslate nohighlight">\([0,1]\)</span> defined by <span class="math notranslate nohighlight">\(F(x) = P(X &lt;= x)\)</span> where <span class="math notranslate nohighlight">\(X\)</span> is the random variable and <span class="math notranslate nohighlight">\(x\)</span> is an arbitary real number.</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> ~ <span class="math notranslate nohighlight">\(F\)</span> indicates <span class="math notranslate nohighlight">\(F\)</span> is the distribution of r.v. <span class="math notranslate nohighlight">\(X\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(a \lt  X \le b) = P(X \le b) - P(X \le a) = F(b) - F(a)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(X \lt a) = F(a^-)\)</span></p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="discrete-and-continuous-r-v">
+<h3>Discrete and Continuous r.v.<a class="headerlink" href="#discrete-and-continuous-r-v" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Discrete random variable - A random variable is said to be disrete if the set of all possible values of <span class="math notranslate nohighlight">\(X\)</span> is a sequence <span class="math notranslate nohighlight">\(x_1, x_2 ... x_n\)</span> (i.e. countable finite or infinite sequence)</p></li>
+<li><p>Continuous random variable - A random variable is said to be continuous if there exists a non-negative function such that the area under that curve for a particular region defines the probability of the random variable falling in that region.</p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p></p></th>
+<th class="head"><p>Discrete r.v.</p></th>
+<th class="text-align:right head"><p>Continuous r.v.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Function</p></td>
+<td><p>Probability mass function</p></td>
+<td class="text-align:right"><p>Probability density function</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Range</p></td>
+<td><p><span class="math notranslate nohighlight">\(p: \mathbb{R} \longrightarrow [0,1] \)</span></p></td>
+<td class="text-align:right"><p><span class="math notranslate nohighlight">\( f: \mathbb{R} \longrightarrow [0,\infty) \)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>p.m.f./ p.d.f.</p></td>
+<td><p><span class="math notranslate nohighlight">\(p(x) = P(X = x)\)</span></p></td>
+<td class="text-align:right"><p><span class="math notranslate nohighlight">\(P(X \in B) = \int_B f(x) dx\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Summation/Integral</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sum_{i} p(x_i) = 1\)</span></p></td>
+<td class="text-align:right"><p><span class="math notranslate nohighlight">\(\int_R f(x) dx = 1\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Relation with c.d.f.</p></td>
+<td><p><span class="math notranslate nohighlight">\(F(a) = \sum_{x_i &lt;= a} p(x_i)\)</span></p></td>
+<td class="text-align:right"><p><span class="math notranslate nohighlight">\(F(a) = \int_{-\infty}^{a} f(x) dx\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="expectation">
+<h3>Expectation<a class="headerlink" href="#expectation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Expectation is the average or mean value of a random variable.</p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p></p></th>
+<th class="head"><p>Discrete r.v.</p></th>
+<th class="text-align:right head"><p>Continuous r.v.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(E[X]\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sum_{x} x.p(x)\)</span></p></td>
+<td class="text-align:right"><p><span class="math notranslate nohighlight">\(\int_{R} x.f(x) dx\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Expectation of sum of random variables is equal to the sum of expectation of random variables, <span class="math notranslate nohighlight">\(\textbf {irrespective of mutual independence}\)</span>, i.e.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+E[\sum_{i=1}^{n}X_i] = \sum_{i=1}^{n}E[X_i]
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E[c] = c\)</span> where c is a constant</p></li>
+<li><p><span class="math notranslate nohighlight">\(E[cX] = cE[X]\)</span> where c is a constant</p></li>
+</ul>
+</div>
+<div class="section" id="variance">
+<h3>Variance<a class="headerlink" href="#variance" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Variance of <span class="math notranslate nohighlight">\(X\)</span> is defined by <span class="math notranslate nohighlight">\(Var(X) = E[(x-\mu)^2]\)</span></p></li>
+<li><p>Variance of sum of random variables is equal to the sum of expectation of random variables <span class="math notranslate nohighlight">\(\textbf {only if all the random variables are mutually independent}\)</span> i.e.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Var(\sum_{i=1}^{n}X_i) = \sum_{i=1}^{n}Var(X_i)
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Var(c) = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Var(X + c) = Var(X)\)</span> where <span class="math notranslate nohighlight">\(c\)</span> is a constant</p></li>
+<li><p><span class="math notranslate nohighlight">\(Var(cX) = c^{2}Var(X)\)</span> where <span class="math notranslate nohighlight">\(c\)</span> is a constant</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="some-common-distributions">
+<h2>Some common distributions<a class="headerlink" href="#some-common-distributions" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<p>Consider <span class="math notranslate nohighlight">\(X\)</span> as the random variable.</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="1c47908a-c7b0-4257-b577-5be6ecd80a02" name="455590f8-3cb6-43db-bb1d-8c00d1de353a" type="radio">
+</input><label class="tabbed-label" for="1c47908a-c7b0-4257-b577-5be6ecd80a02">
+Bernoulli</label><div class="tabbed-content docutils">
+<ul class="simple">
+<li><p>In Bernoulli distribution, r.v. can take only two possible values 0 or 1 with <span class="math notranslate nohighlight">\(X=1\)</span> occuring with probability <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Distribution</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>p.m.f</p></th>
+<th class="text-align:right head"><p>E[X]</p></th>
+<th class="text-align:right head"><p>Var(X)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Bernoulli</p></td>
+<td><p>Discrete</p></td>
+<td><p><span class="math notranslate nohighlight">\(p(x) =  \left\{ \begin{array}{lr} 1-p, &amp; \text{if x = 0}\\ p, &amp; \text{if x = 1}\\ \end{array}\right\} \)</span></p></td>
+<td class="text-align:right"><p><span class="math notranslate nohighlight">\(p\)</span></p></td>
+<td class="text-align:right"><p><span class="math notranslate nohighlight">\(p(1-p)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-default" id="bernoulli-p-m-f">
+<img alt="../_images/bernoulli-pmf.png" src="../_images/bernoulli-pmf.png" />
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Bernoulli distribution with <span class="math notranslate nohighlight">\(p = 0.4\)</span></span><a class="headerlink" href="#bernoulli-p-m-f" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<input id="f082521c-9413-4bbd-b1e1-6576d279f526" name="455590f8-3cb6-43db-bb1d-8c00d1de353a" type="radio">
+</input><label class="tabbed-label" for="f082521c-9413-4bbd-b1e1-6576d279f526">
+Binomial</label><div class="tabbed-content docutils">
+<ul class="simple">
+<li><p>In n Binomial events, we can get the probability of getting <span class="math notranslate nohighlight">\(r\)</span> events <span class="math notranslate nohighlight">\((r\le n)\)</span> with favourable odds <span class="math notranslate nohighlight">\(p\)</span> and the rest with unfavourable odds <span class="math notranslate nohighlight">\(q\)</span> <span class="math notranslate nohighlight">\((q = 1-p)\)</span>.</p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Distribution</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>p.m.f</p></th>
+<th class="text-align:right head"><p>E[X]</p></th>
+<th class="text-align:right head"><p>Var(X)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Binomial</p></td>
+<td><p>Discrete</p></td>
+<td><p><span class="math notranslate nohighlight">\( p(r) = {n \choose r }p^{r}q^{n-r}\)</span></p></td>
+<td class="text-align:right"><p><span class="math notranslate nohighlight">\(np\)</span></p></td>
+<td class="text-align:right"><p><span class="math notranslate nohighlight">\(np(1-p)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-default" id="binomial-p-m-f">
+<img alt="../_images/binomial-pmf.png" src="../_images/binomial-pmf.png" />
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Binomial distribution of 100 trials and <span class="math notranslate nohighlight">\(p = 0.25\)</span> (left), <span class="math notranslate nohighlight">\(p = 0.5\)</span> (middle), and  <span class="math notranslate nohighlight">\(p = 0.75\)</span> (right)</span><a class="headerlink" href="#binomial-p-m-f" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<input id="fdc49580-ec44-4135-b1d2-3c20918ff9ee" name="455590f8-3cb6-43db-bb1d-8c00d1de353a" type="radio">
+</input><label class="tabbed-label" for="fdc49580-ec44-4135-b1d2-3c20918ff9ee">
+Gaussian</label><div class="tabbed-content docutils">
+<ul class="simple">
+<li><p>The normal/gaussian distribution can be expressed in terms of its expectation value and variance.</p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Distribution</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>p.d.f</p></th>
+<th class="text-align:right head"><p>E[X]</p></th>
+<th class="text-align:right head"><p>Var(X)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Normal/Gaussian</p></td>
+<td><p>Continuous</p></td>
+<td><p><span class="math notranslate nohighlight">\( f(x) = \frac{1}{σ\sqrt{2Π}}\exp{(-\frac{1}{2}{(\frac{x-\mu}{σ})}^2)}\)</span></p></td>
+<td class="text-align:right"><p><span class="math notranslate nohighlight">\(μ\)</span></p></td>
+<td class="text-align:right"><p><span class="math notranslate nohighlight">\(σ\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-default" id="gaussian-p-d-f">
+<img alt="../_images/gaussian-pdf.png" src="../_images/gaussian-pdf.png" />
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Bell-shaped curve of the Gaussian distribution</span><a class="headerlink" href="#gaussian-p-d-f" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="intuition-for-clt">
+<h2>Intuition for CLT<a class="headerlink" href="#intuition-for-clt" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="section" id="probability-distributions">
+<h3>1. Probability distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this headline">¶</a></h3>
+<p>Let’s say we want to explore the statistical properties of the heights of human adults. Let us divide the range of possible adult human heights, say from 4 feet to 7 feet, into bins of size 1 feet. We measure the height of a random person and put it in the corresponding bin; like a measurement of 5.6 feet goes into the bin [5 feet,6 feet). When we take multiple such measurements and stack them on top on each other in the respective bins, we get a histogram. This histogram tells us about the distribution of height among the people we measured. If we decrease our bin size and increase the number of measurements, we can make statements and estimates about the distribution more precisely.</p>
+<p>However, it may happen one of the bin may remain empty as no measurment that we sampled fell in the range of that bin. However, that does not mean that no sample in the entire population will fall in that range. So, we use a curve to approximate the historgram and provide us with the same information. The advantage of a curve is that we can account for the empty bins and we do not need to take care of the bin size while sampling.</p>
+<p>We don’t have enough money and time to sample the entire population. The curve approximated based on the mean and standard deviation of the data we collect is a good enough estimate for the entire population.</p>
+<div class="admonition-takeaway admonition">
+<p class="admonition-title">Takeaway</p>
+<p>The probability distribution (as the name suggests) shows us how the probability of measurements is distributed.</p>
+</div>
+<p>We plot a histogram of the height data obtained from the <a class="reference external" href="https://www.kaggle.com/mustafaali96/weight-height">Kaggle weight-height dataset</a> and try to estimate a curve that fits the data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../assets/2022_01_10_central_limit_theorem_notebook/weight-height.csv&quot;</span><span class="p">)</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">])</span>
+
+<span class="c1"># Fit a normal distribution to the data:</span>
+<span class="n">mu</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+<span class="c1"># Plot the histogram.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot the PDF.</span>
+<span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;Heights histogram</span>
+<span class="s1">&#39;&#39;&#39;</span> <span class="o">+</span> <span class="s2">&quot;Fit results: mu = </span><span class="si">%.2f</span><span class="s2">,  std = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Height x (inches)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;p(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default" id="probability-distribution">
+<img alt="../_images/prob-dist.png" src="../_images/prob-dist.png" />
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Probability distribution of heights in the given dataset</span><a class="headerlink" href="#probability-distribution" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="sampling-a-distribution">
+<h3>2. Sampling a distribution<a class="headerlink" href="#sampling-a-distribution" title="Permalink to this headline">¶</a></h3>
+<p>If we ask a computer to pick a measurment at random based on the probability described by the historgram/curve, it is likely to fall in the taller region of the histogram/curve. Every once in a while the computer will also pick some measurment from the shorter region of the histogram/curve.</p>
+<div class="admonition-takeaway admonition">
+<p class="admonition-title">Takeaway</p>
+<p>Sampling a distribution (again as the name suggests) is getting samples from a distribution based on the probabilities described by the distribution.</p>
+</div>
+<p>Why do we have to sample from a distribution? We can use the computer to generate a lot of samples and we can plug them into various statistical tests and make inferences about the real-world data. Since we know the original distribution of the data we collect, we can compare our expectations of what will happen to what the reality is. So, sampling allows us to determine what statistical tests are capable of doing without doing much work in data collection.</p>
+</div>
+<div class="section" id="normal-or-gaussian-distribution">
+<h3>3. Normal or Gaussian distribution<a class="headerlink" href="#normal-or-gaussian-distribution" title="Permalink to this headline">¶</a></h3>
+<p>The normal or Gaussian distribution is a bell-shaped, symmetric curve. In the context of our adult human heights example, the x-axis represents the heights, and the y-axis represents the probability of observing someone of that height.</p>
+<p>Properties</p>
+<ul class="simple">
+<li><p>The normal distributions are always centred at the average value.</p></li>
+<li><p>A tall, narrow curve means less range of the quantity on the x-axis</p></li>
+<li><p>The width of the curve is captured by the standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span></p></li>
+<li><p>Almost 68% of measurments fall within <span class="math notranslate nohighlight">\(\pm 1 \sigma\)</span></p></li>
+<li><p>Almost 95% of the measurements fall within <span class="math notranslate nohighlight">\(\pm 2 \sigma\)</span></p></li>
+<li><p>Almost 99.7% of the measurements fall within <span class="math notranslate nohighlight">\(\pm 3 \sigma\)</span></p></li>
+<li><p>Given an average value and the standard deviation, we can draw a unique normal distribution.</p></li>
+<li><p>We observe this curve a lot in nature, such as for distributions of heights, weights, commute times, etc.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Central Limit Theorem<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="section" id="even-if-you-are-not-normal-the-average-is-normal">
+<h3>Even if you are not normal, the average is normal.<a class="headerlink" href="#even-if-you-are-not-normal-the-average-is-normal" title="Permalink to this headline">¶</a></h3>
+<p>Let us take a uniform distribution in the range <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span>. The probability of picking any number in this range is uniform. We take 30 points at random from this range and call it sample 1. We calculate the mean of this sample and plot a histogram of the mean. We collect multiple such samples and plot their means on the histogram. When we take many such means, we see that the histogram represents the normal/Gaussian curve. Even when we have sampled the data from a uniform distribution, the means of the sampling distributions are normally distributed. Even when we begin with an exponential distribution, the means of the sampling distribution still end up being normally distributed.</p>
+<div class="figure align-default" id="clt">
+<img alt="../_images/CLT.jpeg" src="../_images/CLT.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Sampling distribution of the mean approaches the normal curve</span><a class="headerlink" href="#clt" title="Permalink to this image">¶</a></p>
+</div>
+<p>Practical implications of the means being normally distributed</p>
+<ul class="simple">
+<li><p>In reality, we do not know what distribution our data belongs to. However, the CLT does not care about the original distribution of our data. So we do not have to worry about the distribution that the samples come from.</p></li>
+</ul>
+<p>CLT is the basis for a lot of statistics. The normally distributed means are used to make confidence intervals and in various other statistical tests that help differentiate between two or more samples.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Few data scientists believe that the CLT is applicable only when we take a sample size <span class="math notranslate nohighlight">\(\geq\)</span> 30.</p>
+</div>
+</div>
+</div>
+<div class="section" id="formal-statement-of-clt">
+<h2>Formal Statement of CLT<a class="headerlink" href="#formal-statement-of-clt" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, ... . , X_n\)</span> be <span class="math notranslate nohighlight">\(n\)</span> independent and identically distributed random variables with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard deviation as <span class="math notranslate nohighlight">\(\sigma\)</span>. We introduce a new random variable <span class="math notranslate nohighlight">\(S_n\)</span> defined as:</p>
+<div class="math notranslate nohighlight">
+\[S_n = \sum_i^n X_i\;\;,\;\; \overline{X}_n=\frac{S_n}{n}\]</div>
+<p>Since they are independent and identically distributed random variables, the expectation and variance of <span class="math notranslate nohighlight">\(S_n\)</span> and <span class="math notranslate nohighlight">\(\overline{X}_n\)</span> is given as:</p>
+<div class="math notranslate nohighlight">
+\[E(S_n)=n\mu \;\;\;\; , \;\;\;\; Var(S_n)=n\sigma^2\]</div>
+<div class="math notranslate nohighlight">
+\[E(X_n)=\mu \;\;\;\; , \;\;\;\; Var(X_n)=\sigma^2/n\]</div>
+<p>According to CLT:</p>
+<div class="math notranslate nohighlight">
+\[\sqrt{n}(S_n-\mu) \xrightarrow{\text{distribution goes to}} N(0,\sigma^2)\]</div>
+<p>As <span class="math notranslate nohighlight">\(n\)</span> increases, the distribution approaches standard normal distribution, <span class="math notranslate nohighlight">\(N(0,1)\)</span>. By normalising <span class="math notranslate nohighlight">\(S_n\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[Z_n= \frac{S_n-n\mu}{\sqrt{n\sigma^2}}=\frac{S_n-n\mu}{\sigma\sqrt{n}} \xrightarrow[\text{converges to}]{\text{distribution}} N(0,1)\]</div>
+<p>Or simply (for sufficiently large <span class="math notranslate nohighlight">\(n\)</span>):
+<br />
+<span class="math notranslate nohighlight">\(S_n\approx N(n\mu,n\sigma^2)\)</span><br />
+<span class="math notranslate nohighlight">\(X_n\approx N(\mu,\sigma^2/n)\)</span><br />
+<span class="math notranslate nohighlight">\(Z_n\approx N(0,1)\)</span></p>
+<div class="admonition-takeaway admonition">
+<p class="admonition-title">Takeaway</p>
+<p>As number of samples (<span class="math notranslate nohighlight">\(n\)</span>) increases, the distribution approaches Gaussian distribution.</p>
+</div>
+</div>
+<div class="section" id="galton-board-experiment-an-application-of-clt">
+<h2>Galton Board Experiment - An Application of CLT<a class="headerlink" href="#galton-board-experiment-an-application-of-clt" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<p>The Galton board, invented by Francis Galton is a nice example to illustrate Central Limit Theorem (CLT). It demonstrates how a binomial distribution with a fairly large sample size can be approximated as a normal distribution. <br />
+Below is an image of a Galton Board <a class="reference external" href="https://jpgamesltd.co.uk/Galton-Board-Maths-Desktop-Toy">(source)</a>:</p>
+<div class="figure align-default" id="galton-board-reference-https-jpgamesltd-co-uk-galton-board-maths-desktop-toy">
+<img alt="../_images/galton_board.jpeg" src="../_images/galton_board.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Galton Board Experiment <a class="reference external" href="https://jpgamesltd.co.uk/Galton-Board-Maths-Desktop-Toy">[Source]</a></span><a class="headerlink" href="#galton-board-reference-https-jpgamesltd-co-uk-galton-board-maths-desktop-toy" title="Permalink to this image">¶</a></p>
+</div>
+<p>Consider <span class="math notranslate nohighlight">\(n\)</span> balls in the Galton Board. For each ball, it can go into <span class="math notranslate nohighlight">\(k\)</span> many bins. At each peg, it can either bounce to the left or right. On a biased board, let the probability of bouncing to the right be <span class="math notranslate nohighlight">\(p\)</span>. Therefore, the probability of bouncing to the left is <span class="math notranslate nohighlight">\(1-p\)</span> (since the ball can not go straight down). Therefore, the probability of a ball to reach the <span class="math notranslate nohighlight">\(k^{th}\)</span> bin is given as:</p>
+<div class="math notranslate nohighlight">
+\[ 
+\binom nk \times p^k \times (1-p)^{(n-k)}
+\]</div>
+<p>For a unbiased board, <span class="math notranslate nohighlight">\(p=0.5\)</span></p>
+<p>Accoding to CLT, the binomial distribution illustrated above can be approximated as a normal distribution, when the number of balls and pegs is very large; a condition satisfied by a Galton Board.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs328-2022/CS328-Notes",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022_01_06_object_representations_notebook.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Object Representations</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Students of CS328 2022<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
