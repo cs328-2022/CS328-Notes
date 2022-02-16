@@ -13,4 +13,12 @@ parts:
   - file: notebooks/2022_01_03_data_representations.md
   - file: notebooks/2022_01_03_data_representations_notebook.ipynb
   - file: notebooks/2022_01_03_distance_function.md
+  - file: notebooks/2022_01_06_object_representations_notebook.ipynb
+  - file: notebooks/2022_01_10_central_limit_theorem_notebook.ipynb
+  - file: notebooks/2022_01_11_markov_chebyshev_inequalities.md
+  - file: notebooks/2022_01_13_chernoff_bound.md
+  - file: notebooks/2022_01_13_chernoff_bound_tails.ipynb
   - file: notebooks/2022_01_17_Clustering.ipynb
+  - file: notebooks/2022_01_24_K-means.md
+  - file: notebooks/2022_01_25_K-means++.md
+  - file: notebooks/2022_01_27_Hierarchial_Clustering.md
