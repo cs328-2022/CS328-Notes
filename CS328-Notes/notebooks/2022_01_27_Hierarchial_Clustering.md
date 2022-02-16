@@ -82,8 +82,8 @@ There can be many ways, some of them are-
 
 3. Average of all pairs: average link      -> $d_3$(C,C') = $\underset{x \epsilon C,y \epsilon C'}{avg}$ d(x,y)
 
-![Image](../assets/Image.png)
-![Image](../assets/Image1.png)
+![Image](../assets/2022_01_27_Hierarchial_Clustering/Image.png)
+![Image](../assets/2022_01_27_Hierarchial_Clustering/Image1.png)
 
 ```{Note}
 All the images are taken from the slides provided by the Prof. Anirban Dasgupta.
