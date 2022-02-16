@@ -1,0 +1,825 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clustering &#8212; CS328-2022 Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="K-means" href="2022_01_24_K-means.html" />
+    <link rel="prev" title="Plot of chernoff bound" href="2022_01_13_chernoff_bound_tails.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CS328-2022 Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Course Description
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Logistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="CONTRIBUTING.html">
+   Contributing to CS328 Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
+   Deadlines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations.html">
+   Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations_notebook.html">
+   [CODE] 🧑‍💻Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
+   Distance Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_06_object_representations_notebook.html">
+   Object Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_10_central_limit_theorem_notebook.html">
+   Central Limit Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_11_markov_chebyshev_inequalities.html">
+   Markov and Chebyshev Inequalities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound.html">
+   Chernoff Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound_tails.html">
+   Plot of chernoff bound
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_24_K-means.html">
+   K-means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_25_K-means%2B%2B.html">
+   Lloyd’s algorithm, convergence?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_27_Hierarchial_Clustering.html">
+   Why does k-means++ work?
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_17_Clustering.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs328-2022/CS328-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_17_Clustering.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_17_Clustering.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_01_17_Clustering.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_01_17_Clustering.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-idea">
+   Basic idea
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#objective-function">
+   Objective Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-center">
+   K-Center
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introduction">
+     Introduction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#observations">
+     Observations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-2-approximation">
+     Why 2-approximation?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-means">
+   K-Means
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Objective Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-means-objective-alternative-view">
+     K Means Objective: Alternative View
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#connection-with-maximum-likelihood-function">
+     Connection with Maximum Likelihood Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#voronoi-partition">
+     Voronoi Partition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#center-vs-partitioning">
+     Center vs Partitioning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lloyds-algorithm-analysis">
+     Lloyd’s Algorithm: Analysis
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Clustering</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-idea">
+   Basic idea
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#objective-function">
+   Objective Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-center">
+   K-Center
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introduction">
+     Introduction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#observations">
+     Observations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-2-approximation">
+     Why 2-approximation?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-means">
+   K-Means
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Objective Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-means-objective-alternative-view">
+     K Means Objective: Alternative View
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#connection-with-maximum-likelihood-function">
+     Connection with Maximum Likelihood Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#voronoi-partition">
+     Voronoi Partition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#center-vs-partitioning">
+     Center vs Partitioning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lloyds-algorithm-analysis">
+     Lloyd’s Algorithm: Analysis
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="clustering">
+<h1>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">¶</a></h1>
+<p>Clustering is one of the forms of unsupervised learning when the data does not have labels.</p>
+<p>It is useful for:</p>
+<ul class="simple">
+<li><p>Detecting patterns<br />
+Example - In image data, customer shopping results, anomalies, etc.</p></li>
+<li><p>Optimizing<br />
+Example - Distributing data across various machines, cleaning up search results, facility allocation for city planning, etc.</p></li>
+<li><p>When we ‘don’t know’ what exactly we are looking for</p></li>
+</ul>
+<div class="section" id="basic-idea">
+<h2>Basic idea<a class="headerlink" href="#basic-idea" title="Permalink to this headline">¶</a></h2>
+<p>Clustering is basically concerned with grouping the objects into a small number of meaningful groups called clusters.</p>
+<p>However-</p>
+<ul class="simple">
+<li><p>How do we define the similarity/distance between the objects?</p></li>
+<li><p>When do we call the groups meaningful?</p></li>
+<li><p>How many groups should the objects be divided into?</p></li>
+</ul>
+<p>So typically, there is no supervision for clustering the objects. Since there is no ground truth, evaluating the quality of clustering is often difficult.<br />
+For example, consider the two clustering cases depicted in the figure 1.3 below:</p>
+<div class="figure align-default" id="fig1">
+<img alt="../_images/fig1.png" src="../_images/fig1.png" />
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Two different clustering cases <a class="footnote-reference brackets" href="#ref" id="id1">1</a></span><a class="headerlink" href="#fig1" title="Permalink to this image">¶</a></p>
+</div>
+<p>What is the right way of clustering - the left or the right? Essentially, the answer depends on the application in use. However, most times, clustering might not have an end goal and there might not be a fixed application to proceed with. In such a case, to define what the right way of clustering is, we need an objective function!</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>There is no unique way of defining clusters that work for all applications.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="objective-function">
+<h2>Objective Function<a class="headerlink" href="#objective-function" title="Permalink to this headline">¶</a></h2>
+<p>The most structured way to cluster the objects is the following:</p>
+<ul class="simple">
+<li><p>Specifying the number of clusters required<br />
+K centers / K means / K-median</p></li>
+<li><p>Specifying cluster separation or quality<br />
+Dunn’s index - works on the notion of density, i.e., a set of points would be called a cluster if the points are dense enough<br />
+Radius - works on the notion of radius of the cluster, i.e., a set of points would count as a cluster if all the points fall within certain radius from a specific center</p></li>
+<li><p>Graph-based measures<br />
+This extends the objects of clusters from being points to networks.
+For example, what would the shortest distance mean with respect to networks? Is it the shortest path between the nodes?</p></li>
+<li><p>Working without an objective function<br />
+Hierarchical clustering schemes that define clusters based on some intuitive algorithms</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="k-center">
+<h2>K-Center<a class="headerlink" href="#k-center" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="introduction">
+<h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<p>Consider a cluster with specific cluster centers.<br />
+Cost of a point = Distance of the point from the closest cluster center<br />
+Cost of a single cluster = Maximum of all the point costs of that cluster<br />
+Cost of a complete clustering = Maximum of all the cluster costs, say D</p>
+<p><b> Example:</p>
+<div class="figure align-default" id="fig2">
+<img alt="../_images/fig2.jpeg" src="../_images/fig2.jpeg" />
+</div>
+<p>Cost of points: </b><br />
+Point 1 = <span class="math notranslate nohighlight">\(d_{11}\)</span><br />
+Point 2 = <span class="math notranslate nohighlight">\(d_{12}\)</span><br />
+Point 3 = <span class="math notranslate nohighlight">\(d_{23}\)</span><br />
+Point 4 = <span class="math notranslate nohighlight">\(d_{24}\)</span><br />
+<b><br />
+Cost of clusters: </b><br />
+Cluster 1 = max(<span class="math notranslate nohighlight">\(d_{11}\)</span> , <span class="math notranslate nohighlight">\(d_{12}\)</span> ) = <span class="math notranslate nohighlight">\(d_{12}\)</span><br />
+Cluster 2 = max(<span class="math notranslate nohighlight">\(d_{23}\)</span> , <span class="math notranslate nohighlight">\(d_{24}\)</span> ) = <span class="math notranslate nohighlight">\(d_{23}\)</span><br />
+<b><br />
+Cost of clustering:  </b><br />
+D = max(<span class="math notranslate nohighlight">\(d_{12}\)</span> , <span class="math notranslate nohighlight">\(d_{23}\)</span> ) = <span class="math notranslate nohighlight">\(d_{23}\)</span></p>
+<p><b> Algorithm’s Goal: </b> The algorithm has to find the centers <span class="math notranslate nohighlight">\(C_1\)</span> , <span class="math notranslate nohighlight">\(C_2\)</span>  such that the total cost of the clustering(D) is minimized, i.e., the distance of the farthest point from the center is minimized.</p>
+<p>Consider a set of points as shown in the image. The aim is to choose the positions of k number of centers and create circles corresponding to each center such that all the points in the set lie inside the k circles.</p>
+<div class="figure align-default" id="fig3">
+<img alt="../_images/fig3.jpeg" src="../_images/fig3.jpeg" />
+</div>
+<p><b>K = 4<br />
+Solution #1: </b><br />
+All four centers are the points of the input set. The radii correspond to the distance of the farthest points from the centers.<br />
+Notice that the cost of the cluster(D) = r</p>
+<div class="figure align-default" id="fig5">
+<img alt="../_images/fig5.jpeg" src="../_images/fig5.jpeg" />
+</div>
+<p><b> Solution #2: </b><br />
+All the centers of the circles need not be the points from the input set, but can be arbitrary. Also, although k=4, only three circles have been used to enclose all the points.<br />
+However, notice that the cost of the new cluster(D’) = r’ &gt; r</p>
+<div class="figure align-default" id="fig4">
+<img alt="../_images/fig4.jpeg" src="../_images/fig4.jpeg" />
+</div>
+</div>
+<div class="section" id="observations">
+<h3>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The input set of points should be enclosed in utmost k circles</p>
+<ul>
+<li><p>The algorithm gets to choose the centers of the circles</p></li>
+<li><p>All the points should be covered within the circles</p></li>
+<li><p>Solution value(cost) is given by the largest radii among all the circles</p></li>
+</ul>
+</li>
+<li><p>If we are allowed to k circles, is it possible to obtain a better solution by using k-1 circles instead of k circles? No, because we can always split the biggest ball into two to reduce the cost. It means, given the k centers, we will always use all of them for the optimal solution.</p></li>
+<li><p>This simple problem of finding optimal K-balls is NP-hard.</p></li>
+<li><p>However, there is a solvable algorithm. It is an easy 2-approximation, i.e., if the most optimal solution using at most k circles needs a maximum radius OPT, then our algorithm which also uses k circles will have a maximum radius of not more than 2 <span class="math notranslate nohighlight">\(*\)</span> OPT.</p></li>
+</ul>
+<div class="proof algorithm admonition" id="2-approx">
+<p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (2-Approximation Algorithm)</p>
+<div class="algorithm-content section" id="proof-content">
+<p>Let the input set <span class="math notranslate nohighlight">\(V\)</span> contain a total of ‘n’ points.<br />
+Let all the ‘k’ centers be the points of the input set and are in set <span class="math notranslate nohighlight">\(C\)</span> .</p>
+<p>Following is the pseudocode for 2-approximation:</p>
+<ul class="simple">
+<li><p>Choose a point <span class="math notranslate nohighlight">\(v\)</span> <span class="math notranslate nohighlight">\(\in   \)</span> <span class="math notranslate nohighlight">\(V\)</span> arbitrarily and make it first center <span class="math notranslate nohighlight">\(c_1\)</span> .</p></li>
+<li><p>For every point <span class="math notranslate nohighlight">\(v \in    V\)</span> compute <span class="math notranslate nohighlight">\(d_1[v]\)</span> from <span class="math notranslate nohighlight">\(c_1\)</span> .</p></li>
+<li><p>Pick the point <span class="math notranslate nohighlight">\(c_2\)</span> with highest distance from <span class="math notranslate nohighlight">\(c_1\)</span> and add it to the <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Continue till the <span class="math notranslate nohighlight">\(K\)</span> centers are found.</p></li>
+</ul>
+<p><b> Runtime: </b> <span class="math notranslate nohighlight">\(O(kn) \)</span></p>
+</div>
+</div></div>
+<div class="section" id="why-2-approximation">
+<h3>Why 2-approximation?<a class="headerlink" href="#why-2-approximation" title="Permalink to this headline">¶</a></h3>
+<p>Suppose <span class="math notranslate nohighlight">\(D\)</span> is th largest radius among K-Centers.<br />
+Let,<br />
+    g(1), g(2),  … … g(k) = k centers</p>
+<p>    g(k+1) = farthest point from {g(1), g(2), …..g(k)}</p>
+<p>    G(i) = {g(1), g(2), … g(i)}</p>
+<p>     G(k) = final set</p>
+<p>Solution cost = d (g(k+1) , G(k))</p>
+<p><span class="math notranslate nohighlight">\( \Delta (i) \)</span> =  max  of  d(x, G(i))   i.e farthest from G(i)}</p>
+<div class="proof lemma admonition" id="my-lemma">
+<p class="admonition-title"><span class="caption-number">Lemma 1 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\( \Delta (i+1) \le  \Delta   (i)\)</span></p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof.
+<span class="math notranslate nohighlight">\( \Delta (i+1) =\)</span> max of d (x, G(i)) =  d (g(i+1), G(i))</p>
+<p>Also,  d(g(i+1), G(i))   <span class="math notranslate nohighlight">\(\le\)</span>   d(g(i+1), G(i-1)) … Since our algorithm is greedy</p>
+<p>Now,  d(g(i+1), G(i-1))   <span class="math notranslate nohighlight">\(\le\)</span>    d(g(i), G(i-1))  =  <span class="math notranslate nohighlight">\(\Delta (i) \)</span></p>
+<p>Hence    <span class="math notranslate nohighlight">\( \Delta (i+1)  \le  \Delta   (i)\)</span></p>
+</div>
+<div class="proof lemma admonition" id="my-lemma2">
+<p class="admonition-title"><span class="caption-number">Lemma 2 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>For any two  <span class="math notranslate nohighlight">\(i, j\)</span>  where <span class="math notranslate nohighlight">\( j &lt; i\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[  d(g(i), g(j))  \ge  \Delta  (k)  \]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof.
+d(g(i), g(j)) <span class="math notranslate nohighlight">\(\ge\)</span>  d(g(i), G(i-1))  =  <span class="math notranslate nohighlight">\(\Delta   (i)\)</span></p>
+<p>Also,  <span class="math notranslate nohighlight">\( \Delta   (i)  \ge  \Delta  (k) \)</span>  … from previous lemma</p>
+<p>Putting these together for any i, j</p>
+<p>d(g(i), g(j))  <span class="math notranslate nohighlight">\(\ge   \Delta  _{min} (i, j) \ge   \Delta   (k)\)</span></p>
+<p>d(g(k+1), g(i))  <span class="math notranslate nohighlight">\( \ge  \)</span>  d(g(k+1), G(k))  =  <span class="math notranslate nohighlight">\( \Delta  (k)\)</span></p>
+<p>Hence, when we consider G(k+1), all pairs of points in G(k+1) are separated by atleast <span class="math notranslate nohighlight">\(\Delta  (k)\)</span></p>
+</div>
+<div class="proof lemma admonition" id="my-lemma3">
+<p class="admonition-title"><span class="caption-number">Lemma 3 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(O\)</span> be the K-Centers of the optimal solution and the associated cost be <span class="math notranslate nohighlight">\( \Delta (O)\)</span>  ,  then</p>
+<div class="math notranslate nohighlight">
+\[ \Delta   (G) \le  2 * \Delta   (O) \]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof.
+Take the points in the set H(k+1) = { h(1), h(2), …. , h(k+1)}</p>
+<p>Since we have k circles and K+1 balls, there must be atleast two of these points in the same circle. <b>(Pigeonhole Principle) </b></p>
+<p>say x and y are mapped to the same center c.</p>
+<p>max(d(x, c), d(y, c)) <span class="math notranslate nohighlight">\( \le   \Delta   (O) \)</span></p>
+<p>Since x, y <span class="math notranslate nohighlight">\(\in   \)</span> G(k+1),</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned} d(x, y) \ge \Delta   (k) = \Delta   (G) \text{ ...(lemma 2)}    \\\Delta   (G) \le  d(x, y) \le d(x, c) + d(y, c)   \\
+d(x, c) + d(y, c) \le   \Delta   (O) + \Delta   (O)   \\
+\text{from above two equations,}    \\
+\Delta   (G) \le  2 * \Delta   (O)\end{aligned}\end{align} \]</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Can We Do Better?</p>
+<ul class="simple">
+<li><p>We can do no better than the 2-approximation.</p></li>
+<li><p>For any small constant 𝜖 &gt; 0, we cannot get a 2 - 𝜖 approximation, unless P = NP.</p></li>
+<li><p>If the distance function does not obey triangle inequality, then we cannot build any algorithm for any arbitrary constant factor approximation, unless P = NP. For specific distance functions and datasets, we might get good heuristics.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="k-means">
+<h2>K-Means<a class="headerlink" href="#k-means" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Objective Function<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The distance function is typical <span class="math notranslate nohighlight">\(L_2\)</span>.</p></li>
+<li><p>Let the set of centers to be generated by the algorithm be C = {<span class="math notranslate nohighlight">\(c_1, c_2, c_3, ...., c_k\)</span>}</p></li>
+<li><p>Let the cost of this set C be given by:</p>
+<p>cost(C) = <span class="math notranslate nohighlight">\( \Sigma _x \text{ } min_{cx} d(x, cx)^2\)</span></p>
+<p>For each point x, choose the closest center <span class="math notranslate nohighlight">\(c_x\)</span> i.e., the Euclidean distance d( ) between x and <span class="math notranslate nohighlight">\(c_x\)</span> is the minimum. The cost takes the summation of the squares of all the minimum distances from points to the centers.</p>
+</li>
+<li><p>Find the set C to optimize the cost</p>
+<ul class="simple">
+<li><p>Leads to natural partitioning of the data</p></li>
+</ul>
+</li>
+<li><p>There is a huge amount of work, both from theory and data mining community</p>
+<ul class="simple">
+<li><p>Great example of divergence between theory and practice and how that prompted new research directions for both</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="k-means-objective-alternative-view">
+<h3>K Means Objective: Alternative View<a class="headerlink" href="#k-means-objective-alternative-view" title="Permalink to this headline">¶</a></h3>
+<p>We define the ‘best’ k-clustering of the data by minimizing the variance of each cluster. The mean and variance of each cluster are given by the following:</p>
+<p><b> Mean: </b> <span class="math notranslate nohighlight">\( c_i = \frac  {1}{|c_i|} \Sigma _{x \in  c_i} x\)</span></p>
+<p>It refers to the expected location of a point in the cluster</p>
+<p><b> Variance = </b>  <span class="math notranslate nohighlight">\( \Sigma _{x \in  c_i} ||x-c_i||^2\)</span></p>
+<div class="figure align-default" id="fig6">
+<img alt="../_images/fig6.jpeg" src="../_images/fig6.jpeg" />
+</div>
+</div>
+<div class="section" id="connection-with-maximum-likelihood-function">
+<h3>Connection with Maximum Likelihood Function<a class="headerlink" href="#connection-with-maximum-likelihood-function" title="Permalink to this headline">¶</a></h3>
+<p>Let us now study the maximum likelihood motivation and see how it is related to the k-means criterion. Consider the input data set of points {<span class="math notranslate nohighlight">\( x_1, x_2, …, x_k \)</span>} and a Gaussian Probability Density Function(PDF) with its parameters μ and <span class="math notranslate nohighlight">\( \sigma  ^2 \)</span>.</p>
+<p>For the given Gaussian parameters, the likelihood function would imply the probability of the points <span class="math notranslate nohighlight">\( x_1, x_2, …, x_k \)</span> to fit the Gaussian family with the center μ and covariance matrix <span class="math notranslate nohighlight">\(\sigma  ^2I\)</span> . This probability is given by:</p>
+<div class="math notranslate nohighlight">
+\[ p(x_1, x_2, ..., x_k | μ , \sigma  ) \text{ } \alpha \text{ } \prod  exp(-\frac  {|x_i-\mu|^2}{\sigma ^2})\]</div>
+<div class="math notranslate nohighlight">
+\[ p(x_1, x_2, ..., x_k | μ , \sigma  ) \text{ } \alpha \text{ } exp(\sum  (-\frac  {|x_i-\mu|^2}{\sigma ^2}))\]</div>
+<p>On taking the logarithm of this probability likelihood function, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[ log(p(x_1, x_2, ..., x_k | μ , \sigma  )) \text{ } \alpha \text{ } -\sum  (-\frac  {|x_i-\mu|^2}{\sigma ^2}) + \text{ function($\sigma $, dimension)}\]</div>
+<p>The first term on the right hand side denotes nothing but the cost of the cluster.<br />
+Therefore, the log likelihood of fitting the points of the input set to a Gaussian distribution with parameters μ and <span class="math notranslate nohighlight">\(\sigma ^2\)</span> is proportional to the k-means cost of the cluster of these points assigned to the center at μ summed with some constant function of <span class="math notranslate nohighlight">\(\sigma   \)</span>.</p>
+</div>
+<div class="section" id="voronoi-partition">
+<h3>Voronoi Partition<a class="headerlink" href="#voronoi-partition" title="Permalink to this headline">¶</a></h3>
+<p>When we talk about clustering, there are two ways of looking at it:</p>
+<ol class="simple">
+<li><p>We create partitions among the data points to divide the set into smaller clusters</p></li>
+<li><p>We pick few points as representative centers and add the nearest points to these representatives to their cluster</p></li>
+</ol>
+<p>However, it turns out that both of these ways have one-to-one correspondence and that they are both basically similar.</p>
+<p>To understand this better, consider a set of points of which <span class="math notranslate nohighlight">\(c_1, c_2, \text{and }c_3 \)</span> are chosen as the centers. The two ways of viewing clustering mentioned above are now related this way - if we create a partitioning as shown in the figure, it would mean that all the points in the partitioned regions I, II, and III are closer to nothing but the centers <span class="math notranslate nohighlight">\(c_1, c_2, \text{and }c_3 \)</span> respectively.</p>
+<div class="figure align-default" id="fig7">
+<img alt="../_images/fig7.jpeg" src="../_images/fig7.jpeg" />
+</div>
+<p>Notice how the partitioning is achieved. Each line(or hyperplane) partitioning two centers is the perpendicular bisector of the line joining the respective centers. This method of partitioning is called Voronoi Partition.</p>
+<p>As a next step, it is important to understand the number of partitions that are to be created in order to achieve the desired cluster. The reason being that the performance of the algorithm for K-means clustering in the worst case would be bounded by the number of partitions.</p>
+<p>It turns out that to Voronoi partition an input data set of n points with k chosen centers, we need <span class="math notranslate nohighlight">\(n^{k-1}\)</span> partitions. Although this number of partitions appears fair for smaller sets, the number would crash as n and k begin to increase.</p>
+</div>
+<div class="section" id="center-vs-partitioning">
+<h3>Center vs Partitioning<a class="headerlink" href="#center-vs-partitioning" title="Permalink to this headline">¶</a></h3>
+<p>We have seen that given a set of points and some specified centers, we have partitioned the data using Voronoi Partitioning. Now consider a case that goes the other way - suppose we are given a set of points already partitioned with the centers unspecified. In this case, which point would be the optimal center in each partition?</p>
+<p>Coming up with a center of a partition <span class="math notranslate nohighlight">\(C_i\)</span> would mean that we need to find a point μ in <span class="math notranslate nohighlight">\(C_i\)</span> such that the value <span class="math notranslate nohighlight">\(\sum  _{x\in   c_i}|x-\mu|^2\)</span> is minimized. Therefore, the center(μ) has to be the mean of all the points in the partition.</p>
+<p>Now that we know how to partition the set of points given the centers and also to find the centers given the partitions of the input set, we next understand Lloyd’s algorithm.</p>
+<div class="proof algorithm admonition" id="Lloyd's algo">
+<p class="admonition-title"><span class="caption-number">Algorithm 2 </span> (Lloyd’s Algorithm )</p>
+<div class="algorithm-content section" id="proof-content">
+<p>Llyod’s is an iterative algorithm that keeps iterating on the following steps:</p>
+<ol class="simple">
+<li><p>Find the current centers of the partitions</p></li>
+<li><p>Assign the points to the nearest centers</p></li>
+<li><p>Recalculate centers and partition the set of points through Voronoi</p></li>
+</ol>
+<p>But when should this iterative loop terminate? Following are the stopping criteria for the Llyod’s iteration:</p>
+<ul class="simple">
+<li><p>The cluster centers do not shift much</p></li>
+<li><p>When none or only few points change the cluster(move from one partition to the next)</p></li>
+</ul>
+</div>
+</div></div>
+<div class="section" id="lloyds-algorithm-analysis">
+<h3>Lloyd’s Algorithm: Analysis<a class="headerlink" href="#lloyds-algorithm-analysis" title="Permalink to this headline">¶</a></h3>
+<p>Given a set of N points with k centers in a d-dimensional space:</p>
+<ul class="simple">
+<li><p>The time taken to calculate new cluster assignments is of the order O(kNd)<br />
+That is, for each of the N points, the distance has to be calculated from each of the k centers using all d coordinates to find the closest center.</p></li>
+<li><p>The time taken to calculate the new centers follows the order of O(Nd)<br />
+Consider a cluster of three partitions with <span class="math notranslate nohighlight">\(n_1\)</span>, <span class="math notranslate nohighlight">\(n_2\)</span>, and <span class="math notranslate nohighlight">\(n_3\)</span> points in each partition. To find the center of each partition(equivalent to calculating the mean of all the points of a partition), <span class="math notranslate nohighlight">\(n_1d\)</span>, <span class="math notranslate nohighlight">\(n_2d\)</span>, and <span class="math notranslate nohighlight">\(n_3d\)</span> time would be required. Therefore the total time (<span class="math notranslate nohighlight">\(n_1+n_2+n_3\)</span>)d would scale to Nd.</p></li>
+</ul>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="ref"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://cse.iitkgp.ac.in/~sourangshu/coursefiles/SDM18A/06-clustering.pdf">https://cse.iitkgp.ac.in/~sourangshu/coursefiles/SDM18A/06-clustering.pdf</a></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs328-2022/CS328-Notes",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022_01_13_chernoff_bound_tails.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Plot of chernoff bound</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022_01_24_K-means.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">K-means</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Students of CS328 2022<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
