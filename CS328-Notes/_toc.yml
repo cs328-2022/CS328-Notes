@@ -13,3 +13,5 @@ parts:
   - file: notebooks/2022_01_03_data_representations.md
   - file: notebooks/2022_01_03_data_representations_notebook.ipynb
   - file: notebooks/2022_01_03_distance_function.md
+  - file: notebooks/demo.ipynb
+  - file: notebooks/mynotes.ipynb
