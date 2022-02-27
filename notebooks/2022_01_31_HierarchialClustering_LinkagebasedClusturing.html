@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Markov and Chebyshev Inequalities &#8212; CS328-2022 Notes</title>
+    <title>Hierarchical Clustering &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -58,8 +58,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Chernoff Bound" href="2022_01_13_chernoff_bound.html" />
-    <link rel="prev" title="Central Limit Theorem" href="2022_01_10_central_limit_theorem_notebook.html" />
+    <link rel="next" title="Densest Subgraphs" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html" />
+    <link rel="prev" title="Why does k-means++ work?" href="2022_01_27_Hierarchial_Clustering.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -151,8 +151,8 @@
    Central Limit Theorem
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_11_markov_chebyshev_inequalities.html">
    Markov and Chebyshev Inequalities
   </a>
  </li>
@@ -186,8 +186,8 @@
    Why does k-means++ work?
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Hierarchical Clustering
   </a>
  </li>
@@ -237,9 +237,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_11_markov_chebyshev_inequalities.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -257,10 +257,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_11_markov_chebyshev_inequalities.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_11_markov_chebyshev_inequalities.md"><button
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -275,6 +275,31 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -286,33 +311,35 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#markov-inequality">
-   Markov Inequality
+  <a class="reference internal nav-link" href="#why">
+   Why ?
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chebyshev-s-inequality">
-   Chebyshev’s Inequality
+  <a class="reference internal nav-link" href="#ways-of-doing-hierarchical-clustering">
+   Ways of doing Hierarchical Clustering:
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#motivation">
-     Motivation:
+    <a class="reference internal nav-link" href="#there-are-three-different-ways-of-finding-closeness-between-the-clusters">
+     There are three different ways of finding closeness between the clusters :-
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#properties-of-single-linkage-algorithm">
+   Properties Of Single Linkage Algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#objective-function">
+     Objective Function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#chebyshevs-inequality-is-given-as">
-     Chebyshev’s inequality is given as:
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-do-we-visualize-markov-s-inequality-and-chebyshev-s-inequality">
-     How do we visualize Markov’s Inequality and Chebyshev’s inequality?
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#moment-genrating-functions">
-     Moment Genrating Functions
+    <a class="reference internal nav-link" href="#other-properties-of-single-linkage-clustering">
+     Other Properties of Single Linkage Clustering
     </a>
    </li>
   </ul>
@@ -327,7 +354,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Markov and Chebyshev Inequalities</h1>
+                <h1>Hierarchical Clustering</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -338,33 +365,35 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#markov-inequality">
-   Markov Inequality
+  <a class="reference internal nav-link" href="#why">
+   Why ?
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chebyshev-s-inequality">
-   Chebyshev’s Inequality
+  <a class="reference internal nav-link" href="#ways-of-doing-hierarchical-clustering">
+   Ways of doing Hierarchical Clustering:
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#motivation">
-     Motivation:
+    <a class="reference internal nav-link" href="#there-are-three-different-ways-of-finding-closeness-between-the-clusters">
+     There are three different ways of finding closeness between the clusters :-
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#properties-of-single-linkage-algorithm">
+   Properties Of Single Linkage Algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#objective-function">
+     Objective Function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#chebyshevs-inequality-is-given-as">
-     Chebyshev’s inequality is given as:
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-do-we-visualize-markov-s-inequality-and-chebyshev-s-inequality">
-     How do we visualize Markov’s Inequality and Chebyshev’s inequality?
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#moment-genrating-functions">
-     Moment Genrating Functions
+    <a class="reference internal nav-link" href="#other-properties-of-single-linkage-clustering">
+     Other Properties of Single Linkage Clustering
     </a>
    </li>
   </ul>
@@ -378,113 +407,109 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="markov-and-chebyshev-inequalities">
-<h1>Markov and Chebyshev Inequalities<a class="headerlink" href="#markov-and-chebyshev-inequalities" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="markov-inequality">
-<h2>Markov Inequality<a class="headerlink" href="#markov-inequality" title="Permalink to this headline">¶</a></h2>
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a non-negative random variable and <span class="math notranslate nohighlight">\(a&gt;0\)</span> then the probablity that <span class="math notranslate nohighlight">\(X\)</span> is atleast <span class="math notranslate nohighlight">\(a\)</span> is less than equal to the Expectation of <span class="math notranslate nohighlight">\(X\)</span> divided by <span class="math notranslate nohighlight">\(a\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[P(X \geqslant a) \leqslant \frac{E[X]}{a} \hspace{0.5cm} \text { For any } a&gt;0\]</div>
-<div class="proof admonition" id="proof">
-<p>Proof. Consider</p>
-<div class="math notranslate nohighlight">
-\[ E(X)=\int_{0}^{\infty} x p(x) d x \]</div>
-<div class="math notranslate nohighlight">
-\[ E(X)=\int_{0}^{a} x p(x) d x+\int_{a}^{\infty} x p(x) d x \]</div>
-<div class="math notranslate nohighlight">
-\[ \geq \int_{a}^{\infty} x p(x) d x  \]</div>
-<div class="math notranslate nohighlight">
-\[ \geq \int_{a}^{\infty} a p(x) d  \]</div>
-<div class="math notranslate nohighlight">
-\[ = a \int_{a}^{\infty} p(x) = a P[X \geq a] dx  \]</div>
-<div class="math notranslate nohighlight">
-\[  E(X) \geq a P[X \geq a] \]</div>
-<div class="math notranslate nohighlight">
-\[ \therefore P(X \geqslant a) \leqslant \frac{E[X]}{a} \]</div>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Markov’s inequality is not useful when  <span class="math notranslate nohighlight">\( a &lt; E(x) \)</span></p>
-</div>
-</div>
-<div class="section" id="chebyshev-s-inequality">
-<h2>Chebyshev’s Inequality<a class="headerlink" href="#chebyshev-s-inequality" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="motivation">
-<h3>Motivation:<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h3>
-<p>Markov’s inequality does not consider left hand side of expectation ( <span class="math notranslate nohighlight">\(\mu\)</span>)  and hence does not give any information on its distribution.</p>
-<p>In case of a in left hand side of  <span class="math notranslate nohighlight">\( \mu \)</span> ,therefore for all <span class="math notranslate nohighlight">\(X\)</span>,   <span class="math notranslate nohighlight">\(\frac{\operatorname{E}[X]}{a} \leq 1 \)</span></p>
-<div class="math notranslate nohighlight">
-\[
-\operatorname{Pr}(X \geq a) \leq \frac{\operatorname{E}[X]}{a}
-\]</div>
+  <div class="tex2jax_ignore mathjax_ignore section" id="hierarchical-clustering">
+<h1>Hierarchical Clustering<a class="headerlink" href="#hierarchical-clustering" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="why">
+<h2>Why ?<a class="headerlink" href="#why" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>This statement is not at all useful as it implies that the probability of the said event is less than 1 which is trivial.</p></li>
-<li><p>So we want to define a bound on the probability, that X takes values large than expectation by a ( <span class="math notranslate nohighlight">\(\mu + a\)</span> ) and smaller than expectation by a ( <span class="math notranslate nohighlight">\( \mu - a \)</span> ).</p></li>
-<li><p>Chebyshev’s inequality is a better version /improvement on Markov’s inequality.</p></li>
+<li><p>Hierarchical Clustering can be used when we do not know the target number of clusters.</p></li>
+<li><p>This clustering mechanism is also very useful because we can produce a family of clusters, for each k.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A lot of papers have been written on hierarchial clustering.
+Researchers use this hierarchy to match with the natural hierarchy to obtain results.
+Eg :- Hierarchical clustering is used in Gene Sequencing and DNA matching etc.</p>
 </div>
-<div class="section" id="chebyshevs-inequality-is-given-as">
-<h3>Chebyshev’s inequality is given as:<a class="headerlink" href="#chebyshevs-inequality-is-given-as" title="Permalink to this headline">¶</a></h3>
-<div class="math notranslate nohighlight">
-\[
-\operatorname{Pr}(|X-\mathbf{E}[X]| \geq a) \leq \frac{\operatorname{Var}[X]}{a^{2}}
-\]</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="ways-of-doing-hierarchical-clustering">
+<h2>Ways of doing Hierarchical Clustering:<a class="headerlink" href="#ways-of-doing-hierarchical-clustering" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>We can analytically verify that on increasing <span class="math notranslate nohighlight">\(\sigma\)</span>, probability of <span class="math notranslate nohighlight">\(|X-\mathbf{E}[X]| \geq a\)</span> increase as distribution spread out. Also, with an increase in <span class="math notranslate nohighlight">\(a\)</span>, it is less probable to find <span class="math notranslate nohighlight">\(X\)</span> in that interval.</p></li>
+<li><p>Top-Down/divisive: bi-partition</p></li>
+<li><p>Bottom up/agglomerative: aggregating from individual point</p></li>
 </ul>
-<div class="proof admonition" id="proof">
-<p>Proof. In markov’s inequality  <span class="math notranslate nohighlight">\(Y\)</span> is non negative similarly, <span class="math notranslate nohighlight">\( Y^{2}\)</span> is also non negative.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{array}{l}
-Y=X-E[X] \\
-Y^{2}=\left(X-E[X )^{2} \quad\right. \\
-P\left[Y^{2} \geqslant a^{2}\right] \leq  \left .\frac{\sigma^{2}}{a^{2}}\right. \\
-\text { where } \quad  \sigma^{2}=E\left[Y^{2}\right]
-\end{array}
-\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Single Linkage Clustering is one of the most common heirarchical clustering. It is an example of agglomerative clustering</p>
+<div class="figure align-default">
+<img alt="../_images/hierarch_1.gif" src="../_images/hierarch_1.gif" />
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="there-are-three-different-ways-of-finding-closeness-between-the-clusters">
+<h3>There are three different ways of finding closeness between the clusters :-<a class="headerlink" href="#there-are-three-different-ways-of-finding-closeness-between-the-clusters" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>We can say that</p></li>
+<li><p>Closest Pair: Single Linkage Clustering - The distance between any two pairs of clusters is given by the minimum distance between the elements of the pair of the cluster.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\operatorname{Pr}(|X-\mathbf{E}[X]| \geq a)=\operatorname{Pr}\left((X-\mathbf{E}[X])^{2} \geq a^{2}\right)
+d_1(C_i,C_j) = \min _{x \in C_i , y \in C_j}d(x,y)
 \]</div>
 <ul class="simple">
-<li><p>Hence</p></li>
+<li><p>Farthest Pair: Complete Link Clustering - The distance between any two pairs of clusters is given by the maximum distance between the elements of the pair of the cluster.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\operatorname{Pr}\left((X-\mathbf{E}[X])^{2} \geq a^{2}\right) \leq \frac{\mathbf{E}\left[(X-\mathbf{E}[X])^{2}\right]}{a^{2}}=\frac{\operatorname{Var}[X]}{a^{2}}
+d_2(C_i,C_j) = \max _{x \in C_i , y \in C_j}d(x,y)
+\]</div>
+<ul class="simple">
+<li><p>Average of all Pairs: Average Link Clustering - The distance between any two pairs of clusters is given by the average distance between the elements of the pair of the cluster.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+d_2(C_i,C_j) = avg _{x \in C_i , y \in C_j}d(x,y)
 \]</div>
 </div>
 </div>
-<div class="section" id="how-do-we-visualize-markov-s-inequality-and-chebyshev-s-inequality">
-<h3>How do we visualize Markov’s Inequality and Chebyshev’s inequality?<a class="headerlink" href="#how-do-we-visualize-markov-s-inequality-and-chebyshev-s-inequality" title="Permalink to this headline">¶</a></h3>
-<div class="figure align-default" id="visulizing-chebyshev">
-<a class="reference internal image-reference" href="../_images/VIsualizing_chebyshev's.png"><img alt="../_images/VIsualizing_chebyshev's.png" src="../_images/VIsualizing_chebyshev's.png" style="height: 250px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">A Schematic of region bounded by chebyshev inequality</span><a class="headerlink" href="#visulizing-chebyshev" title="Permalink to this image">¶</a></p>
-</div>
+<hr class="docutils" />
+<div class="section" id="properties-of-single-linkage-algorithm">
+<h2>Properties Of Single Linkage Algorithm<a class="headerlink" href="#properties-of-single-linkage-algorithm" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>The area of left green shaded interval is less than <span class="math notranslate nohighlight">\(\frac{\mu}{\mu +c}\)</span></p></li>
-<li><p>The area of the toatal green-shaded interval is less than <span class="math notranslate nohighlight">\(\frac{\operatorname{Var}[X]}{a^{2}}\)</span> .</p></li>
-<li><p>Typically Chebyshev’s inequality is stronger than Markov’s, but we can not say that in general, its true. In certain conditions, the reverse is true.</p></li>
+<li><p>The algorithm can work with any dissimilarity measure, it may not necessarily be metric</p></li>
+<li><p>There are no Inversions.</p>
+<ul>
+<li><p>As we run the algorithm (as we start merging the clusters), the dissimilarity scores between merged clusters only increases.</p></li>
 </ul>
+</li>
+</ul>
+<div class="figure align-default">
+<img alt="../_images/LevelComp.jpg" src="../_images/LevelComp.jpg" />
 </div>
-<div class="section" id="moment-genrating-functions">
-<h3>Moment Genrating Functions<a class="headerlink" href="#moment-genrating-functions" title="Permalink to this headline">¶</a></h3>
-<p>In proof we saw that <span class="math notranslate nohighlight">\((X-\mathbf{E}[X])^{2}\)</span>  is  better than <span class="math notranslate nohighlight">\((X-\mathbf{E}[X])\)</span></p>
-<p>What is so special about working with <span class="math notranslate nohighlight">\(X^{2}\)</span> and why not other functions?</p>
+<div class="math notranslate nohighlight">
+\[ Dissimilarity ~~ at ~~ Level - 2 &gt; Dissimilarity ~~at ~~Level - 5 \]</div>
+<div class="section" id="objective-function">
+<h3>Objective Function<a class="headerlink" href="#objective-function" title="Permalink to this headline">¶</a></h3>
+<p>The question that arises while understanding the single linkage algorithm is in terms of it’s objective function.</p>
+<p>OR</p>
+<p>What kind of clusters is this algorithm trying to create?</p>
+<p>To understand this we would need to look up some properties of Single Linkage Clustering</p>
+<p>Let’s suppose that we want to create a cluster <span class="math notranslate nohighlight">\( C_1,C_2,....C_k \)</span> which maximizes the inter cluster distance.</p>
+<div class="math notranslate nohighlight">
+\[
+ maximize~~cost_k(C)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+cost_k(C)=\min _{C_i,C_j}d(C_i,C_j) 
+\]</div>
+<div class="figure align-default">
+<img alt="../_images/k_1.jpg" src="../_images/k_1.jpg" />
+</div>
+<p>If the above task is our objective function (to maximize the minimum inter cluster distancefor k clusters) then we can easily use single linkage clustering to achieve our objective.</p>
+<p>We just have to remove the top k-1 clustering merges and we will achieve k clusters. Also, all these K clusters will follow the above objective function.</p>
+</div>
+<div class="section" id="other-properties-of-single-linkage-clustering">
+<h3>Other Properties of Single Linkage Clustering<a class="headerlink" href="#other-properties-of-single-linkage-clustering" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Moment generating functions of <span class="math notranslate nohighlight">\(X\)</span> are stronger bound than <span class="math notranslate nohighlight">\(X^{2}\)</span></p></li>
+<li><p>It is actually an Euclidean Minimum spanning Tree!</p></li>
 </ul>
-<p>For a random variable <span class="math notranslate nohighlight">\(X\)</span>, let <span class="math notranslate nohighlight">\( Y = \text{exp}(tX) \)</span> for some <span class="math notranslate nohighlight">\(t \in \mathbb{R} \)</span> . The moment generating function of <span class="math notranslate nohighlight">\(X\)</span> is defined as expectation of <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<div class="figure align-default">
+<img alt="../_images/c.jpg" src="../_images/c.jpg" />
+</div>
 <div class="math notranslate nohighlight">
-\[E[e^{tX}] = 1 + tE[X] + \frac{t^2}{2!}E[X^2] + ... + \frac{t^{k}}{k!}E[X^{k}]\]</div>
-<p>Let us take the second derivative of <span class="math notranslate nohighlight">\(E[e^{tX}]\)</span> with respect to <span class="math notranslate nohighlight">\(t\)</span> at <span class="math notranslate nohighlight">\(t=0\)</span>,</p>
-<div class="math notranslate nohighlight">
-\[\Big(\frac{d^2}{dt^2}(E[e^{tX}])\Big)_{t=0} = E[X^2] \]</div>
-<p>Similarly taking the <span class="math notranslate nohighlight">\(k\)</span>-th derivative of the moment generating function with <span class="math notranslate nohighlight">\(t=0\)</span>, we can get the <span class="math notranslate nohighlight">\(k\)</span>-th moment of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+\[ Unlike ~~ centre-based ~~ clustering ~~ Single linkage ~~ clustering ~~ can ~ handle ~~ the ~~ above ~~ example ~~ nicely!.\]</div>
 </div>
 </div>
 </div>
@@ -514,17 +539,17 @@ P\left[Y^{2} \geqslant a^{2}\right] \leq  \left .\frac{\sigma^{2}}{a^{2}}\right.
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_01_10_central_limit_theorem_notebook.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_01_27_Hierarchial_Clustering.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Central Limit Theorem</p>
+            <p class="prev-next-title">Why does k-means++ work?</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="2022_01_13_chernoff_bound.html" title="next page">
+    <a class='right-next' id="next-link" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chernoff Bound</p>
+        <p class="prev-next-title">Densest Subgraphs</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

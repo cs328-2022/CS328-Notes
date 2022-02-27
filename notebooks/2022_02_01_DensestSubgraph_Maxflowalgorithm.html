@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Markov and Chebyshev Inequalities &#8212; CS328-2022 Notes</title>
+    <title>Densest Subgraphs &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -58,8 +58,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Chernoff Bound" href="2022_01_13_chernoff_bound.html" />
-    <link rel="prev" title="Central Limit Theorem" href="2022_01_10_central_limit_theorem_notebook.html" />
+    <link rel="prev" title="Hierarchical Clustering" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -151,8 +150,8 @@
    Central Limit Theorem
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_11_markov_chebyshev_inequalities.html">
    Markov and Chebyshev Inequalities
   </a>
  </li>
@@ -191,8 +190,8 @@
    Hierarchical Clustering
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Densest Subgraphs
   </a>
  </li>
@@ -237,9 +236,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_11_markov_chebyshev_inequalities.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -257,10 +256,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_11_markov_chebyshev_inequalities.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_11_markov_chebyshev_inequalities.md"><button
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -275,6 +274,31 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -286,34 +310,55 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#markov-inequality">
-   Markov Inequality
+  <a class="reference internal nav-link" href="#density-of-subgraph">
+   Density of Subgraph
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chebyshev-s-inequality">
-   Chebyshev’s Inequality
+  <a class="reference internal nav-link" href="#finding-densest-subgraphs">
+   Finding Densest Subgraphs
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#motivation">
-     Motivation:
+    <a class="reference internal nav-link" href="#u-using-decision-problem-u">
+     <u>
+      Using Decision Problem
+     </u>
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#chebyshevs-inequality-is-given-as">
-     Chebyshev’s inequality is given as:
+    <a class="reference internal nav-link" href="#u-max-flow-min-cut-based-algorithm-u">
+     <u>
+      Max Flow / Min-cut based Algorithm
+     </u>
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-of-max-flow-min-cut-algorithm">
+   Analysis of Max-Flow / Min-Cut Algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-do-we-visualize-markov-s-inequality-and-chebyshev-s-inequality">
-     How do we visualize Markov’s Inequality and Chebyshev’s inequality?
+    <a class="reference internal nav-link" href="#u-different-cases-u">
+     <u>
+      Different cases
+     </u>
+     :
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#moment-genrating-functions">
-     Moment Genrating Functions
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#case-1">
+       Case - 1
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#case-2">
+       Case - 2
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -327,7 +372,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Markov and Chebyshev Inequalities</h1>
+                <h1>Densest Subgraphs</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -338,34 +383,55 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#markov-inequality">
-   Markov Inequality
+  <a class="reference internal nav-link" href="#density-of-subgraph">
+   Density of Subgraph
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chebyshev-s-inequality">
-   Chebyshev’s Inequality
+  <a class="reference internal nav-link" href="#finding-densest-subgraphs">
+   Finding Densest Subgraphs
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#motivation">
-     Motivation:
+    <a class="reference internal nav-link" href="#u-using-decision-problem-u">
+     <u>
+      Using Decision Problem
+     </u>
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#chebyshevs-inequality-is-given-as">
-     Chebyshev’s inequality is given as:
+    <a class="reference internal nav-link" href="#u-max-flow-min-cut-based-algorithm-u">
+     <u>
+      Max Flow / Min-cut based Algorithm
+     </u>
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-of-max-flow-min-cut-algorithm">
+   Analysis of Max-Flow / Min-Cut Algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-do-we-visualize-markov-s-inequality-and-chebyshev-s-inequality">
-     How do we visualize Markov’s Inequality and Chebyshev’s inequality?
+    <a class="reference internal nav-link" href="#u-different-cases-u">
+     <u>
+      Different cases
+     </u>
+     :
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#moment-genrating-functions">
-     Moment Genrating Functions
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#case-1">
+       Case - 1
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#case-2">
+       Case - 2
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -378,113 +444,120 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="markov-and-chebyshev-inequalities">
-<h1>Markov and Chebyshev Inequalities<a class="headerlink" href="#markov-and-chebyshev-inequalities" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="markov-inequality">
-<h2>Markov Inequality<a class="headerlink" href="#markov-inequality" title="Permalink to this headline">¶</a></h2>
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a non-negative random variable and <span class="math notranslate nohighlight">\(a&gt;0\)</span> then the probablity that <span class="math notranslate nohighlight">\(X\)</span> is atleast <span class="math notranslate nohighlight">\(a\)</span> is less than equal to the Expectation of <span class="math notranslate nohighlight">\(X\)</span> divided by <span class="math notranslate nohighlight">\(a\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[P(X \geqslant a) \leqslant \frac{E[X]}{a} \hspace{0.5cm} \text { For any } a&gt;0\]</div>
-<div class="proof admonition" id="proof">
-<p>Proof. Consider</p>
-<div class="math notranslate nohighlight">
-\[ E(X)=\int_{0}^{\infty} x p(x) d x \]</div>
-<div class="math notranslate nohighlight">
-\[ E(X)=\int_{0}^{a} x p(x) d x+\int_{a}^{\infty} x p(x) d x \]</div>
-<div class="math notranslate nohighlight">
-\[ \geq \int_{a}^{\infty} x p(x) d x  \]</div>
-<div class="math notranslate nohighlight">
-\[ \geq \int_{a}^{\infty} a p(x) d  \]</div>
-<div class="math notranslate nohighlight">
-\[ = a \int_{a}^{\infty} p(x) = a P[X \geq a] dx  \]</div>
-<div class="math notranslate nohighlight">
-\[  E(X) \geq a P[X \geq a] \]</div>
-<div class="math notranslate nohighlight">
-\[ \therefore P(X \geqslant a) \leqslant \frac{E[X]}{a} \]</div>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Markov’s inequality is not useful when  <span class="math notranslate nohighlight">\( a &lt; E(x) \)</span></p>
-</div>
-</div>
-<div class="section" id="chebyshev-s-inequality">
-<h2>Chebyshev’s Inequality<a class="headerlink" href="#chebyshev-s-inequality" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="motivation">
-<h3>Motivation:<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h3>
-<p>Markov’s inequality does not consider left hand side of expectation ( <span class="math notranslate nohighlight">\(\mu\)</span>)  and hence does not give any information on its distribution.</p>
-<p>In case of a in left hand side of  <span class="math notranslate nohighlight">\( \mu \)</span> ,therefore for all <span class="math notranslate nohighlight">\(X\)</span>,   <span class="math notranslate nohighlight">\(\frac{\operatorname{E}[X]}{a} \leq 1 \)</span></p>
-<div class="math notranslate nohighlight">
-\[
-\operatorname{Pr}(X \geq a) \leq \frac{\operatorname{E}[X]}{a}
-\]</div>
+  <div class="tex2jax_ignore mathjax_ignore section" id="densest-subgraphs">
+<h1>Densest Subgraphs<a class="headerlink" href="#densest-subgraphs" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="density-of-subgraph">
+<h2>Density of Subgraph<a class="headerlink" href="#density-of-subgraph" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Density of a subgraph</p>
 <ul class="simple">
-<li><p>This statement is not at all useful as it implies that the probability of the said event is less than 1 which is trivial.</p></li>
-<li><p>So we want to define a bound on the probability, that X takes values large than expectation by a ( <span class="math notranslate nohighlight">\(\mu + a\)</span> ) and smaller than expectation by a ( <span class="math notranslate nohighlight">\( \mu - a \)</span> ).</p></li>
-<li><p>Chebyshev’s inequality is a better version /improvement on Markov’s inequality.</p></li>
+<li><p>Density measures how tightly the components inside a subgraph are connected to each other.</p></li>
+<li><p>It does not care about the connectivity with the components outside the subgraph.</p></li>
+</ul>
+</li>
+<li><p>Mathematically, Density of a subgraph is represented by the following formula:</p>
+<div class="math notranslate nohighlight">
+\[  D(S) = \frac{e(S,S)}{|S|} ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ - (1)\]</div>
+<ul class="simple">
+<li><p>e(S,S) is the number of edges between nodes both in S or e(S,S) = { ( x , y ) <span class="math notranslate nohighlight">\(\in\)</span> E ;  x <span class="math notranslate nohighlight">\(\in\)</span> S, y <span class="math notranslate nohighlight">\(\in\)</span> S }</p></li>
+<li><p>|S| is the number of nodes in subgraph S.</p></li>
+</ul>
+</li>
+<li><p>Significance of |S|</p>
+<ul class="simple">
+<li><p>Simply calculating e(S,S) won’t be enough to determine how tighty the components are connected. For eg, in the figure shown below e(S,S) of Subgraph A is more however we can easily notice that subgraph B is more dense.</p></li>
+</ul>
+<div class="figure align-default">
+<img alt="../_images/Subgraph_Comparision.jpg" src="../_images/Subgraph_Comparision.jpg" />
+</div>
+<div class="math notranslate nohighlight">
+\[ Figure - 1 \]</div>
+<ul class="simple">
+<li><p>We can’t consider denominator as <span class="math notranslate nohighlight">\({|S|}^{2}\)</span> as   <span class="math notranslate nohighlight">\( \max\limits_{S} \frac{e(S,S)}{{|S|}^{2}}  \)</span> is trivial, irrespective of the nature of graph.</p></li>
+<li><p>However    <span class="math notranslate nohighlight">\( \max\limits_{S} \  \frac{e(S,S)}{|S|}  \)</span> is non-trivial for different types of graphs.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>(|S|)(|S|-1) can’t be considered as denominator (as it becomes zero for |S| = 1) even though it gives a tight upper bound on Density of Subgraph.</p>
+</div>
+</div>
+<div class="section" id="finding-densest-subgraphs">
+<h2>Finding Densest Subgraphs<a class="headerlink" href="#finding-densest-subgraphs" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="section" id="u-using-decision-problem-u">
+<h3><u>Using Decision Problem</u><a class="headerlink" href="#u-using-decision-problem-u" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Let us assume the Density of a Subgraph <span class="math notranslate nohighlight">\(\ge\)</span> a constant (say <span class="math notranslate nohighlight">\(\frac{c}{2}\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\( \therefore  \frac{e(S,S)}{|S|} \ge \frac{c}{2}\)</span></p></li>
+<li><p>On Rearranging, <span class="math notranslate nohighlight">\( 2e(S,S) \ge c|S|\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\because  2e(S,S) = deg(S) - e(S,\overline{S}) \)</span> ,  <span class="math notranslate nohighlight">\( deg(S) + e(S,\overline{S}) \ge c|S|\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( deg(S) + deg(\overline{S}) - deg(\overline{S}) - e(S,\overline{S}) \ge c|S| \)</span></p></li>
+<li><p>We know that, <span class="math notranslate nohighlight">\( deg(S) + deg(\overline{S}) = 2|E|\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( \therefore 2|E| \ge c|S| + deg(\overline{S}) + e(S,\overline{S})\)</span>                                <b>-  (2)</b></p></li>
 </ul>
 </div>
-<div class="section" id="chebyshevs-inequality-is-given-as">
-<h3>Chebyshev’s inequality is given as:<a class="headerlink" href="#chebyshevs-inequality-is-given-as" title="Permalink to this headline">¶</a></h3>
-<div class="math notranslate nohighlight">
-\[
-\operatorname{Pr}(|X-\mathbf{E}[X]| \geq a) \leq \frac{\operatorname{Var}[X]}{a^{2}}
-\]</div>
+<div class="section" id="u-max-flow-min-cut-based-algorithm-u">
+<h3><u>Max Flow / Min-cut based Algorithm</u><a class="headerlink" href="#u-max-flow-min-cut-based-algorithm-u" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Maximum Flow or Min-cut algorithm is an algorithm that gives us the maximum feasible flow through a network or the minimum cuts required to stop the flow through the network.</p></li>
+<li><p>We can find the densest subgraph by using a Decision problem where we need to find if there exist any subgraph S with density more than a fixed value let’s say <span class="math notranslate nohighlight">\( \frac{c}{2}\)</span>.</p></li>
+<li><p>Then using binary search it finds the maximum value of c for which there exists a subgraph such that <span class="math notranslate nohighlight">\( \frac{e(S,S)}{|S|}=\frac{c}{2} \)</span></p></li>
+<li><p><b>Max Flow Algorithm :-</b></p>
 <ul class="simple">
-<li><p>We can analytically verify that on increasing <span class="math notranslate nohighlight">\(\sigma\)</span>, probability of <span class="math notranslate nohighlight">\(|X-\mathbf{E}[X]| \geq a\)</span> increase as distribution spread out. Also, with an increase in <span class="math notranslate nohighlight">\(a\)</span>, it is less probable to find <span class="math notranslate nohighlight">\(X\)</span> in that interval.</p></li>
+<li><p>Binary search on value of c</p>
+<ul>
+<li><p>Let the original graph be G.</p></li>
+<li><p>Now let us construct a new graph G’ such that it has 2 extra nodes than G (Source and Sink).</p></li>
+<li><p>Connect all the nodes (undirected) in G to the source and assign weight of each edge as the degree of the node. For eg, if degree of node <span class="math notranslate nohighlight">\(\nu\)</span> is <span class="math notranslate nohighlight">\( {d}_{i} \)</span> then assign weight of edge from source to <span class="math notranslate nohighlight">\(\nu\)</span> as <span class="math notranslate nohighlight">\( {d}_{i} \)</span>.</p></li>
+<li><p>Connect all the nodes to sink and assign weight of all the edges as c.</p></li>
+<li><p>Run the max flow algorithm (Ford-Fulkerson).</p></li>
+<li><p>It will always return a cut <span class="math notranslate nohighlight">\(\le 2|E|\)</span> .</p></li>
+<li><p>Assign Densest Subgraph as S (Shown in the figure).</p></li>
+<li><p>Repeat all the steps with new value of c as per binary search.</p></li>
 </ul>
-<div class="proof admonition" id="proof">
-<p>Proof. In markov’s inequality  <span class="math notranslate nohighlight">\(Y\)</span> is non negative similarly, <span class="math notranslate nohighlight">\( Y^{2}\)</span> is also non negative.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{array}{l}
-Y=X-E[X] \\
-Y^{2}=\left(X-E[X )^{2} \quad\right. \\
-P\left[Y^{2} \geqslant a^{2}\right] \leq  \left .\frac{\sigma^{2}}{a^{2}}\right. \\
-\text { where } \quad  \sigma^{2}=E\left[Y^{2}\right]
-\end{array}
-\end{split}\]</div>
-<ul class="simple">
-<li><p>We can say that</p></li>
+</li>
 </ul>
-<div class="math notranslate nohighlight">
-\[
-\operatorname{Pr}(|X-\mathbf{E}[X]| \geq a)=\operatorname{Pr}\left((X-\mathbf{E}[X])^{2} \geq a^{2}\right)
-\]</div>
-<ul class="simple">
-<li><p>Hence</p></li>
+<div class="figure align-default">
+<img alt="../_images/Densest_subgraph_2.jpg" src="../_images/Densest_subgraph_2.jpg" />
+</div>
+</li>
+<li><p>The runtime of this algorithm in O(log(C) <span class="math notranslate nohighlight">\({|E|}^{2}\)</span> U), where U is the value of maximum flow.</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[
-\operatorname{Pr}\left((X-\mathbf{E}[X])^{2} \geq a^{2}\right) \leq \frac{\mathbf{E}\left[(X-\mathbf{E}[X])^{2}\right]}{a^{2}}=\frac{\operatorname{Var}[X]}{a^{2}}
-\]</div>
 </div>
 </div>
-<div class="section" id="how-do-we-visualize-markov-s-inequality-and-chebyshev-s-inequality">
-<h3>How do we visualize Markov’s Inequality and Chebyshev’s inequality?<a class="headerlink" href="#how-do-we-visualize-markov-s-inequality-and-chebyshev-s-inequality" title="Permalink to this headline">¶</a></h3>
-<div class="figure align-default" id="visulizing-chebyshev">
-<a class="reference internal image-reference" href="../_images/VIsualizing_chebyshev's.png"><img alt="../_images/VIsualizing_chebyshev's.png" src="../_images/VIsualizing_chebyshev's.png" style="height: 250px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">A Schematic of region bounded by chebyshev inequality</span><a class="headerlink" href="#visulizing-chebyshev" title="Permalink to this image">¶</a></p>
+<div class="section" id="analysis-of-max-flow-min-cut-algorithm">
+<h2>Analysis of Max-Flow / Min-Cut Algorithm<a class="headerlink" href="#analysis-of-max-flow-min-cut-algorithm" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="section" id="u-different-cases-u">
+<h3><u>Different cases</u>:<a class="headerlink" href="#u-different-cases-u" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="case-1">
+<h4>Case - 1<a class="headerlink" href="#case-1" title="Permalink to this headline">¶</a></h4>
+<div class="figure align-default">
+<img alt="../_images/Densest_subgraph_1.jpg" src="../_images/Densest_subgraph_1.jpg" />
 </div>
+<div class="math notranslate nohighlight">
+\[ Figure - 2 \]</div>
 <ul class="simple">
-<li><p>The area of left green shaded interval is less than <span class="math notranslate nohighlight">\(\frac{\mu}{\mu +c}\)</span></p></li>
-<li><p>The area of the toatal green-shaded interval is less than <span class="math notranslate nohighlight">\(\frac{\operatorname{Var}[X]}{a^{2}}\)</span> .</p></li>
-<li><p>Typically Chebyshev’s inequality is stronger than Markov’s, but we can not say that in general, its true. In certain conditions, the reverse is true.</p></li>
+<li><p>As you can see in the Figure - 2 that the min cut will atmost be 2|E| and we can always have a cut of less than 2|E|.</p></li>
+<li><p>In this type of cut there is no densest graph since there are no nodes to the left of the cut.</p></li>
 </ul>
 </div>
-<div class="section" id="moment-genrating-functions">
-<h3>Moment Genrating Functions<a class="headerlink" href="#moment-genrating-functions" title="Permalink to this headline">¶</a></h3>
-<p>In proof we saw that <span class="math notranslate nohighlight">\((X-\mathbf{E}[X])^{2}\)</span>  is  better than <span class="math notranslate nohighlight">\((X-\mathbf{E}[X])\)</span></p>
-<p>What is so special about working with <span class="math notranslate nohighlight">\(X^{2}\)</span> and why not other functions?</p>
+<div class="section" id="case-2">
+<h4>Case - 2<a class="headerlink" href="#case-2" title="Permalink to this headline">¶</a></h4>
+<div class="figure align-default">
+<img alt="../_images/Densest_subgraph_2.jpg" src="../_images/Densest_subgraph_2.jpg" />
+</div>
+<div class="math notranslate nohighlight">
+\[ Figure - 3 \]</div>
 <ul class="simple">
-<li><p>Moment generating functions of <span class="math notranslate nohighlight">\(X\)</span> are stronger bound than <span class="math notranslate nohighlight">\(X^{2}\)</span></p></li>
+<li><p>In Figure - 3, we can see that there is a subset of nodes which is to the left of min-cut.</p></li>
+<li><p>This Subset satisfies the condition given by the right hand side of the equation <span class="math notranslate nohighlight">\(  2|E| \ge c|S| + deg(\overline{S}) + e(S,\overline{S})\)</span>.</p></li>
+<li><p>Hence for maximum value of c, this is the desired densest subgraph.</p></li>
 </ul>
-<p>For a random variable <span class="math notranslate nohighlight">\(X\)</span>, let <span class="math notranslate nohighlight">\( Y = \text{exp}(tX) \)</span> for some <span class="math notranslate nohighlight">\(t \in \mathbb{R} \)</span> . The moment generating function of <span class="math notranslate nohighlight">\(X\)</span> is defined as expectation of <span class="math notranslate nohighlight">\(Y\)</span>.</p>
-<div class="math notranslate nohighlight">
-\[E[e^{tX}] = 1 + tE[X] + \frac{t^2}{2!}E[X^2] + ... + \frac{t^{k}}{k!}E[X^{k}]\]</div>
-<p>Let us take the second derivative of <span class="math notranslate nohighlight">\(E[e^{tX}]\)</span> with respect to <span class="math notranslate nohighlight">\(t\)</span> at <span class="math notranslate nohighlight">\(t=0\)</span>,</p>
-<div class="math notranslate nohighlight">
-\[\Big(\frac{d^2}{dt^2}(E[e^{tX}])\Big)_{t=0} = E[X^2] \]</div>
-<p>Similarly taking the <span class="math notranslate nohighlight">\(k\)</span>-th derivative of the moment generating function with <span class="math notranslate nohighlight">\(t=0\)</span>, we can get the <span class="math notranslate nohighlight">\(k\)</span>-th moment of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -514,19 +587,12 @@ P\left[Y^{2} \geqslant a^{2}\right] \leq  \left .\frac{\sigma^{2}}{a^{2}}\right.
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_01_10_central_limit_theorem_notebook.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Central Limit Theorem</p>
+            <p class="prev-next-title">Hierarchical Clustering</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="2022_01_13_chernoff_bound.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chernoff Bound</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
