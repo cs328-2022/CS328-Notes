@@ -22,3 +22,5 @@ parts:
   - file: notebooks/2022_01_24_K-means.md
   - file: notebooks/2022_01_25_K-means++.md
   - file: notebooks/2022_01_27_Hierarchial_Clustering.md
+  - file: notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb
+  - file: notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb
