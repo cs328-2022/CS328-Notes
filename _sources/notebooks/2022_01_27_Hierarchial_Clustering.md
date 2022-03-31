@@ -88,3 +88,7 @@ There can be many ways, some of them are-
 ```{Note}
 All the images are taken from the slides provided by the Prof. Anirban Dasgupta.
 ```
+
+<footer>
+Author(s): Aditya Shakya, Shantanu Sahu, Varun Barala
+</footer>
