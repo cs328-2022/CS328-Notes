@@ -48,3 +48,7 @@ Eucledian Distance
 : $d(x, y) = \sqrt{\sum_{i} (x_{i} - y{i})^{2}}$. The length of line segment joint vector $x$ and $y$ in Eucledian space.
 
 Eucledian distance follows all of the nice properties (including "easy average") that we have mentioned above.
+
+<footer>
+Author(s): Sachin Yadav
+</footer>

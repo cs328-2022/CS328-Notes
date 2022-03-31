@@ -69,3 +69,7 @@ $$ P(S \geq (1+\delta)np) \leq  e^{-\frac{\delta^2}{2+\delta}np} $$
 
 The bound for lower tail can be derived similarly.
 ````
+
+<footer>
+Author(s): Devanshu Thakar, Hardik Mahur, Jayesh Salunkhe
+</footer>
