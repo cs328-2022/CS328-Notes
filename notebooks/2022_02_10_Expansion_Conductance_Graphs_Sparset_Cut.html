@@ -1,0 +1,772 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expansion and Conductance of a Graph &#8212; CS328-2022 Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Densest Subgraph" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CS328-2022 Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Course Description
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Logistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="CONTRIBUTING.html">
+   Contributing to CS328 Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
+   Deadlines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations.html">
+   Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations_notebook.html">
+   [CODE] 🧑‍💻Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
+   Distance Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_06_object_representations_notebook.html">
+   Object Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_10_central_limit_theorem_notebook.html">
+   Central Limit Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_11_markov_chebyshev_inequalities.html">
+   Markov and Chebyshev Inequalities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound.html">
+   Chernoff Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound_tails.html">
+   Plot of chernoff bound
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_17_Clustering.html">
+   Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_24_K-means.html">
+   K-means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_25_K-means%2B%2B.html">
+   Lloyd’s algorithm, convergence?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_27_Hierarchial_Clustering.html">
+   Why does k-means++ work?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html">
+   Hierarchical Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html">
+   Densest Subgraphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html">
+   Densest Subgraph
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Expansion and Conductance of a Graph
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs328-2022/CS328-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#expansion-of-subset-s">
+   (1) Expansion of Subset S
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sum">
+     1) Sum:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#max">
+     2)Max:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#product">
+     3)Product:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conductance">
+   (2) Conductance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sparsest-cut">
+   Sparsest Cut
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#min-cut">
+   Min Cut
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#illustrations-of-min-cut-vs-sparset-cut">
+   Illustrations of Min-cut Vs Sparset cut
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-clique">
+     1) K_clique
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-node-tree">
+     2)K_node tree
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-clique-combination">
+     3)K_clique combination
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Expansion and Conductance of a Graph</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#expansion-of-subset-s">
+   (1) Expansion of Subset S
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sum">
+     1) Sum:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#max">
+     2)Max:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#product">
+     3)Product:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conductance">
+   (2) Conductance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sparsest-cut">
+   Sparsest Cut
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#min-cut">
+   Min Cut
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#illustrations-of-min-cut-vs-sparset-cut">
+   Illustrations of Min-cut Vs Sparset cut
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-clique">
+     1) K_clique
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-node-tree">
+     2)K_node tree
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-clique-combination">
+     3)K_clique combination
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="expansion-and-conductance-of-a-graph">
+<h1>Expansion and Conductance of a Graph<a class="headerlink" href="#expansion-and-conductance-of-a-graph" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="expansion-of-subset-s">
+<h2>(1) Expansion of Subset S<a class="headerlink" href="#expansion-of-subset-s" title="Permalink to this headline">¶</a></h2>
+<p>Let the subset  of the graph G be S and <span class="math notranslate nohighlight">\(\overline{S}\)</span>  be the complement of the subset S.</p>
+<div class="figure align-default" id="figure-1-reference-https-upload-wikimedia-org-wikipedia-commons-thumb-8-80-graph-conductance-svg-330px-graph-conductance-svg-png">
+<img alt="../_images/Dense_subgraph.jpeg" src="../_images/Dense_subgraph.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Expansion on Graph(G)<a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Graph_conductance.svg/330px-Graph_conductance.svg.png">[Source]</a></span><a class="headerlink" href="#figure-1-reference-https-upload-wikimedia-org-wikipedia-commons-thumb-8-80-graph-conductance-svg-330px-graph-conductance-svg-png" title="Permalink to this image">¶</a></p>
+</div>
+<div class="math notranslate nohighlight">
+\[ 
+{Expansion(S)=\frac{e(S,\overline{S})}{min_({|S|},{|\overline{S}|})}}
+\]</div>
+<p>Here S=bhcde and <span class="math notranslate nohighlight">\(\overline{S}\)</span>=agf</p>
+<p><span class="math notranslate nohighlight">\({e(S,\overline{s})} \)</span>=number of edges in between S and <span class="math notranslate nohighlight">\(\overline{S}=\sum_{a\in S,b\in \overline{s}}ab\)</span></p>
+<p><span class="math notranslate nohighlight">\({|S|}\)</span> =Number of vertices in the subgraph G</p>
+<p>In the above example Graph G(V,E):</p>
+<p>Here S=bhcde and <span class="math notranslate nohighlight">\(\overline{S}\)</span>=agf</p>
+<ul class="simple">
+<li><p>Here <span class="math notranslate nohighlight">\( e(S,\overline{S})\)</span>=3   {ab,gh,fe}</p></li>
+<li><p><span class="math notranslate nohighlight">\(min_({|S|},{|\overline{S}|})\)</span>=3</p></li>
+</ul>
+<p>Expansion(S)=3/3=1</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>Why didn’t we use other forms of denominators?</p>
+</div>
+<div class="section" id="sum">
+<h3>1) Sum:<a class="headerlink" href="#sum" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[
+   {Expansion(S)=\frac{e(S,\overline{S})}{{|S|}+{|\overline{S}|}}}
+                =\frac{e(S,\overline{S})}{{N(V)}}
+                
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+|S|+|\overline{S}|= n =D(V)
+\]</div>
+<ul class="simple">
+<li><p>The denominator results to sum of total vertices and it gives the same result as MIN_CUT.</p></li>
+</ul>
+</div>
+<div class="section" id="max">
+<h3>2)Max:<a class="headerlink" href="#max" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[
+   {Expansion(S)=\frac{e(S,\overline{S})}{Max({|S|},{|\overline{S}|})}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+ {Expansion(S)=[\frac{e(S,\overline{S})}{\frac{n}{2}},\frac{e(S,\overline{S})}{n}]}\]</div>
+<ul class="simple">
+<li><p>Where  n==D(V) , total number of vertices of the graph .</p></li>
+<li><p>This result is also produce cut similar to Min_cut .</p></li>
+</ul>
+</div>
+<div class="section" id="product">
+<h3>3)Product:<a class="headerlink" href="#product" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[               
+{Expansion(S)=\frac{e(S,\overline{S})}{{|S|}{|\overline{S}|}}}
+ \]</div>
+<ul class="simple">
+<li><p>This term gives similar result to putting minimum in the denominator.</p></li>
+</ul>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>This above definition was proposed by Computer vision researcher <em>Jitendra Malik</em> and his team.</p>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="conductance">
+<h2>(2) Conductance<a class="headerlink" href="#conductance" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>It is an indicator of Surface/volume property of graph and we use degree instead of cardinality in the <span class="math notranslate nohighlight">\(Expansion(S,\overline {S})\)</span> as it gives efficient contibution term to the volume aspect of the graph.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ 
+{Conductance(S)=\frac{e(S,\overline{S})}{min_({d(S)},{d(\overline{S})})}}
+\]</div>
+<p>Let the subset be of the graph G(V,E) be S and <span class="math notranslate nohighlight">\(\overline{S}\)</span> be the complement of the of subset S.</p>
+<ul class="simple">
+<li><p>d(S)= Sum of all degree of vertices in Subset S</p></li>
+<li><p><span class="math notranslate nohighlight">\(d(\overline{S})\)</span>=Sum of all degree of vertices in Subset <span class="math notranslate nohighlight">\( \overline{S}\)</span></p></li>
+</ul>
+<div class="figure align-default" id="figure-2">
+<img alt="../_images/Dense_subgraph.jpeg" src="../_images/Dense_subgraph.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">conductance on Graph(G)</span><a class="headerlink" href="#figure-2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Here S=bhcde and <span class="math notranslate nohighlight">\(\overline{S}\)</span>=agf</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\({e(S,\overline{s})} \)</span>=Number of edges in between S and <span class="math notranslate nohighlight">\(\overline{S}=\sum_{a\in S,b\in \overline{s}}ab \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\({d(S)}\)</span> =<span class="math notranslate nohighlight">\(\sum_{u\in S}d(u)\)</span>  =Degree of the vertices in the subset</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ Conductance(G)=Min(Conductance(S\subset G(V,E))) \]</div>
+<p>In the above example Graph G:</p>
+<p>Here S=bhcde and <span class="math notranslate nohighlight">\(\overline{S}\)</span>=agf</p>
+<ul class="simple">
+<li><p><strong>Note:</strong> For the Regular graph,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Conductance(S)=\frac{e(S,\overline{S})}{min_({d(S)},{d(\overline{S})})}=\frac{1}{d}\frac{e(S,\overline{S})}{min_({|S|},{|\overline{S}|})}=\frac{1}{d}(Expansion(S))
+\]</div>
+<ul class="simple">
+<li><p>For the irregular graphs,conductance term is very crucial as degree caputures the importance|volume property of the graph.</p></li>
+</ul>
+</div>
+<div class="section" id="sparsest-cut">
+<h2>Sparsest Cut<a class="headerlink" href="#sparsest-cut" title="Permalink to this headline">¶</a></h2>
+<p>For a graph G ,Cut resulting the subset with minimum Conductance<span class="math notranslate nohighlight">\((S,\overline{S})\)</span></p>
+<ul class="simple">
+<li><p>It is also the conductance of Graph G(V,E).</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ Conductance(G)=Min(Conductance(S\subset G(V,E))) \]</div>
+<div class="figure align-default" id="figure-3-reference-https-www-researchgate-net-profile-daniel-simon-11-publication-220910004-figure-fig7-as-305512227852293-1449851199267-a-sparse-cut-is-a-small-set-of-edges-whose-removal-separates-the-graph-into-two-large-png">
+<img alt="../_images/sparse_cut.jpeg" src="../_images/sparse_cut.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Sparsest Cut<a class="reference external" href="https://www.researchgate.net/profile/Daniel-Simon-11/publication/220910004/figure/fig7/AS:305512227852293&#64;1449851199267/A-sparse-cut-is-a-small-set-of-edges-whose-removal-separates-the-graph-into-two-large.png">[Source]</a></span><a class="headerlink" href="#figure-3-reference-https-www-researchgate-net-profile-daniel-simon-11-publication-220910004-figure-fig7-as-305512227852293-1449851199267-a-sparse-cut-is-a-small-set-of-edges-whose-removal-separates-the-graph-into-two-large-png" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition-goal admonition">
+<p class="admonition-title">Goal</p>
+<p>To find the cut with minimum sparsity/conductance.</p>
+</div>
+</div>
+<div class="section" id="min-cut">
+<h2>Min Cut<a class="headerlink" href="#min-cut" title="Permalink to this headline">¶</a></h2>
+<p>For a graph G,the cut with minimum metric(weights /number of edges) that divides the graph into two disjoint sets.</p>
+<p><strong>Definition:</strong> A minimum cut S is a partition of the nodes of Graph G into S and <span class="math notranslate nohighlight">\(\overline {S}\)</span> that minimizes the number of edges going across the partition</p>
+<ul class="simple">
+<li><p>It is only dependent on the edges and it’s weight between the vertices.</p></li>
+</ul>
+<div class="figure align-default" id="figure-4">
+<img alt="../_images/min_cut.jpeg" src="../_images/min_cut.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text">Min_cut on Graph</span><a class="headerlink" href="#figure-4" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="illustrations-of-min-cut-vs-sparset-cut">
+<h2>Illustrations of Min-cut Vs Sparset cut<a class="headerlink" href="#illustrations-of-min-cut-vs-sparset-cut" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="k-clique">
+<h3>1) K_clique<a class="headerlink" href="#k-clique" title="Permalink to this headline">¶</a></h3>
+<p><strong>Min Cut:</strong></p>
+<ul class="simple">
+<li><p>V(1)  and all the other {V(2),V(3),…….V(k)}</p></li>
+<li><p><span class="math notranslate nohighlight">\(E(S,\overline{S})\)</span>=k-1 is minimum</p></li>
+<li><p>Min_cut is isolating one vetex form all other vertices</p></li>
+<li><p>For this cut conductance(S,\overline{S})=k-1/k_1=1</p></li>
+</ul>
+<div class="figure align-default" id="figure-5">
+<img alt="../_images/kcliquemincut.jpeg" src="../_images/kcliquemincut.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">Mincut on Kclique</span><a class="headerlink" href="#figure-5" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>Sparsest Cut:</strong></p>
+<ul class="simple">
+<li><p>Scenerio:Splitting the graph into equal number vertices</p></li>
+<li><p><span class="math notranslate nohighlight">\(E(S,\overline{S})\approx{(k/2)*(k/2))}=\frac{k^2}{4}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Denomiator=Min_{degree}(S,\overline{S})=(k-1)*(k/2)\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[degree(vertex)=k-1\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Conductance(S,\overline{S})={\frac{k^2/4}{k*(k-1)/2}}\approx{1/2}\)</span></p></li>
+</ul>
+<p>This cut is the sparsest cut.</p>
+<div class="figure align-default" id="figure-6">
+<img alt="../_images/kcliquesparsecut.jpeg" src="../_images/kcliquesparsecut.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">Sparsecut on Graph</span><a class="headerlink" href="#figure-6" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="k-node-tree">
+<h3>2)K_node tree<a class="headerlink" href="#k-node-tree" title="Permalink to this headline">¶</a></h3>
+<p><strong>Min Cut:</strong></p>
+<ul class="simple">
+<li><p>Scenerio: cut the leaf node.</p></li>
+<li><p><span class="math notranslate nohighlight">\(E(S,\overline{S})\)</span>=1 is minimum</p></li>
+<li><p>Min(degree(S,\overline{S}))=1</p></li>
+<li><p>conductance(S,|overline{S})=1</p></li>
+</ul>
+<div class="figure align-default" id="figure-7">
+<img alt="../_images/tree_mincut.jpeg" src="../_images/tree_mincut.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Mincut on Tree_k</span><a class="headerlink" href="#figure-7" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>Sparsest Cut</strong></p>
+<ul class="simple">
+<li><p>Scenerio:cut the first child of root node apart.</p></li>
+<li><p><span class="math notranslate nohighlight">\(E(S,\overline{S})\)</span>=1</p></li>
+<li><p><span class="math notranslate nohighlight">\(Mindegree(S,\overline{S})\)</span>=2(|s|-1)</p></li>
+<li><p><span class="math notranslate nohighlight">\(conductance(S,\overline{S})=\frac{1}{2|S|-1}\)</span></p></li>
+</ul>
+<p>assuming <span class="math notranslate nohighlight">\( |S|\leq|\overline{S}|\leq{k/2}\)</span></p>
+<p>To minimise the conductance we need to maximise the denominator</p>
+<p><span class="math notranslate nohighlight">\( |S|\to{k/2}\)</span></p>
+<div class="figure align-default" id="fig-8">
+<img alt="../_images/treesparsecut.jpeg" src="../_images/treesparsecut.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text">Sparse Cut on Tree_K</span><a class="headerlink" href="#fig-8" title="Permalink to this image">¶</a></p>
+</div>
+<p>This cut is the sparsest cut.</p>
+</div>
+<div class="section" id="k-clique-combination">
+<h3>3)K_clique combination<a class="headerlink" href="#k-clique-combination" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="figure-9">
+<img alt="assets/2022_02_10_Expansion_conductance_graph_sparsecut/k_n.jpeg" src="assets/2022_02_10_Expansion_conductance_graph_sparsecut/k_n.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">kclique_combination</span><a class="headerlink" href="#figure-9" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Here, there n edges matched between two K_n graphs and one edge between K_n and K_logn.</p></li>
+</ul>
+<p><strong>Min Cut:</strong></p>
+<ul class="simple">
+<li><p>Scenerio: cut the edge between k_n and K_logn.</p></li>
+<li><p><span class="math notranslate nohighlight">\(E(S,\overline{S})\)</span>=1 is minimum</p></li>
+<li><p><span class="math notranslate nohighlight">\(Min(degree(S,\overline{S}))=\theta{(log(n)^2)}\)</span>,  k_logn is a clique</p></li>
+<li><p><span class="math notranslate nohighlight">\(conductance(S,\overline{S})\approx{\frac{1}{\theta{(log(n)^2})}}\)</span></p></li>
+</ul>
+<div class="figure align-default" id="figure-10">
+<img alt="../_images/K_n_mincut.jpeg" src="../_images/K_n_mincut.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text">k_n_Min cut</span><a class="headerlink" href="#figure-10" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>Sparsest Cut</strong></p>
+<ul class="simple">
+<li><p>Scenerio:cut the edges between the K_n and K_n</p></li>
+<li><p><span class="math notranslate nohighlight">\(E(S,\overline{S})\)</span>=n</p></li>
+<li><p><span class="math notranslate nohighlight">\(Mindegree(S,\overline{S})\approx{\theta{(n^2)}}\)</span>, assuming k_n is a clique</p></li>
+<li><p><span class="math notranslate nohighlight">\(conductance(S,\overline{S})\approx{\frac{n}{\theta{(n^2)}}}\)</span></p></li>
+</ul>
+<p>To minimise the conductance we need to maximise the denominator</p>
+<div class="figure align-default" id="figure-11">
+<img alt="../_images/K_n_sparsecut.jpeg" src="../_images/K_n_sparsecut.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text">k_n_Sparsest Cut</span><a class="headerlink" href="#figure-11" title="Permalink to this image">¶</a></p>
+</div>
+<p>This cut is the sparsest cut.</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>(1) These edges in a graph gives the interaction between the node/data.</p>
+<p>(2) Clustering is  grouping of nodes which are more connceted than others.This Conductance calculation results in fraction of edges that goes from from one cluster set(S) to the S compliment.</p>
+<p>(3) Higher the conductance implies harder to disconnet the graph G into parts.</p>
+</div>
+<p>We can apply this conductance concept to solve some classic problems like <strong>Randoom walks</strong>,divide and conquer algorithms,finding communities in social networks,various network design problems e.t.c.</p>
+<div class="admonition-references admonition">
+<p class="admonition-title">References:</p>
+<p>Here are the sources for images
+<a class="reference external" href="https://www.researchgate.net/profile/Daniel-Simon-11/publication/220910004/figure/fig7/AS:305512227852293&#64;1449851199267/A-sparse-cut-is-a-small-set-of-edges-whose-removal-separates-the-graph-into-two-large.png">[Sparsest Cut]</a>
+and <a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Graph_conductance.svg/330px-Graph_conductance.svg.png">[Expansion on Graph(G)]</a></p>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs328-2022/CS328-Notes",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Densest Subgraph</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Students of CS328 2022<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

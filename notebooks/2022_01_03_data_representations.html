@@ -196,6 +196,16 @@
    Densest Subgraphs
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html">
+   Densest Subgraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html">
+   Expansion and Conductance of a Graph
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -676,8 +686,8 @@ For example: argue, argued, argues and arguing; all reduce to the stem word <cod
 </div>
 <p><strong>Step 5: Building Unigrams, Bigrams, Trigrams, Skip-grams etc.</strong></p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="163eb3bc-5302-46ca-8949-0b3125438fdb" name="9d2edd6d-1675-4481-9c72-320b1de69d8c" type="radio">
-</input><label class="tabbed-label" for="163eb3bc-5302-46ca-8949-0b3125438fdb">
+<input checked="checked" id="4a69af23-ab58-4c2b-8ed0-66554ff5419a" name="958b87e2-86bf-44f5-8797-ba52b8684ef9" type="radio">
+</input><label class="tabbed-label" for="4a69af23-ab58-4c2b-8ed0-66554ff5419a">
 Unigrams</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -960,8 +970,8 @@ Unigrams</label><div class="tabbed-content docutils">
 </tbody>
 </table>
 </div>
-<input id="41f0697e-0acc-4e55-94c5-327d5e11d3ca" name="9d2edd6d-1675-4481-9c72-320b1de69d8c" type="radio">
-</input><label class="tabbed-label" for="41f0697e-0acc-4e55-94c5-327d5e11d3ca">
+<input id="0de06e14-0a90-4690-a28e-e39e77c0e8ae" name="958b87e2-86bf-44f5-8797-ba52b8684ef9" type="radio">
+</input><label class="tabbed-label" for="0de06e14-0a90-4690-a28e-e39e77c0e8ae">
 Bigrams</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bigram_vocab</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">review_word_stem_tokens</span><span class="p">:</span>
@@ -1273,8 +1283,8 @@ Bigrams</label><div class="tabbed-content docutils">
 </tbody>
 </table>
 </div>
-<input id="c7a8541e-d283-49e4-be5f-4ce361e6e4b2" name="9d2edd6d-1675-4481-9c72-320b1de69d8c" type="radio">
-</input><label class="tabbed-label" for="c7a8541e-d283-49e4-be5f-4ce361e6e4b2">
+<input id="49a89a7f-05da-49b0-9767-a2909de98aef" name="958b87e2-86bf-44f5-8797-ba52b8684ef9" type="radio">
+</input><label class="tabbed-label" for="49a89a7f-05da-49b0-9767-a2909de98aef">
 Trigrams</label><div class="tabbed-content docutils">
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">trigram_vocab</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">review_word_stem_tokens</span><span class="p">:</span>
@@ -1562,8 +1572,8 @@ Trigrams</label><div class="tabbed-content docutils">
 </tbody>
 </table>
 </div>
-<input id="147a857b-279d-40d1-87dc-8faeaf4bb41d" name="9d2edd6d-1675-4481-9c72-320b1de69d8c" type="radio">
-</input><label class="tabbed-label" for="147a857b-279d-40d1-87dc-8faeaf4bb41d">
+<input id="deb802bf-7b1a-432b-9e91-f2616a4255b5" name="958b87e2-86bf-44f5-8797-ba52b8684ef9" type="radio">
+</input><label class="tabbed-label" for="deb802bf-7b1a-432b-9e91-f2616a4255b5">
 Skip-1-gram</label><div class="tabbed-content docutils">
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">skip_1_gram_vocab</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">review_word_stem_tokens</span><span class="p">:</span>
@@ -1859,15 +1869,15 @@ Skip-1-gram</label><div class="tabbed-content docutils">
 <div class="section" id="overall">
 <h3>Overall<a class="headerlink" href="#overall" title="Permalink to this headline">¶</a></h3>
 <div class="tabbed-set docutils">
-<input checked="checked" id="43e721fe-d567-4547-b19b-543a82e3ea16" name="1488c14d-94b7-4c69-a607-20a6ec1628c0" type="radio">
-</input><label class="tabbed-label" for="43e721fe-d567-4547-b19b-543a82e3ea16">
+<input checked="checked" id="d89cbd71-66cc-4c65-9361-f10ae3986d03" name="73c30180-c1dd-4ba2-ad13-27747da3a9a8" type="radio">
+</input><label class="tabbed-label" for="d89cbd71-66cc-4c65-9361-f10ae3986d03">
 Initially</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="n">love</span> <span class="n">sci</span><span class="o">-</span><span class="n">fi</span> <span class="ow">and</span> <span class="n">am</span> <span class="n">willing</span> <span class="n">to</span> <span class="n">put</span> <span class="n">up</span> <span class="k">with</span> <span class="n">a</span> <span class="n">lot</span><span class="o">.</span> <span class="n">Sci</span><span class="o">-</span><span class="n">fi</span> <span class="n">movies</span><span class="o">/</span><span class="n">TV</span> <span class="n">are</span> <span class="n">usually</span> <span class="n">underfunded</span><span class="p">,</span> <span class="n">under</span><span class="o">-</span><span class="n">appreciated</span> <span class="ow">and</span> <span class="n">misunderstood</span><span class="o">.</span> <span class="n">I</span> <span class="n">tried</span> <span class="n">to</span> <span class="n">like</span> <span class="n">this</span><span class="p">,</span> <span class="n">I</span> <span class="n">really</span> <span class="n">did</span><span class="p">,</span> <span class="n">but</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">to</span> <span class="n">good</span> <span class="n">TV</span> <span class="n">sci</span><span class="o">-</span><span class="n">fi</span> <span class="k">as</span> <span class="n">Babylon</span> <span class="mi">5</span> <span class="ow">is</span> <span class="n">to</span> <span class="n">Star</span> <span class="n">Trek</span> <span class="p">(</span><span class="n">the</span> <span class="n">original</span><span class="p">)</span><span class="o">.</span> <span class="n">Silly</span> <span class="n">prosthetics</span><span class="p">,</span> <span class="n">cheap</span> <span class="n">cardboard</span> <span class="n">sets</span><span class="p">,</span> <span class="n">stilted</span> <span class="n">dialogues</span><span class="p">,</span> <span class="n">CG</span> <span class="n">that</span> <span class="n">doesn</span><span class="s1">&#39;t match the background, and painfully one-dimensional characters cannot be overcome with a &#39;</span><span class="n">sci</span><span class="o">-</span><span class="n">fi</span><span class="s1">&#39; setting. (I&#39;</span><span class="n">m</span> <span class="n">sure</span> <span class="n">there</span> <span class="n">are</span> <span class="n">those</span> <span class="n">of</span> <span class="n">you</span> <span class="n">out</span> <span class="n">there</span> <span class="n">who</span> <span class="n">think</span> <span class="n">Babylon</span> <span class="mi">5</span> <span class="ow">is</span> <span class="n">good</span> <span class="n">sci</span><span class="o">-</span><span class="n">fi</span> <span class="n">TV</span><span class="o">.</span> <span class="n">It</span><span class="s1">&#39;s not. It&#39;</span><span class="n">s</span> <span class="n">clichéd</span> <span class="ow">and</span> <span class="n">uninspiring</span><span class="o">.</span><span class="p">)</span> <span class="n">While</span> <span class="n">US</span> <span class="n">viewers</span> <span class="n">might</span> <span class="n">like</span> <span class="n">emotion</span> <span class="ow">and</span> <span class="n">character</span> <span class="n">development</span><span class="p">,</span> <span class="n">sci</span><span class="o">-</span><span class="n">fi</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">genre</span> <span class="n">that</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">take</span> <span class="n">itself</span> <span class="n">seriously</span> <span class="p">(</span><span class="n">cf</span><span class="o">.</span> <span class="n">Star</span> <span class="n">Trek</span><span class="p">)</span><span class="o">.</span> <span class="n">It</span> <span class="n">may</span> <span class="n">treat</span> <span class="n">important</span> <span class="n">issues</span><span class="p">,</span> <span class="n">yet</span> <span class="ow">not</span> <span class="k">as</span> <span class="n">a</span> <span class="n">serious</span> <span class="n">philosophy</span><span class="o">.</span> <span class="n">It</span><span class="s1">&#39;s really difficult to care about the characters here as they are not simply foolish, just missing a spark of life. Their actions and reactions are wooden and predictable, often painful to watch. The makers of Earth KNOW it&#39;</span><span class="n">s</span> <span class="n">rubbish</span> <span class="k">as</span> <span class="n">they</span> <span class="n">have</span> <span class="n">to</span> <span class="n">always</span> <span class="n">say</span> <span class="s2">&quot;Gene Roddenberry&#39;s Earth...&quot;</span> <span class="n">otherwise</span> <span class="n">people</span> <span class="n">would</span> <span class="ow">not</span> <span class="k">continue</span> <span class="n">watching</span><span class="o">.</span> <span class="n">Roddenberry</span><span class="s1">&#39;s ashes must be turning in their orbit as this dull, cheap, poorly edited (watching it without advert breaks really brings this home) trudging Trabant of a show lumbers into space. Spoiler. So, kill off a main character. And then bring him back as another actor. Jeeez! Dallas all over again.</span>
 </pre></div>
 </div>
 </div>
-<input id="9db22dfa-a0f8-4b9b-83bb-ed2576848245" name="1488c14d-94b7-4c69-a607-20a6ec1628c0" type="radio">
-</input><label class="tabbed-label" for="9db22dfa-a0f8-4b9b-83bb-ed2576848245">
+<input id="865c3242-4ca8-451d-aa7c-5205d52279d6" name="73c30180-c1dd-4ba2-ad13-27747da3a9a8" type="radio">
+</input><label class="tabbed-label" for="865c3242-4ca8-451d-aa7c-5205d52279d6">
 Into sentences</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;I love sci-fi and am willing to put up with a lot.&#39;</span><span class="p">,</span>
  <span class="s1">&#39;Sci-fi movies/TV are usually underfunded, under-appreciated and misunderstood.&#39;</span><span class="p">,</span>
@@ -1889,8 +1899,8 @@ Into sentences</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="ee2691d3-72e2-4680-91df-9d0c0489ae4d" name="1488c14d-94b7-4c69-a607-20a6ec1628c0" type="radio">
-</input><label class="tabbed-label" for="ee2691d3-72e2-4680-91df-9d0c0489ae4d">
+<input id="d0ad80af-57aa-4889-b8fb-01242bfc300f" name="73c30180-c1dd-4ba2-ad13-27747da3a9a8" type="radio">
+</input><label class="tabbed-label" for="d0ad80af-57aa-4889-b8fb-01242bfc300f">
 Tokenization</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;love&#39;</span><span class="p">,</span> <span class="s1">&#39;sci-fi&#39;</span><span class="p">,</span> <span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;am&#39;</span><span class="p">,</span> <span class="s1">&#39;willing&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;put&#39;</span><span class="p">,</span> <span class="s1">&#39;up&#39;</span><span class="p">,</span> <span class="s1">&#39;with&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;lot&#39;</span><span class="p">]</span>
 <span class="p">[</span><span class="s1">&#39;Sci-fi&#39;</span><span class="p">,</span> <span class="s1">&#39;movies&#39;</span><span class="p">,</span> <span class="s1">&#39;TV&#39;</span><span class="p">,</span> <span class="s1">&#39;are&#39;</span><span class="p">,</span> <span class="s1">&#39;usually&#39;</span><span class="p">,</span> <span class="s1">&#39;underfunded&#39;</span><span class="p">,</span> <span class="s1">&#39;under-appreciated&#39;</span><span class="p">,</span> <span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;misunderstood&#39;</span><span class="p">]</span>
@@ -1900,8 +1910,8 @@ Tokenization</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="a6b36e7f-2c8b-4978-9e15-4a8f1a7e24c0" name="1488c14d-94b7-4c69-a607-20a6ec1628c0" type="radio">
-</input><label class="tabbed-label" for="a6b36e7f-2c8b-4978-9e15-4a8f1a7e24c0">
+<input id="bf7f039f-bcdb-4945-84a7-fe96b6a794cb" name="73c30180-c1dd-4ba2-ad13-27747da3a9a8" type="radio">
+</input><label class="tabbed-label" for="bf7f039f-bcdb-4945-84a7-fe96b6a794cb">
 Stemming</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;love&#39;</span><span class="p">,</span> <span class="s1">&#39;sci-fi&#39;</span><span class="p">,</span> <span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;am&#39;</span><span class="p">,</span> <span class="s1">&#39;will&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;put&#39;</span><span class="p">,</span> <span class="s1">&#39;up&#39;</span><span class="p">,</span> <span class="s1">&#39;with&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;lot&#39;</span><span class="p">]</span>
 <span class="p">[</span><span class="s1">&#39;sci-fi&#39;</span><span class="p">,</span> <span class="s1">&#39;movi&#39;</span><span class="p">,</span> <span class="s1">&#39;TV&#39;</span><span class="p">,</span> <span class="s1">&#39;are&#39;</span><span class="p">,</span> <span class="s1">&#39;usual&#39;</span><span class="p">,</span> <span class="s1">&#39;underfund&#39;</span><span class="p">,</span> <span class="s1">&#39;under-appreci&#39;</span><span class="p">,</span> <span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;misunderstood&#39;</span><span class="p">]</span>
@@ -1911,8 +1921,8 @@ Stemming</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="ff211789-7273-451b-94be-77c66650e005" name="1488c14d-94b7-4c69-a607-20a6ec1628c0" type="radio">
-</input><label class="tabbed-label" for="ff211789-7273-451b-94be-77c66650e005">
+<input id="15a30630-48a8-42dd-82ba-bfab92005f5b" name="73c30180-c1dd-4ba2-ad13-27747da3a9a8" type="radio">
+</input><label class="tabbed-label" for="15a30630-48a8-42dd-82ba-bfab92005f5b">
 Remove Stop words</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;love&#39;</span><span class="p">,</span> <span class="s1">&#39;sci-fi&#39;</span><span class="p">,</span> <span class="s1">&#39;put&#39;</span><span class="p">,</span> <span class="s1">&#39;lot&#39;</span><span class="p">]</span>
 <span class="p">[</span><span class="s1">&#39;sci-fi&#39;</span><span class="p">,</span> <span class="s1">&#39;movi&#39;</span><span class="p">,</span> <span class="s1">&#39;TV&#39;</span><span class="p">,</span> <span class="s1">&#39;usual&#39;</span><span class="p">,</span> <span class="s1">&#39;underfund&#39;</span><span class="p">,</span> <span class="s1">&#39;under-appreci&#39;</span><span class="p">,</span> <span class="s1">&#39;misunderstood&#39;</span><span class="p">]</span>
@@ -1922,8 +1932,8 @@ Remove Stop words</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="1ee9369d-adf2-4823-8b42-a37593d18af4" name="1488c14d-94b7-4c69-a607-20a6ec1628c0" type="radio">
-</input><label class="tabbed-label" for="1ee9369d-adf2-4823-8b42-a37593d18af4">
+<input id="6c5583d1-147e-471a-be7c-52833542db39" name="73c30180-c1dd-4ba2-ad13-27747da3a9a8" type="radio">
+</input><label class="tabbed-label" for="6c5583d1-147e-471a-be7c-52833542db39">
 Bigrams</label><div class="tabbed-content docutils">
 <table class="colwidths-auto table">
 <thead>

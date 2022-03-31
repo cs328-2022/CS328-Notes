@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Densest Subgraphs &#8212; CS328-2022 Notes</title>
+    <title>Densest Subgraph &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -58,8 +58,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Densest Subgraph" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html" />
-    <link rel="prev" title="Hierarchical Clustering" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html" />
+    <link rel="next" title="Expansion and Conductance of a Graph" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html" />
+    <link rel="prev" title="Densest Subgraphs" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -191,13 +191,13 @@
    Hierarchical Clustering
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html">
    Densest Subgraphs
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Densest Subgraph
   </a>
  </li>
@@ -247,7 +247,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_02_03_Greedy_algorithm_for_Densest_subgraphs.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -267,10 +267,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb"><button
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_02_03_Greedy_algorithm_for_Densest_subgraphs.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -285,31 +285,6 @@
 
             <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        <button type="button" class="btn btn-secondary topbarbtn"
-            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
-                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
-        
-    </div>
-</div>
-
         </div>
 
         <!-- Table of contents -->
@@ -320,53 +295,46 @@
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#density-of-subgraph">
-   Density of Subgraph
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Densest Subgraph
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#finding-densest-subgraphs">
-   Finding Densest Subgraphs
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   BackGround
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#u-using-decision-problem-u">
-     <u>
-      Using Decision Problem
-     </u>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#u-max-flow-min-cut-based-algorithm-u">
-     <u>
-      Max Flow / Min-cut based Algorithm
-     </u>
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analysis-of-max-flow-min-cut-algorithm">
-   Analysis of Max-Flow / Min-Cut Algorithm
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#greedy-algorithm">
+   Greedy Algorithm
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#u-different-cases-u">
-     <u>
-      Different cases
-     </u>
-     :
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introduction">
+     Introduction
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithm-psuedocode">
+     Algorithm(Psuedocode)
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#case-1">
-       Case - 1
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#following-is-the-pseudocode-for-greedy-algorithm">
+       Following is the pseudocode for Greedy Algorithm:
       </a>
      </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#case-2">
-       Case - 2
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#alternate-definition-of-graph-clustering">
+     Alternate definition of Graph Clustering
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#expansion">
+       Expansion
       </a>
      </li>
     </ul>
@@ -383,7 +351,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Densest Subgraphs</h1>
+                <h1>Densest Subgraph</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -393,53 +361,46 @@
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#density-of-subgraph">
-   Density of Subgraph
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Densest Subgraph
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#finding-densest-subgraphs">
-   Finding Densest Subgraphs
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   BackGround
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#u-using-decision-problem-u">
-     <u>
-      Using Decision Problem
-     </u>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#u-max-flow-min-cut-based-algorithm-u">
-     <u>
-      Max Flow / Min-cut based Algorithm
-     </u>
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analysis-of-max-flow-min-cut-algorithm">
-   Analysis of Max-Flow / Min-Cut Algorithm
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#greedy-algorithm">
+   Greedy Algorithm
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#u-different-cases-u">
-     <u>
-      Different cases
-     </u>
-     :
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introduction">
+     Introduction
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithm-psuedocode">
+     Algorithm(Psuedocode)
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#case-1">
-       Case - 1
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#following-is-the-pseudocode-for-greedy-algorithm">
+       Following is the pseudocode for Greedy Algorithm:
       </a>
      </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#case-2">
-       Case - 2
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#alternate-definition-of-graph-clustering">
+     Alternate definition of Graph Clustering
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#expansion">
+       Expansion
       </a>
      </li>
     </ul>
@@ -455,120 +416,140 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="densest-subgraphs">
-<h1>Densest Subgraphs<a class="headerlink" href="#densest-subgraphs" title="Permalink to this headline">¶</a></h1>
-<hr class="docutils" />
-<div class="section" id="density-of-subgraph">
-<h2>Density of Subgraph<a class="headerlink" href="#density-of-subgraph" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p>Density of a subgraph</p>
-<ul class="simple">
-<li><p>Density measures how tightly the components inside a subgraph are connected to each other.</p></li>
-<li><p>It does not care about the connectivity with the components outside the subgraph.</p></li>
-</ul>
-</li>
-<li><p>Mathematically, Density of a subgraph is represented by the following formula:</p>
-<div class="math notranslate nohighlight">
-\[  D(S) = \frac{e(S,S)}{|S|} ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ - (1)\]</div>
-<ul class="simple">
-<li><p>e(S,S) is the number of edges between nodes both in S or e(S,S) = { ( x , y ) <span class="math notranslate nohighlight">\(\in\)</span> E ;  x <span class="math notranslate nohighlight">\(\in\)</span> S, y <span class="math notranslate nohighlight">\(\in\)</span> S }</p></li>
-<li><p>|S| is the number of nodes in subgraph S.</p></li>
-</ul>
-</li>
-<li><p>Significance of |S|</p>
-<ul class="simple">
-<li><p>Simply calculating e(S,S) won’t be enough to determine how tighty the components are connected. For eg, in the figure shown below e(S,S) of Subgraph A is more however we can easily notice that subgraph B is more dense.</p></li>
-</ul>
-<div class="figure align-default">
-<img alt="../_images/Subgraph_Comparision.jpg" src="../_images/Subgraph_Comparision.jpg" />
+  <div class="tex2jax_ignore mathjax_ignore section" id="densest-subgraph">
+<h1>Densest Subgraph<a class="headerlink" href="#densest-subgraph" title="Permalink to this headline">¶</a></h1>
+<p>Let G,S be the graph and Subgraph/Cluster defined as following:</p>
+<p>a) The edges in the Subgraph S are denoted as e(S,S).</p>
+<p>b) The number of nodes in S is denoted as |S|.</p>
+<p>c)Density of Subgraph is given by Den(S) and Den(S)=<span class="math notranslate nohighlight">\(\frac{e(S,S)}{|S|}\)</span></p>
+<p>The subgraph having the maximum density will be known as Densest Subgraph.</p>
 </div>
-<div class="math notranslate nohighlight">
-\[ Figure - 1 \]</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="background">
+<h1>BackGround<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h1>
+<p>The Densest Subgraph Problem can be solved using 2 algorithms. They are</p>
 <ul class="simple">
-<li><p>We can’t consider denominator as <span class="math notranslate nohighlight">\({|S|}^{2}\)</span> as   <span class="math notranslate nohighlight">\( \max\limits_{S} \frac{e(S,S)}{{|S|}^{2}}  \)</span> is trivial, irrespective of the nature of graph.</p></li>
-<li><p>However    <span class="math notranslate nohighlight">\( \max\limits_{S} \  \frac{e(S,S)}{|S|}  \)</span> is non-trivial for different types of graphs.</p></li>
+<li><p>Max flow based algorithm in Directed graphs.</p></li>
+<li><p>Flow based algorithms by Goldberg in undirected graphs.</p></li>
+<li><p>Greedy Algorithm which gives 2-Approx algorithm in undirected and directed graphs.</p></li>
+</ul>
+<p>We have seen flow based algorithms and Max flow/min cut based algorithms in previous notes. Let us discuss here about the Greedy Algorithm.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="greedy-algorithm">
+<h1>Greedy Algorithm<a class="headerlink" href="#greedy-algorithm" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This greedy algorithm for densest subgraPhs is given by Charikar.</p>
+<p>Generally while building this densest subgraph using greedy algorithm, the intuition tells us to select the node having highest density and then another node with next highest density and so on. But this is not accepeted.
+The reason being:</p>
+<ul class="simple">
+<li><p>The density(S)=<span class="math notranslate nohighlight">\(\frac{e(S,S)}{|S|}\)</span>. The number of edges(#e(S,S)) would be zero when there is only one node.</p></li>
+<li><p>Also,Even if the e(S,S) will increase with increase in nodes the number of vertices also increases.</p></li>
+</ul>
+<p>Thus,finding the density using greedy algorithm in this way is not appreciated.</p>
+</div>
+<div class="section" id="algorithm-psuedocode">
+<h2>Algorithm(Psuedocode)<a class="headerlink" href="#algorithm-psuedocode" title="Permalink to this headline">¶</a></h2>
+<p>First consider all the nodes in the graph. Start with <span class="math notranslate nohighlight">\(V_o=V(G)\)</span></p>
+<p>k=|V|(number of vertices/nodes)</p>
+<div class="section" id="following-is-the-pseudocode-for-greedy-algorithm">
+<h3>Following is the pseudocode for Greedy Algorithm:<a class="headerlink" href="#following-is-the-pseudocode-for-greedy-algorithm" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-algorithm admonition">
+<p class="admonition-title">Algorithm:</p>
+<ul class="simple">
+<li><p>For i in range n(number of vertices)</p>
+<ul>
+<li><p>Find <span class="math notranslate nohighlight">\(deg_i(\nu_i)\)</span> (Degree of every <span class="math notranslate nohighlight">\(\nu_i \in V(G)_i\)</span> restricted to <span class="math notranslate nohighlight">\(V(G)_i)\)</span></p></li>
 </ul>
 </li>
+<li><p>For i =k to 2</p>
+<ul>
+<li><p><strong>Do:</strong> <span class="math notranslate nohighlight">\(\nu\)</span> be the vertex in <span class="math notranslate nohighlight">\(V_i\)</span> of minimum degree <strong>then</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(V_{i-1}\)</span>=<span class="math notranslate nohighlight">\(V_i\)</span>-{𝜈}</p></li>
 </ul>
-<div class="admonition note">
+</li>
+<li><p><span class="math notranslate nohighlight">\(return (V_j\)</span>,which has maximum density among <span class="math notranslate nohighlight">\(V_i\)</span>,where i=1,2,..k)</p></li>
+</ul>
+</div>
+<p>Let us take an example.
+A graph has 9 vertices and connected as shown below.</p>
+<div class="figure align-default" id="fig-1">
+<img alt="../_images/graph.jpeg" src="../_images/graph.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Sub_graph</span><a class="headerlink" href="#fig-1" title="Permalink to this image">¶</a></p>
+</div>
+<p>The densities of all vertices are mentioned in the table.The Densities are calculated as per the greedy algorithm discussed above.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>V0</p></th>
+<th class="head"><p>V1</p></th>
+<th class="head"><p>V2</p></th>
+<th class="head"><p>V3</p></th>
+<th class="head"><p>V4</p></th>
+<th class="head"><p>V5</p></th>
+<th class="head"><p>V6</p></th>
+<th class="head"><p>V7</p></th>
+<th class="head"><p>V8</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>13/9</p></td>
+<td><p>12/8</p></td>
+<td><p>11/7</p></td>
+<td><p>9/6</p></td>
+<td><p>7/5</p></td>
+<td><p>6/4</p></td>
+<td><p>3/3</p></td>
+<td><p>1/2</p></td>
+<td><p>1/1</p></td>
+</tr>
+</tbody>
+</table>
+<p>So,<span class="math notranslate nohighlight">\(V_2\)</span> has highest density among all nodes in the graph.Thus all nodes conneted to <span class="math notranslate nohighlight">\(V_2\)</span> will be the Densest Subgraph</p>
+<div class="admonition-note admonition">
 <p class="admonition-title">Note</p>
-<p>(|S|)(|S|-1) can’t be considered as denominator (as it becomes zero for |S| = 1) even though it gives a tight upper bound on Density of Subgraph.</p>
+<p>Density(Greedy algo) is bounded by Density(Opt).
+Density(Opt)<span class="math notranslate nohighlight">\(\geq\)</span>Density(Greedy)<span class="math notranslate nohighlight">\(\geq\)</span> <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>Density(Opt)</p>
 </div>
-</div>
-<div class="section" id="finding-densest-subgraphs">
-<h2>Finding Densest Subgraphs<a class="headerlink" href="#finding-densest-subgraphs" title="Permalink to this headline">¶</a></h2>
-<hr class="docutils" />
-<div class="section" id="u-using-decision-problem-u">
-<h3><u>Using Decision Problem</u><a class="headerlink" href="#u-using-decision-problem-u" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Let us assume the Density of a Subgraph <span class="math notranslate nohighlight">\(\ge\)</span> a constant (say <span class="math notranslate nohighlight">\(\frac{c}{2}\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\( \therefore  \frac{e(S,S)}{|S|} \ge \frac{c}{2}\)</span></p></li>
-<li><p>On Rearranging, <span class="math notranslate nohighlight">\( 2e(S,S) \ge c|S|\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\because  2e(S,S) = deg(S) - e(S,\overline{S}) \)</span> ,  <span class="math notranslate nohighlight">\( deg(S) + e(S,\overline{S}) \ge c|S|\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\( deg(S) + deg(\overline{S}) - deg(\overline{S}) - e(S,\overline{S}) \ge c|S| \)</span></p></li>
-<li><p>We know that, <span class="math notranslate nohighlight">\( deg(S) + deg(\overline{S}) = 2|E|\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\( \therefore 2|E| \ge c|S| + deg(\overline{S}) + e(S,\overline{S})\)</span>                                <b>-  (2)</b></p></li>
-</ul>
-</div>
-<div class="section" id="u-max-flow-min-cut-based-algorithm-u">
-<h3><u>Max Flow / Min-cut based Algorithm</u><a class="headerlink" href="#u-max-flow-min-cut-based-algorithm-u" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>Maximum Flow or Min-cut algorithm is an algorithm that gives us the maximum feasible flow through a network or the minimum cuts required to stop the flow through the network.</p></li>
-<li><p>We can find the densest subgraph by using a Decision problem where we need to find if there exist any subgraph S with density more than a fixed value let’s say <span class="math notranslate nohighlight">\( \frac{c}{2}\)</span>.</p></li>
-<li><p>Then using binary search it finds the maximum value of c for which there exists a subgraph such that <span class="math notranslate nohighlight">\( \frac{e(S,S)}{|S|}=\frac{c}{2} \)</span></p></li>
-<li><p><b>Max Flow Algorithm :-</b></p>
-<ul class="simple">
-<li><p>Binary search on value of c</p>
-<ul>
-<li><p>Let the original graph be G.</p></li>
-<li><p>Now let us construct a new graph G’ such that it has 2 extra nodes than G (Source and Sink).</p></li>
-<li><p>Connect all the nodes (undirected) in G to the source and assign weight of each edge as the degree of the node. For eg, if degree of node <span class="math notranslate nohighlight">\(\nu\)</span> is <span class="math notranslate nohighlight">\( {d}_{i} \)</span> then assign weight of edge from source to <span class="math notranslate nohighlight">\(\nu\)</span> as <span class="math notranslate nohighlight">\( {d}_{i} \)</span>.</p></li>
-<li><p>Connect all the nodes to sink and assign weight of all the edges as c.</p></li>
-<li><p>Run the max flow algorithm (Ford-Fulkerson).</p></li>
-<li><p>It will always return a cut <span class="math notranslate nohighlight">\(\le 2|E|\)</span> .</p></li>
-<li><p>Assign Densest Subgraph as S (Shown in the figure).</p></li>
-<li><p>Repeat all the steps with new value of c as per binary search.</p></li>
-</ul>
-</li>
-</ul>
-<div class="figure align-default">
-<img alt="../_images/Densest_subgraph_2.jpg" src="../_images/Densest_subgraph_2.jpg" />
-</div>
-</li>
-<li><p>The runtime of this algorithm in O(log(C) <span class="math notranslate nohighlight">\({|E|}^{2}\)</span> U), where U is the value of maximum flow.</p></li>
-</ul>
-</div>
-</div>
-<div class="section" id="analysis-of-max-flow-min-cut-algorithm">
-<h2>Analysis of Max-Flow / Min-Cut Algorithm<a class="headerlink" href="#analysis-of-max-flow-min-cut-algorithm" title="Permalink to this headline">¶</a></h2>
-<hr class="docutils" />
-<div class="section" id="u-different-cases-u">
-<h3><u>Different cases</u>:<a class="headerlink" href="#u-different-cases-u" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="case-1">
-<h4>Case - 1<a class="headerlink" href="#case-1" title="Permalink to this headline">¶</a></h4>
-<div class="figure align-default">
-<img alt="../_images/Densest_subgraph_1.jpg" src="../_images/Densest_subgraph_1.jpg" />
-</div>
+<p><strong>Proof:</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(S^{}\)</span> be vertices of optimal subgraph. Then Den(Opt)=<span class="math notranslate nohighlight">\(\frac{e(S^{},S^{})}{|S^{}|}\)</span>.</p>
+<p><strong>Claim</strong>: Any <span class="math notranslate nohighlight">\(\nu \in S^{}\)</span>,<span class="math notranslate nohighlight">\(deg_{S^{}}(\nu)\geq Opt.\)</span> where <span class="math notranslate nohighlight">\(deg_{S^{}}(\nu)\)</span> is degree of <span class="math notranslate nohighlight">\(\nu\)</span> in <span class="math notranslate nohighlight">\(S^{*}\)</span></p>
+<p>Consider <span class="math notranslate nohighlight">\(S^{}\)</span> and <span class="math notranslate nohighlight">\(S^{}\)</span>-<span class="math notranslate nohighlight">\({\nu}\)</span></p>
+<p>By the definition of optimum,we can say that</p>
 <div class="math notranslate nohighlight">
-\[ Figure - 2 \]</div>
-<ul class="simple">
-<li><p>As you can see in the Figure - 2 that the min cut will atmost be 2|E| and we can always have a cut of less than 2|E|.</p></li>
-<li><p>In this type of cut there is no densest graph since there are no nodes to the left of the cut.</p></li>
-</ul>
-</div>
-<div class="section" id="case-2">
-<h4>Case - 2<a class="headerlink" href="#case-2" title="Permalink to this headline">¶</a></h4>
-<div class="figure align-default">
-<img alt="../_images/Densest_subgraph_2.jpg" src="../_images/Densest_subgraph_2.jpg" />
-</div>
+\[\frac{e(S^{},S^{})}{|S^{}|}\geq\frac{e(S^{},S^{})-deg_{S^{}}(\nu)}{|S^{*}-1|}\]</div>
 <div class="math notranslate nohighlight">
-\[ Figure - 3 \]</div>
-<ul class="simple">
-<li><p>In Figure - 3, we can see that there is a subset of nodes which is to the left of min-cut.</p></li>
-<li><p>This Subset satisfies the condition given by the right hand side of the equation <span class="math notranslate nohighlight">\(  2|E| \ge c|S| + deg(\overline{S}) + e(S,\overline{S})\)</span>.</p></li>
-<li><p>Hence for maximum value of c, this is the desired densest subgraph.</p></li>
-</ul>
+\[-e(S^{},S^{})\geq-|S^{}|deg_{S^{}}(\nu)\]</div>
+<div class="math notranslate nohighlight">
+\[deg_{S^{}}(\nu)\geq\frac{e(S^{},S^{})}{|S^{}|}=Opt\]</div>
+<p>Now,Let us say that for the first a vertex <span class="math notranslate nohighlight">\(\nu\)</span> has been removed from <span class="math notranslate nohighlight">\(S^{*} \)</span> Let S be the current set of vertices before removing <span class="math notranslate nohighlight">\(\nu\)</span>.</p>
+<p>So, we can say <span class="math notranslate nohighlight">\(deg_{S}u \geq \)</span><span class="math notranslate nohighlight">\(deg_{S}\nu\)</span> for all u<span class="math notranslate nohighlight">\(\in\)</span> S.</p>
+<div class="math notranslate nohighlight">
+\[e(S,S)=\frac{1}{2}\sum_{u \in S}deg_{S}u\geq\frac{1}{2}|S|deg_{S}(\nu)\]</div>
+<p>Divide by |S| on all sides.</p>
+<div class="math notranslate nohighlight">
+\[\frac{e(S,S)}{|S|}\geq\frac{1}{2}deg_{S}\nu\geq\frac{1}{2}deg_{S^{}}(\nu)\geq\frac{1}{2}Opt (Since S^{}\subseteq S)\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{\frac{e(S,S)}{|S|}\geq\frac{1}{2}Opt}.(Lower Bound)\]</div>
+<div class="math notranslate nohighlight">
+\[Den(Opt)\geq \frac{e(S,S)}{|S|}\]</div>
+<p>Hence proved that <span class="math notranslate nohighlight">\(Density(Opt)\geq Density(Greedy)\geq\frac{1}{2}Density(Opt)\)</span></p>
 </div>
+</div>
+<div class="section" id="alternate-definition-of-graph-clustering">
+<h2>Alternate definition of Graph Clustering<a class="headerlink" href="#alternate-definition-of-graph-clustering" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<p>Imagine partioning solid objects, the best way of partitioing the object could be interpreted as partition at the part where surface to to the volume ratio is final.</p>
+<p>For example: The best way of partitioning a dumbell would be breaking it in the middle of the handle.</p>
+<p>Similar analogy can be applied to graphs also.</p>
+<div class="section" id="expansion">
+<h3>Expansion<a class="headerlink" href="#expansion" title="Permalink to this headline">¶</a></h3>
+<p>Let us take a graph as shown below and partition them into S and <span class="math notranslate nohighlight">\(\bar{S}\)</span>.</p>
+<div class="figure align-default" id="fig-2">
+<img alt="../_images/Expansioncut1.jpeg" src="../_images/Expansioncut1.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Expansion_cut</span><a class="headerlink" href="#fig-2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Here, the edge 5-6 will be cut and the subgraph with node 5 is S and another part is <span class="math notranslate nohighlight">\(\bar{S}\)</span></p>
+<p>Now,expansion of the set S =<span class="math notranslate nohighlight">\(\frac{e(S,\bar{S})}{Min(|S|,|\bar{S}|)}\)</span></p>
+<p>Where <span class="math notranslate nohighlight">\(e(S,\bar{S})\)</span> is number os edges between S and <span class="math notranslate nohighlight">\(\bar{S}\)</span></p>
 </div>
 </div>
 </div>
@@ -598,17 +579,17 @@
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Hierarchical Clustering</p>
+            <p class="prev-next-title">Densest Subgraphs</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html" title="next page">
+    <a class='right-next' id="next-link" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Densest Subgraph</p>
+        <p class="prev-next-title">Expansion and Conductance of a Graph</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
