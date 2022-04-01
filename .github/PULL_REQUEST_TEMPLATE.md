@@ -25,3 +25,10 @@ the contribution guidelines: https://cs328-2022.github.io/CS328-Notes/notebooks/
 - `<Member 3 Name>` : `<Member 3 Roll Number>` : `<Member 3 email>` : `<Member 3 github username>`
 
 #### Any other comments?
+
+<!-- In each of the new markdown/notebook files created by your group; please mention all the group members.
+At the end of each file, add this footer HTML tag.
+<footer>
+Author(s): Member 1 Name, Member 2 Name, Member 3 Name
+</footer>
+ -->
