@@ -24,3 +24,5 @@ parts:
   - file: notebooks/2022_01_27_Hierarchial_Clustering.md
   - file: notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb
   - file: notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb
+  - file: notebooks/2022_03_14_singular_valued_decomposition.ipynb
+  - file: notebooks/2022_03_15_geometric_interpretation_of_SVD.ipynb
