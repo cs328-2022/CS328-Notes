@@ -24,3 +24,5 @@ parts:
   - file: notebooks/2022_01_27_Hierarchial_Clustering.md
   - file: notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb
   - file: notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb
+  - file: notebooks/2022_02_14_GraphLaplacian.ipynb
+  - file: 2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.ipynb
