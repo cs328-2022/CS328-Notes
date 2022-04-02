@@ -29,7 +29,7 @@ parts:
   - file: notebooks/2022_02_03_Greedy_algorithm_for_Densest_subgraphs.ipynb
   - file: notebooks/2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.ipynb
   - file: notebooks/2022_02_14_GraphLaplacian.ipynb
-  - file: 2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.ipynb
+  - file: notebooks/2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.ipynb
 # - caption: Dealing with massive data
 #   chapters:
 # - caption: Selected topics from NPTEL-Scalable Data Science Course
