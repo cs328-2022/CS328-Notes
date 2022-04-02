@@ -116,3 +116,7 @@ Let us take the second derivative of $E[e^{tX}]$ with respect to $t$ at $t=0$,
 $$\Big(\frac{d^2}{dt^2}(E[e^{tX}])\Big)_{t=0} = E[X^2] $$
 
 Similarly taking the $k$-th derivative of the moment generating function with $t=0$, we can get the $k$-th moment of $X$.
+
+<footer>
+Author(s): Devanshu Thakar, Hardik Mahur, Jayesh Salunkhe
+</footer>

@@ -96,5 +96,11 @@ Before a PR can be merged, it needs to be approved by a TA. Please prefix the ti
 
    `[WIP or MRG] CS328 Submission : Group <Group No.>`
 2. Please make sure the name of md/ipynb files is in format `yyyy_mm_dd_topic_name`, where date is of the day when the corresponding lecture was conducted.
-3. Follow the PR template. The template will automatically open when creating a PR.
-4. Make sure all the checks are passing with no merge conflicts.
+3. In each markdown/notebook file, please mention the names of all the group members in footer tag. At the end of each page:
+    ```html
+    <footer>
+        Author(s): Member1 Name, Member2 Name, Member3 Name
+    </footer>
+    ```
+4. Follow the PR template. The template will automatically open when creating a PR.
+5. Make sure all the checks are passing with no merge conflicts.
