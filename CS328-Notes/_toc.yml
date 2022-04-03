@@ -18,6 +18,7 @@ parts:
   - file: notebooks/2022_01_11_markov_chebyshev_inequalities.md
   - file: notebooks/2022_01_13_chernoff_bound.md
   - file: notebooks/2022_01_13_chernoff_bound_tails.ipynb
+
 - caption: Clustering and low-rank approximations
   chapters:
   - file: notebooks/2022_01_17_Clustering.ipynb
@@ -28,6 +29,9 @@ parts:
   - file: notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb
   - file: notebooks/2022_02_03_Greedy_algorithm_for_Densest_subgraphs.ipynb
   - file: notebooks/2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.ipynb
+  - file: notebooks/2022_03_14_singular_value_decomposition.ipynb
+  # - file: notebooks/2022_03_15_goemetric_interpretation_of_svd.ipynb
+  - file: notebooks/2022_03_15_geometric_svd.ipynb
 # - caption: Dealing with massive data
 #   chapters:
 # - caption: Selected topics from NPTEL-Scalable Data Science Course
