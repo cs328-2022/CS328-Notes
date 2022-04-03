@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hierarchical Clustering &#8212; CS328-2022 Notes</title>
+    <title>Singular Valued Decomposition (SVD) &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -46,8 +46,6 @@
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -58,8 +56,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Densest Subgraphs" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html" />
-    <link rel="prev" title="Why does k-means++ work?" href="2022_01_27_Hierarchial_Clustering.html" />
+    <link rel="next" title="Applications of SVD" href="2022_03_15_geometric_svd.html" />
+    <link rel="prev" title="Expansion and Conductance of a Graph" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -193,8 +191,8 @@
    Why does k-means++ work?
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html">
    Hierarchical Clustering
   </a>
  </li>
@@ -213,8 +211,8 @@
    Expansion and Conductance of a Graph
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_14_singular_value_decomposition.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Singular Valued Decomposition (SVD)
   </a>
  </li>
@@ -264,7 +262,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_03_14_singular_value_decomposition.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -284,10 +282,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_03_14_singular_value_decomposition.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb"><button
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_03_14_singular_value_decomposition.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -307,7 +305,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_03_14_singular_value_decomposition.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -315,7 +313,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_03_14_singular_value_decomposition.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -332,48 +330,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why">
-   Why ?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ways-of-doing-hierarchical-clustering">
-   Ways of doing Hierarchical Clustering:
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#there-are-three-different-ways-of-finding-closeness-between-the-clusters">
-     There are three different ways of finding closeness between the clusters :-
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#properties-of-single-linkage-algorithm">
-   Properties Of Single Linkage Algorithm
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#objective-function">
-     Objective Function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#other-properties-of-single-linkage-clustering">
-     Other Properties of Single Linkage Clustering
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -381,167 +337,135 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Hierarchical Clustering</h1>
+                <h1>Singular Valued Decomposition (SVD)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why">
-   Why ?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ways-of-doing-hierarchical-clustering">
-   Ways of doing Hierarchical Clustering:
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#there-are-three-different-ways-of-finding-closeness-between-the-clusters">
-     There are three different ways of finding closeness between the clusters :-
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#properties-of-single-linkage-algorithm">
-   Properties Of Single Linkage Algorithm
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#objective-function">
-     Objective Function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#other-properties-of-single-linkage-clustering">
-     Other Properties of Single Linkage Clustering
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="hierarchical-clustering">
-<h1>Hierarchical Clustering<a class="headerlink" href="#hierarchical-clustering" title="Permalink to this headline">¶</a></h1>
-<hr class="docutils" />
-<div class="section" id="why">
-<h2>Why ?<a class="headerlink" href="#why" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Hierarchical Clustering can be used when we do not know the target number of clusters.</p></li>
-<li><p>This clustering mechanism is also very useful because we can produce a family of clusters, for each k.</p></li>
-</ul>
+  <div class="tex2jax_ignore mathjax_ignore section" id="singular-valued-decomposition-svd">
+<h1>Singular Valued Decomposition (SVD)<a class="headerlink" href="#singular-valued-decomposition-svd" title="Permalink to this headline">¶</a></h1>
+<h3><b>Introduction</b></h3>
+<p>The Singular Value Decomposition (SVD) is a basic tool frequently used in
+Numerical Linear Algebra and in many applications, which generalizes the
+Spectral Theorem from symmetric n × n matrices to general m × n matrices.
+We introduce the reader to some of its beautiful properties, mainly related to
+the Eckart-Young Theorem, which has a geometric nature. The implementation of a SVD algorithm in the computer algebra software Macaulay2 allows
+a friendly use in many algebro-geometric computations.</p>
+<p>Let A be an n × d matrix  in d-dimensional space.
+Consider where subspace is 1-d dimensional
+For k = 1, 2, 3,…, for the collection of n data points, the singular value decomposition yields the best-fitting k-dimensional subspace.</b></p>
+<p>Let’s start with a one-dimensional subspace, such as a line through the origin.
+Next the best-fitting k-dimensional subspace may be discovered by k applications of the best fitting line approach, where the best fit line perpendicular to the preceding i-1 lines is found on the i th iteration.When k approaches the rank of the matrix, we have a precise breakdown of the matrix termed the singular value decomposition from these processes.</b></p>
+<p>SVD of  a matrix A with real elements is the factorization of A into the product of three matrices, A = UDV T, where the columns of U and V are orthonormal and the matrix D is diagonal with positive real values. The unit length vectors are represented by V’s columns. The coordinates of a row of U will be fractions of the corresponding row of A along each of the lines.</p>
+<h3><b>Explanation</b></h3>
+<p>Assume that we have a matrix A (nxm) with rank r. Dimensions of rowspace and column space can be atmost n, m respectively. However as the rank of A is r there are excatly r linearly independent row vectors and column vectors, thus the dimension of rowspace and colspace is r.</p>
+<p><b>This means that there are r basis vectors for the rowspace and columnspace.</b></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A lot of papers have been written on hierarchial clustering.
-Researchers use this hierarchy to match with the natural hierarchy to obtain results.
-Eg :- Hierarchical clustering is used in Gene Sequencing and DNA matching etc.</p>
+<p>these basis vectors of rowspace, column space can be found out from the  corresponding echelon matrix using non-zero rows and pivot columns.</p>
 </div>
-</div>
-<hr class="docutils" />
-<div class="section" id="ways-of-doing-hierarchical-clustering">
-<h2>Ways of doing Hierarchical Clustering:<a class="headerlink" href="#ways-of-doing-hierarchical-clustering" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Top-Down/divisive: bi-partition</p></li>
-<li><p>Bottom up/agglomerative: aggregating from individual point</p></li>
-</ul>
+<p>Matrix can be viewed as an operator of linear transformation, each column of a matrix represents a trasformed basis vector. let v be a vector in rowspace of A, then A*v gives a vector in the column space of A. i.e. A v=σ u, σ is a constant.</p>
+<p>For the rowspace,there exists some orthogonal basis (say v). we are intrested in finding such basis that gets transformed by A to an orhtogonal basis in colspace.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Single Linkage Clustering is one of the most common heirarchical clustering. It is an example of agglomerative clustering</p>
-<div class="figure align-default">
-<img alt="../_images/hierarch_1.gif" src="../_images/hierarch_1.gif" />
+<p>For a subspace formed by span of vectors, there can be multiple sets of basis vectors. Using algorithm given by Gram-schmidt, an orthogonal basis vectors for the same space can be found using some set of basis vectors.</p>
+</div>
+<p>let v1, v2, v3… vr be that orthogonal basis vectors of the rowspace. u1, u2, u3,…,ur be the transformed vectors that form an orhtogonal basis of the column space,<br><br>
+i.e. <br><br><br></p>
+<!-- <img src="../assets/2022_3_14_svd/svd_0.png"> -->
+<p><img alt="" src="../_images/svd_0.jpg" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>generally in this Σ matrix, σ values are kept in decreasing order, as a consequence the order of v vectors in V and u vectors in V is also changed to maintain the correspondence.</p>
+</div>
+<br>
+<b>A V=U 𝚺</b>
+<br>multiply by V<sup>  -1</sup> on both sides 
+<br>A V V <sup>  -1</sup> =U 𝚺 V<sup>  -1</sup>
+<br> A = U 𝚺 V<sup>  -1</sup>
+<br> U and V are the collection of orthogonal basis vectors, so U and V are othrogonal matrices. So V V<sup>T</sup> = I, i.e. V<sup>-1</sup> = V<sup>T</sup>
+<br> <b>A = U 𝚺 V<sup>  T</sup></b>
+<p>if we generalize this equation considering all vectors of row and column space, we get
+<br><br></p>
+<!-- <img src="../assets/2022_3_14_svd/svd_3.png" > -->
+<p><img alt="" src="../_images/svd_3.jpg" /></p>
+<p>Here u<sub>i</sub>’s are called left singluar vectors and v<sub>i</sub>’s are called right singular vectors and σ<sub>i</sub>’s are called singular
+<br></p>
+<br>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>when the rank of A is r ( r &lt;= min(n,m)) then we need only first r vectors of U, V. we are able to take only these vectors by manipulating zeroes in matrix 𝚺.</p>
+</div>
+<p><br><br>
+Now let us consider A A<sup>  T</sup>
+<br> A A<sup>  T</sup> = (U 𝚺 V<sup>  T</sup>) (U 𝚺 V<sup>  T</sup>)<sup>T</sup>
+<br>= U 𝚺 V<sup>  T</sup> V</sup> 𝚺<sup>T</sup> U<sup>T</sup>
+<br>
+as 𝚺 is a diagnol matrix 𝚺<sup>T</sup>=𝚺
+<br>= U 𝚺 <sup>2</sup> U<sup>T</sup></p>
+<p><b>Thus u<sub>i</sub>’s  are eigen vectors of A A<sup>T</sup> and σ<sub>i</sub>’s are the square roots of eigen values of A A<sup>T</sup></b></p>
+<br>
+<p>Now let us consider A<sup>  T</sup> A</p>
+<p>A<sup>  T</sup> A = (U 𝚺 V<sup>  T</sup>)<sup>T</sup> (U 𝚺 V<sup>  T</sup>)
+<br> = V 𝚺<sup>T</sup> U <sup>T</sup> U 𝚺 V<sup>  T</sup>
+<br> = V 𝚺<sup>T</sup> U <sup>T</sup> U 𝚺 V<sup>  T</sup>
+<br> = V 𝚺<sup>2</sup> V<sup>T</sup></p>
+<p><b>Thus v<sub>i</sub>’s  are eigen vectors of A<sup>T</sup> A and σ<sub>i</sub>’s are the square roots of eigen values of A<sup>T</sup> A</b></p>
+<p>***Property: Matrices (AB) and (BA) have same eigen values.</p>
+<br>
+<br>
+<h3><b>Top K Truncated SVD:</b></h3>
+<p>use first k vectors of U, V and the corresponding spectral values (top k x k submatrix of Σ )</p>
+<h3><b>Implementation of SVD</b></h3><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>                       <span class="c1"># actually V here = V (Transpose) in svd   </span>
+<span class="n">U</span><span class="p">,</span><span class="n">D</span><span class="p">,</span><span class="n">V</span>
+</pre></div>
 </div>
 </div>
-<hr class="docutils" />
-<div class="section" id="there-are-three-different-ways-of-finding-closeness-between-the-clusters">
-<h3>There are three different ways of finding closeness between the clusters :-<a class="headerlink" href="#there-are-three-different-ways-of-finding-closeness-between-the-clusters" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Closest Pair: Single Linkage Clustering - The distance between any two pairs of clusters is given by the minimum distance between the elements of the pair of the cluster.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-d_1(C_i,C_j) = \min _{x \in C_i , y \in C_j}d(x,y)
-\]</div>
-<ul class="simple">
-<li><p>Farthest Pair: Complete Link Clustering - The distance between any two pairs of clusters is given by the maximum distance between the elements of the pair of the cluster.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-d_2(C_i,C_j) = \max _{x \in C_i , y \in C_j}d(x,y)
-\]</div>
-<ul class="simple">
-<li><p>Average of all Pairs: Average Link Clustering - The distance between any two pairs of clusters is given by the average distance between the elements of the pair of the cluster.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-d_2(C_i,C_j) = avg _{x \in C_i , y \in C_j}d(x,y)
-\]</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([[-0.69366543,  0.59343205, -0.40824829],
+        [-0.4427092 , -0.79833696, -0.40824829],
+        [-0.56818732, -0.10245245,  0.81649658]]),
+ array([10.25142677,  2.62835484]),
+ array([[-0.88033817, -0.47434662],
+        [ 0.47434662, -0.88033817]]))
+</pre></div>
 </div>
 </div>
-<hr class="docutils" />
-<div class="section" id="properties-of-single-linkage-algorithm">
-<h2>Properties Of Single Linkage Algorithm<a class="headerlink" href="#properties-of-single-linkage-algorithm" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>The algorithm can work with any dissimilarity measure, it may not necessarily be metric</p></li>
-<li><p>There are no Inversions.</p>
-<ul>
-<li><p>As we run the algorithm (as we start merging the clusters), the dissimilarity scores between merged clusters only increases.</p></li>
-</ul>
-</li>
-</ul>
-<div class="figure align-default">
-<img alt="../_images/LevelComp.jpg" src="../_images/LevelComp.jpg" />
 </div>
-<div class="math notranslate nohighlight">
-\[ Dissimilarity ~~ at ~~ Level - 2 &gt; Dissimilarity ~~at ~~Level - 5 \]</div>
-<div class="section" id="objective-function">
-<h3>Objective Function<a class="headerlink" href="#objective-function" title="Permalink to this headline">¶</a></h3>
-<p>The question that arises while understanding the single linkage algorithm is in terms of it’s objective function.</p>
-<p>OR</p>
-<p>What kind of clusters is this algorithm trying to create?</p>
-<p>To understand this we would need to look up some properties of Single Linkage Clustering</p>
-<p>Let’s suppose that we want to create a cluster <span class="math notranslate nohighlight">\( C_1,C_2,....C_k \)</span> which maximizes the inter cluster distance.</p>
-<div class="math notranslate nohighlight">
-\[
- maximize~~cost_k(C)
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-cost_k(C)=\min _{C_i,C_j}d(C_i,C_j) 
-\]</div>
-<div class="figure align-default">
-<img alt="../_images/k_1.jpg" src="../_images/k_1.jpg" />
-</div>
-<p>If the above task is our objective function (to maximize the minimum inter cluster distancefor k clusters) then we can easily use single linkage clustering to achieve our objective.</p>
-<p>We just have to remove the top k-1 clustering merges and we will achieve k clusters. Also, all these K clusters will follow the above objective function.</p>
-</div>
-<div class="section" id="other-properties-of-single-linkage-clustering">
-<h3>Other Properties of Single Linkage Clustering<a class="headerlink" href="#other-properties-of-single-linkage-clustering" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>It is actually an Euclidean Minimum spanning Tree!</p></li>
-</ul>
-<div class="figure align-default">
-<img alt="../_images/c.jpg" src="../_images/c.jpg" />
-</div>
-<div class="math notranslate nohighlight">
-\[ Unlike ~~ centre-based ~~ clustering ~~ Single linkage ~~ clustering ~~ can ~ handle ~~ the ~~ above ~~ example ~~ nicely!.\]</div>
-<footer>
-Author(s): Abhigyan M. Ninama, Chetan Kishore, Shubh Lavti
-</footer></div>
-</div>
-</div>
+<!-- <h3><b> Geometrical view of svd </b></h3> -->
+<!-- <img src="../assets/2022_3_14_svd/goe.jpg" width="550px" height="400px"> -->
+<!-- ![](..\assets\2022_3_14_svd\goe.jpg) -->
+<p><img alt="" src="../_images/goe.jpg" /></p>
+<!-- ```{figure} ../assets/2022_3_14_svd/goe.jpg
+:height: 150px
+``` -->
+<!-- ```{image} ../assets/2022_3_14_svd/goe.jpg
+:height: 150px
+:name: image-example
+``` -->
+<p>Fig credit: Math for CSLecture</p>
+<p>The above image shows how the points get linearly transformed by A, i.e. A v= σ u (equation 1)
+<br>
+svd says 3 important things about this transormation</p>
+<ol class="simple">
+<li><p>The u<sub>i</sub> vectors in SVD decompostion of A form the axes of the new  transformed subspace</p></li>
+<li><p>the length of each axis is equal to coressponding σ<sub>i</sub> value</p></li>
+<li><p>the preimage of u<sub>i</sub> is the corresponding v<sub>i</sub> of the SVD of A (from equation 1)</p></li>
+</ol>
+<p><b>References</b>:</p>
+<p><a class="reference external" href="https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/video-lectures/lecture-29-singular-value-decomposition/">https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/video-lectures/lecture-29-singular-value-decomposition/</a></p>
+<p>“Spectral Learning on Matrices and Tensors” textbook</p>
+<footer> <i><b>Authors: Binita, GV Sai, Sai Narasimha</b></i></footer></div>
 
     <script type="text/x-thebe-config">
     {
@@ -568,17 +492,17 @@ Author(s): Abhigyan M. Ninama, Chetan Kishore, Shubh Lavti
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_01_27_Hierarchial_Clustering.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Why does k-means++ work?</p>
+            <p class="prev-next-title">Expansion and Conductance of a Graph</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html" title="next page">
+    <a class='right-next' id="next-link" href="2022_03_15_geometric_svd.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Densest Subgraphs</p>
+        <p class="prev-next-title">Applications of SVD</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
