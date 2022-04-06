@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Distance Function &#8212; CS328-2022 Notes</title>
+    <title>Relation between second eigenvalue of Laplacian and Spectral Clustering &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -58,8 +58,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Object Representations" href="2022_01_06_object_representations_notebook.html" />
-    <link rel="prev" title="[CODE] 🧑‍💻Data Representations" href="2022_01_03_data_representations_notebook.html" />
+    <link rel="next" title="Singular Valued Decomposition (SVD)" href="2022_03_14_singular_value_decomposition.html" />
+    <link rel="prev" title="Graph Laplacian and its Eigenvalues" href="2022_02_14_GraphLaplacian.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -125,7 +125,7 @@
   Foundations
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_01_03_data_representations.html">
    Data Representations
@@ -136,8 +136,8 @@
    [CODE] 🧑‍💻Data Representations
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
    Distance Function
   </a>
  </li>
@@ -172,7 +172,7 @@
   Clustering and low-rank approximations
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_01_17_Clustering.html">
    Clustering
@@ -218,8 +218,8 @@
    Graph Laplacian and its Eigenvalues
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Relation between second eigenvalue of Laplacian and Spectral Clustering
   </a>
  </li>
@@ -284,9 +284,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_03_distance_function.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -304,10 +304,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_03_distance_function.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_03_distance_function.md"><button
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -333,8 +333,13 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nice-to-have-metric-properties">
-   Nice to have metric properties
+  <a class="reference internal nav-link" href="#cheeger-s-inequality">
+   Cheeger’s Inequality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spectral-clustering">
+   Spectral Clustering
   </a>
  </li>
 </ul>
@@ -347,7 +352,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Distance Function</h1>
+                <h1>Relation between second eigenvalue of Laplacian and Spectral Clustering</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -358,8 +363,13 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nice-to-have-metric-properties">
-   Nice to have metric properties
+  <a class="reference internal nav-link" href="#cheeger-s-inequality">
+   Cheeger’s Inequality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spectral-clustering">
+   Spectral Clustering
   </a>
  </li>
 </ul>
@@ -371,47 +381,72 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="distance-function">
-<h1>Distance Function<a class="headerlink" href="#distance-function" title="Permalink to this headline">¶</a></h1>
-<p>After object representation, next we need distance functions for objects.</p>
-<dl class="simple myst">
-<dt>Distance</dt><dd><p>A function <span class="math notranslate nohighlight">\(d\)</span>, given two objects <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>; produces a real number.</p>
-</dd>
-</dl>
-<div class="math notranslate nohighlight">
-\[ d(x, y) \rightarrow \mathbb{R} \geq 0\]</div>
-<div class="section" id="nice-to-have-metric-properties">
-<h2>Nice to have metric properties<a class="headerlink" href="#nice-to-have-metric-properties" title="Permalink to this headline">¶</a></h2>
-<p>It would be nice, if my distance function have these below properties. But it is not necessary for the distance function to follow any of the property below.</p>
-<p>Nice if, he distance between two different objects is always greater than zero.</p>
-<div class="math notranslate nohighlight" id="equation-property-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-property-1" title="Permalink to this equation">¶</a></span>\[\begin{split}d(x, y) &amp;= 0 \rightarrow x = y \\
-d(x, y) &amp;\geq 0\end{split}\]</div>
-<p>It would be nice if symmetric.</p>
-<div class="math notranslate nohighlight" id="equation-property-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-property-2" title="Permalink to this equation">¶</a></span>\[d(x, y) = d(y, x)\]</div>
-<p>Nice, if follows triangle inequality.</p>
-<div class="math notranslate nohighlight" id="equation-property-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-property-3" title="Permalink to this equation">¶</a></span>\[d(x, y) + d(y, z) \geq d(x, z)\]</div>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>The above three properties are “nice to have” and not necessary for a distance function to follow.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="relation-between-second-eigenvalue-of-laplacian-and-spectral-clustering">
+<h1>Relation between second eigenvalue of Laplacian and Spectral Clustering<a class="headerlink" href="#relation-between-second-eigenvalue-of-laplacian-and-spectral-clustering" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<p><span class="math notranslate nohighlight">\( \rightarrow \)</span> If <span class="math notranslate nohighlight">\( \phi^* \)</span> is conductance of <span class="math notranslate nohighlight">\( G, \)</span> we can use <span class="math notranslate nohighlight">\( v_2(L) \)</span> to find a cut of conductance
+<br><center><span class="math notranslate nohighlight">\( O(\sqrt{\phi^*} logn) \)</span></center></p>
+<p><span class="math notranslate nohighlight">\( \rightarrow \)</span> For any vector <span class="math notranslate nohighlight">\( v, \)</span>
+<br><center><span class="math notranslate nohighlight">\( v^TLv = \sum_{ij \in E} (v_i - v_j)^2 \)</span></center>
+<br><center><span class="math notranslate nohighlight">\( L = D - A \)</span></center>
+<br><center><span class="math notranslate nohighlight">\( v^TLv = v^TDv - v^TAv = \sum_{i=1}^n d_iv_i^2 - \sum_{i}v_i \sum_{j}A_{ij}v_j \)</span> </center></p>
+<p><br><center><span class="math notranslate nohighlight">\( LHS = \sum{div_i^2} - \sum_{ij}{v_i v_j A_{ij}} = \sum{d_iv_i^2} - 2\sum_{ij \in E}{v_iv_j} \)</span></center>
+<br><center><span class="math notranslate nohighlight">\( RHS = \sum_{ij \in E}{(v_i - v_j)^2} = \sum{d_iv_i^2} - 2\sum_{ij \in E}{v_iv_j} \)</span></center></p>
+<p><span class="math notranslate nohighlight">\( \rightarrow \)</span> We saw that <span class="math notranslate nohighlight">\( v_1 = \bar{1} \frac{1}{\sqrt{n}} \)</span>
+<br><center><span class="math notranslate nohighlight">\( \lambda_2 = \min_{v \perp \bar{1}, v \neq 0} \frac{v^TLv}{d(v^Tv)} = \min_{v \perp \bar{1}, v \neq 0} \frac{\sum_{ij \in E}{(v_i - v_j)^2}}{d \sum_{i}{v_i^2}} \hspace{20mm}(1) \)</span></center></p>
+<p>where <br><center><span class="math notranslate nohighlight">\( \bar{1} =\begin{bmatrix} 1 \\ 1 \\ 1 \\ . \\ . \\ 1 \end{bmatrix} \)</span></center></p>
+<p><span class="math notranslate nohighlight">\( \underline{Claim:} \)</span> We can also write
+<br><center><span class="math notranslate nohighlight">\( \lambda_2 = \min_{u, u \neq 0} \frac{\sum_{ij \in E}{(u_i - u_j)^2}}{\frac{d}{n} \sum_{\{ ij \}}{(u_i - u_j) ^ 2}} \hspace{20mm}(2) \)</span></center></p>
+<p>Consider a set <span class="math notranslate nohighlight">\( S \subseteq V \)</span>
+<br><center><span class="math notranslate nohighlight">\( S_{i} =
+    \begin{cases}
+        +1, i \in S\\
+        0, i \notin S
+    \end{cases}
+\)</span> </center></p>
+<p><br><center><span class="math notranslate nohighlight">\( \sum_{ij \in E}{(S_i - S_j)^2} = e(S, \bar{S}) \)</span></center></p>
+<p><br><center><span class="math notranslate nohighlight">\( Denominator = \frac{d}{n} |S||\bar{S}| \)</span></center>
+<br><center><span class="math notranslate nohighlight">\( R(S) = \phi(S) \)</span></center></p>
+<p>where <br><center><span class="math notranslate nohighlight">\( R(S) = \frac{\sum_{ij \in E}{(v_i - v_j)^2}}{\frac{d}{n} \sum_{\{ ij \}}{(v_i - v_j) ^ 2}} \)</span></center></p>
+<p><span class="math notranslate nohighlight">\( \rightarrow \)</span> If <span class="math notranslate nohighlight">\( u \perp \bar{1}, \)</span> then denominator of <span class="math notranslate nohighlight">\( (2) \)</span>
+<br><center><span class="math notranslate nohighlight">\( = \frac{d}{n} \sum_{\{ i,j \}}{(u_i - u_j)^2} = \frac{d}{2n} \sum_{ij}{(u_i - u_j)^2} \)</span></center>
+<br><center><span class="math notranslate nohighlight">\( = \frac{d}{2n} (n \sum_{i}{u_i^2} + n \sum_{j}{u_j^2} - 2 \sum_{ij}{u_iu_j}) \)</span></center>
+<br><center><span class="math notranslate nohighlight">\( = \frac{d}{2} \times 2 \sum{u_i^2} - \frac{d}{2n} \times 2(\sum{u_i})^2 \)</span></center>
+<br><center><span class="math notranslate nohighlight">\( = d \sum{u_i^2} = \text{Denominator of } (1) \)</span></center></p>
+<p><span class="math notranslate nohighlight">\( \rightarrow \)</span> Rayleight quotient for <span class="math notranslate nohighlight">\( S \)</span>
+<br><center><span class="math notranslate nohighlight">\( R(S) = \frac{e(S, \bar{S})}{|S| |\bar{S}| \frac{d}{n}} = \sigma(S) = \sigma(G) \text{ if S = optional set for } \sigma(S) \)</span></center>
+<br><center><span class="math notranslate nohighlight">\( \lambda_2 \leq \sigma(G) \leq 2\phi(G) \)</span></center></p>
+<p>Hence <span class="math notranslate nohighlight">\( \lambda_2 \)</span> is really a “relaxed”/soft version of <span class="math notranslate nohighlight">\( \sigma(G) / \phi(G) \)</span></p>
+<div class="section" id="cheeger-s-inequality">
+<h2>Cheeger’s Inequality<a class="headerlink" href="#cheeger-s-inequality" title="Permalink to this headline">¶</a></h2>
+<p><br><center><span class="math notranslate nohighlight">\( \lambda_2 \leq 2\phi(G) \)</span></center>
+<br><center><span class="math notranslate nohighlight">\( \lambda_2 \geq \frac{\phi(G)^2}{2} \)</span></center></p>
+<p><span class="math notranslate nohighlight">\( \hspace{3mm} \)</span> Implies that using <span class="math notranslate nohighlight">\( v_2, \)</span> we can find a cut where expansion is
+<br><center><span class="math notranslate nohighlight">\( O(\sqrt{\lambda_2} logn) = O(\sqrt{\phi(G)} logn) \)</span></center></p>
 </div>
-<p>Also good, if we are able to calculate “average”.</p>
-<dl class="simple myst">
-<dt>Average</dt><dd><p><span class="math notranslate nohighlight">\(\min_{x} \sum^{}_{i} d(p_{i}, x)\)</span>. The object <span class="math notranslate nohighlight">\(x\)</span> which minimizes the sum of distance from the objects in a given set to <span class="math notranslate nohighlight">\(x\)</span>.</p>
-</dd>
-</dl>
-<p>It would be nice, if average can be calculated easily.</p>
-<dl class="simple myst">
-<dt>Eucledian Distance</dt><dd><p><span class="math notranslate nohighlight">\(d(x, y) = \sqrt{\sum_{i} (x_{i} - y{i})^{2}}\)</span>. The length of line segment joint vector <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> in Eucledian space.</p>
-</dd>
-</dl>
-<p>Eucledian distance follows all of the nice properties (including “easy average”) that we have mentioned above.</p>
+<div class="section" id="spectral-clustering">
+<h2>Spectral Clustering<a class="headerlink" href="#spectral-clustering" title="Permalink to this headline">¶</a></h2>
+<p><span class="math notranslate nohighlight">\( \rightarrow \)</span> For regular graphs
+<br><span class="math notranslate nohighlight">\( \hspace{5mm} - \)</span> Find <span class="math notranslate nohighlight">\( L = dI - A \)</span> or <span class="math notranslate nohighlight">\( I - \frac{1}{d}A \)</span>
+<br><span class="math notranslate nohighlight">\( \hspace{5mm} - \)</span> Find <span class="math notranslate nohighlight">\( v_2(L) \)</span>
+<br><span class="math notranslate nohighlight">\( \hspace{5mm} - \)</span> Sort all vertices by their coordinates of <span class="math notranslate nohighlight">\( v_2 \)</span>
+<br><span class="math notranslate nohighlight">\( \hspace{5mm} - \)</span> Find best prefix i.e. <span class="math notranslate nohighlight">\( S_i = \{ 1, ..., i \} \)</span> as per new numbering</p>
+<div class="figure align-default" id="fig-1">
+<img alt="../_images/example3.jpeg" src="../_images/example3.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text">Spectral Clustering</span><a class="headerlink" href="#fig-1" title="Permalink to this image">¶</a></p>
+</div>
+<p><span class="math notranslate nohighlight">\( \\ \hspace{5mm} \)</span> n cuts <span class="math notranslate nohighlight">\( \rightarrow \)</span> report one with smallest conductance</p>
+<p><span class="math notranslate nohighlight">\( \rightarrow \)</span> For non-regular graphs,
+<br><span class="math notranslate nohighlight">\( \hspace{5mm} - L = I - D^{-1/2}AD^{-1/2} \)</span>
+<br><span class="math notranslate nohighlight">\( \hspace{5mm} - \)</span> Calculate <span class="math notranslate nohighlight">\( v_2(L) \)</span> and still find best prefix cut
+<br><span class="math notranslate nohighlight">\( \hspace{5mm} - \)</span> If <span class="math notranslate nohighlight">\( \phi^* \)</span> is optimal conductance cut, we are guaranteed a cut of conductance no more that <span class="math notranslate nohighlight">\( O(\sqrt{\phi^*} logn) \)</span></p>
+<div class="figure align-default" id="fig-2">
+<img alt="../_images/example4.jpeg" src="../_images/example4.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 29 </span><span class="caption-text">Sorting of vertices in Spectral Clustering</span><a class="headerlink" href="#fig-2" title="Permalink to this image">¶</a></p>
+</div>
 <footer>
-Author(s): Sachin Yadav
-</footer>
-</div>
+    Author(s): Avnish Ranwa, Divyanshu Tripathy, Prachika Kanodia
+</footer></div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -439,17 +474,17 @@ Author(s): Sachin Yadav
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_01_03_data_representations_notebook.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_02_14_GraphLaplacian.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">[CODE] 🧑‍💻Data Representations</p>
+            <p class="prev-next-title">Graph Laplacian and its Eigenvalues</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="2022_01_06_object_representations_notebook.html" title="next page">
+    <a class='right-next' id="next-link" href="2022_03_14_singular_value_decomposition.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Object Representations</p>
+        <p class="prev-next-title">Singular Valued Decomposition (SVD)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

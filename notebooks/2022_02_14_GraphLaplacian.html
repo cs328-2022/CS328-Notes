@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Distance Function &#8212; CS328-2022 Notes</title>
+    <title>Graph Laplacian and its Eigenvalues &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -58,8 +58,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Object Representations" href="2022_01_06_object_representations_notebook.html" />
-    <link rel="prev" title="[CODE] 🧑‍💻Data Representations" href="2022_01_03_data_representations_notebook.html" />
+    <link rel="next" title="Relation between second eigenvalue of Laplacian and Spectral Clustering" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html" />
+    <link rel="prev" title="Expansion and Conductance of a Graph" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -125,7 +125,7 @@
   Foundations
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_01_03_data_representations.html">
    Data Representations
@@ -136,8 +136,8 @@
    [CODE] 🧑‍💻Data Representations
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
    Distance Function
   </a>
  </li>
@@ -172,7 +172,7 @@
   Clustering and low-rank approximations
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_01_17_Clustering.html">
    Clustering
@@ -213,8 +213,8 @@
    Expansion and Conductance of a Graph
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_14_GraphLaplacian.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Graph Laplacian and its Eigenvalues
   </a>
  </li>
@@ -284,9 +284,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_03_distance_function.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_02_14_GraphLaplacian.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -304,10 +304,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_03_distance_function.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_02_14_GraphLaplacian.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_03_distance_function.md"><button
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_02_14_GraphLaplacian.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -333,9 +333,21 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nice-to-have-metric-properties">
-   Nice to have metric properties
+  <a class="reference internal nav-link" href="#laplacian-matrix">
+   Laplacian Matrix
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#eigenvector-eigenvalues-of-laplacian-matrix">
+   Eigenvector/Eigenvalues of Laplacian Matrix
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-if-the-graph-is-disconnected">
+     What if the graph is disconnected?
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -347,7 +359,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Distance Function</h1>
+                <h1>Graph Laplacian and its Eigenvalues</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -358,9 +370,21 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nice-to-have-metric-properties">
-   Nice to have metric properties
+  <a class="reference internal nav-link" href="#laplacian-matrix">
+   Laplacian Matrix
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#eigenvector-eigenvalues-of-laplacian-matrix">
+   Eigenvector/Eigenvalues of Laplacian Matrix
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-if-the-graph-is-disconnected">
+     What if the graph is disconnected?
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -371,46 +395,116 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="distance-function">
-<h1>Distance Function<a class="headerlink" href="#distance-function" title="Permalink to this headline">¶</a></h1>
-<p>After object representation, next we need distance functions for objects.</p>
-<dl class="simple myst">
-<dt>Distance</dt><dd><p>A function <span class="math notranslate nohighlight">\(d\)</span>, given two objects <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>; produces a real number.</p>
-</dd>
-</dl>
+  <div class="tex2jax_ignore mathjax_ignore section" id="graph-laplacian-and-its-eigenvalues">
+<h1>Graph Laplacian and its Eigenvalues<a class="headerlink" href="#graph-laplacian-and-its-eigenvalues" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="laplacian-matrix">
+<h2>Laplacian Matrix<a class="headerlink" href="#laplacian-matrix" title="Permalink to this headline">¶</a></h2>
+<p>Given a graph <span class="math notranslate nohighlight">\( G = (V,E) \)</span> where <span class="math notranslate nohighlight">\( V = \{ v_1, v_2, ..., v_n \} \)</span> is the set of nodes and <span class="math notranslate nohighlight">\( E = \{ e_1, e_2, ..., e_n \} \)</span> is the set of edges then Laplacian Matrix is defined as</p>
 <div class="math notranslate nohighlight">
-\[ d(x, y) \rightarrow \mathbb{R} \geq 0\]</div>
-<div class="section" id="nice-to-have-metric-properties">
-<h2>Nice to have metric properties<a class="headerlink" href="#nice-to-have-metric-properties" title="Permalink to this headline">¶</a></h2>
-<p>It would be nice, if my distance function have these below properties. But it is not necessary for the distance function to follow any of the property below.</p>
-<p>Nice if, he distance between two different objects is always greater than zero.</p>
-<div class="math notranslate nohighlight" id="equation-property-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-property-1" title="Permalink to this equation">¶</a></span>\[\begin{split}d(x, y) &amp;= 0 \rightarrow x = y \\
-d(x, y) &amp;\geq 0\end{split}\]</div>
-<p>It would be nice if symmetric.</p>
-<div class="math notranslate nohighlight" id="equation-property-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-property-2" title="Permalink to this equation">¶</a></span>\[d(x, y) = d(y, x)\]</div>
-<p>Nice, if follows triangle inequality.</p>
-<div class="math notranslate nohighlight" id="equation-property-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-property-3" title="Permalink to this equation">¶</a></span>\[d(x, y) + d(y, z) \geq d(x, z)\]</div>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>The above three properties are “nice to have” and not necessary for a distance function to follow.</p>
+\[ L = D - A \]</div>
+<p>where <span class="math notranslate nohighlight">\( A \)</span> is an adjacency matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} A_{i, j} =
+    \begin{cases}
+        1, \text{if there is an edge between } v_i \text{ and } v_j\\
+        0, \text{otherwise}
+    \end{cases}
+\end{split}\]</div>
+<p>and <span class="math notranslate nohighlight">\( D \)</span> is a diagonal matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} D_{i, j} =
+    \begin{cases}
+        degree(v_i), \text{ if } i \text{ == } j\\
+        0, \text{otherwise}
+    \end{cases}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\rightarrow \text{If edges of graph are weighted then } degree(v_i) = \sum_j A_{ij}\\\)</span></p>
+<p>Consider the following example</p>
+<div class="figure align-default" id="fig-1">
+<img alt="../_images/example.jpeg" src="../_images/example.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 26 </span><span class="caption-text">Node with weighted edges</span><a class="headerlink" href="#fig-1" title="Permalink to this image">¶</a></p>
 </div>
-<p>Also good, if we are able to calculate “average”.</p>
-<dl class="simple myst">
-<dt>Average</dt><dd><p><span class="math notranslate nohighlight">\(\min_{x} \sum^{}_{i} d(p_{i}, x)\)</span>. The object <span class="math notranslate nohighlight">\(x\)</span> which minimizes the sum of distance from the objects in a given set to <span class="math notranslate nohighlight">\(x\)</span>.</p>
-</dd>
-</dl>
-<p>It would be nice, if average can be calculated easily.</p>
-<dl class="simple myst">
-<dt>Eucledian Distance</dt><dd><p><span class="math notranslate nohighlight">\(d(x, y) = \sqrt{\sum_{i} (x_{i} - y{i})^{2}}\)</span>. The length of line segment joint vector <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> in Eucledian space.</p>
-</dd>
-</dl>
-<p>Eucledian distance follows all of the nice properties (including “easy average”) that we have mentioned above.</p>
+<p>As we can see from the above figure, the edges of the node are weighted. So the degree of the node will be 3+2+1.5=6.5 rather than 3.</p>
+<p>For irregular graphs we typically normalize <span class="math notranslate nohighlight">\( L \)</span> as</p>
+<div class="math notranslate nohighlight">
+\[ L = D^{-1/2}LD^{-1/2} = I - D^{-1/2}AD^{-1/2} \]</div>
+<p>where <span class="math notranslate nohighlight">\( D^{-1/2} \equiv \)</span> diagonal matrix with <span class="math notranslate nohighlight">\( i^{th} \)</span> entry <span class="math notranslate nohighlight">\( = \frac{1}{\sqrt{d_i}} \)</span></p>
+<ul class="simple">
+<li><p>Diagonal entries, <span class="math notranslate nohighlight">\( L_{ii} = d_i \)</span></p></li>
+<li><p>Offdiagonal entries,
+$<span class="math notranslate nohighlight">\( L_{ij} = 
+  \begin{cases}
+      0, \text{ if there is no edge between } i \text{ and } j\\
+      -1, \text{otherwise}
+  \end{cases} 
+  \)</span>$</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\( \rightarrow \)</span> Sum of each row of <span class="math notranslate nohighlight">\( L \)</span> is 0 as <span class="math notranslate nohighlight">\( D_{ii} = \sum_{j=1}^{n}A_{ij} \)</span> and <span class="math notranslate nohighlight">\( L = D - A \)</span></p>
+</div>
+<div class="section" id="eigenvector-eigenvalues-of-laplacian-matrix">
+<h2>Eigenvector/Eigenvalues of Laplacian Matrix<a class="headerlink" href="#eigenvector-eigenvalues-of-laplacian-matrix" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p><span class="math notranslate nohighlight">\( \forall \)</span> <span class="math notranslate nohighlight">\( \lambda_i (\frac{1}{d} L) \in [0, 2] \)</span><br><br>
+<span class="math notranslate nohighlight">\( \lambda_i \in [0, 2d]\)</span><br><br>
+<span class="math notranslate nohighlight">\( \lambda_i (\frac{1}{d} L) \in [0, d] \)</span> <br><br></p>
+<p>Normalized Laplacian = <span class="math notranslate nohighlight">\( D^{-1/2}LD^{-1/2} \)</span></p>
+<p>For regular graphs (d)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} D^{-1/2} = 
+   \begin{bmatrix}
+      \frac{1}{\sqrt{d}} &amp; &amp; \\
+      &amp; \ddots &amp; \\
+      &amp; &amp; \frac{1}{\sqrt{d}}
+   \end{bmatrix} = \frac{1}{\sqrt{d}} I \end{split}\]</div>
+<p>Normalized Laplacian = <span class="math notranslate nohighlight">\( (\frac{1}{\sqrt{d}} I) L (\frac{1}{\sqrt{d}} I) = \frac{1}{d}L \)</span></p>
+</li>
+</ol>
+<ol>
+<li><p><span class="math notranslate nohighlight">\( \lambda_1(L) = 0 \\ \)</span>
+<span class="math notranslate nohighlight">\( \lambda_k(L) = 0 \)</span> iff k disconnected components are present in graph</p>
+<p>For example, consider the following graph</p>
+<div class="figure align-default" id="fig-2">
+<img alt="../_images/example2.jpeg" src="../_images/example2.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text">A disconnected graph</span><a class="headerlink" href="#fig-2" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split} A = 
+\begin{bmatrix}
+   0 \hspace{2mm} 1 \hspace{2mm} 1 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} \\
+   1 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 1 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} \\
+   1 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 1 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} \\
+   0 \hspace{2mm} 1 \hspace{2mm} 1 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} \\
+   0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 1 \hspace{2mm} 1 \hspace{2mm} \\
+   0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 1 \hspace{2mm} 0 \hspace{2mm} 1 \hspace{2mm} \\
+   0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 0 \hspace{2mm} 1 \hspace{2mm} 1 \hspace{2mm} 0 \hspace{2mm} \\
+\end{bmatrix}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\hspace{7mm} \lambda_1(L) = 0 \)</span> using all ones eigen vector
+<span class="math notranslate nohighlight">\( \\ \hspace{7mm} \lambda_2(L) = 0 \\ \)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \hspace{7mm} v_1 = 
+   \begin{bmatrix}
+    1 \\ 1 \\ 1 \\ 1 \\ 0 \\ 0 \\ 0 
+   \end{bmatrix} \Rightarrow L.v_1 = \begin{bmatrix}
+    0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 
+   \end{bmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split} \hspace{7mm} v_2 = 
+   \begin{bmatrix}
+    0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 1 \\ 1 
+   \end{bmatrix} \Rightarrow L.v_2 = \begin{bmatrix}
+    0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 
+   \end{bmatrix}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\( \rightarrow v_1 \)</span> and <span class="math notranslate nohighlight">\( v_2 \)</span> are orthogonal to each other.</p>
+<p><span class="math notranslate nohighlight">\( \rightarrow \)</span> Looking at the values of <span class="math notranslate nohighlight">\( v_2(L), ...., v_k(L) \)</span> tells us what the components are.</p>
+<div class="section" id="what-if-the-graph-is-disconnected">
+<h3>What if the graph is disconnected?<a class="headerlink" href="#what-if-the-graph-is-disconnected" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\( \hspace{7mm} \lambda_2(L) \)</span> will still give a “measure of how much, <span class="math notranslate nohighlight">\( G \)</span> resembles a 2 disconnected components, i.e., sparsest cut”.</p>
 <footer>
-Author(s): Sachin Yadav
-</footer>
+    Author(s): Avnish Ranwa, Divyanshu Tripathy, Prachika Kanodia
+</footer></div>
 </div>
 </div>
 
@@ -439,17 +533,17 @@ Author(s): Sachin Yadav
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_01_03_data_representations_notebook.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">[CODE] 🧑‍💻Data Representations</p>
+            <p class="prev-next-title">Expansion and Conductance of a Graph</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="2022_01_06_object_representations_notebook.html" title="next page">
+    <a class='right-next' id="next-link" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Object Representations</p>
+        <p class="prev-next-title">Relation between second eigenvalue of Laplacian and Spectral Clustering</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

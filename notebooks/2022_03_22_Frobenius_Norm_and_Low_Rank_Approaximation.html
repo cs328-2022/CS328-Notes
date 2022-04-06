@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Distance Function &#8212; CS328-2022 Notes</title>
+    <title>Frobenius Norm and Low Rank Approaximation &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -58,8 +58,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Object Representations" href="2022_01_06_object_representations_notebook.html" />
-    <link rel="prev" title="[CODE] 🧑‍💻Data Representations" href="2022_01_03_data_representations_notebook.html" />
+    <link rel="prev" title="SVD in Gaussian Mixture Model" href="2022_03_17_SVD_in_Mixture_Models.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -125,7 +124,7 @@
   Foundations
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_01_03_data_representations.html">
    Data Representations
@@ -136,8 +135,8 @@
    [CODE] 🧑‍💻Data Representations
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
    Distance Function
   </a>
  </li>
@@ -172,7 +171,7 @@
   Clustering and low-rank approximations
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_01_17_Clustering.html">
    Clustering
@@ -238,8 +237,8 @@
    SVD in Gaussian Mixture Model
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Frobenius Norm and Low Rank Approaximation
   </a>
  </li>
@@ -284,9 +283,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_03_distance_function.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -304,10 +303,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_03_distance_function.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_03_distance_function.md"><button
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -322,6 +321,31 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -332,9 +356,26 @@
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nice-to-have-metric-properties">
-   Nice to have metric properties
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Frobenius Norm and Low Rank Approaximation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#brief-singular-value-decomposition-svd">
+     1.Brief Singular Value Decomposition (SVD)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#frobenius-norm">
+   2.Frobenius norm
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#low-rank-approaximation">
+   3. Low rank approaximation
   </a>
  </li>
 </ul>
@@ -347,7 +388,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Distance Function</h1>
+                <h1>Frobenius Norm and Low Rank Approaximation</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -357,9 +398,26 @@
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nice-to-have-metric-properties">
-   Nice to have metric properties
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Frobenius Norm and Low Rank Approaximation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#brief-singular-value-decomposition-svd">
+     1.Brief Singular Value Decomposition (SVD)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#frobenius-norm">
+   2.Frobenius norm
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#low-rank-approaximation">
+   3. Low rank approaximation
   </a>
  </li>
 </ul>
@@ -371,48 +429,120 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="distance-function">
-<h1>Distance Function<a class="headerlink" href="#distance-function" title="Permalink to this headline">¶</a></h1>
-<p>After object representation, next we need distance functions for objects.</p>
-<dl class="simple myst">
-<dt>Distance</dt><dd><p>A function <span class="math notranslate nohighlight">\(d\)</span>, given two objects <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>; produces a real number.</p>
-</dd>
-</dl>
+  <div class="tex2jax_ignore mathjax_ignore section" id="frobenius-norm-and-low-rank-approaximation">
+<h1>Frobenius Norm and Low Rank Approaximation<a class="headerlink" href="#frobenius-norm-and-low-rank-approaximation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="brief-singular-value-decomposition-svd">
+<h2>1.Brief Singular Value Decomposition (SVD)<a class="headerlink" href="#brief-singular-value-decomposition-svd" title="Permalink to this headline">¶</a></h2>
+<p>We first need to compute the SVD before going for low rank approximation. SVD is factorization of m x p matrix(A).</p>
 <div class="math notranslate nohighlight">
-\[ d(x, y) \rightarrow \mathbb{R} \geq 0\]</div>
-<div class="section" id="nice-to-have-metric-properties">
-<h2>Nice to have metric properties<a class="headerlink" href="#nice-to-have-metric-properties" title="Permalink to this headline">¶</a></h2>
-<p>It would be nice, if my distance function have these below properties. But it is not necessary for the distance function to follow any of the property below.</p>
-<p>Nice if, he distance between two different objects is always greater than zero.</p>
-<div class="math notranslate nohighlight" id="equation-property-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-property-1" title="Permalink to this equation">¶</a></span>\[\begin{split}d(x, y) &amp;= 0 \rightarrow x = y \\
-d(x, y) &amp;\geq 0\end{split}\]</div>
-<p>It would be nice if symmetric.</p>
-<div class="math notranslate nohighlight" id="equation-property-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-property-2" title="Permalink to this equation">¶</a></span>\[d(x, y) = d(y, x)\]</div>
-<p>Nice, if follows triangle inequality.</p>
-<div class="math notranslate nohighlight" id="equation-property-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-property-3" title="Permalink to this equation">¶</a></span>\[d(x, y) + d(y, z) \geq d(x, z)\]</div>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>The above three properties are “nice to have” and not necessary for a distance function to follow.</p>
+\[A = USV^T \]</div>
+<p>Where,</p>
+<ul class="simple">
+<li><p>U and V is orthogonal matrix, where U is m<span class="math notranslate nohighlight">\(\times\)</span>p and V is p<span class="math notranslate nohighlight">\(\times\)</span>n matrix</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[U = [U_1,U_2...,U_p]\]</div>
+<div class="math notranslate nohighlight">
+\[V = [V_1,V_2,...V_p]\]</div>
+<ul class="simple">
+<li><p>S is singular diagonal of p x p matrix</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(S =\begin{pmatrix}
+  \sigma_1 &amp; 0 &amp; \cdots &amp; 0 \\
+  0 &amp; \sigma_2 &amp; \cdots &amp; 0 \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+  0 &amp; 0 &amp; \cdots &amp; \sigma_p
+ \end{pmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(A = [U_1,U_2...,U_p] {\begin{pmatrix}
+  \sigma_1 &amp; 0 &amp; \cdots &amp; 0 \\
+  0 &amp; \sigma_2 &amp; \cdots &amp; 0 \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+  0 &amp; 0 &amp; \cdots &amp; \sigma_p
+ \end{pmatrix} } [V_1,V_2,...V_p] = \sum_{j=0}^p\sigma_jU_jV_j^T \)</span></p>
+<p>The vector <span class="math notranslate nohighlight">\({(U_j)}_{j=1}^p\)</span> and <span class="math notranslate nohighlight">\({(V_j)}_{j=1}^p\)</span> are left and right singular vectors, forms othonormal of the range <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(A^T\)</span> respectively. where as <span class="math notranslate nohighlight">\({(\sigma_j)}_{j=1}^p\)</span> are the singular values of A. [Note - <span class="math notranslate nohighlight">\(\sigma_1 \ge \sigma_2 \ge.....\ge \sigma_p \ge 0 \)</span>]</p>
 </div>
-<p>Also good, if we are able to calculate “average”.</p>
-<dl class="simple myst">
-<dt>Average</dt><dd><p><span class="math notranslate nohighlight">\(\min_{x} \sum^{}_{i} d(p_{i}, x)\)</span>. The object <span class="math notranslate nohighlight">\(x\)</span> which minimizes the sum of distance from the objects in a given set to <span class="math notranslate nohighlight">\(x\)</span>.</p>
-</dd>
-</dl>
-<p>It would be nice, if average can be calculated easily.</p>
-<dl class="simple myst">
-<dt>Eucledian Distance</dt><dd><p><span class="math notranslate nohighlight">\(d(x, y) = \sqrt{\sum_{i} (x_{i} - y{i})^{2}}\)</span>. The length of line segment joint vector <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> in Eucledian space.</p>
-</dd>
-</dl>
-<p>Eucledian distance follows all of the nice properties (including “easy average”) that we have mentioned above.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="frobenius-norm">
+<h1>2.Frobenius norm<a class="headerlink" href="#frobenius-norm" title="Permalink to this headline">¶</a></h1>
+<p>Frobenius norm of matrix A is denoted as <span class="math notranslate nohighlight">\(||A||_F\)</span> , can be formulated as</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( A = (\sum_{ij}|A_{ij}|^2)^{1/2}\)</span><br />
+also <span class="math notranslate nohighlight">\(∑||A_{*i}||_2^2 = ∑||A_{i*}||_2^2 \)</span></p></li>
+<li><p>For any row <span class="math notranslate nohighlight">\(a_j\)</span> of matrix <span class="math notranslate nohighlight">\(A\)</span></p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(||a_j||_2^2 == \sum_{i=1}^r(a_j^TV_i)\)</span> , where <span class="math notranslate nohighlight">\(V_i=i^{th}s-vector\)</span></p>
+<p><span class="math notranslate nohighlight">\(||a_j||_2^2 = \sum_{j=1}^n \sum_{i=1}^r(a_j^TV_i)^2 = \sum_{i=1}^r|AV_i|_2^2 = \sum_{i=1}^r\sigma_i^2\)</span></p>
+<p>therefore,</p>
+<p><span class="math notranslate nohighlight">\(||A||_F^2 = \sum_{i=1}^r\sigma_i^2\)</span></p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="low-rank-approaximation">
+<h1>3. Low rank approaximation<a class="headerlink" href="#low-rank-approaximation" title="Permalink to this headline">¶</a></h1>
+<p>Let metrix <span class="math notranslate nohighlight">\(A\in \mathbb{R}^{m{\times}n}\)</span> with rank <span class="math notranslate nohighlight">\(\le min(m,n)\)</span>. THe low rank approximation of <span class="math notranslate nohighlight">\(A\)</span> is to find another matrix B with rank-k [<span class="math notranslate nohighlight">\(B_k\in\mathbb{R}^{m{\times}n}\)</span>] which approximate <span class="math notranslate nohighlight">\(A\)</span> and has less rank than <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<ul class="simple">
+<li><p>To find the best <span class="math notranslate nohighlight">\(B_k\)</span> , and how closely  <span class="math notranslate nohighlight">\(B_k\)</span> approximates <span class="math notranslate nohighlight">\(A\)</span>. we can use the concept of frobenius norm as followed</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(||A-B_k|| = min||A-B_k||_F: A\in \mathbb{R}^{m{\times}n},r(B_k) \le k\)</span></p>
+<ul>
+<li><p>SVD based low-rank approximation - <br />
+we aware of following equation or term from SVD</p>
+<p><span class="math notranslate nohighlight">\(A = USV^T = \sum_{j=0}^p\sigma_jU_jV_j^T \)</span></p>
+</li>
+</ul>
+<p>The best-<span class="math notranslate nohighlight">\(k\)</span> approximation for matrix <span class="math notranslate nohighlight">\(A\)</span> is given by</p>
+<p><span class="math notranslate nohighlight">\(A_k =\sum_{j=1}^k\sigma_jU_jV_j^T \)</span> , where <span class="math notranslate nohighlight">\(k \le rank(A)\)</span> , where <span class="math notranslate nohighlight">\(U_k = [U_1, U_2, ..., U_k] , V_k = [V_1, V_2, ..., V_k]\ and\ S_k = diag[\sigma_1, \sigma_2, ..., \sigma_k]\)</span></p>
+<div class="figure align-default" id="figure-1">
+<img alt="../_images/Svd.jpeg" src="../_images/Svd.jpeg" />
+<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">Low rank approaximation</span><a class="headerlink" href="#figure-1" title="Permalink to this image">¶</a></p>
+</div>
+<p>using frobenius norms <br />
+<span class="math notranslate nohighlight">\(||A-A_k||_F=||A-B||_F\)</span> , where <span class="math notranslate nohighlight">\(rank(B)\le k\)</span> <br />
+In terms of singular value, <br />
+<span class="math notranslate nohighlight">\(||A-A_k||_F = (\sum_{j=k+1}^p\sigma_j^2)^{1/2}\)</span></p>
+<ul class="simple">
+<li><p>simple example - <br />
+To find rank-2 approximation of matrix A <br />
+<span class="math notranslate nohighlight">\(A = \begin{pmatrix}
+3 &amp; 2 &amp; 1  \\
+0 &amp; 2 &amp; 1 \\
+0 &amp; 0 &amp; 1
+\end{pmatrix}\)</span></p></li>
+</ul>
+<p>Now</p>
+<p><span class="math notranslate nohighlight">\(A = USV_T\)</span><br />
+<span class="math notranslate nohighlight">\( = \begin{pmatrix}
+  0.91 &amp; 0.42 &amp; 0.02  \\
+  0.41 &amp; -0.87 &amp; -0.26 \\
+  0.09 &amp; -0.24 &amp; 0.97
+ \end{pmatrix} \times \begin{pmatrix}
+  4.04 &amp; 0 &amp; 0  \\
+  0 &amp; 1.7 &amp; 0 \\
+  0 &amp; 0 &amp; 0.87
+ \end{pmatrix} \times \begin{pmatrix}
+  0.67 &amp; 0.73 &amp; 0.08  \\
+  0.65 &amp; -0.54 &amp; -0.53 \\
+  0.35 &amp; -0.41 &amp; 0.84
+ \end{pmatrix}^T\)</span></p>
+<p><span class="math notranslate nohighlight">\(A_2 = \begin{pmatrix}
+  0.91 &amp; 0.42  \\
+  0.41 &amp; -0.87  \\
+  0.09 &amp; -0.24 
+ \end{pmatrix} \times \begin{pmatrix}
+  4.04 &amp; 0 \\
+  0 &amp; 1.7 
+ \end{pmatrix} \times \begin{pmatrix}
+  0.67 &amp; 0.73  \\
+  0.65 &amp; -0.54 \\
+  0.35 &amp; -0.41
+ \end{pmatrix}^T\)</span></p>
+<p><span class="math notranslate nohighlight">\(A_2 = \begin{pmatrix}
+  2.99 &amp; 2.01 &amp; 0.98  \\
+  0.02 &amp; 1.88 &amp; 1.1 \\
+  -0.07 &amp; 0.45 &amp; 0.29
+ \end{pmatrix}\)</span></p>
+<p>The above matrix A is of rank 2, which is requirement.</p>
 <footer>
-Author(s): Sachin Yadav
-</footer>
-</div>
-</div>
+Author(s): Tare Adithya,Abhinav Singh,Devendhar
+<footer></div>
 
     <script type="text/x-thebe-config">
     {
@@ -439,19 +569,12 @@ Author(s): Sachin Yadav
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_01_03_data_representations_notebook.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_03_17_SVD_in_Mixture_Models.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">[CODE] 🧑‍💻Data Representations</p>
+            <p class="prev-next-title">SVD in Gaussian Mixture Model</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="2022_01_06_object_representations_notebook.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Object Representations</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
