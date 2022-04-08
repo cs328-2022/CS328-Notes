@@ -38,6 +38,7 @@ parts:
 #   chapters:
 # - caption: Selected topics from NPTEL-Scalable Data Science Course
 #   chapters:
+  - file: notebooks/2022_04_08_Locality_Sensitive_Hashing.ipynb
   - file: notebooks/2022_03_17_SVD_in_Mixture_Models.ipynb
   - file: notebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.ipynb
   - file: notebooks/2022_04_07_Near_Neighbors.ipynb
