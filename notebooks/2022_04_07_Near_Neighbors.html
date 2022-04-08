@@ -1,0 +1,705 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finding Near Neighbors &#8212; CS328-2022 Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Frobenius Norm and Low Rank Approaximation" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CS328-2022 Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Course Description
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Logistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="CONTRIBUTING.html">
+   Contributing to CS328 Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
+   Deadlines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations.html">
+   Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations_notebook.html">
+   [CODE] 🧑‍💻Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
+   Distance Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_06_object_representations_notebook.html">
+   Object Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_10_central_limit_theorem_notebook.html">
+   Central Limit Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_11_markov_chebyshev_inequalities.html">
+   Markov and Chebyshev Inequalities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound.html">
+   Chernoff Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound_tails.html">
+   Plot of chernoff bound
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering and low-rank approximations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_17_Clustering.html">
+   Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_24_K-means.html">
+   K-means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_25_K-means%2B%2B.html">
+   Lloyd’s algorithm, convergence?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_27_Hierarchial_Clustering.html">
+   Why does k-means++ work?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html">
+   Hierarchical Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html">
+   Densest Subgraphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html">
+   Densest Subgraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html">
+   Expansion and Conductance of a Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_14_GraphLaplacian.html">
+   Graph Laplacian and its Eigenvalues
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html">
+   Relation between second eigenvalue of Laplacian and Spectral Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_14_singular_value_decomposition.html">
+   Singular Valued Decomposition (SVD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_15_geometric_svd.html">
+   Applications of SVD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_17_SVD_in_Mixture_Models.html">
+   SVD in Gaussian Mixture Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html">
+   Frobenius Norm and Low Rank Approaximation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Finding Near Neighbors
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_04_07_Near_Neighbors.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs328-2022/CS328-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_04_07_Near_Neighbors.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_04_07_Near_Neighbors.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applications">
+   Applications
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variants">
+     Variants
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naive-scan">
+     Naive Scan
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#voronoi-partition">
+     Voronoi Partition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#space-partitioning-trees">
+     Space Partitioning Trees
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kd-trees">
+     Kd-Trees
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#complexity">
+     Complexity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variants-of-space-partitioning-trees">
+   Variants of space partitioning trees
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-projection-rp-tree">
+     1. Random Projection (RP) tree
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#principal-direction-pd-or-pca-tree">
+     2. Principal Direction (PD or PCA) tree
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mean-tree">
+     3. 2-Mean tree
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intrinsic-dimension">
+   Intrinsic dimension
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Finding Near Neighbors</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applications">
+   Applications
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variants">
+     Variants
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naive-scan">
+     Naive Scan
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#voronoi-partition">
+     Voronoi Partition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#space-partitioning-trees">
+     Space Partitioning Trees
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kd-trees">
+     Kd-Trees
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#complexity">
+     Complexity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variants-of-space-partitioning-trees">
+   Variants of space partitioning trees
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-projection-rp-tree">
+     1. Random Projection (RP) tree
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#principal-direction-pd-or-pca-tree">
+     2. Principal Direction (PD or PCA) tree
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mean-tree">
+     3. 2-Mean tree
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intrinsic-dimension">
+   Intrinsic dimension
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="finding-near-neighbors">
+<h1>Finding Near Neighbors<a class="headerlink" href="#finding-near-neighbors" title="Permalink to this headline">¶</a></h1>
+<p>We are given a set of data points and a query <span class="math notranslate nohighlight">\(Q\)</span> and we have to answer what is the nearest data point to a query.</p>
+<p>The data points are known to us, so we can preprocess the data beforehand.</p>
+<div class="section" id="applications">
+<h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<p>There are numerious applications to fining nearest neighbors, some of which are as follows:</p>
+<ol class="simple">
+<li><p>Finding Similar Images in Search</p></li>
+<li><p>Finding Near Duplicate Webpages/Articles - Specifically used in de-duplicating the websites. For eg:- While implemnting a search engine, we don’t want multiple copies of the same article with only minor variations, so we perform de-duplication.</p></li>
+<li><p>Clustering - Given a particular datapoint, we want to find the items that are close to it.</p></li>
+<li><p>Nearest Neighbor Classifier - In a nearest neighbor classifier, given a test point, we look at the labels of the neighbors around it and assign a label to the test point based on the labels of the neighbors. So naturally, before we assign a label, we need to find the neighbors efficiently.</p></li>
+</ol>
+<div class="section" id="variants">
+<h3>Variants<a class="headerlink" href="#variants" title="Permalink to this headline">¶</a></h3>
+<p>Anoter variant of this algorithm is All Pairs Near Neighbor. In the variation, rather than for a particular query, given a dataset we need to find all pairs of datapoints that are considered near neighbors.</p>
+</div>
+<div class="section" id="naive-scan">
+<h3>Naive Scan<a class="headerlink" href="#naive-scan" title="Permalink to this headline">¶</a></h3>
+<p>Given a query, we go over all the data points. Assuming that the points are vectors in <span class="math notranslate nohighlight">\(\mathbb{R}^d\)</span>, then we <span class="math notranslate nohighlight">\(O(nd)\)</span> time for each query, where <span class="math notranslate nohighlight">\(n\)</span> is the no. of points, because we compare each point to the query.</p>
+</div>
+<div class="section" id="voronoi-partition">
+<h3>Voronoi Partition<a class="headerlink" href="#voronoi-partition" title="Permalink to this headline">¶</a></h3>
+<p>Given a set a point, we compute the Voronoi Partition of the points. Suppose we are inn <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span>, the following image shows the voronoi partition. Then, given a point we mark off all the regions that are closest to that particular point, which will be the Voronoi cell. The following image shows the voronoi cell for one point.</p>
+<div class="figure align-default" id="id1">
+<img alt="../_images/voronoi_cell.jpg" src="../_images/voronoi_cell.jpg" />
+<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">:name: Voronoi Paritioning</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<div class="legend">
+<p>Voronoi Parition with regions marked closest to the pink point<a class="reference external" href="http://pcg.wikidot.com/pcg-algorithm:voronoi-diagram">[Source]</a></p>
+</div>
+</div>
+<p>We do this for all the points. Then, given a query, we just need to check which Voroni Partition it falls in.</p>
+<p>Unfortunately, Voronoi Partition in <span class="math notranslate nohighlight">\(d\)</span> dimensions needs a lot of storage. For <span class="math notranslate nohighlight">\(n\)</span> points in <span class="math notranslate nohighlight">\(d\)</span> dimensions, it needs <span class="math notranslate nohighlight">\(n^\frac{d}{2}\)</span> storage, which is too much.</p>
+</div>
+<div class="section" id="space-partitioning-trees">
+<h3>Space Partitioning Trees<a class="headerlink" href="#space-partitioning-trees" title="Permalink to this headline">¶</a></h3>
+<p>Given some datapoints, we recursively partition the space. In the following image, we first paritioned the space in x-axis and y-axis. The we further partition each quarter with their relative x-axis and y-axis.</p>
+<a class="reference internal image-reference" href="../_images/spt-axis.jpeg"><img alt="PartitionedSpace" class="align-center" src="../_images/spt-axis.jpeg" style="width: 400px;" /></a>
+<p>In the tree, the top level partition will have 4 children corresponding the 4 axis. And each of those partitions will have 4 children, corresponding to the 4 axis and so on.</p>
+<a class="reference internal image-reference" href="../_images/spt-tree.jpeg"><img alt="PartitionedTree" class="align-center" src="../_images/spt-tree.jpeg" style="width: 400px;" /></a>
+<p>Given a query point, we node we ask which children we need to traverse. The partitioning method mentioned above is very naive. Deciding how to the partitioning is the most critical part.</p>
+</div>
+<div class="section" id="kd-trees">
+<h3>Kd-Trees<a class="headerlink" href="#kd-trees" title="Permalink to this headline">¶</a></h3>
+<p>Originally, <span class="math notranslate nohighlight">\(k\)</span> used to denote the number of dimensions, for e.g. <span class="math notranslate nohighlight">\(2d\)</span> or <span class="math notranslate nohighlight">\(3d\)</span> trees. Our idea here is that, each level of the tree each uses a single dimension to partition.</p>
+<ol class="simple">
+<li><p>Starting with the entire set of points, with each level of tree, we associate a cutting dimension.</p></li>
+<li><p>We then cycle through these dimensions. For e.g., if we start with the first dimension and we form the first cut according to some threshold in the first dimension. Then at the second level we use the second dimension and choose some threshold level in second dimension and so on.</p></li>
+<li><p>For choosing the threshold, at every step, we try to balance the tree. To do so, we choose the point which is the median along that dimension and create an axis-aligned partition.</p></li>
+</ol>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>Here is an exmaple of kd tree for 2 dimentions.</p>
+<ul class="simple">
+<li><p>First, we devide a space with a line passing thorugh a median point of datapoint.</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/example1.jpeg"><img alt="example1" class="align-center" src="../_images/example1.jpeg" style="width: 400px;" /></a>
+<ul class="simple">
+<li><p>Then, we devide S1 space into two by its median point, and same with S2 space.</p></li>
+<li><p>We devide every subspace untill all points are covered</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/example21.jpeg"><img alt="example2" class="align-center" src="../_images/example21.jpeg" style="width: 400px;" /></a>
+<ul class="simple">
+<li><p>With every node, there is a data point associated with that as we are using median point for division. The leaves node also contain datapoints.</p></li>
+</ul>
+</div>
+<div class="section" id="complexity">
+<h3>Complexity<a class="headerlink" href="#complexity" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Space taken</strong> = <span class="math notranslate nohighlight">\(O (n)\)</span></p></li>
+<li><p><strong>Nearest neighbour Search</strong></p>
+<ul>
+<li><p><strong>Defeatist Search:</strong></p>
+<ul>
+<li><p>Only search the child that contain the query point.</p></li>
+<li><p>Does not give always a correct answer, as a nearest neighbour point might be in another cell.</p></li>
+</ul>
+</li>
+<li><p><strong>Desending Search:</strong></p>
+<ul>
+<li><p>Maintain the current near neighbour and distance to it.</p></li>
+<li><p>Visit one or both children depending on wheather there is intersection.</p></li>
+<li><p>If there is an intersection check that cell also.</p></li>
+<li><p>Defenitely gives a nearest neighbour but might end up searching antire tree.</p></li>
+</ul>
+</li>
+<li><p><strong>Priority Search:</strong></p>
+<ul>
+<li><p>Maintain a priority queue of the regions depending on distance.</p></li>
+<li><p>Decide to visit the cell by the priority of the distance to the cell.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="variants-of-space-partitioning-trees">
+<h2>Variants of space partitioning trees<a class="headerlink" href="#variants-of-space-partitioning-trees" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="random-projection-rp-tree">
+<h3>1. Random Projection (RP) tree<a class="headerlink" href="#random-projection-rp-tree" title="Permalink to this headline">¶</a></h3>
+<p>Picks a random direction from the unit sphere to create a
+hyperplane which splits the data at the median. Subsequent
+hyperplanes further divide the data at the median value into
+smaller partitions.</p>
+</div>
+<div class="section" id="principal-direction-pd-or-pca-tree">
+<h3>2. Principal Direction (PD or PCA) tree<a class="headerlink" href="#principal-direction-pd-or-pca-tree" title="Permalink to this headline">¶</a></h3>
+<p>Instead of choosing a random direction each time for splitting the data,
+the direction pointed by the principal eigenvector of the covariance
+matrix is chosen to split the data. The data is split at the median
+using the direction obtained as mentioned. <br></p>
+<p>The two splits obtained are further divided by the same rule by
+calculating the covariance matrix of each split. The intuition behind
+choosing this direction is that the variance along the direction of the
+principal eigenvector is the maximum. Thus, the hyperplane that is
+orthogonal to this direction is very effective in partitioning the data.
+However, this method is computationally expensive as we need to calculate
+the covariance matrices for each split of the data.</p>
+</div>
+<div class="section" id="mean-tree">
+<h3>3. 2-Mean tree<a class="headerlink" href="#mean-tree" title="Permalink to this headline">¶</a></h3>
+<p>Run k-means on the data for k=2 and then split the data by the plane that
+bisects the line joining the two centroids obtained from
+the k-means algorithm.</p>
+</div>
+</div>
+<div class="section" id="intrinsic-dimension">
+<h2>Intrinsic dimension<a class="headerlink" href="#intrinsic-dimension" title="Permalink to this headline">¶</a></h2>
+<p>Let us assume that the data <span class="math notranslate nohighlight">\(\in \mathbb{R}^D\)</span>.
+If the <span class="math notranslate nohighlight">\(d\)</span> largest eigenvectors account for <span class="math notranslate nohighlight">\(1 - \epsilon\)</span> fraction of
+the trace, then the data has an intrinsic dimension <span class="math notranslate nohighlight">\(d\)</span> where <span class="math notranslate nohighlight">\(d &lt; D\)</span>.
+This means that most of the data lies in <span class="math notranslate nohighlight">\(\mathbb{R}^d\)</span> instead of <span class="math notranslate nohighlight">\(\mathbb{R}^D\)</span>.</p>
+<p>Given that the data has an intrinsic dimension d, the partitioning
+algorithm must take this fact into account while creating new
+partitions.</p>
+<p>RP trees and PD trees can adapt to this smaller dimension while
+creating partitions but k-d trees do not. We can understand this by the
+fact that k-d trees cycle through all <span class="math notranslate nohighlight">\(D\)</span> dimensions while generating
+new partitions.</p>
+<footer>
+    Author(s): Divyanshu Meena, Harshil Purohit, Mihir Chauhan
+</footer></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs328-2022/CS328-Notes",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Frobenius Norm and Low Rank Approaximation</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Students of CS328 2022<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
