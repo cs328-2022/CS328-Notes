@@ -40,5 +40,5 @@ parts:
       #   chapters:
       - file: notebooks/2022_03_17_SVD_in_Mixture_Models.ipynb
       - file: notebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.ipynb
-      #chapters
-      - file: notebooks/2022_04_07_Building_LSH_Tables.ipynb
+      - file: notebooks/2022_04_07_Near_Neighbors.ipynb
+#chapters
