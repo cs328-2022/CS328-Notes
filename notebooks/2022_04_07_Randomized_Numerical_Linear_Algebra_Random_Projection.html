@@ -1,0 +1,658 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Randomized Numerical Linear Algebra: Random Projection &#8212; CS328-2022 Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Finding Near Neighbors" href="2022_04_07_Near_Neighbors.html" />
+    <link rel="prev" title="Frobenius Norm and Low Rank Approaximation" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CS328-2022 Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Course Description
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Logistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="CONTRIBUTING.html">
+   Contributing to CS328 Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
+   Deadlines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations.html">
+   Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations_notebook.html">
+   [CODE] 🧑‍💻Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
+   Distance Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_06_object_representations_notebook.html">
+   Object Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_10_central_limit_theorem_notebook.html">
+   Central Limit Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_11_markov_chebyshev_inequalities.html">
+   Markov and Chebyshev Inequalities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound.html">
+   Chernoff Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound_tails.html">
+   Plot of chernoff bound
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering and low-rank approximations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_17_Clustering.html">
+   Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_24_K-means.html">
+   K-means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_25_K-means%2B%2B.html">
+   Lloyd’s algorithm, convergence?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_27_Hierarchial_Clustering.html">
+   Why does k-means++ work?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html">
+   Hierarchical Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html">
+   Densest Subgraphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html">
+   Densest Subgraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html">
+   Expansion and Conductance of a Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_14_GraphLaplacian.html">
+   Graph Laplacian and its Eigenvalues
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html">
+   Relation between second eigenvalue of Laplacian and Spectral Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_14_singular_value_decomposition.html">
+   Singular Valued Decomposition (SVD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_15_geometric_svd.html">
+   Applications of SVD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_17_SVD_in_Mixture_Models.html">
+   SVD in Gaussian Mixture Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html">
+   Frobenius Norm and Low Rank Approaximation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Selected topics from NPTEL-Scalable Data Science Course
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Randomized Numerical Linear Algebra: Random Projection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
+   Finding Near Neighbors
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs328-2022/CS328-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Randomized Numerical Linear Algebra: Random Projection</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="randomized-numerical-linear-algebra-random-projection">
+<h1>Randomized Numerical Linear Algebra: Random Projection<a class="headerlink" href="#randomized-numerical-linear-algebra-random-projection" title="Permalink to this headline">¶</a></h1>
+<h3><b>Introduction</b></h3>
+<p>Random projection is a method to find the lower rank approximation of matrices in faster time and low error rate. We will see how we can find such a lower rank matrix and its applications in this chapter.</p>
+<h3><b>Johnson Lindenstrauss Lemma</b></h3><div class="proof lemma admonition" id="JL_Lemma">
+<p class="admonition-title"><span>Lemma </span> (Johnson Lindenstrauss Lemma [JL84])</p>
+<div class="lemma-content section" id="proof-content">
+<p>Given a set of points <span class="math notranslate nohighlight">\(x_1, x_2, ...., x_n \in \mathcal{R}^d\)</span>, there exists a linear mapping <span class="math notranslate nohighlight">\(A\)</span> that creates the images of these points in the target dimension <span class="math notranslate nohighlight">\(k\)</span> such that the pairwise distance between any two points is preserved by the factor <span class="math notranslate nohighlight">\(\epsilon\)</span>, where <span class="math notranslate nohighlight">\(k \geq \frac{c\log{n}}{\epsilon^2}, \epsilon &gt; 0\)</span>. i.e. for all <span class="math notranslate nohighlight">\((i, j)\)</span></p>
+<div class="math notranslate nohighlight" id="equation-jl-eq">
+<span class="eqno">(6)<a class="headerlink" href="#equation-jl-eq" title="Permalink to this equation">¶</a></span>\[(1 - \epsilon)\|x_i - x_j\|_2 \leq \|Ax_i - Ax_j\|_2 \leq (1 + \epsilon)\|x_i - x_j\|_2\]</div>
+</div>
+</div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span class="math notranslate nohighlight">\(Ax_1, Ax_2, ...., Ax_n \in \mathcal{R}^k\)</span></p>
+</div>
+<div class="figure align-center" id="projection">
+<a class="reference internal image-reference" href="../_images/projection.jpg"><img alt="../_images/projection.jpg" src="../_images/projection.jpg" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Projection to Lower Dimension</span><a class="headerlink" href="#projection" title="Permalink to this image">¶</a></p>
+</div>
+<p>This mapping is created by filling up the matrix with independant gaussian random variables. The guarantee is that with very high probability for every pair <span class="math notranslate nohighlight">\((i, j)\)</span> the distance <span class="math notranslate nohighlight">\(\|Ax_i - Ax_j\|_2\)</span> will be within <span class="math notranslate nohighlight">\((1 \pm \epsilon)\|x_i - x_j\|_2\)</span>.</p>
+<h3><b>Other Properties</b></h3>
+<p>Remember that a given length <span class="math notranslate nohighlight">\(x\)</span> is preserved with probability <span class="math notranslate nohighlight">\(1 - \delta\)</span> if the target dimension <span class="math notranslate nohighlight">\(k\)</span> is <span class="math notranslate nohighlight">\(\frac{c}{\epsilon^2} \log(\frac{1}{\delta})\)</span></p>
+<div class="proof property admonition" id="JL_PROP_1">
+<p class="admonition-title"><span class="caption-number">Property 1 </span></p>
+<div class="property-content section" id="proof-content">
+<p>It is known that the bound <span class="math notranslate nohighlight">\(k \geq \frac{c}{\epsilon^2} \log(\frac{1}{\delta})\)</span> is tight.</p>
+</div>
+</div><div class="proof property admonition" id="JL_PROP_2">
+<p class="admonition-title"><span class="caption-number">Property 2 </span></p>
+<div class="property-content section" id="proof-content">
+<p>Target dimension depends only on <span class="math notranslate nohighlight">\(\epsilon\)</span>  and <span class="math notranslate nohighlight">\(\delta\)</span>. It does not depend on the original dimension.</p>
+</div>
+</div><div class="proof property admonition" id="JL_PROP_3">
+<p class="admonition-title"><span class="caption-number">Property 3 </span></p>
+<div class="property-content section" id="proof-content">
+<p>Such a result cannot hold on distance metrics other that Euclidean metric. For example, it will not hold for <span class="math notranslate nohighlight">\(L_1\)</span> Norm.</p>
+</div>
+</div><h3><b>Other Constructions</b></h3><h4>Earlier Method:</h4>
+<p>We were creating the matrix <span class="math notranslate nohighlight">\(A\)</span> by creating the matrix <span class="math notranslate nohighlight">\(R\)</span> such that <span class="math notranslate nohighlight">\(R_{ij} \sim N(0, 1)\)</span>. We make sure that every column of <span class="math notranslate nohighlight">\(R\)</span> is normalized. So,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2863eefa-ffef-4ccd-8752-bc6508c8e103">
+<span class="eqno">(7)<a class="headerlink" href="#equation-2863eefa-ffef-4ccd-8752-bc6508c8e103" title="Permalink to this equation">¶</a></span>\[\begin{align}
+A = \frac{1}{\sqrt{k}}R
+\end{align}\]</div>
+<p>We divide by <span class="math notranslate nohighlight">\(\sqrt{k}\)</span> so that the expected norm of each column becomes <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p>But it is expensive to sample, create and store Gaussian random variables. We might also need to store floating point numbers. So, instead of using Gaussian random variables the matrix <span class="math notranslate nohighlight">\(R\)</span> is created where:</p>
+<div class="proof definition admonition" id="my-definition-1">
+<p class="admonition-title"><span>Definition </span></p>
+<div class="definition-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[\begin{split} R_{ij} = \left\{
+\begin{array}{ll}
+    +1, &amp; p = \frac{1}{3} \\
+    0, &amp; p = \frac{2}{3} \\
+    -1, &amp; p = \frac{1}{3} \\
+\end{array}
+\right. \end{split}\]</div>
+<p>where, <span class="math notranslate nohighlight">\(p\)</span> = probability.</p>
+</div>
+</div><h3><b>Example Application: PCA</b></h3>
+<p>Suppose we have <span class="math notranslate nohighlight">\(A \in \mathcal{R}^{n \times d}\)</span>. We want a rank-<span class="math notranslate nohighlight">\(k\)</span> approximation <span class="math notranslate nohighlight">\(A'\)</span> such that <span class="math notranslate nohighlight">\(\|A - A'\|_F\)</span> is minimized.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Here, <span class="math notranslate nohighlight">\(\|A - A'\| = \sum_{i, j}(A - A')_{ij}^2\)</span> is the frobenius norm.</p>
+</div>
+<p>The optimal low rank approximation is <span class="math notranslate nohighlight">\(A_k = U_k \Sigma_k V_k^t\)</span>, but it takes <span class="math notranslate nohighlight">\(\mathcal{O}(nd \times min(n,d))\)</span> time.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <span class="math notranslate nohighlight">\(n \approx d\)</span>, then it takes <span class="math notranslate nohighlight">\(\mathcal{O}(n^3)\)</span> time.</p>
+</div>
+<h3><b>Low Rank Approximation</b></h3>
+<p>We know that <span class="math notranslate nohighlight">\(A_k = P_A^kA\)</span>, where projection <span class="math notranslate nohighlight">\(P_A^k = U_kU_k^t\)</span>.</p>
+<p>Also,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5ec86575-03df-43cc-a7c3-b1462a5be48d">
+<span class="eqno">(8)<a class="headerlink" href="#equation-5ec86575-03df-43cc-a7c3-b1462a5be48d" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\|A - P_A^kA\|_2 = \sigma_{k+1}
+\end{align}\]</div>
+<p>For any <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(P_B^k\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f249b743-6382-4e40-9265-8602252ed134">
+<span class="eqno">(9)<a class="headerlink" href="#equation-f249b743-6382-4e40-9265-8602252ed134" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\sigma_{k+1} \leq \|A - P_B^kA\| \leq \sigma_{k+1} + \sqrt{2\|AA^t - BB^t\|}
+\end{align}\]</div>
+<p>Now, we want <span class="math notranslate nohighlight">\(B\)</span> such that,</p>
+<ul class="simple">
+<li><p>It is efficiently computable and small</p></li>
+<li><p>It leads to low error, i.e. <span class="math notranslate nohighlight">\(\|AA^t - BB^t\| \leq \epsilon\|AA^t\|_2\)</span></p></li>
+</ul>
+<h3><b>Cheap and Effective Low Rank</b></h3><p>For <span class="math notranslate nohighlight">\(A \in \mathcal{R}^{n \times d}\)</span>, create <span class="math notranslate nohighlight">\(R \in \mathcal{R}^{d \times k}\)</span> as JL matrix.</p>
+<p>Take <span class="math notranslate nohighlight">\(B = AR \in \mathcal{R}^{n \times k}\)</span></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This takes <span class="math notranslate nohighlight">\(\mathcal{O}(ndk)\)</span> time.</p>
+<p>Also, <span class="math notranslate nohighlight">\(E[BB^t] = A E[RR^t] A^t = AA^t\)</span>, since every <span class="math notranslate nohighlight">\(R_{ij}\)</span> has unit variance and are independent of each other.</p>
+</div>
+<h3><b>JL in Low Rank Approximation</b></h3>
+<p>Observe that,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2703437a-dadd-4e53-80f5-ceb161238ac9">
+<span class="eqno">(10)<a class="headerlink" href="#equation-2703437a-dadd-4e53-80f5-ceb161238ac9" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\|AA^t - BB^t\| &amp;= \sup_{\|x\| = 1} \|\|xA\|_2^2 - \|xAR\|_2^2\| \\
+&amp;= \sup_{\|x\| = 1}\|\|y\|_2^2 - \|yR\|_2^2\| \hspace{2cm} \text{(Take } xA = y)
+\end{align}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember that,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-06285c81-3671-449a-b47c-120f5b1d8953">
+<span class="eqno">(11)<a class="headerlink" href="#equation-06285c81-3671-449a-b47c-120f5b1d8953" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\|A\|_2 &amp;= \sup_{\|x\|_2 = 1}\|Ax\| \\
+\|A\|_2^2 &amp;= \max_{\|x\|_2 = 1} x^TAx
+\end{align}\]</div>
+</div>
+<p>Now, from the JL property,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-46240b04-f2ad-4ff9-ad45-dfb184a036c1">
+<span class="eqno">(12)<a class="headerlink" href="#equation-46240b04-f2ad-4ff9-ad45-dfb184a036c1" title="Permalink to this equation">¶</a></span>\[\begin{align}
+Pr[\|yR\|^2 - \|y\|^2 &gt; \epsilon\|y\|^2] &lt; e^{-ck\epsilon^2} \hspace{2cm} \text{(Exponentially small)}
+\end{align}\]</div>
+<p>Using the union bound over a <span class="math notranslate nohighlight">\(\epsilon\)</span> - net, <span class="math notranslate nohighlight">\(k = \tilde{O}(\frac{rank(A)}{\epsilon^2})\)</span></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="figure align-center" id="sphere">
+<a class="reference internal image-reference" href="../_images/sphere.jpg"><img alt="../_images/sphere.jpg" src="../_images/sphere.jpg" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text"><span class="math notranslate nohighlight">\(\epsilon\)</span>-net Sphere</span><a class="headerlink" href="#sphere" title="Permalink to this image">¶</a></p>
+</div>
+<p><span class="math notranslate nohighlight">\(\epsilon\)</span> - net is when we choose points in unit sphere such that the union of the <span class="math notranslate nohighlight">\(\epsilon\)</span> - radius spheres of all the points give the unit sphere.</p>
+</div>
+<p>We get,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5633143f-c875-411e-9098-7402f05aaf8e">
+<span class="eqno">(13)<a class="headerlink" href="#equation-5633143f-c875-411e-9098-7402f05aaf8e" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\sup_{\|x\| = 1}\|\|xA\|^2 - \|xAR\|^2\| \leq \epsilon\|AA^t\|
+\end{align}\]</div>
+<h3><b>Time taken for Projection</b></h3>
+<p>The matrix vector multiplication takes <span class="math notranslate nohighlight">\(\mathcal{O}(kd)\)</span> time, where <span class="math notranslate nohighlight">\(k = \Omega(\frac{1}{\epsilon^2})\)</span>.</p>
+<p>Now, there is also a lower bound on the target dimension, so can we make the projection faster?</p>
+<h3><b>Thought Experiment</b></h3>
+<div class="proof definition admonition" id="my-definition-3">
+<p class="admonition-title"><span>Definition </span></p>
+<div class="definition-content section" id="proof-content">
+<p>Suppose the projection matrix <span class="math notranslate nohighlight">\(A\)</span> is very sparse:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} A_{ij} = \left\{
+\begin{array}{ll}
+    0, &amp; probability = 1 - p \\
+    N(0, \frac{1}{\sqrt{p}}), &amp; probability = p \\
+\end{array}
+\right. \end{split}\]</div>
+<p>Now, set <span class="math notranslate nohighlight">\(p\)</span> ~ <span class="math notranslate nohighlight">\(\frac{1}{d}\)</span>, then there will be a constant number of entries in most of the rows. So, time taken will be <span class="math notranslate nohighlight">\(\mathcal{O}(dkp)\)</span> ~ <span class="math notranslate nohighlight">\(\mathcal{O}(k)\)</span> only.</p>
+</div>
+</div><div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<ul class="simple">
+<li><p>It fails to preserve norm for sparse vectors.</p></li>
+</ul>
+<div class="figure align-center" id="example">
+<a class="reference internal image-reference" href="../_images/example.jpg"><img alt="../_images/example.jpg" src="../_images/example.jpg" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">Example for which norm is not preserved</span><a class="headerlink" href="#example" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>It works fine if vector is all dense!</p></li>
+</ul>
+</div>
+<p>We want to be able to work with all vectors. So, we try to preprocess vectors to make them dense.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The time taken for pre-processing should not be more than for projection.</p>
+</div>
+<h3><b>Hadamard Matrices</b></h3><div class="proof definition admonition" id="my-definition-2">
+<p class="admonition-title"><span>Definition </span></p>
+<div class="definition-content section" id="proof-content">
+<p>Hadamard matrices are defined only when <span class="math notranslate nohighlight">\(d = 2^k\)</span>. i.e.</p>
+<p><span class="math notranslate nohighlight">\(H_1 = \begin{pmatrix}
+1
+\end{pmatrix}\)</span>, <span class="math notranslate nohighlight">\(H_2 = \begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; -1
+\end{pmatrix}\)</span>, <span class="math notranslate nohighlight">\(H_{2^{k+1}} = \begin{pmatrix}
+H_{2^k} &amp; H_{2^k} \\
+H_{2^k} &amp; -H_{2^k}
+\end{pmatrix}\)</span></p>
+</div>
+</div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Multiplying a vector by <span class="math notranslate nohighlight">\(Hd\)</span> takes <span class="math notranslate nohighlight">\(\mathcal{O}(d\log{d})\)</span> time.</p>
+<p>It can be proved by recursion: <span class="math notranslate nohighlight">\(T(d) = 2T(\frac{d}{2}) + \mathcal{O}(d)\)</span></p>
+</div>
+<h3><b>Densifying using Hadamard</b></h3>
+<p>Now, we can use the Hadamard matrix to densify <span class="math notranslate nohighlight">\(x \in \mathcal{R}^d\)</span> as follows:</p>
+<p><span class="math notranslate nohighlight">\(y = HDx\)</span>, where <span class="math notranslate nohighlight">\(D \in \mathcal{R}^{d \times d}\)</span> diagonal with,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} D_{ii} = \left\{
+\begin{array}{ll}
+    +1, &amp; p = \frac{1}{2} \\
+    -1, &amp; p = \frac{1}{2} \\
+\end{array}
+\right. \end{split}\]</div>
+<p>Here, calculating <span class="math notranslate nohighlight">\(y\)</span> takes <span class="math notranslate nohighlight">\(\mathcal{O}(d\log{d})\)</span> time.</p>
+<h3><b>Intuition</b></h3>
+<p><span class="math notranslate nohighlight">\(H\)</span> itself is a rotation,</p>
+<ul class="simple">
+<li><p>Sparse vectors are rotated to dense vectors (Uncertainty principle).</p></li>
+<li><p>But, it is a rotation, it can happen that few dense vectors can become sparse.</p></li>
+<li><p>Randomization using the diagonal ensures that adversary cannot choose such vectors as input.</p></li>
+</ul>
+<h3><b>Densification Claim</b></h3>
+<p>For <span class="math notranslate nohighlight">\(x \in \mathcal{R}^d,\|x\|_2 = 1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[max_i\|(HDx)_i\| \leq \mathcal{O}(\frac{\log{(nd)}}{d})^{\frac{1}{2}}\]</div>
+<p>The maximum is near the average (<span class="math notranslate nohighlight">\(\frac{1}{\sqrt{d}}\)</span>), so the vector <span class="math notranslate nohighlight">\(HDx\)</span> is dense.</p>
+<div class="proof remark admonition" id="my-remark-1">
+<p class="admonition-title"><span>Remark </span></p>
+<div class="remark-content section" id="proof-content">
+<p>The claim can be proved by applying Cherfnoff style tail inequality per coordinate and union bound.</p>
+</div>
+</div><h3><b>Projecting a Dense Vector</b></h3>
+<p>Take, <span class="math notranslate nohighlight">\(y = HDx\)</span></p>
+<p><span class="math notranslate nohighlight">\(\max_i \|y_i\| \approx \mathcal{O}(\sqrt{\frac{\log{nd}}{d}})\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split} P = \left\{
+\begin{array}{ll}
+    0, &amp; probability = 1 - q \\
+    N(0, \frac{1}{\sqrt{q}}), &amp; probability = q \\
+\end{array}
+\right. \end{split}\]</div>
+<p>where, <span class="math notranslate nohighlight">\(P \in \mathcal{R}^{k \times d}\)</span> and <span class="math notranslate nohighlight">\(k = \mathcal{O}(\frac{1}{\epsilon^2} \log{\frac{1}{\delta}})\)</span></p>
+<p>And, <span class="math notranslate nohighlight">\(z = PHDx\)</span> is the final projected vector.</p>
+<h3><b>Fast JL Transform</b></h3>
+<p>If <span class="math notranslate nohighlight">\(q = \mathcal{O}(\|x\|_\infty^2) = \mathcal{O}(\frac{\log{(nd)}}{d})\)</span>, <span class="math notranslate nohighlight">\(PHD\)</span> satisfies <span class="math notranslate nohighlight">\(JL\)</span> property.</p>
+<div class="proof observation admonition" id="my-observation-1">
+<p class="admonition-title"><span>Observation </span></p>
+<div class="observation-content section" id="proof-content">
+<p>Calculating <span class="math notranslate nohighlight">\(y = PHDx\)</span> takes time <span class="math notranslate nohighlight">\(\mathcal{O}(d\log{d} + k\log{(nd)})\)</span>, potentially much faster than original Gaussian construction.</p>
+</div>
+</div><footer>
+    Author(s): Gaurav Viramgami, Hrushti Naik, Manas Mulpuri
+</footer></div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs328-2022/CS328-Notes",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Frobenius Norm and Low Rank Approaximation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022_04_07_Near_Neighbors.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Finding Near Neighbors</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Students of CS328 2022<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
