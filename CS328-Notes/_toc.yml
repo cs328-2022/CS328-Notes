@@ -36,10 +36,12 @@ parts:
       - file: notebooks/2022_03_15_geometric_svd.ipynb
       # - caption: Dealing with massive data
       #   chapters:
-      # - caption: Selected topics from NPTEL-Scalable Data Science Course
-      #   chapters:
       - file: notebooks/2022_03_17_SVD_in_Mixture_Models.ipynb
       - file: notebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.ipynb
-      - file: notebooks/2022_04_07_Near_Neighbors.ipynb
       - file: notebooks/2022_04_07_Building_LSH_Tables.ipynb
+
+  - caption: Selected topics from NPTEL-Scalable Data Science Course
+    chapters:
+      - file: notebooks/2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.ipynb
+      - file: notebooks/2022_04_07_Near_Neighbors.ipynb
 #chapters
