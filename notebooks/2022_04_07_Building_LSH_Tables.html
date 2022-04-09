@@ -1,0 +1,893 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Building LSH Table &#8212; CS328-2022 Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Randomized Numerical Linear Algebra: Random Projection" href="2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.html" />
+    <link rel="prev" title="Frobenius Norm and Low Rank Approaximation" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CS328-2022 Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Course Description
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Logistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="CONTRIBUTING.html">
+   Contributing to CS328 Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
+   Deadlines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations.html">
+   Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations_notebook.html">
+   [CODE] 🧑‍💻Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
+   Distance Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_06_object_representations_notebook.html">
+   Object Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_10_central_limit_theorem_notebook.html">
+   Central Limit Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_11_markov_chebyshev_inequalities.html">
+   Markov and Chebyshev Inequalities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound.html">
+   Chernoff Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound_tails.html">
+   Plot of chernoff bound
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering and low-rank approximations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_17_Clustering.html">
+   Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_24_K-means.html">
+   K-means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_25_K-means%2B%2B.html">
+   Lloyd’s algorithm, convergence?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_27_Hierarchial_Clustering.html">
+   Why does k-means++ work?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html">
+   Hierarchical Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html">
+   Densest Subgraphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html">
+   Densest Subgraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html">
+   Expansion and Conductance of a Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_14_GraphLaplacian.html">
+   Graph Laplacian and its Eigenvalues
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html">
+   Relation between second eigenvalue of Laplacian and Spectral Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_14_singular_value_decomposition.html">
+   Singular Valued Decomposition (SVD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_15_geometric_svd.html">
+   Applications of SVD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_17_SVD_in_Mixture_Models.html">
+   SVD in Gaussian Mixture Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html">
+   Frobenius Norm and Low Rank Approaximation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Building LSH Table
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Selected topics from NPTEL-Scalable Data Science Course
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.html">
+   Randomized Numerical Linear Algebra: Random Projection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
+   Finding Near Neighbors
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_04_07_Building_LSH_Tables.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs328-2022/CS328-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_04_07_Building_LSH_Tables.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_04_07_Building_LSH_Tables.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_04_07_Building_LSH_Tables.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_04_07_Building_LSH_Tables.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Building LSH Table
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#locality-sensitive-hashing">
+     Locality Sensitive Hashing
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jacard-similarity-minhashing">
+     Jacard Similarity: minhashing
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#why-is-this-lhs">
+       Why is this LHS?
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-choose-random-permutations">
+     How to choose random permutations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#which-similarities-admit-lsh">
+     Which similarities admit LSH?
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-of-non-lshable-similarities">
+       Example of non-LSHable similarities
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gap-definition-of-lsh">
+     Gap Definition of LSH
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#l2-norm">
+       L2 Norm
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-the-near-neighbour">
+     Solving the near neighbour
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#how-to-actually-use">
+       How to actually use
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#band-construction">
+       Band Construction
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#and-ing-of-lsh">
+         AND-ing of LSH
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#or-ing">
+         OR-ing
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#why-is-it-better">
+       Why is it better
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-an-lsh">
+     Creating an LSH
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lsh-theory-vs-practice">
+     LSH : theory vs practice
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#looking-back">
+     Looking back
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lsh-locality-sensitive-hashing-application">
+   LSH (Locality Sensitive Hashing) Application
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Building LSH Table</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Building LSH Table
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#locality-sensitive-hashing">
+     Locality Sensitive Hashing
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jacard-similarity-minhashing">
+     Jacard Similarity: minhashing
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#why-is-this-lhs">
+       Why is this LHS?
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-choose-random-permutations">
+     How to choose random permutations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#which-similarities-admit-lsh">
+     Which similarities admit LSH?
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-of-non-lshable-similarities">
+       Example of non-LSHable similarities
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gap-definition-of-lsh">
+     Gap Definition of LSH
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#l2-norm">
+       L2 Norm
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-the-near-neighbour">
+     Solving the near neighbour
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#how-to-actually-use">
+       How to actually use
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#band-construction">
+       Band Construction
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#and-ing-of-lsh">
+         AND-ing of LSH
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#or-ing">
+         OR-ing
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#why-is-it-better">
+       Why is it better
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-an-lsh">
+     Creating an LSH
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lsh-theory-vs-practice">
+     LSH : theory vs practice
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#looking-back">
+     Looking back
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lsh-locality-sensitive-hashing-application">
+   LSH (Locality Sensitive Hashing) Application
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="building-lsh-table">
+<h1>Building LSH Table<a class="headerlink" href="#building-lsh-table" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="locality-sensitive-hashing">
+<h2>Locality Sensitive Hashing<a class="headerlink" href="#locality-sensitive-hashing" title="Permalink to this headline">¶</a></h2>
+<p>-&gt; Originally defined in terms of a similarity function</p>
+<p>-&gt; We have a universe of elements, say, <span class="math notranslate nohighlight">\(U\)</span> and we define a similarity function, <span class="math notranslate nohighlight">\(s: U \times U \to [0,1]\)</span></p>
+<p>-&gt; Next, we are concerned with an existence of a probability distribution such over a hash family H such that</p>
+<p><span class="math notranslate nohighlight">\(Pr_{h \in H}[h(x) = h(y)] = s(x,y)\)</span></p>
+<p>Here, <span class="math notranslate nohighlight">\(s(x,y) = 1 \to x = y \ and\  s(x,y) = s(y,x)\)</span></p>
+</div>
+<div class="section" id="jacard-similarity-minhashing">
+<h2>Jacard Similarity: minhashing<a class="headerlink" href="#jacard-similarity-minhashing" title="Permalink to this headline">¶</a></h2>
+<p>Consider two sets, A and B, the Jaccard similarity is defined as <span class="math notranslate nohighlight">\(JS(A,B) = \frac{A \cap B}{A \cup B}\)</span></p>
+<p>As an example, consider a elemental universe U from which we have to pick a uniform permutation (the hash family consists of all the random permutations!)</p>
+<p>For any set S, we define - <span class="math notranslate nohighlight">\(h(S) = min_{x \in S}h(x)\)</span></p>
+<p>This represents a mapping!</p>
+<p>We will now look at collection of sets as a {0,1} matrix</p>
+<p>$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-32f14487-6842-4baf-a3c7-fd61022a7a8c">
+<span class="eqno">(6)<a class="headerlink" href="#equation-32f14487-6842-4baf-a3c7-fd61022a7a8c" title="Permalink to this equation">¶</a></span>\[\begin{bmatrix}
+ &amp; S_{1} &amp; S_{2} &amp; S_{3} &amp; S_{4} \\
+A &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+B  &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+C  &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+D  &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+E  &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+F  &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+G  &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+\end{bmatrix}\]</div>
+<p>$</p>
+<p>Here, {A..G} are the elements in universe U and <span class="math notranslate nohighlight">\(S_{i}\)</span> represents the set(s)</p>
+<p>Now, we consider the following random permutation of the elements</p>
+<p>$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-23ebd911-68c2-41d6-8856-ee55cdc800e2">
+<span class="eqno">(7)<a class="headerlink" href="#equation-23ebd911-68c2-41d6-8856-ee55cdc800e2" title="Permalink to this equation">¶</a></span>\[\begin{bmatrix}
+ &amp; S_{1} &amp; S_{2} &amp; S_{3} &amp; S_{4} \\
+A &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+C  &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+G  &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+F  &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+B  &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+E  &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+D  &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+\end{bmatrix}\]</div>
+<p>$</p>
+<p>From, our initial definition of <span class="math notranslate nohighlight">\(h(S)\)</span> we have <span class="math notranslate nohighlight">\(h(S_{1}) = A,\ h(S_{2}) = C,\ h(S_{3}) = A,\ h(S_{4}) = C\)</span></p>
+<div class="section" id="why-is-this-lhs">
+<h3>Why is this LHS?<a class="headerlink" href="#why-is-this-lhs" title="Permalink to this headline">¶</a></h3>
+<p>For sets S and T,</p>
+<p>The first row where one of them has a 1 belong to <span class="math notranslate nohighlight">\(S \cup T\)</span></p>
+<p>We have <span class="math notranslate nohighlight">\(h(S) = h(T)\)</span> iff both the rows contain 1</p>
+<p>This means that this row belongs to <span class="math notranslate nohighlight">\(S \cap T\)</span></p>
+<p>Since, the event h(S) = h(T) is same as the event that a row in <span class="math notranslate nohighlight">\(S \cap T\)</span> appears first among all rows in <span class="math notranslate nohighlight">\(S \cap T\)</span></p>
+<p><span class="math notranslate nohighlight">\(Pr[h(S) = h(T)]=\frac{S \cap T}{S \cup T}\)</span></p>
+</div>
+</div>
+<div class="section" id="how-to-choose-random-permutations">
+<h2>How to choose random permutations<a class="headerlink" href="#how-to-choose-random-permutations" title="Permalink to this headline">¶</a></h2>
+<p>-&gt; Picking a uniform at random permutation is expensive!</p>
+<p>-&gt; We look at a family of min-wise independent permutations</p>
+<p>-&gt; In practice, we use standard hash functions, hash all the values and then sort</p>
+</div>
+<div class="section" id="which-similarities-admit-lsh">
+<h2>Which similarities admit LSH?<a class="headerlink" href="#which-similarities-admit-lsh" title="Permalink to this headline">¶</a></h2>
+<p>Theorem : S is LSHable <span class="math notranslate nohighlight">\(\to\)</span> 1 - S is a metric</p>
+<p>Consider a hash family, H and fix a hash function <span class="math notranslate nohighlight">\(h \in H\)</span> and define</p>
+<p><span class="math notranslate nohighlight">\(\Delta_{h}(A,B) = [h(A) \neq h(B)]\)</span></p>
+<p><span class="math notranslate nohighlight">\(1 - S(A,B) = Pr_{h}[\Delta_{h}(A,B)]\)</span></p>
+<p>Also, <span class="math notranslate nohighlight">\(\Delta_{h}(A,B) + \Delta_{h}(B,C) \geq \Delta_{h}(A,C)\)</span></p>
+<div class="section" id="example-of-non-lshable-similarities">
+<h3>Example of non-LSHable similarities<a class="headerlink" href="#example-of-non-lshable-similarities" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(d(A,B) = 1 - s(A,B)\)</span></p>
+<p><span class="math notranslate nohighlight">\(Sorenson-Dice \ :\  s(A,B) = \frac{2|A \cap B|}{|A| + |B|}\)</span></p>
+<p><span class="math notranslate nohighlight">\(Overlap \ :\  s(A,B) = \frac{A \cap B}{min(|A|,|B|)}\)</span></p>
+</div>
+</div>
+<div class="section" id="gap-definition-of-lsh">
+<h2>Gap Definition of LSH<a class="headerlink" href="#gap-definition-of-lsh" title="Permalink to this headline">¶</a></h2>
+<p>LSH being defined as a distance measure</p>
+<p><img alt="Gap Definition" src="../_images/Circle.png" /></p>
+<p>A family is (r,R,p,P) LSH if</p>
+<p><span class="math notranslate nohighlight">\(Pr_{h \in H}[h(x) = h(y)] \geq p \ if\  d(x,y) \leq r\)</span></p>
+<p><span class="math notranslate nohighlight">\(Pr_{h \in H}[h(x) = h(y)] \geq P \ if\  d(x,y) \geq R\)</span></p>
+<p>If points are closer than the lower radius collision probability is higher and if the points are farther than the greater radius, collision probability is lower!</p>
+<p>Jaccard similarity follows Gap LSH!</p>
+<div class="section" id="l2-norm">
+<h3>L2 Norm<a class="headerlink" href="#l2-norm" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(d(x,y) = \sqrt{\sum_{i}(x_{i} - y_{i})^{2}}\)</span></p>
+<p>u = random unit norm vector, w <span class="math notranslate nohighlight">\(\in\)</span> R parameter, b <span class="math notranslate nohighlight">\(\sim\)</span> Unif[0,w]</p>
+<p><span class="math notranslate nohighlight">\(h(x) = \lfloor \frac{u.x + b}{w} \rfloor\)</span></p>
+<p>If <span class="math notranslate nohighlight">\(|x - y|_{2} &lt; \frac{w}{2}\)</span> , the probability that they will fall in separate partitions is low (x and y are close to each other)!</p>
+<p>If <span class="math notranslate nohighlight">\(|x - y|_{2} &gt; 4w\)</span> , the probability that they will fall in the same partition is low (x and y are far apart)!</p>
+</div>
+</div>
+<div class="section" id="solving-the-near-neighbour">
+<h2>Solving the near neighbour<a class="headerlink" href="#solving-the-near-neighbour" title="Permalink to this headline">¶</a></h2>
+<p>(r,c) - near neighbour problem</p>
+<p>-&gt; Given query point q, return all points p such that <span class="math notranslate nohighlight">\(d(p,q) &lt; r\)</span> and none such that <span class="math notranslate nohighlight">\(d(p,q) &gt; cr\)</span></p>
+<p>-&gt; Solving this gives a subroutine to solve the “nearest neighbour”, by building a data-structure for each r, in powers of <span class="math notranslate nohighlight">\((1 + \epsilon)\)</span></p>
+<div class="section" id="how-to-actually-use">
+<h3>How to actually use<a class="headerlink" href="#how-to-actually-use" title="Permalink to this headline">¶</a></h3>
+<p>We need to amplify the probability of collisions for close points since the graph of collision probability versus distance goes down smoothly for Jaccard distance.</p>
+<p><img alt="Amplify Close" src="../_images/Distance.png" /></p>
+<p>So, we want high value of collision probability if distance is less than <span class="math notranslate nohighlight">\(r\)</span> and low value if distance is greater than <span class="math notranslate nohighlight">\(cr\)</span> where <span class="math notranslate nohighlight">\(c\)</span> is some constant!</p>
+</div>
+<div class="section" id="band-construction">
+<h3>Band Construction<a class="headerlink" href="#band-construction" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="and-ing-of-lsh">
+<h4>AND-ing of LSH<a class="headerlink" href="#and-ing-of-lsh" title="Permalink to this headline">¶</a></h4>
+<p>-&gt; Define a composite function <span class="math notranslate nohighlight">\(H(x) = (h_{1}(x),...,h_{k}(x))\)</span></p>
+<p>-&gt; <span class="math notranslate nohighlight">\(Pr[H(x) = H(y)] = \Pi_{i}Pr[h_{i}(x) = h_{i}(y)] = Pr[h_{1}(x) = h_{1}(y)]^{k}\)</span></p>
+</div>
+<div class="section" id="or-ing">
+<h4>OR-ing<a class="headerlink" href="#or-ing" title="Permalink to this headline">¶</a></h4>
+<p>-&gt; Create L independent hash-tables for <span class="math notranslate nohighlight">\(H_{1},H_{2},...H_{L}\)</span></p>
+<p>-&gt; Given query q, search in <span class="math notranslate nohighlight">\(\cup_{j} H_{j}(q)\)</span></p>
+</div>
+</div>
+<div class="section" id="why-is-it-better">
+<h3>Why is it better<a class="headerlink" href="#why-is-it-better" title="Permalink to this headline">¶</a></h3>
+<p>Consider q,r with <span class="math notranslate nohighlight">\(Pr[h(q) = h(y)] = 1 - d(q,y)\)</span></p>
+<p>Probability of <strong>not</strong> finding y as one of the candidates in <span class="math notranslate nohighlight">\(\cup_{j} H_{j}(q)\)</span>
+is <span class="math notranslate nohighlight">\(1 - (1 - (1-d)^{k})\)</span></p>
+</div>
+</div>
+<div class="section" id="creating-an-lsh">
+<h2>Creating an LSH<a class="headerlink" href="#creating-an-lsh" title="Permalink to this headline">¶</a></h2>
+<p>-&gt; If we have <span class="math notranslate nohighlight">\((r,cr,p,q) LSH\)</span></p>
+<p>-&gt; For any y, wih <span class="math notranslate nohighlight">\(|q - y| &lt; r\)</span></p>
+<p>Probability of y as candidate in <span class="math notranslate nohighlight">\(\cup_{j}H_{j}(q) \geq 1 - (1-p^{k})^{L} \geq 1 - \frac{1}{e}\)</span></p>
+<p>-&gt; For any z, <span class="math notranslate nohighlight">\(|q - z| &gt; cr\)</span></p>
+<p>Probability of z as candidate in any fixed <span class="math notranslate nohighlight">\(H_{j}(q) \leq q_{k}\)</span></p>
+<p>Expected number of such <span class="math notranslate nohighlight">\(z \leq Lq^{k} \leq L = n^{\rho}\)</span></p>
+<p>Space used = <span class="math notranslate nohighlight">\(n^{1 + \rho}\)</span></p>
+<p>Query time = <span class="math notranslate nohighlight">\(n^{\rho}\)</span></p>
+<p>We can show that for Hamming, angle etc, <span class="math notranslate nohighlight">\(\rho \approx \frac{1}{c}\)</span></p>
+<p>Therefore, we can get 2-approx near neighbours in <span class="math notranslate nohighlight">\(O(\sqrt(n))\)</span> query time</p>
+</div>
+<div class="section" id="lsh-theory-vs-practice">
+<h2>LSH : theory vs practice<a class="headerlink" href="#lsh-theory-vs-practice" title="Permalink to this headline">¶</a></h2>
+<p>In order to design LSH in practice, the theoretical parameter values are only a guidance, we need to search over the parameter space to find a good operating point!</p>
+</div>
+<div class="section" id="looking-back">
+<h2>Looking back<a class="headerlink" href="#looking-back" title="Permalink to this headline">¶</a></h2>
+<p>LSH is a tool for near neighbour problems</p>
+<p>Trades off space with query time</p>
+<p>Practical for medium to large datasets with fairly large number of dimensions, exceptions being sparse, very very high dimensional datasets</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="lsh-locality-sensitive-hashing-application">
+<h1>LSH (Locality Sensitive Hashing) Application<a class="headerlink" href="#lsh-locality-sensitive-hashing-application" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<br/>
+<h2>Finding Similar Items from a large Dataset with Precesion using LSH.</h2>
+<br/>
+<h3>Intro</h3>
+<p>
+We want to search similar things from a large dataset. Brute Force approach takes O(N^2) time but LSH cuts this time to O(N)
+</p>
+<br/>
+<h3>Different Scenarios</h3>
+<p>
+While searching in the documents we can have two issues<br/><br/>
+1. We have a reasonable amount of Documents but every document have a large length.
+2. We have a large number of documents with reasonable length.
+</p>
+<h3>Let's Explore the LSH usage in a large Documents Database</h3>
+<p>First we have to Vectorize the Document. To do that we build k-shingles. And then we make a big set of k-shingles and assign every shingle to an unique index</p>
+<p><img alt="K-Shingles" src="../_images/Shingles.png" /></p>
+<p>Now we have a large document of NXD dimensions with N documents and D columns having values 1/0 representing differnet shinngles. But we can't work with that dense matrix.</p>
+<p>Before moving further, Let's see the Jacard Matrix</p>
+<div class="math notranslate nohighlight">
+\[J = \frac{A \cap B}{A \cup B}\]</div>
+<p><span>Now, we can take N documents of D dimensions and can find the Jaccard similarity above some threshold.</span></p>
+<p>Now to overcome this issue of iterating through large N documents we use Min-Hashing.</p>
+<br/>
+<p>For Example — Let suppose we have A = {1,0,0,1} and B = {0,0,0,1}. and let suppose these are shuffled already, the first index would be A[0]=1 and B[0]=0. A[0]!=B[0] which means the two are not similar and we return 0. Let's do the second shuffle. Shuffle gives A={0,0,1,1}, B={0,0,1,0}, so we get A[2]=B[2]!=0 which is a +1. Ultimately, if you shuffle enough times, you will find the similarity approaches the true value of 0.25. It is an approximation method that yields an expected similarity value. And more the data we have more the accuracy we'll generate.</p>
+<h3>Generating Unique Hashes</h3>
+<p>Take two random numbers a and b and pass through the forumula hash(x) = (a*x+b) mod D, where x is the index we are permuting. We generate new hashes by randomly choosing a, b. </p>
+<h3>The Signature Matrix</h3>
+<br/>
+<p>Now we'll compute (N,K) Signature Matrix that has K number of random hash functions. Now we can compare N,K vectors as compared to the large N,D matrix. Signature matrix column represents one random hash functions. For every row in a column, the value is given by the index of the first nonzero element for that row (which is the MinHash).</p>
+<p><img alt="Signature Matrix" src="../_images/Signature.png" /></p>
+<p><br/><br/></p>
+<p>Now, To write an efficient algorithm, we don’t actually need to permute all of the rows. It is now okay to just look at every element of the (N,D) dense matrix, and see if it has a 1, and if so if any permutations of the entry lead to a new MinHash.</p>
+<p>Now instead of iterating on (N,D) we can iterate on (N,K) But it is still O(N^2)</p>
+<h3>Now to make it Precise we'll use LSH (Locality Sensitive Hashingh)</h3>
+<br/>
+<h4>LSH: The band structure</h4>
+<br/>
+<p>Let's take an intuition that If we are able to map each row of the matrix to the buckets then the rows that are into the same bucket are somewhat similar or close. The “close” is precisely the desired similarity threshold we introduced earlier.</p>
+<p>Now, coming to the defination of LSH, It is a family of functions which tune the functions such that points that are close to each other gets closer and points that are not close gets farthest apart with probability approaching to 1</p>
+<p>Now we will take a band b. Earlier we were trying to match each row with other but now we give each row b possible chances. So we hash each row to b buckets and see who it matches with.</p>
+<p><span> ——&gt;  r below is the number of rows per band</span></p>
+<p>Now, For better understanding, increasing b gives rows more chances to match, so it let’s in candidate pairs with lower similarity scores. Increasing r makes the match criteria stricter, restricting to higher similarity scores. r and b do opposite things or having a tradeoff between them (means one has opposite effect on the other one).</p>
+<p><mark>Now, we can precisely tune the parameters b and r such that we turn the likelihood of a candidate pair into a step function around our desired threshold</mark></p>
+<ul class="simple">
+<li><p>Note: Two rows are considered candidate pairs which means that they have the possibility to have a similarity score above the desired threshold, if the two rows have at least one band in which all the rows are identical.</p></li>
+</ul>
+<br/>
+<hr class="docutils" />
+<footer>
+Author(s): 
+Lovepreet Singh, 
+Taha Mohammad Syed, 
+Vaibhav Dilip Khandare
+</footer></div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs328-2022/CS328-Notes",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Frobenius Norm and Low Rank Approaximation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Randomized Numerical Linear Algebra: Random Projection</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Students of CS328 2022<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
