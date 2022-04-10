@@ -1,0 +1,743 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Low rank approximation in Mixture Models and Recommendation systems &#8212; CS328-2022 Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Streaming Models and Answering Inclusion Queries" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html" />
+    <link rel="prev" title="Building LSH Table" href="2022_04_07_Building_LSH_Tables.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CS328-2022 Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Course Description
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Logistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="CONTRIBUTING.html">
+   Contributing to CS328 Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
+   Deadlines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations.html">
+   Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations_notebook.html">
+   [CODE] 🧑‍💻Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
+   Distance Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_06_object_representations_notebook.html">
+   Object Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_10_central_limit_theorem_notebook.html">
+   Central Limit Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_11_markov_chebyshev_inequalities.html">
+   Markov and Chebyshev Inequalities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound.html">
+   Chernoff Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound_tails.html">
+   Plot of chernoff bound
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering and low-rank approximations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_17_Clustering.html">
+   Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_24_K-means.html">
+   K-means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_25_K-means%2B%2B.html">
+   Lloyd’s algorithm, convergence?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_27_Hierarchial_Clustering.html">
+   Why does k-means++ work?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html">
+   Hierarchical Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html">
+   Densest Subgraphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html">
+   Densest Subgraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html">
+   Expansion and Conductance of a Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_14_GraphLaplacian.html">
+   Graph Laplacian and its Eigenvalues
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html">
+   Relation between second eigenvalue of Laplacian and Spectral Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_14_singular_value_decomposition.html">
+   Singular Valued Decomposition (SVD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_15_geometric_svd.html">
+   Applications of SVD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_17_SVD_in_Mixture_Models.html">
+   SVD in Gaussian Mixture Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html">
+   Frobenius Norm and Low Rank Approaximation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
+   Building LSH Table
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Low rank approximation in Mixture Models and Recommendation systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
+   Streaming Models and Answering Inclusion Queries
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Selected topics from NPTEL-Scalable Data Science Course
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.html">
+   Randomized Numerical Linear Algebra: Random Projection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
+   Finding Near Neighbors
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_03_24_Low_rank_approximation_Mixture_Models _and_Recommendation systems.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs328-2022/CS328-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_03_24_Low_rank_approximation_Mixture_Models _and_Recommendation systems.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_03_24_Low_rank_approximation_Mixture_Models _and_Recommendation systems.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_03_24_Low_rank_approximation_Mixture_Models _and_Recommendation systems.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_03_24_Low_rank_approximation_Mixture_Models _and_Recommendation systems.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#low-rank-approximation-in-mixture-models">
+   Low rank approximation in Mixture Models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clustering-of-gaussian-mixture-model">
+     Clustering of gaussian mixture model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-subspace-spanned-by-the-centers">
+     Finding subspace spanned by the centers
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simple-case-single-gaussian">
+       Simple case: Single-Gaussian
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gaussian-mixture-model">
+       Gaussian mixture model
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recommendation-systems">
+   Recommendation systems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preliminary-approach">
+     Preliminary approach
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#svd-approach">
+     SVD approach
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Low rank approximation in Mixture Models and Recommendation systems</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#low-rank-approximation-in-mixture-models">
+   Low rank approximation in Mixture Models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clustering-of-gaussian-mixture-model">
+     Clustering of gaussian mixture model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-subspace-spanned-by-the-centers">
+     Finding subspace spanned by the centers
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simple-case-single-gaussian">
+       Simple case: Single-Gaussian
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gaussian-mixture-model">
+       Gaussian mixture model
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recommendation-systems">
+   Recommendation systems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preliminary-approach">
+     Preliminary approach
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#svd-approach">
+     SVD approach
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="low-rank-approximation-in-mixture-models-and-recommendation-systems">
+<h1>Low rank approximation in Mixture Models and Recommendation systems<a class="headerlink" href="#low-rank-approximation-in-mixture-models-and-recommendation-systems" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="low-rank-approximation-in-mixture-models">
+<h2>Low rank approximation in Mixture Models<a class="headerlink" href="#low-rank-approximation-in-mixture-models" title="Permalink to this headline">¶</a></h2>
+<p>A mixture model is a probablistic model where the distribution is sum of different probablity densities. Each of these proabablity densities have a weight in the distribution of the mixture model. In short a mixture model is a weighted sum of of probablity densities.</p>
+<div class="math notranslate nohighlight">
+\[
+    P = w_1p_1 + w_2p_2 + w_3p_3 + . . . + w_kp_k
+\]</div>
+<ul class="simple">
+<li><p>K is the number of distribitions present in the mixture model</p></li>
+<li><p><span class="math notranslate nohighlight">\( p_i\)</span> is the probablity density of the <span class="math notranslate nohighlight">\(i^{th}\)</span> distribution</p></li>
+<li><p><span class="math notranslate nohighlight">\( w_i\)</span> is the weight associated with the <span class="math notranslate nohighlight">\(i^{th}\)</span> distribution</p></li>
+</ul>
+<p>In this section, we will only consider a gaussian mixture models in which each of the underlying probablity densities are sphereical gaussians.</p>
+<div class="section" id="clustering-of-gaussian-mixture-model">
+<h3>Clustering of gaussian mixture model<a class="headerlink" href="#clustering-of-gaussian-mixture-model" title="Permalink to this headline">¶</a></h3>
+<p>We had previously seen that in a gaussian mixture if the distance between centers  <span class="math notranslate nohighlight">\( &gt;cd^{1/4}\)</span> then clustering algorithms will be able to identify points from the same distribution in gaussian mixture model.</p>
+<ul class="simple">
+<li><p>d is the dimension of the data</p></li>
+</ul>
+<p>In higher dimension, this seperation is usually not met and clustering algorithmns performs poorly.
+Now hypothetically if we are given the subspace spanned by the K centers then we can project all the sample points to this subspace.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>The distance between centers remanins same because we are projecting onto the subspacce which is spanned by the centers</p></li>
+<li><p>The dimension of the data has decreased from d to k</p></li>
+</ul>
+</div>
+<p>Typically <span class="math notranslate nohighlight">\( k&lt;&lt;d \)</span> and therefore the minimum distance between centers to distinguish their distribution has decreased. This is benifical for our clustering algorithms and will give us better performace.</p>
+</div>
+<div class="section" id="finding-subspace-spanned-by-the-centers">
+<h3>Finding subspace spanned by the centers<a class="headerlink" href="#finding-subspace-spanned-by-the-centers" title="Permalink to this headline">¶</a></h3>
+<p>Consider the distribution <span class="math notranslate nohighlight">\( \mu \in   \mathbb{R}^{d}, D \equiv N(\mu,\sigma^{2}I) \)</span></p>
+<div class="admonition-claim admonition">
+<p class="admonition-title">Claim</p>
+<p><span class="math notranslate nohighlight">\(E[{(v^Ta)}^2]\)</span> where <span class="math notranslate nohighlight">\( a\sim D\)</span> is maximised when <span class="math notranslate nohighlight">\({\overrightarrow{v}}\)</span> is <span class="math notranslate nohighlight">\(\frac{\overrightarrow{\mu}}{\lVert \mu \rVert} \)</span></p>
+</div>
+<div class="proof admonition" id="proof">
+<p>Proof. <span class="math notranslate nohighlight">\(E[{(v^Ta)}^2] = E{[(v^T(\mu+z))]}^2 = E[{(v^T\mu + v^Tz)}^2], z\sim N(0,\sigma^{2}I)\)</span></p>
+<p><span class="math notranslate nohighlight">\(= {(v^T\mu)}^2 + 2E[(v^T\mu v^Tz)] + v^TE[zz^T]v \)</span></p>
+<p><span class="math notranslate nohighlight">\(={(v^T\mu)}^2 + 0 + v^T{({\sigma}^2I)}v \)</span></p>
+<p><span class="math notranslate nohighlight">\(={(v^T\mu)}^2 + v^Tv \)</span></p>
+<p>This is maximised when v is along <span class="math notranslate nohighlight">\(\frac{\overrightarrow{\mu}}{\lVert \mu \rVert} \)</span></p>
+</div>
+<p>Before moving on to gaussian mixture models lets try solving the simpler version first.</p>
+<div class="section" id="simple-case-single-gaussian">
+<h4>Simple case: Single-Gaussian<a class="headerlink" href="#simple-case-single-gaussian" title="Permalink to this headline">¶</a></h4>
+<p>We are given a single Gaussian distribution <span class="math notranslate nohighlight">\(D \equiv N(\mu,\sigma^{2}I)\)</span> and let <span class="math notranslate nohighlight">\( a_1,a_2,a_3,...,a_n\)</span> be n points from this distribution. We need to find <span class="math notranslate nohighlight">\(v\)</span> which maximises <span class="math notranslate nohighlight">\( \sum_{i=1}^{n} {(v^Ta_i)}^2\)</span></p>
+<p>Converting the summation into matrix multiplication we get the following</p>
+<p><span class="math notranslate nohighlight">\( \sum_{i=1}^{n} {(v^Ta_i)}^2 = {{{\lVert Av \rVert}}_2}^2\)</span>, where <span class="math notranslate nohighlight">\(A=
+\left(\begin{array}
+&amp;{a_1}^T\\
+ {a_2}^T\\
+ . \\
+ .\\
+ .\\
+ {a_n}^T
+\end{array}\right)\)</span></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>We have seen <span class="math notranslate nohighlight">\({{{\lVert Av \rVert}}_2}^2\)</span> before in SVD and the value of <span class="math notranslate nohighlight">\(v\)</span> which maximises the norm is nothing but its 1’st singluar vector.</p>
+</div>
+<p>We know that <span class="math notranslate nohighlight">\(E[{(v^Ta)}^2] \approx \frac{1}{n}\sum_{i=1}^{n} {(v^Ta_i)}^2\)</span> for large n.</p>
+<p>So, the <span class="math notranslate nohighlight">\(\underset{v}{\operatorname{\arg max}} {{{\lVert Av \rVert}}_2}^2\)</span> approximately lies along <span class="math notranslate nohighlight">\({\overrightarrow{\mu}}\)</span> and from the previous lemma we can say that the unit vector along <span class="math notranslate nohighlight">\(\mu\)</span> can be approximated to the 1st singular vector</p>
+</div>
+<div class="section" id="gaussian-mixture-model">
+<h4>Gaussian mixture model<a class="headerlink" href="#gaussian-mixture-model" title="Permalink to this headline">¶</a></h4>
+<p>The same concepts from the single-gaussian case apply over here too but the geomentry gets tricky as we are dealing in d dimensions. Instead of line passing through a single center <span class="math notranslate nohighlight">\(\mu\)</span>, here we will deal with a subspace passing through all the centers <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\mu_3,...,\mu_n\)</span></p>
+<p>Applying the same idea from the single-gaussian case:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\underset{P}{\operatorname{\arg max  }}\)</span>  <span class="math notranslate nohighlight">\(E_a{{{\lVert a^TP \rVert}}_2}^2 =\)</span> Subspace spanned by <span class="math notranslate nohighlight">\({[\mu_1,\mu_2,...,\mu_n]}\)</span> and <span class="math notranslate nohighlight">\(a\)</span> comes from the gaussian mixture model. P is of (<span class="math notranslate nohighlight">\(d,k\)</span>) dimension</p></li>
+<li><p>Where <span class="math notranslate nohighlight">\( P = {[p_1,p_2,...,p_k]}\)</span> and <span class="math notranslate nohighlight">\(p_i \perp p_j, i \neq j\)</span></p></li>
+<li><p>We know that <span class="math notranslate nohighlight">\(E_a[{{{\lVert a^TP \rVert}}_F}^2] \approx \frac{1}{n}\sum_{i=1}^{n} {({a_i}^TP)}^2\)</span> for large n.</p></li>
+<li><p>So to find the subspace spanned by <span class="math notranslate nohighlight">\({[\mu_1,\mu_2,...,\mu_n]}\)</span> we need to find <span class="math notranslate nohighlight">\(\underset{P}{\operatorname{\arg max  }}\)</span>  <span class="math notranslate nohighlight">\({{{\lVert AP \rVert}}_F}^2\)</span></p></li>
+<li><p>If we can find the P then we can project all our sample points on P by computing <span class="math notranslate nohighlight">\(a_iP\)</span></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>From Pythagorean theorem:
+<span class="math notranslate nohighlight">\(\underset{P}{\operatorname{\arg max  }}\)</span>  <span class="math notranslate nohighlight">\({{{\lVert AP \rVert}}_F}^2 = \underset{P}{\operatorname{\arg min  }}  {{{\lVert A-AP \rVert}}_F}^2\)</span></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Propery of low rank approximation:
+<span class="math notranslate nohighlight">\({{{\lVert A-A_k \rVert}}_F} \leq  {{{\lVert A-B \rVert}}_F}\)</span>, where <span class="math notranslate nohighlight">\(rank(B) \leq k\)</span></p>
+</div>
+<p>Therefore  <span class="math notranslate nohighlight">\( {{{\lVert A-AP \rVert}}_F}^2\)</span> attains its minimum when
+<span class="math notranslate nohighlight">\(AP = A_k\)</span></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Now back to our initial idea of projecting the sample points on the subspace spanned by the centers .i.e each point <span class="math notranslate nohighlight">\(a_i\)</span> gets mapped to <span class="math notranslate nohighlight">\(a_iP\)</span>, since P satisfies the above equation <span class="math notranslate nohighlight">\(a_iP\)</span> is nothing but the ith row of <span class="math notranslate nohighlight">\(A_k\)</span></p>
+</div>
+<p>So our final strategy for learning Gaussian mixtures is as follows:</p>
+<ul class="simple">
+<li><p>Given n samples <span class="math notranslate nohighlight">\(x_1,x_2,...,x_n\)</span>, <span class="math notranslate nohighlight">\(x_i \in \mathbb{R}^{d}\)</span> form the matrix <span class="math notranslate nohighlight">\(A=
+\left(\begin{array}
+&amp;{a_1}^T\\
+{a_2}^T\\
+. \\
+.\\
+.\\
+{a_n}^T
+\end{array}\right)\)</span></p></li>
+<li><p>Find <span class="math notranslate nohighlight">\( A_k \)</span></p></li>
+<li><p>Apply clustering algorithms on the rows of <span class="math notranslate nohighlight">\(A_k\)</span></p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="recommendation-systems">
+<h2>Recommendation systems<a class="headerlink" href="#recommendation-systems" title="Permalink to this headline">¶</a></h2>
+<p>We are given a rating matrix <span class="math notranslate nohighlight">\(R\)</span> of n rows and m columns, where each row denotes a user and each column denotes a objects. User <span class="math notranslate nohighlight">\(u\)</span> rates the object <span class="math notranslate nohighlight">\(o\)</span> with a rating <span class="math notranslate nohighlight">\(x\)</span> then <span class="math notranslate nohighlight">\(R[u][o] = x\)</span>. It is not necessary that every user will rate every object</p>
+<div class="admonition-goal admonition">
+<p class="admonition-title">Goal</p>
+<p>To fill the rating matrix <span class="math notranslate nohighlight">\(R\)</span></p>
+</div>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 1 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>We assume that there is an underlying space of interest called latent space.</p>
+</div>
+</div><div class="section" id="preliminary-approach">
+<h3>Preliminary approach<a class="headerlink" href="#preliminary-approach" title="Permalink to this headline">¶</a></h3>
+<p>Each user and each object is a point in this latent space. Now lets say rating of user <span class="math notranslate nohighlight">\(u\)</span> for object <span class="math notranslate nohighlight">\(o\)</span> .i.e <span class="math notranslate nohighlight">\(R[u][o]\)</span> depends on the closeness of <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(o\)</span> in the latent space.</p>
+<div class="math notranslate nohighlight">
+\[ R[u][o] = u.o + noise \]</div>
+</div>
+<div class="section" id="svd-approach">
+<h3>SVD approach<a class="headerlink" href="#svd-approach" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Do one of the following to <span class="math notranslate nohighlight">\(R\)</span></p>
+<ul class="simple">
+<li><p>Fill all the empty cells in <span class="math notranslate nohighlight">\(R\)</span> with zeroes.</p></li>
+<li><p>Normalise <span class="math notranslate nohighlight">\(R\)</span> by subtracting its mean and fill the empty cells with 0.</p></li>
+<li><p>Fill a empty cell by its row average or its column average</p></li>
+</ul>
+</li>
+<li><p>Find <span class="math notranslate nohighlight">\(R_k = P_k \sum_k Q_k\)</span> the low rank approximation of <span class="math notranslate nohighlight">\(R\)</span></p></li>
+<li><p>We fill <span class="math notranslate nohighlight">\(R\)</span> by recombining features from the low rank approximation <span class="math notranslate nohighlight">\(R_k\)</span> as <span class="math notranslate nohighlight">\(R_{uo} = \sum_{i=1}^{k} P_{ui} \sigma_i Q_{io} \)</span></p></li>
+</ol>
+<div class="proof remark admonition" id="remark-1">
+<p class="admonition-title"><span>Remark </span></p>
+<div class="remark-content section" id="proof-content">
+<p>There is no specific way of choosing <span class="math notranslate nohighlight">\(k\)</span></p>
+<p>One way to go about it is to plot the <span class="math notranslate nohighlight">\({{\sigma}_i}'s\)</span> and choose k based on the <span class="math notranslate nohighlight">\(\sigma\)</span> values. If <span class="math notranslate nohighlight">\({\sigma_i}'s\)</span> after <span class="math notranslate nohighlight">\(i = t \)</span> does not contribute significantly to the variation in the data then choose <span class="math notranslate nohighlight">\( k = t\)</span></p>
+</div>
+</div><p>One another way of approaching the problem is to deal with the missing entries as unknown entries.</p>
+<p>Then to find <span class="math notranslate nohighlight">\(B\)</span>, rank(<span class="math notranslate nohighlight">\(B\)</span>) = <span class="math notranslate nohighlight">\(k\)</span>, such that</p>
+<div class="math notranslate nohighlight">
+\[
+\min \sum_{ij} W_{ij}(R_{ij} - B_{ij})
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}W_{ij}=\begin{equation}
+\left\{ 
+  \begin{aligned}
+    1 \text{   if  } R_{ij} \text{  is available}\\
+    0  \text{  if  } R_{ij} \text{  is not available }
+  \end{aligned}
+  \right.
+\end{equation}\end{split}\]</div>
+<footer>
+    Author(s): Shivasankaran V P, Gunuru Manoj Taraka Ramarao, Jayasurya Nalamolu 
+</footer> </div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs328-2022/CS328-Notes",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022_04_07_Building_LSH_Tables.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Building LSH Table</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Streaming Models and Answering Inclusion Queries</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Students of CS328 2022<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hierarchical Clustering &#8212; CS328-2022 Notes</title>
+    <title>Streaming Models and Answering Inclusion Queries &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -58,8 +58,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Densest Subgraphs" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html" />
-    <link rel="prev" title="Why does k-means++ work?" href="2022_01_27_Hierarchial_Clustering.html" />
+    <link rel="next" title="Randomized Numerical Linear Algebra: Random Projection" href="2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.html" />
+    <link rel="prev" title="Low rank approximation in Mixture Models and Recommendation systems" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -193,8 +193,8 @@
    Why does k-means++ work?
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html">
    Hierarchical Clustering
   </a>
  </li>
@@ -253,8 +253,8 @@
    Low rank approximation in Mixture Models and Recommendation systems
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Streaming Models and Answering Inclusion Queries
   </a>
  </li>
@@ -316,7 +316,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_03_25_Streamingmodels_and_answering_inclusion_queries.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -336,10 +336,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_03_25_Streamingmodels_and_answering_inclusion_queries.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb"><button
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_03_25_Streamingmodels_and_answering_inclusion_queries.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -359,7 +359,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_03_25_Streamingmodels_and_answering_inclusion_queries.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -367,7 +367,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_03_25_Streamingmodels_and_answering_inclusion_queries.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -390,38 +390,34 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why">
-   Why ?
+  <a class="reference internal nav-link" href="#sampling-data-in-a-stream">
+   Sampling Data in a Stream
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ways-of-doing-hierarchical-clustering">
-   Ways of doing Hierarchical Clustering:
+  <a class="reference internal nav-link" href="#reservoir-sampling">
+   Reservoir Sampling
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#there-are-three-different-ways-of-finding-closeness-between-the-clusters">
-     There are three different ways of finding closeness between the clusters :-
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#properties-of-single-linkage-algorithm">
-   Properties Of Single Linkage Algorithm
+  <a class="reference internal nav-link" href="#hashing">
+   Hashing
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#objective-function">
-     Objective Function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#other-properties-of-single-linkage-clustering">
-     Other Properties of Single Linkage Clustering
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hash-family">
+   Hash Family
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chaining">
+   Chaining
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prime-multiplicative-hashing">
+   Prime Multiplicative Hashing
+  </a>
  </li>
 </ul>
 
@@ -433,7 +429,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Hierarchical Clustering</h1>
+                <h1>Streaming Models and Answering Inclusion Queries</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -444,38 +440,34 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why">
-   Why ?
+  <a class="reference internal nav-link" href="#sampling-data-in-a-stream">
+   Sampling Data in a Stream
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ways-of-doing-hierarchical-clustering">
-   Ways of doing Hierarchical Clustering:
+  <a class="reference internal nav-link" href="#reservoir-sampling">
+   Reservoir Sampling
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#there-are-three-different-ways-of-finding-closeness-between-the-clusters">
-     There are three different ways of finding closeness between the clusters :-
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#properties-of-single-linkage-algorithm">
-   Properties Of Single Linkage Algorithm
+  <a class="reference internal nav-link" href="#hashing">
+   Hashing
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#objective-function">
-     Objective Function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#other-properties-of-single-linkage-clustering">
-     Other Properties of Single Linkage Clustering
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hash-family">
+   Hash Family
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chaining">
+   Chaining
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prime-multiplicative-hashing">
+   Prime Multiplicative Hashing
+  </a>
  </li>
 </ul>
 
@@ -486,113 +478,143 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="hierarchical-clustering">
-<h1>Hierarchical Clustering<a class="headerlink" href="#hierarchical-clustering" title="Permalink to this headline">¶</a></h1>
-<hr class="docutils" />
-<div class="section" id="why">
-<h2>Why ?<a class="headerlink" href="#why" title="Permalink to this headline">¶</a></h2>
+  <div class="tex2jax_ignore mathjax_ignore section" id="streaming-models-and-answering-inclusion-queries">
+<h1>Streaming Models and Answering Inclusion Queries<a class="headerlink" href="#streaming-models-and-answering-inclusion-queries" title="Permalink to this headline">¶</a></h1>
+<p>Stream sampling is a process of collecting a representative sample of the elements of a data stream.The sample is usually much smaller than the entire stream, but can be designed to retain many important characteristics of the stream, and can be used to estimate many important aggregates on the stream. <br>
+<br>In this section, we are going to learn about memory efficent computing when the space is at crunch. We are assuming two important assumptions in this section.</p>
+<ol class="simple">
+<li><p>data arrives in a stream or streams and if it is not processed or stored, then it is lost forever.</p></li>
+<li><p>data arrives so rapidly that it is not feasible to store it and then interact with it at the time of our choosing.</p></li>
+</ol>
+<div class="admonition-examples-of-the-streaming-data admonition">
+<p class="admonition-title">Examples of the streaming data</p>
 <ul class="simple">
-<li><p>Hierarchical Clustering can be used when we do not know the target number of clusters.</p></li>
-<li><p>This clustering mechanism is also very useful because we can produce a family of clusters, for each k.</p></li>
+<li><p>Sensor data: Imagine a temperature sensor above the ocean, sending information about the surface temperature to the base station at every hour.</p></li>
+<li><p>Image data: Sateliites often send infromation to the earth which consists of terabytes of the information.</p></li>
+<li><p>Internet and Web Traffic</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>A lot of papers have been written on hierarchial clustering.
-Researchers use this hierarchy to match with the natural hierarchy to obtain results.
-Eg :- Hierarchical clustering is used in Gene Sequencing and DNA matching etc.</p>
 </div>
-</div>
-<hr class="docutils" />
-<div class="section" id="ways-of-doing-hierarchical-clustering">
-<h2>Ways of doing Hierarchical Clustering:<a class="headerlink" href="#ways-of-doing-hierarchical-clustering" title="Permalink to this headline">¶</a></h2>
+<div class="proof remark admonition" id="remark-0">
+<p class="admonition-title"><span>Remark </span></p>
+<div class="remark-content section" id="proof-content">
 <ul class="simple">
-<li><p>Top-Down/divisive: bi-partition</p></li>
-<li><p>Bottom up/agglomerative: aggregating from individual point</p></li>
+<li><p>Streams often deliver elements very rapidly. We must process them quickly otherwise we may lose the opportunity to process them at all. Thus it is important that the streaming algortihm is executed in the main memory with rare accessing the secondary memory.</p></li>
+<li><p>Even if the stream requires only small portion of main memory for the computation, the requirements of all streams together can exceed the main memory.</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Single Linkage Clustering is one of the most common heirarchical clustering. It is an example of agglomerative clustering</p>
-<div class="figure align-default">
-<img alt="../_images/hierarch_1.gif" src="../_images/hierarch_1.gif" />
 </div>
-</div>
-<hr class="docutils" />
-<div class="section" id="there-are-three-different-ways-of-finding-closeness-between-the-clusters">
-<h3>There are three different ways of finding closeness between the clusters :-<a class="headerlink" href="#there-are-three-different-ways-of-finding-closeness-between-the-clusters" title="Permalink to this headline">¶</a></h3>
+</div><div class="section" id="sampling-data-in-a-stream">
+<h2>Sampling Data in a Stream<a class="headerlink" href="#sampling-data-in-a-stream" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we have <span class="math notranslate nohighlight">\(a_1\)</span>, <span class="math notranslate nohighlight">\(a_2\)</span>, <span class="math notranslate nohighlight">\(a_3\)</span>, …… <span class="math notranslate nohighlight">\(a_n\)</span> distinct items in a stream belongs to some universe U. Our goal is to sample a set S from the stream such that <span class="math notranslate nohighlight">\(|\)</span>S<span class="math notranslate nohighlight">\(|\)</span> <span class="math notranslate nohighlight">\(=\)</span> <span class="math notranslate nohighlight">\(k\)</span> and p[x <span class="math notranslate nohighlight">\(\in\)</span> S] = <span class="math notranslate nohighlight">\(\frac kn\)</span> <span class="math notranslate nohighlight">\(\forall\)</span><span class="math notranslate nohighlight">\(x\)</span> in the stream.</p>
+<p>There are two cases possible while sampling from the stream based on the length of the stream.</p>
+<p>Case1 : We know the length of stream is known and finite.</p>
 <ul class="simple">
-<li><p>Closest Pair: Single Linkage Clustering - The distance between any two pairs of clusters is given by the minimum distance between the elements of the pair of the cluster.</p></li>
+<li><p>Can choose k random positions out of n and use the entries in those positions</p></li>
+<li><p>The samples are obtained only after reading through the entire stream</p></li>
 </ul>
+<p>Case2 : We don’t know the length of the stream i.e; n is unknown or n is infinite.</p>
+<p>We can use Reservoir Sampling</p>
+</div>
+<div class="section" id="reservoir-sampling">
+<h2>Reservoir Sampling<a class="headerlink" href="#reservoir-sampling" title="Permalink to this headline">¶</a></h2>
+<p>Assume we are sampling only single item then k=1.
+Suppose we have <span class="math notranslate nohighlight">\(a_1\)</span>, <span class="math notranslate nohighlight">\(a_2\)</span>, <span class="math notranslate nohighlight">\(a_3\)</span>, …<span class="math notranslate nohighlight">\(a_i\)</span>… <span class="math notranslate nohighlight">\(a_n\)</span> distinct items in a stream belongs to some universe U where we don’t know n in advance. then</p>
 <div class="math notranslate nohighlight">
-\[
-d_1(C_i,C_j) = \min _{x \in C_i , y \in C_j}d(x,y)
+\[ 
+pr[a_i \ is \ chosen] = \frac 1n 
 \]</div>
+<p>Since k=1 we will have a one memory cell to store one sample from the data. Let that memeory cell be s.</p>
+<p>Now the probability of <span class="math notranslate nohighlight">\(a_i\)</span> replacing the element previously in the memory cell is <span class="math notranslate nohighlight">\(\frac 1i\)</span> and move on is <span class="math notranslate nohighlight">\(1 - \frac1i\)</span>.</p>
+<p>Now let us suppose the ith item is in the final stored in the memory cell.</p>
+<div class="math notranslate nohighlight">
+\[pr[s = a_i] = \frac 1i \times(1-\frac1{i+1})\times(1-\frac 1{i+2})\times.......\times(1-\frac 1n)\]</div>
+<p>since ith element must be chosen and (i+1)th, (i+2)th…nth elements must move on.</p>
+<p>Hence,</p>
+<div class="math notranslate nohighlight">
+\[pr[s = a_i] = \frac 1i \times(\frac{i}{i+1})\times(\frac{i+1}{i+2})\times ....... \times\frac{n-1}n)  pr[s = a_i] = \frac 1n\]</div>
+<p>With this information, now let us solve for the case any k.</p>
+<p>Suppose if we want to make sampling k items with replacement of items then do k parallel independent reservoir sampling for single items.
+Suppose if we want to make sampling k items without replacement of items.
+This time we are going to have k memory cells.
+Follow the below algortihm:</p>
+<p>for the first k items in the stream simply assign them to the k memory cells.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="n">k</span><span class="p">):</span>
+
+       <span class="n">j</span> <span class="o">=</span> <span class="n">random</span> <span class="n">number</span> <span class="kn">from</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">4.</span><span class="o">..</span><span class="n">i</span>
+       <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">):</span>
+           <span class="n">replace</span> <span class="n">jth</span> <span class="n">memory</span> <span class="n">cell</span> <span class="k">with</span> <span class="n">ith</span> <span class="n">element</span>
+</pre></div>
+</div>
+<p>Now let us suppose the ith item is the occured in the chosen subset.</p>
+<div class="math notranslate nohighlight">
+\[pr[a_i \in S] = \frac ki \times(1-\frac1{i+1})\times(1-\frac 1{i+2})\times .......\times(1-\frac 1n)\]</div>
+<p>since ith element must be chosen and placed in one of the k cells and (i+1)th, (i+2)th…nth elements should not fall on that location.</p>
+<p>Hence,</p>
+<div class="math notranslate nohighlight">
+\[pr[a_i \in S] = \frac ki \times(\frac{i}{i+1})\times(\frac{i+1}{i+2})\times ....... \times\frac{n-1}n) \]</div>
+<div class="math notranslate nohighlight">
+\[pr[a_i \in S] = \frac kn \]</div>
+<p>Here reservoir is analogus to memeory cell. At at every step i, all items from 1,2,3,..<span class="math notranslate nohighlight">\(i\)</span> will have the same probability <span class="math notranslate nohighlight">\(\frac1i\)</span> being in the reservoir.</p>
+</div>
+<div class="section" id="hashing">
+<h2>Hashing<a class="headerlink" href="#hashing" title="Permalink to this headline">¶</a></h2>
+<p>Elements come from universe U, but we need to store only only n items where n&lt;<span class="math notranslate nohighlight">\(|\)</span>U<span class="math notranslate nohighlight">\(|\)</span>.</p>
+<p>In hash table, we will have an array size m and hash function ‘h’ that maps elements from Universe to the set {0,1,2,..m-1}. We typically use <span class="math notranslate nohighlight">\(m ≪ |U|\)</span> and <span class="math notranslate nohighlight">\(m &lt; n\)</span></p>
 <ul class="simple">
-<li><p>Farthest Pair: Complete Link Clustering - The distance between any two pairs of clusters is given by the maximum distance between the elements of the pair of the cluster.</p></li>
+<li><p>Collisions happen when <span class="math notranslate nohighlight">\(x ≠ y\)</span>, but <span class="math notranslate nohighlight">\(h (x) = h(y)\)</span></p></li>
 </ul>
+<p>In theory, we design for worst-case behaviour of data. So, We Need to choose hash function “randomly”.</p>
+<p>Suppose there is a Hash family H = {<span class="math notranslate nohighlight">\(h_1, h_2, ... \)</span>}. When creating a hash table, we choose a random hash function and start analysing the expected query time. However, the algorithm has to carry around the “description” of the hash
+function, it needs log(<span class="math notranslate nohighlight">\(|H|\)</span>) bits of storage.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><span class="math notranslate nohighlight">\(|H|\)</span> cannot be too big, in particular, it cannot be the set <span class="math notranslate nohighlight">\([m]^U\)</span>, all possible
+functions</p>
+</div>
+</div>
+<div class="section" id="hash-family">
+<h2>Hash Family<a class="headerlink" href="#hash-family" title="Permalink to this headline">¶</a></h2>
+<p>We need to define a way to create a hash function that requires only small amount of “parameter storage”. We can also look it as follows: Suppose we have a set of parameters <span class="math notranslate nohighlight">\(a_1\)</span>, <span class="math notranslate nohighlight">\(a_2\)</span>, <span class="math notranslate nohighlight">\(a_3\)</span>, …. <span class="math notranslate nohighlight">\(a_k\)</span>. Setting these parameters randomly defines the hash function. It is also important to create small hash families H such that choosing from it gives a function with “good behaviour”. Here are some hash families.</p>
 <div class="math notranslate nohighlight">
-\[
-d_2(C_i,C_j) = \max _{x \in C_i , y \in C_j}d(x,y)
-\]</div>
+\[Uniform \ : \ Pr_{h \in H}[h(x) = i] = \frac{1}{m} \ \  \forall x,i\]</div>
+<div class="math notranslate nohighlight">
+\[Universal \ : \ Pr_{h}[h(x) = h(y)] = \frac{1}{m} \ \  \forall x\neq y \]</div>
+<div class="math notranslate nohighlight">
+\[Near \ Universal \ : \ Pr_{h}[h(x) = h(y)] \leq \frac{2}{m} \ \  \forall x\neq y \]</div>
+</div>
+<div class="section" id="chaining">
+<h2>Chaining<a class="headerlink" href="#chaining" title="Permalink to this headline">¶</a></h2>
+<p>When we are trying to insert items based on the hash values, if two items get the same hash values, we say that the two items are colliding. When  collisons happen, we store that elements in that hash value using linked lists.</p>
+<div class="figure align-default" id="hash-1">
+<img alt="../_images/hash.png" src="../_images/hash.png" />
+<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Hash table</span><a class="headerlink" href="#hash-1" title="Permalink to this image">¶</a></p>
+</div>
+<p>Suppose l(x) = length of the chain at position h(x).
+Expected time to query x = <span class="math notranslate nohighlight">\(O(1 + E_h[l(x)])\)</span>. It is same for insert and delete.</p>
+<p>Now let us define</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} for \ \ x\neq y \ \ C_{xy}=   \left\{
+\begin{array}{ll}
+      1 &amp; if \ \ h(x) = h(y)\\
+      0 &amp; else\\
+\end{array} 
+\right.  \end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[E_{h}[l(x)] = E_{h}[\sum_{y}C_{xy}]\]</div>
+<p>For universal hashing</p>
+<div class="math notranslate nohighlight">
+\[E_{h}[l(x)] = E_{h}[\sum_{y}C_{xy}] = \sum_{y}E_{h}[p(x) = p(y)] = \frac nm\]</div>
+</div>
+<div class="section" id="prime-multiplicative-hashing">
+<h2>Prime Multiplicative Hashing<a class="headerlink" href="#prime-multiplicative-hashing" title="Permalink to this headline">¶</a></h2>
+<p>Prime Multiplicative hashing is used to design small and universal hash family.</p>
 <ul class="simple">
-<li><p>Average of all Pairs: Average Link Clustering - The distance between any two pairs of clusters is given by the average distance between the elements of the pair of the cluster.</p></li>
+<li><p>Fix a prime number p &gt; <span class="math notranslate nohighlight">\(|U|\)</span></p></li>
+<li><p>H = {<span class="math notranslate nohighlight">\(h_a\)</span> (x) = ((ax + b)mod p)mod m, a, b ∈ {1, … p − 1 }}</p></li>
+<li><p>Choosing a hash function is same as choosing a, b ∈ {1, … p − 1}.</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[
-d_2(C_i,C_j) = avg _{x \in C_i , y \in C_j}d(x,y)
-\]</div>
-</div>
-</div>
-<hr class="docutils" />
-<div class="section" id="properties-of-single-linkage-algorithm">
-<h2>Properties Of Single Linkage Algorithm<a class="headerlink" href="#properties-of-single-linkage-algorithm" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>The algorithm can work with any dissimilarity measure, it may not necessarily be metric</p></li>
-<li><p>There are no Inversions.</p>
-<ul>
-<li><p>As we run the algorithm (as we start merging the clusters), the dissimilarity scores between merged clusters only increases.</p></li>
-</ul>
-</li>
-</ul>
-<div class="figure align-default">
-<img alt="../_images/LevelComp.jpg" src="../_images/LevelComp.jpg" />
-</div>
-<div class="math notranslate nohighlight">
-\[ Dissimilarity ~~ at ~~ Level - 2 &gt; Dissimilarity ~~at ~~Level - 5 \]</div>
-<div class="section" id="objective-function">
-<h3>Objective Function<a class="headerlink" href="#objective-function" title="Permalink to this headline">¶</a></h3>
-<p>The question that arises while understanding the single linkage algorithm is in terms of it’s objective function.</p>
-<p>OR</p>
-<p>What kind of clusters is this algorithm trying to create?</p>
-<p>To understand this we would need to look up some properties of Single Linkage Clustering</p>
-<p>Let’s suppose that we want to create a cluster <span class="math notranslate nohighlight">\( C_1,C_2,....C_k \)</span> which maximizes the inter cluster distance.</p>
-<div class="math notranslate nohighlight">
-\[
- maximize~~cost_k(C)
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-cost_k(C)=\min _{C_i,C_j}d(C_i,C_j) 
-\]</div>
-<div class="figure align-default">
-<img alt="../_images/k_1.jpg" src="../_images/k_1.jpg" />
-</div>
-<p>If the above task is our objective function (to maximize the minimum inter cluster distancefor k clusters) then we can easily use single linkage clustering to achieve our objective.</p>
-<p>We just have to remove the top k-1 clustering merges and we will achieve k clusters. Also, all these K clusters will follow the above objective function.</p>
-</div>
-<div class="section" id="other-properties-of-single-linkage-clustering">
-<h3>Other Properties of Single Linkage Clustering<a class="headerlink" href="#other-properties-of-single-linkage-clustering" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>It is actually an Euclidean Minimum spanning Tree!</p></li>
-</ul>
-<div class="figure align-default">
-<img alt="../_images/c.jpg" src="../_images/c.jpg" />
-</div>
-<div class="math notranslate nohighlight">
-\[ Unlike ~~ centre-based ~~ clustering ~~ Single linkage ~~ clustering ~~ can ~ handle ~~ the ~~ above ~~ example ~~ nicely!.\]</div>
 <footer>
-Author(s): Abhigyan M. Ninama, Chetan Kishore, Shubh Lavti
-</footer></div>
-</div>
+    Author(s): Shivasankaran V P, Gunuru Manoj Taraka Ramarao, Jayasurya Nalamolu 
+</footer> </div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -620,17 +642,17 @@ Author(s): Abhigyan M. Ninama, Chetan Kishore, Shubh Lavti
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_01_27_Hierarchial_Clustering.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Why does k-means++ work?</p>
+            <p class="prev-next-title">Low rank approximation in Mixture Models and Recommendation systems</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html" title="next page">
+    <a class='right-next' id="next-link" href="2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Densest Subgraphs</p>
+        <p class="prev-next-title">Randomized Numerical Linear Algebra: Random Projection</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
