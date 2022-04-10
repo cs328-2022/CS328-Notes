@@ -4,43 +4,46 @@
 format: jb-book
 root: intro.md
 parts:
-- caption: Logistics
-  chapters:
-  - file: notebooks/CONTRIBUTING.md
-  - file: notebooks/deadlines.md
-- caption: Foundations
-  chapters:
-  - file: notebooks/2022_01_03_data_representations.md
-  - file: notebooks/2022_01_03_data_representations_notebook.ipynb
-  - file: notebooks/2022_01_03_distance_function.md
-  - file: notebooks/2022_01_06_object_representations_notebook.ipynb
-  - file: notebooks/2022_01_10_central_limit_theorem_notebook.ipynb
-  - file: notebooks/2022_01_11_markov_chebyshev_inequalities.md
-  - file: notebooks/2022_01_13_chernoff_bound.md
-  - file: notebooks/2022_01_13_chernoff_bound_tails.ipynb
+  - caption: Logistics
+    chapters:
+      - file: notebooks/CONTRIBUTING.md
+      - file: notebooks/deadlines.md
+  - caption: Foundations
+    chapters:
+      - file: notebooks/2022_01_03_data_representations.md
+      - file: notebooks/2022_01_03_data_representations_notebook.ipynb
+      - file: notebooks/2022_01_03_distance_function.md
+      - file: notebooks/2022_01_06_object_representations_notebook.ipynb
+      - file: notebooks/2022_01_10_central_limit_theorem_notebook.ipynb
+      - file: notebooks/2022_01_11_markov_chebyshev_inequalities.md
+      - file: notebooks/2022_01_13_chernoff_bound.md
+      - file: notebooks/2022_01_13_chernoff_bound_tails.ipynb
 
-- caption: Clustering and low-rank approximations
-  chapters:
-  - file: notebooks/2022_01_17_Clustering.ipynb
-  - file: notebooks/2022_01_24_K-means.md
-  - file: notebooks/2022_01_25_K-means++.md
-  - file: notebooks/2022_01_27_Hierarchial_Clustering.md
-  - file: notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb
-  - file: notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb
-  - file: notebooks/2022_02_03_Greedy_algorithm_for_Densest_subgraphs.ipynb
-  - file: notebooks/2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.ipynb
-  - file: notebooks/2022_02_14_GraphLaplacian.ipynb
-  - file: notebooks/2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.ipynb
-  - file: notebooks/2022_03_14_singular_value_decomposition.ipynb
-  # - file: notebooks/2022_03_15_goemetric_interpretation_of_svd.ipynb
-  - file: notebooks/2022_03_15_geometric_svd.ipynb
-# - caption: Dealing with massive data
-#   chapters:
-# - caption: Selected topics from NPTEL-Scalable Data Science Course
-#   chapters:
-  - file: notebooks/2022_03_17_SVD_in_Mixture_Models.ipynb
-  - file: notebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.ipynb
-  - file: notebooks/2022_04_07_Near_Neighbors.ipynb
-  - file: notebooks/2022_03_24_Low_rank_approximation_Mixture_Models _and_Recommendation systems.ipynb
-  - file: notebooks/2022_03_25_Streamingmodels_and_answering_inclusion_queries.ipynb
+  - caption: Clustering and low-rank approximations
+    chapters:
+      - file: notebooks/2022_01_17_Clustering.ipynb
+      - file: notebooks/2022_01_24_K-means.md
+      - file: notebooks/2022_01_25_K-means++.md
+      - file: notebooks/2022_01_27_Hierarchial_Clustering.md
+      - file: notebooks/2022_01_31_HierarchialClustering_LinkagebasedClusturing.ipynb
+      - file: notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb
+      - file: notebooks/2022_02_03_Greedy_algorithm_for_Densest_subgraphs.ipynb
+      - file: notebooks/2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.ipynb
+      - file: notebooks/2022_02_14_GraphLaplacian.ipynb
+      - file: notebooks/2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.ipynb
+      - file: notebooks/2022_03_14_singular_value_decomposition.ipynb
+      # - file: notebooks/2022_03_15_goemetric_interpretation_of_svd.ipynb
+      - file: notebooks/2022_03_15_geometric_svd.ipynb
+      # - caption: Dealing with massive data
+      #   chapters:
+      - file: notebooks/2022_03_17_SVD_in_Mixture_Models.ipynb
+      - file: notebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.ipynb
+      - file: notebooks/2022_04_07_Building_LSH_Tables.ipynb
+      - file: notebooks/2022_03_24_Low_rank_approximation_Mixture_Models _and_Recommendation systems.ipynb
+      - file: notebooks/2022_03_25_Streamingmodels_and_answering_inclusion_queries.ipynb
+
+  - caption: Selected topics from NPTEL-Scalable Data Science Course
+    chapters:
+      - file: notebooks/2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.ipynb
+      - file: notebooks/2022_04_07_Near_Neighbors.ipynb
 #chapters
