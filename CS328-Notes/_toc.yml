@@ -39,6 +39,8 @@ parts:
       - file: notebooks/2022_03_17_SVD_in_Mixture_Models.ipynb
       - file: notebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.ipynb
       - file: notebooks/2022_04_07_Building_LSH_Tables.ipynb
+      - file: notebooks/2022_03_24_Low_rank_approximation_Mixture_Models _and_Recommendation systems.ipynb
+      - file: notebooks/2022_03_25_Streamingmodels_and_answering_inclusion_queries.ipynb
 
   - caption: Selected topics from NPTEL-Scalable Data Science Course
     chapters:
