@@ -244,6 +244,16 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_17_Mixture_Models.html">
+   Mixture Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
+   Gaussian Annulus Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
    Building LSH Table
   </a>
@@ -399,7 +409,7 @@
 </div>
 <div class="figure align-center" id="projection">
 <a class="reference internal image-reference" href="../_images/projection.jpg"><img alt="../_images/projection.jpg" src="../_images/projection.jpg" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 35 </span><span class="caption-text">Projection to Lower Dimension</span><a class="headerlink" href="#projection" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 40 </span><span class="caption-text">Projection to Lower Dimension</span><a class="headerlink" href="#projection" title="Permalink to this image">¶</a></p>
 </div>
 <p>This mapping is created by filling up the matrix with independant gaussian random variables. The guarantee is that with very high probability for every pair <span class="math notranslate nohighlight">\((i, j)\)</span> the distance <span class="math notranslate nohighlight">\(\|Ax_i - Ax_j\|_2\)</span> will be within <span class="math notranslate nohighlight">\((1 \pm \epsilon)\|x_i - x_j\|_2\)</span>.</p>
 <h3><b>Other Properties</b></h3>
@@ -421,8 +431,8 @@
 </div>
 </div><h3><b>Other Constructions</b></h3><h4>Earlier Method:</h4>
 <p>We were creating the matrix <span class="math notranslate nohighlight">\(A\)</span> by creating the matrix <span class="math notranslate nohighlight">\(R\)</span> such that <span class="math notranslate nohighlight">\(R_{ij} \sim N(0, 1)\)</span>. We make sure that every column of <span class="math notranslate nohighlight">\(R\)</span> is normalized. So,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5410a247-cf6a-4fdd-be64-1c52033a18c4">
-<span class="eqno">(9)<a class="headerlink" href="#equation-5410a247-cf6a-4fdd-be64-1c52033a18c4" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7897dda8-433f-4d8c-a961-dfd8c52768bd">
+<span class="eqno">(9)<a class="headerlink" href="#equation-7897dda8-433f-4d8c-a961-dfd8c52768bd" title="Permalink to this equation">¶</a></span>\[\begin{align}
 A = \frac{1}{\sqrt{k}}R
 \end{align}\]</div>
 <p>We divide by <span class="math notranslate nohighlight">\(\sqrt{k}\)</span> so that the expected norm of each column becomes <span class="math notranslate nohighlight">\(1\)</span>.</p>
@@ -454,13 +464,13 @@ A = \frac{1}{\sqrt{k}}R
 <h3><b>Low Rank Approximation</b></h3>
 <p>We know that <span class="math notranslate nohighlight">\(A_k = P_A^kA\)</span>, where projection <span class="math notranslate nohighlight">\(P_A^k = U_kU_k^t\)</span>.</p>
 <p>Also,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-53a8713a-cae6-4156-9b1e-1e7a2fa5cec2">
-<span class="eqno">(10)<a class="headerlink" href="#equation-53a8713a-cae6-4156-9b1e-1e7a2fa5cec2" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c86e2e62-d771-4c8f-bce4-027992ee4cee">
+<span class="eqno">(10)<a class="headerlink" href="#equation-c86e2e62-d771-4c8f-bce4-027992ee4cee" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \|A - P_A^kA\|_2 = \sigma_{k+1}
 \end{align}\]</div>
 <p>For any <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(P_B^k\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-22f2ca5b-2707-42b3-9a0a-e9df8c363de9">
-<span class="eqno">(11)<a class="headerlink" href="#equation-22f2ca5b-2707-42b3-9a0a-e9df8c363de9" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b2f4931a-c77b-4253-8937-8584a67ab8c0">
+<span class="eqno">(11)<a class="headerlink" href="#equation-b2f4931a-c77b-4253-8937-8584a67ab8c0" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \sigma_{k+1} \leq \|A - P_B^kA\| \leq \sigma_{k+1} + \sqrt{2\|AA^t - BB^t\|}
 \end{align}\]</div>
 <p>Now, we want <span class="math notranslate nohighlight">\(B\)</span> such that,</p>
@@ -477,23 +487,23 @@ A = \frac{1}{\sqrt{k}}R
 </div>
 <h3><b>JL in Low Rank Approximation</b></h3>
 <p>Observe that,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-395ee64a-f835-468a-8d44-98f64d4a3ced">
-<span class="eqno">(12)<a class="headerlink" href="#equation-395ee64a-f835-468a-8d44-98f64d4a3ced" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-271ea9f4-23ee-4d28-bfd2-9a6cf8f115bb">
+<span class="eqno">(12)<a class="headerlink" href="#equation-271ea9f4-23ee-4d28-bfd2-9a6cf8f115bb" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \|AA^t - BB^t\| &amp;= \sup_{\|x\| = 1} \|\|xA\|_2^2 - \|xAR\|_2^2\| \\
 &amp;= \sup_{\|x\| = 1}\|\|y\|_2^2 - \|yR\|_2^2\| \hspace{2cm} \text{(Take } xA = y)
 \end{align}\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Remember that,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7ce31eef-3cab-483b-a92e-986be9c53bce">
-<span class="eqno">(13)<a class="headerlink" href="#equation-7ce31eef-3cab-483b-a92e-986be9c53bce" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-22e0e525-cd32-4f0a-a31c-aa01ec64c4f4">
+<span class="eqno">(13)<a class="headerlink" href="#equation-22e0e525-cd32-4f0a-a31c-aa01ec64c4f4" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \|A\|_2 &amp;= \sup_{\|x\|_2 = 1}\|Ax\| \\
 \|A\|_2^2 &amp;= \max_{\|x\|_2 = 1} x^TAx
 \end{align}\]</div>
 </div>
 <p>Now, from the JL property,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7c007669-3234-4819-8d08-b21ad7a23c2b">
-<span class="eqno">(14)<a class="headerlink" href="#equation-7c007669-3234-4819-8d08-b21ad7a23c2b" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fc74254d-b2fb-4371-9cb9-cc1fde0cb380">
+<span class="eqno">(14)<a class="headerlink" href="#equation-fc74254d-b2fb-4371-9cb9-cc1fde0cb380" title="Permalink to this equation">¶</a></span>\[\begin{align}
 Pr[\|yR\|^2 - \|y\|^2 &gt; \epsilon\|y\|^2] &lt; e^{-ck\epsilon^2} \hspace{2cm} \text{(Exponentially small)}
 \end{align}\]</div>
 <p>Using the union bound over a <span class="math notranslate nohighlight">\(\epsilon\)</span> - net, <span class="math notranslate nohighlight">\(k = \tilde{O}(\frac{rank(A)}{\epsilon^2})\)</span></p>
@@ -501,13 +511,13 @@ Pr[\|yR\|^2 - \|y\|^2 &gt; \epsilon\|y\|^2] &lt; e^{-ck\epsilon^2} \hspace{2cm} 
 <p class="admonition-title">Note</p>
 <div class="figure align-center" id="sphere">
 <a class="reference internal image-reference" href="../_images/sphere.jpg"><img alt="../_images/sphere.jpg" src="../_images/sphere.jpg" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 36 </span><span class="caption-text"><span class="math notranslate nohighlight">\(\epsilon\)</span>-net Sphere</span><a class="headerlink" href="#sphere" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 41 </span><span class="caption-text"><span class="math notranslate nohighlight">\(\epsilon\)</span>-net Sphere</span><a class="headerlink" href="#sphere" title="Permalink to this image">¶</a></p>
 </div>
 <p><span class="math notranslate nohighlight">\(\epsilon\)</span> - net is when we choose points in unit sphere such that the union of the <span class="math notranslate nohighlight">\(\epsilon\)</span> - radius spheres of all the points give the unit sphere.</p>
 </div>
 <p>We get,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cdbabdf7-9a04-42f9-b9e5-f2c6f36da7eb">
-<span class="eqno">(15)<a class="headerlink" href="#equation-cdbabdf7-9a04-42f9-b9e5-f2c6f36da7eb" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f8f7384b-684d-4574-a67d-46b3ce7e61dd">
+<span class="eqno">(15)<a class="headerlink" href="#equation-f8f7384b-684d-4574-a67d-46b3ce7e61dd" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \sup_{\|x\| = 1}\|\|xA\|^2 - \|xAR\|^2\| \leq \epsilon\|AA^t\|
 \end{align}\]</div>
 <h3><b>Time taken for Projection</b></h3>
@@ -534,7 +544,7 @@ Pr[\|yR\|^2 - \|y\|^2 &gt; \epsilon\|y\|^2] &lt; e^{-ck\epsilon^2} \hspace{2cm} 
 </ul>
 <div class="figure align-center" id="example">
 <a class="reference internal image-reference" href="../_images/example.jpg"><img alt="../_images/example.jpg" src="../_images/example.jpg" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 37 </span><span class="caption-text">Example for which norm is not preserved</span><a class="headerlink" href="#example" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 42 </span><span class="caption-text">Example for which norm is not preserved</span><a class="headerlink" href="#example" title="Permalink to this image">¶</a></p>
 </div>
 <ul class="simple">
 <li><p>It works fine if vector is all dense!</p></li>
