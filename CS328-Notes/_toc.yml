@@ -32,6 +32,9 @@ parts:
   - file: notebooks/2022_03_14_singular_value_decomposition.ipynb
   # - file: notebooks/2022_03_15_goemetric_interpretation_of_svd.ipynb
   - file: notebooks/2022_03_15_geometric_svd.ipynb
+  - file: notebooks/2022_04_02_gaussian_analysis.ipynb
+  - file: notebooks/2022_02_17_Mixture_Models.ipynb
+  - file: notebooks/2022_02_21_Chi_Squared_Distribution,_Gaussian_Annulus_Theorem,_Distance_between_points_sampled_from_a_distribution.ipynb
 # - caption: Dealing with massive data
 #   chapters:
 # - caption: Selected topics from NPTEL-Scalable Data Science Course
