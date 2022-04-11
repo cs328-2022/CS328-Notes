@@ -1,0 +1,721 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bloom Filters &#8212; CS328-2022 Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Low rank approximation in Mixture Models and Recommendation systems" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html" />
+    <link rel="prev" title="Building LSH Table" href="2022_04_07_Building_LSH_Tables.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CS328-2022 Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Course Description
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Logistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="CONTRIBUTING.html">
+   Contributing to CS328 Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
+   Deadlines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations.html">
+   Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations_notebook.html">
+   [CODE] 🧑‍💻Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
+   Distance Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_06_object_representations_notebook.html">
+   Object Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_10_central_limit_theorem_notebook.html">
+   Central Limit Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_11_markov_chebyshev_inequalities.html">
+   Markov and Chebyshev Inequalities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound.html">
+   Chernoff Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound_tails.html">
+   Plot of chernoff bound
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering and low-rank approximations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_17_Clustering.html">
+   Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_24_K-means.html">
+   K-means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_25_K-means%2B%2B.html">
+   Lloyd’s algorithm, convergence?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_27_Hierarchial_Clustering.html">
+   Why does k-means++ work?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html">
+   Hierarchical Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html">
+   Densest Subgraphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html">
+   Densest Subgraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html">
+   Expansion and Conductance of a Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_14_GraphLaplacian.html">
+   Graph Laplacian and its Eigenvalues
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html">
+   Relation between second eigenvalue of Laplacian and Spectral Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_14_singular_value_decomposition.html">
+   Singular Valued Decomposition (SVD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_15_geometric_svd.html">
+   Applications of SVD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_17_SVD_in_Mixture_Models.html">
+   SVD in Gaussian Mixture Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html">
+   Frobenius Norm and Low Rank Approaximation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
+   Building LSH Table
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Bloom Filters
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
+   Low rank approximation in Mixture Models and Recommendation systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
+   Streaming Models and Answering Inclusion Queries
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Selected topics from NPTEL-Scalable Data Science Course
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.html">
+   Randomized Numerical Linear Algebra: Random Projection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
+   Finding Near Neighbors
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_04_10_DistinctCount_BloomFilters.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs328-2022/CS328-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_04_10_DistinctCount_BloomFilters.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_04_10_DistinctCount_BloomFilters.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_04_10_DistinctCount_BloomFilters.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_04_10_DistinctCount_BloomFilters.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Bloom Filters
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#querying">
+     Querying
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bloom-filter">
+     Bloom Filter:
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analysis">
+     Analysis
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minimizing-the-false-positive-rate">
+     Minimizing the false positive rate:
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#drawbacks-and-extensions">
+     Drawbacks and Extensions:
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applications">
+     Applications:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#streaming-problem-distinct-count">
+   Streaming problem: distinct count
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Applications
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solutions">
+     Solutions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#approximations">
+     Approximations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-effort">
+     First Effort
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Bloom Filters</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Bloom Filters
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#querying">
+     Querying
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bloom-filter">
+     Bloom Filter:
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analysis">
+     Analysis
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minimizing-the-false-positive-rate">
+     Minimizing the false positive rate:
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#drawbacks-and-extensions">
+     Drawbacks and Extensions:
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applications">
+     Applications:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#streaming-problem-distinct-count">
+   Streaming problem: distinct count
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Applications
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solutions">
+     Solutions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#approximations">
+     Approximations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-effort">
+     First Effort
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="bloom-filters">
+<h1>Bloom Filters<a class="headerlink" href="#bloom-filters" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="querying">
+<h2>Querying<a class="headerlink" href="#querying" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we have a large number of elements in our universe U. This could be anything ranging from books in a library to IP addresses stored in a server. Now suppose we want to implement a data structure that would help us in querying whether a particular element is present in the set or not, efficiently in terms of time and space. Since we have much lesser memory as compared to the size of our universe, we have to find a way to reduce the memory requirement for the querying data structure from <span class="math notranslate nohighlight">\(|U|\)</span> to something less. Similarly, we can’t spend <span class="math notranslate nohighlight">\(O(|U|)\)</span> time(a linear search) for querying as this would be too much. So, what are the possible solutions?
+The first idea would be to use Hashing; which reduces the space used to <span class="math notranslate nohighlight">\(O(n log |U|)\)</span> and the querying time to <span class="math notranslate nohighlight">\(O(n/m)\)</span>(where <span class="math notranslate nohighlight">\(n\)</span> is the number of elements stored and <span class="math notranslate nohighlight">\(m\)</span> is the size of the hash table), or to use a bit array which uses <span class="math notranslate nohighlight">\(O(|U|)\)</span> space but queries in <span class="math notranslate nohighlight">\(O(1)\)</span> time on average. But let us go beyond this and try and figure out if we can do better! Turns out, if we allow errors in querying with a small probability delta(a Monte Carlo algorithm), we can, using a data structure known as a Bloom Filter.</p>
+</div>
+<div class="section" id="bloom-filter">
+<h2>Bloom Filter:<a class="headerlink" href="#bloom-filter" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="fig1">
+<img alt="../_images/fig11.png" src="../_images/fig11.png" />
+<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Figure 1: Bloom Filter</span><a class="headerlink" href="#fig1" title="Permalink to this image">¶</a></p>
+</div>
+<p>A bloom filter uses a bit array B of size, <span class="math notranslate nohighlight">\(m\)</span>, say, and <span class="math notranslate nohighlight">\(k\)</span> hash functions. m and k are parameters which we will look at shortly. First let us take a look at the structure and working of the BF. For every element <span class="math notranslate nohighlight">\(x\)</span> belonging to <span class="math notranslate nohighlight">\(U\)</span>, each hash function maps it to a particular location in the bit array. We start with all bits of B initialized to 0, i.e. <span class="math notranslate nohighlight">\(B[i]=0\)</span> for all 1<span class="math notranslate nohighlight">\(\leq\)</span>i<span class="math notranslate nohighlight">\(\leq\)</span>m.</p>
+<p><strong>Insertion</strong>:
+For all <span class="math notranslate nohighlight">\(x⊆U\)</span>, we apply hash functions <span class="math notranslate nohighlight">\(h_{i}\)</span> to <span class="math notranslate nohighlight">\(h_{k}\)</span> on x and set the bit at the corresponding location in the BF B to 1, ie, for all
+<span class="math notranslate nohighlight">\(x⊆U\)</span>, <span class="math notranslate nohighlight">\(B[hi(x)]=1\)</span>.</p>
+<p><strong>Lookup</strong>:
+For a particular element <span class="math notranslate nohighlight">\(x\)</span>, return PRESENT if for all <span class="math notranslate nohighlight">\(i=1…k\)</span>, ^<span class="math notranslate nohighlight">\(B[hi(x)]\)</span> is <span class="math notranslate nohighlight">\(1\)</span>, where ^ denotes the BITWISE AND. Else return ABSENT.</p>
+<div class="figure align-default" id="fig2">
+<img alt="../_images/fig2.png" src="../_images/fig2.png" />
+<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text">Figure 2: Insertion and lookup in a BF</span><a class="headerlink" href="#fig2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="analysis">
+<h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h2>
+<p>Now let us do an efficiency analysis for the BF. Clearly, when an element is actually present in the BF, the query for it will always return PRESENT, because all the locations in the bit array mapped by the hash functions for that element must have already been set to 1 when the element was inserted, therefore their AND is always going to return 1 which is what we want.</p>
+<p>What about when a particular element is not actually present in the BF? Can the query return a false answer? Unfortunately, yes it can. Consider the following scenario: We insert three elements <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> in the BF. We use three hash functions <span class="math notranslate nohighlight">\(h_{1}\)</span>, <span class="math notranslate nohighlight">\(h_{2}\)</span> and <span class="math notranslate nohighlight">\(h_{3}\)</span>. For <span class="math notranslate nohighlight">\(x\)</span>, locations <span class="math notranslate nohighlight">\(1\)</span>,<span class="math notranslate nohighlight">\(3\)</span> and <span class="math notranslate nohighlight">\(5\)</span> are set to <span class="math notranslate nohighlight">\(1\)</span>. For <span class="math notranslate nohighlight">\(y\)</span>, locations <span class="math notranslate nohighlight">\(4\)</span>,<span class="math notranslate nohighlight">\(6\)</span> and <span class="math notranslate nohighlight">\(7\)</span> are set to <span class="math notranslate nohighlight">\(1\)</span> and for <span class="math notranslate nohighlight">\(z\)</span>, locations <span class="math notranslate nohighlight">\(6\)</span>, <span class="math notranslate nohighlight">\(4\)</span> and <span class="math notranslate nohighlight">\(2\)</span> are set to <span class="math notranslate nohighlight">\(1\)</span>. Now we query if an element w is present in the bit array or not. The hash functions map <span class="math notranslate nohighlight">\(w\)</span> to locations <span class="math notranslate nohighlight">\(2\)</span>,<span class="math notranslate nohighlight">\(7\)</span> and <span class="math notranslate nohighlight">\(5\)</span>. But these locations have the bits already turned on by insertion of other elements and therefore our query returns a false positive. We want to minimize this false positive, and we will do that by adjusting our parameters <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<p>False Positive Analysis:
+Let us now do an analysis of how the probability of returning a false positive depends on <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(k\)</span>. Suppose we have <span class="math notranslate nohighlight">\(n\)</span> elements inserted in the BF; size of the BF is <span class="math notranslate nohighlight">\(m\)</span> and the number of hash functions is <span class="math notranslate nohighlight">\(k\)</span>. We perform a lookup for an element, say, <span class="math notranslate nohighlight">\(x\)</span>, which was not inserted. What is the probability that the query returns PRESENT?</p>
+<p>To make our analysis easier, assume that the hash functions <span class="math notranslate nohighlight">\(h_{1}….h_{k}\)</span> are independent of each other and they map elements uniform randomly to each position in B, ie., <br></p>
+<p><span class="math notranslate nohighlight">\(Pr[h_{i} =j]=1/m\)</span>,   for all positions <span class="math notranslate nohighlight">\(1\)</span> <span class="math notranslate nohighlight">\(\leq\)</span> <span class="math notranslate nohighlight">\(j\)</span> <span class="math notranslate nohighlight">\(\leq\)</span> <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<p>Now, the probability that <span class="math notranslate nohighlight">\(h_{i}(x)=0\)</span> for any position <span class="math notranslate nohighlight">\(p=(1-1/m)^{kn}\)</span>,
+which is roughly <span class="math notranslate nohighlight">\(e^-{kn/m}\)</span>.</p>
+<p>So, the probability that all positions for <span class="math notranslate nohighlight">\(x\)</span> have a <span class="math notranslate nohighlight">\(1\)</span> is
+<span class="math notranslate nohighlight">\((1-e^{-kn/m})^k\)</span></p>
+<p>This is exactly equal to the probability of returning a false positive for the BF. We aim to minimize this probability.</p>
+</div>
+<div class="section" id="minimizing-the-false-positive-rate">
+<h2>Minimizing the false positive rate:<a class="headerlink" href="#minimizing-the-false-positive-rate" title="Permalink to this headline">¶</a></h2>
+<p>We have,
+<br>                         <span class="math notranslate nohighlight">\(p= e^{-kn/m}\)</span><br>
+<br>                         <span class="math notranslate nohighlight">\(=&gt;k=-\frac{m}{n}log(p) \)</span>
+<br>
+And false positive probability=<br>                          <span class="math notranslate nohighlight">\((1-p)^k\)</span></p>
+<p><br>To make the calculations easier, we minimize the log of this function instead of the actual function</p>
+<p>                   <span class="math notranslate nohighlight">\(log(1-p)^k = klog(1-p)=-\frac{m}{n}log(p)log(1-p) \)</span><br></p>
+<p>This is clearly minimized at <span class="math notranslate nohighlight">\(p=1/2\)</span> or <span class="math notranslate nohighlight">\(k=\frac{mlog(2)}{n}\)</span></p>
+<div class="figure align-default" id="fig3">
+<img alt="../_images/fig3.png" src="../_images/fig3.png" />
+<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">Figure 3: Minimizing the false positive rate</span><a class="headerlink" href="#fig3" title="Permalink to this image">¶</a></p>
+</div>
+<p>Doing a few mathematical manipulations, we see that the false positive rate is minimized at <span class="math notranslate nohighlight">\(k=\frac{mlog2}{n}\)</span>.</p>
+<p>This now gives us an estimate of designing a Bloom Filter efficiently. If we want a false positive rate of delta, we set <span class="math notranslate nohighlight">\(m=\lceil \frac{log\frac{1}{\delta}n}{log^2 2} \rceil\)</span></p>
+</div>
+<div class="section" id="drawbacks-and-extensions">
+<h2>Drawbacks and Extensions:<a class="headerlink" href="#drawbacks-and-extensions" title="Permalink to this headline">¶</a></h2>
+<p>The chief drawback of Bloom Filter is that it does not allow for deletions. We can’t simply set the bits corresponding to the element being deleted to 0 as it can affect the lookup of other elements which might have bits clashing with that of the element being deleted.</p>
+<p>In this light, several extensions of the Bloom Filter have been studied. One of them is the Counting Bloom filter, which maintains a small counter rather than a single bit. It maintains 4 bits per counter. Insertions require increasing the counter at a particular location(as mapped by the hash functions) by 1 and deletions decrease it by 1. Lookups are the same as the simple Bloom Filter. This Bloom Filter however, can also give false negatives but with a low probability.</p>
+</div>
+<div class="section" id="applications">
+<h2>Applications:<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<p>Bloom Filters find a number of applications in cyber security, database lookups, bitcoins and much more. Browsers use a modified version of the Bloom Filter to decide whether a URL is potentially malicious. Many noteworthy servers that have to maintain a large amount of data often make use of Bloom Filters. Facebook, for example, uses bloom filters for typeahead search, to fetch friends and friends of friends to a user typed query. Bloom filters find applications in querying whenever small number of false positives are tolerable</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="streaming-problem-distinct-count">
+<h1>Streaming problem: distinct count<a class="headerlink" href="#streaming-problem-distinct-count" title="Permalink to this headline">¶</a></h1>
+<p>Let the universe be U, the number of distinct elements that you have seen is n. This n
+is smaller than u, and the stream size is m(potentially much bigger than n). Distinct count has a variety of uses. A common use is websites and apps that are counting values.
+For instance,
+U = all IP addresses
+10.1.21.10, 10.93.28,1,…..,98.0.3.1,…..10.93.28.1…..</p>
+<p>We can see here a list of IPs, 10.93.28.1 has appeared multiple times. We cannot really predict anything about the sequence in which this data comes. We have to estimate the number of distinct elements we have seen.</p>
+<div class="section" id="id1">
+<h2>Applications<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Before going to how it actually works let us go through few applications -</p>
+<ol class="simple">
+<li><p>Suppose you’re working on a document corpus analysis. And, when modeling this document corpus, you may need to build something known as k-grams, which is made of k consecutive bytes that appeared in your text data. You have to make k-grams out of it. And the document corpus you’re reading is the source of your stream. This document corpus is massive, and in order to develop a natural language model, you’ll need the number of distinct k-grams you’ve seen in the corpus, or at least an estimate of it.</p></li>
+<li><p>Similarly, let’s say we’re looking at telephone call logs to see who called whom, and some telecommunication company might be interested in knowing how many phone calls were made in the last month. Then you’ll notice from the stream of these tuples that I look at only the first element of the tuple (caller, callee) and I want to examine how many different phone numbers show in at least one of the records as caller.</p></li>
+</ol>
+</div>
+<div class="section" id="solutions">
+<h2>Solutions<a class="headerlink" href="#solutions" title="Permalink to this headline">¶</a></h2>
+<p>Now, we will try to look at what are the naive solutions. The first naive solution is to store all the elements, sort them, and count the number of distinct elements. It takes a lot of space because you’ll need O(n log(U)) space to store all the n elements if you are doing a sorting.
+Instead, if we store a hash map. Then you don’t sort; for each new element that arrives, you check to see if it’s already in a hash map. If it isn’t there, insert it in the hashmap and increment the counter and if it is there then it isn’t in this element. You could use a bit array of size U and change the bit to 1 in the respective place if it’s seen.</p>
+</div>
+<div class="section" id="approximations">
+<h2>Approximations<a class="headerlink" href="#approximations" title="Permalink to this headline">¶</a></h2>
+<p>You obtain a much better result in less space. This type of solution, which will be a prevalent category of solutions, will be referred to as epsilon delta approximations.
+(∈, δ) − approximations</p>
+<p>Assume the true solution is the actual number of distinct counts is n. Suppose the algorithm returns some <span class="math notranslate nohighlight">\(\hat{n}\)</span>. We name it epsilon delta approximation, if it satisfies the property
+that (1 − ε)n ≤ <span class="math notranslate nohighlight">\(\hat{n}\)</span> ≤ (1 + ε)n with probability (1 − δ).</p>
+<p>So, this probability over the randomness of the algorithm in our specific situation. In the case of distinct counts the randomness will be the choice of random hash functions.
+As a result, the probability will be based on the random hash function selection.</p>
+</div>
+<div class="section" id="first-effort">
+<h2>First Effort<a class="headerlink" href="#first-effort" title="Permalink to this headline">¶</a></h2>
+<p>Let’s look at this case, the number of distinct elements is n and the stream length is m where m is much bigger than n. The proposed algorithm is that suppose we are given a space S, sample S items from the stream. We have to find out the number of distinct elements in this set. Let, the number of distinct elements in this set is <span class="math notranslate nohighlight">\(\hat{n}\)</span> and returns <span class="math notranslate nohighlight">\(\hat{n}\)</span>*(m/S)
+That is the estimated method will return here.</p>
+<p>Take this particular setting -  1,1,1,1,1,…….1,2,3,4,……n-1 (not a constant factor approximation)</p>
+<p>The first m-n+1 element of the input sequence is element 1 which occurs multiple times. We have n-2 distinct elements here. Suppose, if m is much bigger than n. Take m equal to <span class="math notranslate nohighlight">\(n^{2}\)</span>.</p>
+<p>So if we randomly choose n positions from O(<span class="math notranslate nohighlight">\(n^{2}\)</span>) there is a maximum probability that the elements might repeat and therefore estimate n̂ in this case is 1 with high probability. It does not work because what may happen is, if you are sampling only this one particular element you cannot distinguish between the 2 cases. When we have 1 1 1 1 1 and 2 3 4 n-1, when we have 1 1 1 1 1 and then again more ones. These 2 cases we return the same answers. So therefore, this particular sampling algorithm cannot work.</p>
+<footer>
+Author(s): Ayush Anand, Bhoomika Mandloi, Lakshmi Ramireddy
+</footer></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs328-2022/CS328-Notes",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022_04_07_Building_LSH_Tables.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Building LSH Table</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Low rank approximation in Mixture Models and Recommendation systems</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Students of CS328 2022<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
