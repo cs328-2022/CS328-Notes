@@ -18,7 +18,10 @@ parts:
       - file: notebooks/2022_01_11_markov_chebyshev_inequalities.md
       - file: notebooks/2022_01_13_chernoff_bound.md
       - file: notebooks/2022_01_13_chernoff_bound_tails.ipynb
-
+# - caption: Dealing with massive data
+#   chapters:
+# - caption: Selected topics from NPTEL-Scalable Data Science Course
+#   chapters:
   - caption: Clustering and low-rank approximations
     chapters:
       - file: notebooks/2022_01_17_Clustering.ipynb
@@ -38,6 +41,8 @@ parts:
       #   chapters:
       - file: notebooks/2022_03_17_SVD_in_Mixture_Models.ipynb
       - file: notebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.ipynb
+      - file: notebooks/2022_02_17_Mixture_Models.ipynb
+      - file: notebooks/2022_02_21_Chi_Squared_Distribution,_Gaussian_Annulus_Theorem,_Distance_between_points_sampled_from_a_distribution.ipynb
       - file: notebooks/2022_04_07_Building_LSH_Tables.ipynb
       - file: notebooks/2022_04_10_DistinctCount_BloomFilters
       - file: notebooks/2022_03_24_Low_rank_approximation_Mixture_Models _and_Recommendation systems.ipynb
