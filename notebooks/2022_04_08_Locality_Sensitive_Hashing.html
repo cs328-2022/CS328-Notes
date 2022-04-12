@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Densest Subgraphs &#8212; CS328-2022 Notes</title>
+    <title>Locality Sensitive Hashing &#8212; CS328-2022 Notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -58,8 +58,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Densest Subgraph" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html" />
-    <link rel="prev" title="Hierarchical Clustering" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html" />
+    <link rel="next" title="Finding Near Neighbors" href="2022_04_07_Near_Neighbors.html" />
+    <link rel="prev" title="Streaming Models and Answering Inclusion Queries" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -172,7 +172,7 @@
   Clustering and low-rank approximations
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_01_17_Clustering.html">
    Clustering
@@ -198,8 +198,8 @@
    Hierarchical Clustering
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html">
    Densest Subgraphs
   </a>
  </li>
@@ -279,9 +279,9 @@
   Selected topics from NPTEL-Scalable Data Science Course
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_08_Locality_Sensitive_Hashing.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Locality Sensitive Hashing
   </a>
  </li>
@@ -336,7 +336,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_04_08_Locality_Sensitive_Hashing.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -356,10 +356,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_04_08_Locality_Sensitive_Hashing.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb"><button
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_04_08_Locality_Sensitive_Hashing.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -379,7 +379,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_04_08_Locality_Sensitive_Hashing.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -387,7 +387,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_02_01_DensestSubgraph_Maxflowalgorithm.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_04_08_Locality_Sensitive_Hashing.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -410,57 +410,58 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#density-of-subgraph">
-   Density of Subgraph
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#finding-densest-subgraphs">
-   Finding Densest Subgraphs
+  <a class="reference internal nav-link" href="#representation-of-a-document-as-sets">
+   Representation of a document as Sets
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#u-using-decision-problem-u">
-     <u>
-      Using Decision Problem
-     </u>
+    <a class="reference internal nav-link" href="#separation-of-the-elements-in-the-set">
+     Separation of the elements in the set
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#u-max-flow-min-cut-based-algorithm-u">
-     <u>
-      Max Flow / Min-cut based Algorithm
-     </u>
+    <a class="reference internal nav-link" href="#measure-of-similarity">
+     Measure of Similarity
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analysis-of-max-flow-min-cut-algorithm">
-   Analysis of Max-Flow / Min-Cut Algorithm
+  <a class="reference internal nav-link" href="#representation-of-documents-as-vector">
+   Representation of Documents as Vector
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#similarity-between-documents">
+   Similarity between Documents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#locality-sensitive-property">
+   Locality Sensitive property
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hamming-distance">
+   Hamming Distance
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#u-different-cases-u">
-     <u>
-      Different cases
-     </u>
-     :
+    <a class="reference internal nav-link" href="#locality-sensitive-function-for-this-distance">
+     Locality Sensitive function for this distance?
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#case-1">
-       Case - 1
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#case-2">
-       Case - 2
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#existence-of-locality-sensitive-hashing">
+   Existence of Locality Sensitive Hashing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#locality-sensitive-hashing-for-angle-distance">
+   Locality Sensitive Hashing for Angle Distance
+  </a>
  </li>
 </ul>
 
@@ -472,7 +473,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Densest Subgraphs</h1>
+                <h1>Locality Sensitive Hashing</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -483,57 +484,58 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#density-of-subgraph">
-   Density of Subgraph
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#finding-densest-subgraphs">
-   Finding Densest Subgraphs
+  <a class="reference internal nav-link" href="#representation-of-a-document-as-sets">
+   Representation of a document as Sets
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#u-using-decision-problem-u">
-     <u>
-      Using Decision Problem
-     </u>
+    <a class="reference internal nav-link" href="#separation-of-the-elements-in-the-set">
+     Separation of the elements in the set
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#u-max-flow-min-cut-based-algorithm-u">
-     <u>
-      Max Flow / Min-cut based Algorithm
-     </u>
+    <a class="reference internal nav-link" href="#measure-of-similarity">
+     Measure of Similarity
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analysis-of-max-flow-min-cut-algorithm">
-   Analysis of Max-Flow / Min-Cut Algorithm
+  <a class="reference internal nav-link" href="#representation-of-documents-as-vector">
+   Representation of Documents as Vector
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#similarity-between-documents">
+   Similarity between Documents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#locality-sensitive-property">
+   Locality Sensitive property
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hamming-distance">
+   Hamming Distance
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#u-different-cases-u">
-     <u>
-      Different cases
-     </u>
-     :
+    <a class="reference internal nav-link" href="#locality-sensitive-function-for-this-distance">
+     Locality Sensitive function for this distance?
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#case-1">
-       Case - 1
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#case-2">
-       Case - 2
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#existence-of-locality-sensitive-hashing">
+   Existence of Locality Sensitive Hashing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#locality-sensitive-hashing-for-angle-distance">
+   Locality Sensitive Hashing for Angle Distance
+  </a>
  </li>
 </ul>
 
@@ -544,124 +546,149 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="densest-subgraphs">
-<h1>Densest Subgraphs<a class="headerlink" href="#densest-subgraphs" title="Permalink to this headline">¶</a></h1>
-<hr class="docutils" />
-<div class="section" id="density-of-subgraph">
-<h2>Density of Subgraph<a class="headerlink" href="#density-of-subgraph" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p>Density of a subgraph</p>
-<ul class="simple">
-<li><p>Density measures how tightly the components inside a subgraph are connected to each other.</p></li>
-<li><p>It does not care about the connectivity with the components outside the subgraph.</p></li>
-</ul>
-</li>
-<li><p>Mathematically, Density of a subgraph is represented by the following formula:</p>
-<div class="math notranslate nohighlight">
-\[  D(S) = \frac{e(S,S)}{|S|} ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ - (1)\]</div>
-<ul class="simple">
-<li><p>e(S,S) is the number of edges between nodes both in S or e(S,S) = { ( x , y ) <span class="math notranslate nohighlight">\(\in\)</span> E ;  x <span class="math notranslate nohighlight">\(\in\)</span> S, y <span class="math notranslate nohighlight">\(\in\)</span> S }</p></li>
-<li><p>|S| is the number of nodes in subgraph S.</p></li>
-</ul>
-</li>
-<li><p>Significance of |S|</p>
-<ul class="simple">
-<li><p>Simply calculating e(S,S) won’t be enough to determine how tighty the components are connected. For eg, in the figure shown below e(S,S) of Subgraph A is more however we can easily notice that subgraph B is more dense.</p></li>
-</ul>
-<div class="figure align-default">
-<img alt="../_images/Subgraph_Comparision.jpg" src="../_images/Subgraph_Comparision.jpg" />
+  <div class="tex2jax_ignore mathjax_ignore section" id="locality-sensitive-hashing">
+<h1>Locality Sensitive Hashing<a class="headerlink" href="#locality-sensitive-hashing" title="Permalink to this headline">¶</a></h1>
+<p><strong>Finding Nearest Points</strong>: Given a set of data points and a query data point, we have to find the data point closest to this query point. We also have to find the K-nearest neighbours or some set of points which satisfy the condition
+<span class="math notranslate nohighlight">\(d(p,query)  &lt; r\)</span>, where r is some given distance.<br />
+This point may be a representation of a multiset or a vector which represents a  document.</p>
+<p><strong>If we are taking the datapoints as a part of a document, the near points  represent similarity within a document.</strong><br />
+The words in the documents need to be represented in some mathematical entity.</p>
+<div class="section" id="representation-of-a-document-as-sets">
+<h2>Representation of a document as Sets<a class="headerlink" href="#representation-of-a-document-as-sets" title="Permalink to this headline">¶</a></h2>
+<p>Any document is represented by the words it contains. The words may be represented by their position on the document, but the spatial orientation of the words is not a very useful attribute of the representation.<br />
+Thus the document is represented by the set of words it consists.</p>
+<div class="section" id="separation-of-the-elements-in-the-set">
+<h3>Separation of the elements in the set<a class="headerlink" href="#separation-of-the-elements-in-the-set" title="Permalink to this headline">¶</a></h3>
+<p>Natural separators are not always reliable for a document. Thus a document is separated into Shingles.<br />
+<strong>Shingles are a set of k consecutive characters that make up the entire document.</strong> These Shingles are often hashed to 64bit numbers for each of storage.<br />
+A document = Set of Shingles</p>
+<p>Example: A Sly fox jumped<br />
+<span class="math notranslate nohighlight">\(k=5\)</span><br />
+Shingles:<br />
+a sly<br />
+sly f<br />
+ly fo<br />
+.<br />
+.<br />
+.</p>
+<p>Shingles are more appropriate method of separation because, they represent and preserve the semantics of a document. Most of the time, while comparing the document, we have to take into account the semantic similarity.</p>
 </div>
-<div class="math notranslate nohighlight">
-\[ Figure - 1 \]</div>
-<ul class="simple">
-<li><p>We can’t consider denominator as <span class="math notranslate nohighlight">\({|S|}^{2}\)</span> as   <span class="math notranslate nohighlight">\( \max\limits_{S} \frac{e(S,S)}{{|S|}^{2}}  \)</span> is trivial, irrespective of the nature of graph.</p></li>
-<li><p>However    <span class="math notranslate nohighlight">\( \max\limits_{S} \  \frac{e(S,S)}{|S|}  \)</span> is non-trivial for different types of graphs.</p></li>
-</ul>
-</li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>(|S|)(|S|-1) can’t be considered as denominator (as it becomes zero for |S| = 1) even though it gives a tight upper bound on Density of Subgraph.</p>
-</div>
-</div>
-<div class="section" id="finding-densest-subgraphs">
-<h2>Finding Densest Subgraphs<a class="headerlink" href="#finding-densest-subgraphs" title="Permalink to this headline">¶</a></h2>
-<hr class="docutils" />
-<div class="section" id="u-using-decision-problem-u">
-<h3><u>Using Decision Problem</u><a class="headerlink" href="#u-using-decision-problem-u" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Let us assume the Density of a Subgraph <span class="math notranslate nohighlight">\(\ge\)</span> a constant (say <span class="math notranslate nohighlight">\(\frac{c}{2}\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\( \therefore  \frac{e(S,S)}{|S|} \ge \frac{c}{2}\)</span></p></li>
-<li><p>On Rearranging, <span class="math notranslate nohighlight">\( 2e(S,S) \ge c|S|\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\because  2e(S,S) = deg(S) - e(S,\overline{S}) \)</span> ,  <span class="math notranslate nohighlight">\( deg(S) + e(S,\overline{S}) \ge c|S|\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\( deg(S) + deg(\overline{S}) - deg(\overline{S}) - e(S,\overline{S}) \ge c|S| \)</span></p></li>
-<li><p>We know that, <span class="math notranslate nohighlight">\( deg(S) + deg(\overline{S}) = 2|E|\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\( \therefore 2|E| \ge c|S| + deg(\overline{S}) + e(S,\overline{S})\)</span>                                <b>-  (2)</b></p></li>
-</ul>
-</div>
-<div class="section" id="u-max-flow-min-cut-based-algorithm-u">
-<h3><u>Max Flow / Min-cut based Algorithm</u><a class="headerlink" href="#u-max-flow-min-cut-based-algorithm-u" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>Maximum Flow or Min-cut algorithm is an algorithm that gives us the maximum feasible flow through a network or the minimum cuts required to stop the flow through the network.</p></li>
-<li><p>We can find the densest subgraph by using a Decision problem where we need to find if there exist any subgraph S with density more than a fixed value let’s say <span class="math notranslate nohighlight">\( \frac{c}{2}\)</span>.</p></li>
-<li><p>Then using binary search it finds the maximum value of c for which there exists a subgraph such that <span class="math notranslate nohighlight">\( \frac{e(S,S)}{|S|}=\frac{c}{2} \)</span></p></li>
-<li><p><b>Max Flow Algorithm :-</b></p>
-<ul class="simple">
-<li><p>Binary search on value of c</p>
-<ul>
-<li><p>Let the original graph be G.</p></li>
-<li><p>Now let us construct a new graph G’ such that it has 2 extra nodes than G (Source and Sink).</p></li>
-<li><p>Connect all the nodes (undirected) in G to the source and assign weight of each edge as the degree of the node. For eg, if degree of node <span class="math notranslate nohighlight">\(\nu\)</span> is <span class="math notranslate nohighlight">\( {d}_{i} \)</span> then assign weight of edge from source to <span class="math notranslate nohighlight">\(\nu\)</span> as <span class="math notranslate nohighlight">\( {d}_{i} \)</span>.</p></li>
-<li><p>Connect all the nodes to sink and assign weight of all the edges as c.</p></li>
-<li><p>Run the max flow algorithm (Ford-Fulkerson).</p></li>
-<li><p>It will always return a cut <span class="math notranslate nohighlight">\(\le 2|E|\)</span> .</p></li>
-<li><p>Assign Densest Subgraph as S (Shown in the figure).</p></li>
-<li><p>Repeat all the steps with new value of c as per binary search.</p></li>
-</ul>
-</li>
-</ul>
-<div class="figure align-default">
-<img alt="../_images/Densest_subgraph_2.jpg" src="../_images/Densest_subgraph_2.jpg" />
-</div>
-</li>
-<li><p>The runtime of this algorithm in O(log(C) <span class="math notranslate nohighlight">\({|E|}^{2}\)</span> U), where U is the value of maximum flow.</p></li>
-</ul>
+<div class="section" id="measure-of-similarity">
+<h3>Measure of Similarity<a class="headerlink" href="#measure-of-similarity" title="Permalink to this headline">¶</a></h3>
+<p>Jaccard Similarity <span class="math notranslate nohighlight">\(JS(A,B) =  \frac {|A \cap B|} {|A \cup B|}\)</span></p>
+<p><span class="math notranslate nohighlight">\(JS(A,B) \in [0,1]\)</span></p>
+<p>Jaccard Distcance : <span class="math notranslate nohighlight">\(JD(A,B) = 1 - JS(A,B)\)</span></p>
+<p><span class="math notranslate nohighlight">\(JD(A,B) \in [0,1]\)</span></p>
+<p>Jaccard Distance is a metric property. It satisfies the following :<br />
+1.<br />
+<span class="math notranslate nohighlight">\(JD(A,A) = 1-  \frac {|A \cap A|} {|A \cup A|}\)</span><br />
+<span class="math notranslate nohighlight">\(JD(A,A) = 1-  1\)</span><br />
+<span class="math notranslate nohighlight">\(JD(A,A) = 0\)</span></p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(JD(A,B) = 1-  \frac {|A \cap B|} {|A \cup B|}\)</span><br />
+<span class="math notranslate nohighlight">\(JD(A,B) = 1-  \frac {|B \cap A|} {|B \cup A|}\)</span><br />
+<span class="math notranslate nohighlight">\(JD(A,B) = 1-JS(B,A)\)</span><br />
+<span class="math notranslate nohighlight">\(JD(A,B) = JD(B,A)\)</span><br />
+Jaccard Distance is symmetric</p></li>
+</ol>
+<ol class="simple">
+<li><p>JD(x,y) can only lie between 0 and 1. Thus <span class="math notranslate nohighlight">\(JD(A,B) \ge 0\)</span></p></li>
+</ol>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(JD(A,C) &lt; JD(A,B) + JD(A,C)\)</span><br />
+Triangle inequality is also satisfied by Jaccard distance.</p></li>
+</ol>
 </div>
 </div>
-<div class="section" id="analysis-of-max-flow-min-cut-algorithm">
-<h2>Analysis of Max-Flow / Min-Cut Algorithm<a class="headerlink" href="#analysis-of-max-flow-min-cut-algorithm" title="Permalink to this headline">¶</a></h2>
-<hr class="docutils" />
-<div class="section" id="u-different-cases-u">
-<h3><u>Different cases</u>:<a class="headerlink" href="#u-different-cases-u" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="case-1">
-<h4>Case - 1<a class="headerlink" href="#case-1" title="Permalink to this headline">¶</a></h4>
-<div class="figure align-default">
-<img alt="../_images/Densest_subgraph_1.jpg" src="../_images/Densest_subgraph_1.jpg" />
+<div class="section" id="representation-of-documents-as-vector">
+<h2>Representation of Documents as Vector<a class="headerlink" href="#representation-of-documents-as-vector" title="Permalink to this headline">¶</a></h2>
+<p>Vectors can be used in various instances for representation. They can be used to represent an image (over 64x64 or 128x128 domains) or the spatial distribution of data. Their use can also be extended to documents</p>
+<p>In Documents, the vector representation is similar to that of sets. Each vector direction represents the position of a shingle in the document and the magnitude can be related to the weightage of the shingle.</p>
 </div>
-<div class="math notranslate nohighlight">
-\[ Figure - 2 \]</div>
-<ul class="simple">
-<li><p>As you can see in the Figure - 2 that the min cut will atmost be 2|E| and we can always have a cut of less than 2|E|.</p></li>
-<li><p>In this type of cut there is no densest graph since there are no nodes to the left of the cut.</p></li>
-</ul>
+<div class="section" id="similarity-between-documents">
+<h2>Similarity between Documents<a class="headerlink" href="#similarity-between-documents" title="Permalink to this headline">¶</a></h2>
+<p>Given any Document, if we pass the shingles through a hash function and compare the hash values, we can get the values where shingles are exactly same. But there is no way we can say that two shingles are similar through the same approach.<br />
+Example:<br />
+x= acted , y= acted , z= acced<br />
+The Hash function would easily detect that x and y are exact but not detect that x and z are 80 % similar</p>
 </div>
-<div class="section" id="case-2">
-<h4>Case - 2<a class="headerlink" href="#case-2" title="Permalink to this headline">¶</a></h4>
-<div class="figure align-default">
-<img alt="../_images/Densest_subgraph_2.jpg" src="../_images/Densest_subgraph_2.jpg" />
+<div class="section" id="locality-sensitive-property">
+<h2>Locality Sensitive property<a class="headerlink" href="#locality-sensitive-property" title="Permalink to this headline">¶</a></h2>
+<p>The exact equality of the two shingles are detected because they are assigned to the same index by the hash function. Taking this idea, <strong>Indyk Motwani</strong> repuroposed the occurance of collisions in the hash functions, i.e., if two entities x and y are similar, they collide (same value is produced by the hash function) and not if they are vastly different.<br />
+Relating to our earlier problem of finding nearest points. If two points in a space are nearby, the chances of collision is high.<br />
+<span class="math notranslate nohighlight">\(Pr[h(x)=h(y)] \)</span> is high if x and y are close<br />
+<span class="math notranslate nohighlight">\(Pr[h(x)=h(y)] \)</span> is low if x and y are far apart</p>
+<p>Such kind of function will solve both the problems, however no such clear function exists. To slove such problems, a hash family is designed, given the distance function or similarity function.<br />
+At runtine, a single hash function is chosen from this family to calculate the similarity.</p>
+<p>This function is then called Locality sensitive if the above two probabilities is satisfied.</p>
+<p>In Terms of similarity function, given a universe U, and siilarity s:U x U -&gt; [0,1], does there exist a probability distribution over some hash family H such that<br />
+<span class="math notranslate nohighlight">\(Pr[h(x)=h(y)] = S(x,y)\)</span><br />
+<span class="math notranslate nohighlight">\(S(x,y) =1 \Rightarrow x=y\)</span><br />
+<span class="math notranslate nohighlight">\(S(x,y) = S(x,y)\)</span></p>
 </div>
-<div class="math notranslate nohighlight">
-\[ Figure - 3 \]</div>
-<ul class="simple">
-<li><p>In Figure - 3, we can see that there is a subset of nodes which is to the left of min-cut.</p></li>
-<li><p>This Subset satisfies the condition given by the right hand side of the equation <span class="math notranslate nohighlight">\(  2|E| \ge c|S| + deg(\overline{S}) + e(S,\overline{S})\)</span>.</p></li>
-<li><p>Hence for maximum value of c, this is the desired densest subgraph.</p></li>
-</ul>
+<div class="section" id="hamming-distance">
+<h2>Hamming Distance<a class="headerlink" href="#hamming-distance" title="Permalink to this headline">¶</a></h2>
+<p>Used when the points are denoted by a bit string of fixed and equal length.<br />
+point <span class="math notranslate nohighlight">\(\to\)</span> bit string of length d.<br />
+H(x,y) = {i, <span class="math notranslate nohighlight">\(x_{i} \neq y_{i}\)</span>}<br />
+<span class="math notranslate nohighlight">\(S_{H}(x,y) = 1-\frac {H(x,y)} {d}\)</span></p>
+<p>For Example: x=1011010001, y= 0111010101<br />
+d=10
+number of dissimilarities H(x,y) =3<br />
+S(x,y) = 1-3/10 =0.7</p>
+<div class="section" id="locality-sensitive-function-for-this-distance">
+<h3>Locality Sensitive function for this distance?<a class="headerlink" href="#locality-sensitive-function-for-this-distance" title="Permalink to this headline">¶</a></h3>
+<p>In order to create a LSH for such a problem, the hash family must be sampling a set of positions. Let the be a hash family such that<br />
+H ={<span class="math notranslate nohighlight">\(h_{i}(x)=x_{i} | i=1,2... d\)</span>}<br />
+|H| = d<br />
+From this family H, a function h is chosen randomy to achieve the probability of similarity.
+<span class="math notranslate nohighlight">\(Pr_{h\in H}[h(x)=h(y)] = S(x,y)\)</span></p>
+<p>If we extend the dame function to k coordinates instead of 1, we get a more precise equation. In the above example itself, let S={1,5,7}</p>
+</div>
+</div>
+<div class="section" id="existence-of-locality-sensitive-hashing">
+<h2>Existence of Locality Sensitive Hashing<a class="headerlink" href="#existence-of-locality-sensitive-hashing" title="Permalink to this headline">¶</a></h2>
+<p>Since we are choosing k-coordinates, where k = |S| and we know that for a single coordinate:</p>
+<p>Pr[h(x) = h(y)] = 1 - <span class="math notranslate nohighlight">\(\frac{H(x,y)} {d} = S_{h}(x,y)\)</span></p>
+<p>The Probability for k coordinates:</p>
+<p>Pr[h(x) = h(y)] = <span class="math notranslate nohighlight">\((1 - \frac{H(x,y} {d})^{k} = (S_{H}(x,y))^{k}\)</span></p>
+</div>
+<div class="section" id="locality-sensitive-hashing-for-angle-distance">
+<h2>Locality Sensitive Hashing for Angle Distance<a class="headerlink" href="#locality-sensitive-hashing-for-angle-distance" title="Permalink to this headline">¶</a></h2>
+<p><img alt="img" src="../_images/LSH.png" /></p>
+<p>Let x and y be unit normal vectors, i.e. radii in a circle of radius 1.</p>
+<p>Therefore, |x| = |y| = 1</p>
+<p>x,y = |x||y|cos<span class="math notranslate nohighlight">\(θ\)</span></p>
+<p><span class="math notranslate nohighlight">\(⇒\)</span> x.y = cos<span class="math notranslate nohighlight">\(θ\)</span></p>
+<p><span class="math notranslate nohighlight">\(\theta = cos^{-1}(x.y) = d(x,y)\)</span> [angle distance]</p>
+<p>Since, the total angular distance in a circle is [-x,x]</p>
+<p>S(x,y) = 1 - <span class="math notranslate nohighlight">\(\frac {\theta} {x} \in\)</span>  [0,1]</p>
+<p>Corresponding notion of local sensitivity hashing:</p>
+<p>Choose a normal vector v at random</p>
+<p>Now, <span class="math notranslate nohighlight">\(h_{v}\)</span>(x) = sign(v.x) = <span class="math notranslate nohighlight">\(±1\)</span>  (or ‘1’ and ‘0’ in binary)</p>
+<p>Let P be a hyperplane <span class="math notranslate nohighlight">\(\perp\)</span> to v</p>
+<p>Then, the half containing <span class="math notranslate nohighlight">\(\vec{v}\)</span> yields +1 and the other half yields -1</p>
+<p>Pr[h(x) = h(y)] = 1 - <span class="math notranslate nohighlight">\(\frac {\theta} {x}\)</span></p>
+<p>The hyperplane gives different signs for x and y if it passes through <span class="math notranslate nohighlight">\(\theta\)</span> with probability <span class="math notranslate nohighlight">\(\frac {\theta} {x}\)</span></p>
+<p>Thus the probability of x and y giving some signs is 1 - <span class="math notranslate nohighlight">\(\frac {\theta} {x}\)</span></p>
+<p>Aside : Picking a direction u.a.r</p>
+<ol class="simple">
+<li><p>Picking a vector in d-dimensions (x <span class="math notranslate nohighlight">\(\in\)</span> R<span class="math notranslate nohighlight">\(^d\)</span>) such that norm of x = 1 (|x|<span class="math notranslate nohighlight">\(_{2}\)</span> = 1)
+and, the direction is uniform along all possible directions</p></li>
+<li><p>Take the Gaussian distribution and generate d independent samples.</p></li>
+</ol>
+<p>x = (<span class="math notranslate nohighlight">\(x_{1},x_{2}, ..... x_{d}) \thicksim  N(0,1)\)</span></p>
+<ol class="simple">
+<li><p>Normalize it with the length of the vector <span class="math notranslate nohighlight">\((\frac {x} {|x|_{2}})\)</span></p></li>
+</ol>
+<p>L<span class="math notranslate nohighlight">\(_{2}\)</span> norm of x = <span class="math notranslate nohighlight">\(\sqrt{\Sigma x_{i}^2} \)</span></p>
+<ol class="simple">
+<li><p>Writing the equation in polar form gives us independent r and <span class="math notranslate nohighlight">\(θ\)</span>.
+With r normalized, we are left with a uniformly chosen direction.</p></li>
+</ol>
 <footer>
-Author(s): Abhigyan M. Ninama, Chetan Kishore, Shubh Lavti
+Authors: Kanishk Singh , Krishnam Hasija , Paras Gupta , Shreyshi Singh
 </footer></div>
-</div>
-</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -689,17 +716,17 @@ Author(s): Abhigyan M. Ninama, Chetan Kishore, Shubh Lavti
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Hierarchical Clustering</p>
+            <p class="prev-next-title">Streaming Models and Answering Inclusion Queries</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html" title="next page">
+    <a class='right-next' id="next-link" href="2022_04_07_Near_Neighbors.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Densest Subgraph</p>
+        <p class="prev-next-title">Finding Near Neighbors</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
