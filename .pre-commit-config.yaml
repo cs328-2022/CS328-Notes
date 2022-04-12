@@ -1,18 +1,23 @@
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
     hooks:
-    -   id: check-yaml
-    -   id: end-of-file-fixer
-    -   id: trailing-whitespace
-    -   id: requirements-txt-fixer
--   repo: https://github.com/psf/black
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: requirements-txt-fixer
+  - repo: https://github.com/psf/black
     rev: 21.6b0
     hooks:
-    -   id: black
-        additional_dependencies: ['click==8.0.4']
--   repo: https://gitlab.com/pycqa/flake8
+      - id: black
+        additional_dependencies: ["click==8.0.4"]
+  - repo: https://gitlab.com/pycqa/flake8
     rev: 3.9.2
     hooks:
-    -   id: flake8
+      - id: flake8
         types: [file, python]
+  # - repo: https://github.com/executablebooks/jupyter-book
+  #   rev: v0.12.1
+  #   hooks:
+  #     - id: jb-to-sphinx
+  #       args: ["CS328-Notes"]
