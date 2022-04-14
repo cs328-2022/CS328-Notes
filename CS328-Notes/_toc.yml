@@ -40,6 +40,8 @@ parts:
       - file: notebooks/2022_04_10_DistinctCount_BloomFilters
       - file: notebooks/2022_03_24_Low_rank_approximation_Mixture_Models _and_Recommendation systems.ipynb
       - file: notebooks/2022_03_25_Streamingmodels_and_answering_inclusion_queries.ipynb
+      - file: notebooks/2022_03_31_Linear_Counting.ipynb
+      - file: notebooks/2022_04_04_Flajolet_Martin_Algorithm.ipynb
 
   - caption: Selected topics from NPTEL-Scalable Data Science Course
     chapters:
