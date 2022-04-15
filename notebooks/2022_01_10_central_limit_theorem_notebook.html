@@ -273,6 +273,16 @@
    Streaming Models and Answering Inclusion Queries
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_31_Linear_Counting.html">
+   Linear Counting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_04_Flajolet_Martin_Algorithm.html">
+   Flajolet-Martin Sketch
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -731,8 +741,8 @@ Var(\sum_{i=1}^{n}X_i) = \sum_{i=1}^{n}Var(X_i)
 <hr class="docutils" />
 <p>Consider <span class="math notranslate nohighlight">\(X\)</span> as the random variable.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="4d53d2d6-0a45-480a-8190-2d6e4db9f316" name="8e3331f9-84bc-430e-b47b-c6a20ecef12f" type="radio">
-</input><label class="tabbed-label" for="4d53d2d6-0a45-480a-8190-2d6e4db9f316">
+<input checked="checked" id="b6e52974-78ed-43d0-858d-ec63379868d5" name="438a241a-775b-4c72-a22f-90c8ee60f0a3" type="radio">
+</input><label class="tabbed-label" for="b6e52974-78ed-43d0-858d-ec63379868d5">
 Bernoulli</label><div class="tabbed-content docutils">
 <ul class="simple">
 <li><p>In Bernoulli distribution, r.v. can take only two possible values 0 or 1 with <span class="math notranslate nohighlight">\(X=1\)</span> occuring with probability <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
@@ -760,8 +770,8 @@ Bernoulli</label><div class="tabbed-content docutils">
 <p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Bernoulli distribution with <span class="math notranslate nohighlight">\(p = 0.4\)</span></span><a class="headerlink" href="#bernoulli-p-m-f" title="Permalink to this image">¶</a></p>
 </div>
 </div>
-<input id="d7b80cdb-0ef8-4bfc-a7c1-4dba81b7fdd3" name="8e3331f9-84bc-430e-b47b-c6a20ecef12f" type="radio">
-</input><label class="tabbed-label" for="d7b80cdb-0ef8-4bfc-a7c1-4dba81b7fdd3">
+<input id="40c8a06f-e6ed-4f75-8e72-d74bec84e864" name="438a241a-775b-4c72-a22f-90c8ee60f0a3" type="radio">
+</input><label class="tabbed-label" for="40c8a06f-e6ed-4f75-8e72-d74bec84e864">
 Binomial</label><div class="tabbed-content docutils">
 <ul class="simple">
 <li><p>In n Binomial events, we can get the probability of getting <span class="math notranslate nohighlight">\(r\)</span> events <span class="math notranslate nohighlight">\((r\le n)\)</span> with favourable odds <span class="math notranslate nohighlight">\(p\)</span> and the rest with unfavourable odds <span class="math notranslate nohighlight">\(q\)</span> <span class="math notranslate nohighlight">\((q = 1-p)\)</span>.</p></li>
@@ -789,8 +799,8 @@ Binomial</label><div class="tabbed-content docutils">
 <p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Binomial distribution of 100 trials and <span class="math notranslate nohighlight">\(p = 0.25\)</span> (left), <span class="math notranslate nohighlight">\(p = 0.5\)</span> (middle), and  <span class="math notranslate nohighlight">\(p = 0.75\)</span> (right)</span><a class="headerlink" href="#binomial-p-m-f" title="Permalink to this image">¶</a></p>
 </div>
 </div>
-<input id="e77f26af-1a6e-4bb9-b920-3660ca20a91a" name="8e3331f9-84bc-430e-b47b-c6a20ecef12f" type="radio">
-</input><label class="tabbed-label" for="e77f26af-1a6e-4bb9-b920-3660ca20a91a">
+<input id="31af4c6d-75f2-4909-bc0d-816133e0b9c0" name="438a241a-775b-4c72-a22f-90c8ee60f0a3" type="radio">
+</input><label class="tabbed-label" for="31af4c6d-75f2-4909-bc0d-816133e0b9c0">
 Gaussian</label><div class="tabbed-content docutils">
 <ul class="simple">
 <li><p>The normal/gaussian distribution can be expressed in terms of its expectation value and variance.</p></li>

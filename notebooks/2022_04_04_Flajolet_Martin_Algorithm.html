@@ -1,0 +1,897 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flajolet-Martin Sketch &#8212; CS328-2022 Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Locality Sensitive Hashing" href="2022_04_08_Locality_Sensitive_Hashing.html" />
+    <link rel="prev" title="Linear Counting" href="2022_03_31_Linear_Counting.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CS328-2022 Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Course Description
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Logistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="CONTRIBUTING.html">
+   Contributing to CS328 Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deadlines.html">
+   Deadlines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations.html">
+   Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_data_representations_notebook.html">
+   [CODE] 🧑‍💻Data Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_03_distance_function.html">
+   Distance Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_06_object_representations_notebook.html">
+   Object Representations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_10_central_limit_theorem_notebook.html">
+   Central Limit Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_11_markov_chebyshev_inequalities.html">
+   Markov and Chebyshev Inequalities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound.html">
+   Chernoff Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_13_chernoff_bound_tails.html">
+   Plot of chernoff bound
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering and low-rank approximations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_17_Clustering.html">
+   Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_24_K-means.html">
+   K-means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_25_K-means%2B%2B.html">
+   Lloyd’s algorithm, convergence?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_27_Hierarchial_Clustering.html">
+   Why does k-means++ work?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_01_31_HierarchialClustering_LinkagebasedClusturing.html">
+   Hierarchical Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_01_DensestSubgraph_Maxflowalgorithm.html">
+   Densest Subgraphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_03_Greedy_algorithm_for_Densest_subgraphs.html">
+   Densest Subgraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_10_Expansion_Conductance_Graphs_Sparset_Cut.html">
+   Expansion and Conductance of a Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_14_GraphLaplacian.html">
+   Graph Laplacian and its Eigenvalues
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html">
+   Relation between second eigenvalue of Laplacian and Spectral Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_14_singular_value_decomposition.html">
+   Singular Valued Decomposition (SVD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_15_geometric_svd.html">
+   Applications of SVD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_17_SVD_in_Mixture_Models.html">
+   SVD in Gaussian Mixture Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html">
+   Frobenius Norm and Low Rank Approaximation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_17_Mixture_Models.html">
+   Mixture Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
+   Gaussian Annulus Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
+   Building LSH Table
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_10_DistinctCount_BloomFilters.html">
+   Bloom Filters
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
+   Low rank approximation in Mixture Models and Recommendation systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
+   Streaming Models and Answering Inclusion Queries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_03_31_Linear_Counting.html">
+   Linear Counting
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Flajolet-Martin Sketch
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Selected topics from NPTEL-Scalable Data Science Course
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_08_Locality_Sensitive_Hashing.html">
+   Locality Sensitive Hashing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
+   Finding Near Neighbors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.html">
+   Randomized Numerical Linear Algebra: Random Projection
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/2022_04_04_Flajolet_Martin_Algorithm.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs328-2022/CS328-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs328-2022/CS328-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2022_04_04_Flajolet_Martin_Algorithm.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs328-2022/CS328-Notes/edit/main/CS328-Notes/notebooks/2022_04_04_Flajolet_Martin_Algorithm.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs328-2022/CS328-Notes/main?urlpath=lab/tree/CS328-Notes/notebooks/2022_04_04_Flajolet_Martin_Algorithm.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/cs328-2022/CS328-Notes/blob/main/CS328-Notes/notebooks/2022_04_04_Flajolet_Martin_Algorithm.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Flajolet-Martin Sketch
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introduction">
+     Introduction
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-algorithm">
+     The Algorithm
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-of-the-algorithm">
+     Example of the Algorithm:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proof-of-correctness-for-flajolet-martin-sketch">
+   Proof of correctness for Flajolet-Martin Sketch
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-intuition">
+     Basic intuition
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#formalizing-our-intuition">
+     Formalizing our Intuition
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#upper-bound">
+       Upper bound
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lower-bound">
+       Lower bound
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#understanding-the-bounds">
+       Understanding the bounds
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#improving-the-probabilities">
+   Improving the probabilities
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#median-of-estimates">
+     Median of Estimates
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#median-of-means">
+       Median of Means
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Flajolet-Martin Sketch</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Flajolet-Martin Sketch
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introduction">
+     Introduction
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-algorithm">
+     The Algorithm
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-of-the-algorithm">
+     Example of the Algorithm:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proof-of-correctness-for-flajolet-martin-sketch">
+   Proof of correctness for Flajolet-Martin Sketch
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-intuition">
+     Basic intuition
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#formalizing-our-intuition">
+     Formalizing our Intuition
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#upper-bound">
+       Upper bound
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lower-bound">
+       Lower bound
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#understanding-the-bounds">
+       Understanding the bounds
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#improving-the-probabilities">
+   Improving the probabilities
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#median-of-estimates">
+     Median of Estimates
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#median-of-means">
+       Median of Means
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="flajolet-martin-sketch">
+<h1>Flajolet-Martin Sketch<a class="headerlink" href="#flajolet-martin-sketch" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Flajolet-Martin Sketch, popularly known as the FM Algorithm, is an algorithm for the distinct count problem in a stream. The algorithm can approximate the distinct elements in a stream with a single pass and space-consumption logarithmic in the maximal number of possible distinct elements in the stream</p>
+</div>
+<div class="section" id="the-algorithm">
+<h2>The Algorithm<a class="headerlink" href="#the-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>We are given a random hash function that maps the elements of the universe to integers in the range 0 to <span class="math notranslate nohighlight">\(2^l-1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[h(x) : U → [0,2^l-1]\]</div>
+<p>The output of this hash function can be stored using a <span class="math notranslate nohighlight">\(l\)</span>-length bit string.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We assume the outputs to be sufficiently uniformly distributed and that the hash function is completely random.</p>
+</div>
+<div class="proof definition admonition" id="my-definition-1">
+<p class="admonition-title"><span>Definition </span></p>
+<div class="definition-content section" id="proof-content">
+<p>We define the zeros of a number as the index of the first non-zero bit from the right in the binary representation of that number with 0-indexing. It is simply the number of zeros at the end of the bit string. It can be defined as the maximum power of 2 that divides the number.</p>
+<div class="math notranslate nohighlight">
+\[ zeros(v) = max\{i, 2^i \text{ divides } v\} \]</div>
+<p>Example:<br />
+<span class="math notranslate nohighlight">\(zeros(1011000) = 3\)</span>, here the maximum power of 2 which will divide the number is 3<br />
+<span class="math notranslate nohighlight">\(zeros(0010010) = 3\)</span>, here the maximum power of 2 which will divide the number is 1</p>
+</div>
+</div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span class="math notranslate nohighlight">\(zeros(0000000)\)</span> will be equal to 0 and not 7.</p>
+</div>
+<p>Next, we need to find out the maximum number of zeros an element has in the input stream. We can calculate the maximum zeros as follows in the same pass of the stream:</p>
+<ol class="simple">
+<li><p>Initialize z as 0.</p></li>
+<li><p>For each element <span class="math notranslate nohighlight">\(x\)</span> in stream:</p></li>
+</ol>
+<ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(zeros(h(x)) &gt; z\)</span>, <span class="math notranslate nohighlight">\(z ← zeros(h(x))\)</span></p></li>
+</ul>
+<p>Finally, we return the estimate of the number of distinct elements in our stream as:</p>
+<div class="math notranslate nohighlight">
+\[ \text{Number of distinct elements} = 2^{z+\frac{1}{2}} \]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The addition of half in the final estimate of distinct count is due to the correction factor is found out by calculations. It can be seen in the original article by Flajolet and Martin.</p>
+</div>
+</div>
+<div class="section" id="example-of-the-algorithm">
+<h2>Example of the Algorithm:<a class="headerlink" href="#example-of-the-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we need to calculate the number of distinct elements in the following stream:</p>
+<div class="figure align-center" id="example-stream">
+<a class="reference internal image-reference" href="../_images/Example_stream.png"><img alt="../_images/Example_stream.png" src="../_images/Example_stream.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 40 </span><span class="caption-text">After the hash function, suppose the elements are mapped as followed:</span><a class="headerlink" href="#example-stream" title="Permalink to this image">¶</a></p>
+<div class="legend">
+<div class="figure align-center" id="hash-map">
+<a class="reference internal image-reference" href="../_images/Hash_map.png"><img alt="../_images/Hash_map.png" src="../_images/Hash_map.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 41 </span><span class="caption-text">The maximum number of zeros in the outputs of the hash map is equal to 2.
+Thus our estimate will be equal to:
+<span class="math notranslate nohighlight">\( \text{Distinct count} = 2^{2+0.5} ≈ 6 \)</span></span><a class="headerlink" href="#hash-map" title="Permalink to this image">¶</a></p>
+<div class="legend">
+<p>Thus, the algorithm returns 6 as the number of distinct elements in our stream. The answer is not accurate and this is because we have a very small stream. The algorithm gives better results for bigger datasets.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above algorithm was further refined in LogLog and HyperLogLog algorithms to improve accuracy.</p>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="proof-of-correctness-for-flajolet-martin-sketch">
+<h1>Proof of correctness for Flajolet-Martin Sketch<a class="headerlink" href="#proof-of-correctness-for-flajolet-martin-sketch" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-intuition">
+<h2>Basic intuition<a class="headerlink" href="#basic-intuition" title="Permalink to this headline">¶</a></h2>
+<p>The main intuition behind the algorithm is that suppose we choose <span class="math notranslate nohighlight">\(n = 2^k\)</span> elements uniformly random from <span class="math notranslate nohighlight">\([0,N]\)</span> then we expect the number of elements to be divisible</p>
+<ul class="simple">
+<li><p>by <span class="math notranslate nohighlight">\(2\)</span> to be <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>, i.e., <span class="math notranslate nohighlight">\(2^{k-1}\)</span></p></li>
+<li><p>by <span class="math notranslate nohighlight">\(4\)</span> to be <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>, i.e., <span class="math notranslate nohighlight">\(2^{k-2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(…\)</span></p></li>
+<li><p>Similary, by <span class="math notranslate nohighlight">\(2^{k-1}\)</span> to be <span class="math notranslate nohighlight">\(2\)</span></p></li>
+<li><p>by <span class="math notranslate nohighlight">\(2^k\)</span> to be <span class="math notranslate nohighlight">\(1\)</span></p></li>
+<li><p>by <span class="math notranslate nohighlight">\(2^{k+1}\)</span> to be <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span></p></li>
+</ul>
+<p>Therefore we don’t expect any number to be divisible by <span class="math notranslate nohighlight">\(2^{k+1}\)</span></p>
+<p>Now, for a number to be divisible</p>
+<ul class="simple">
+<li><p>by 2 it must have atleast 1 trailing zero in its binary representation</p></li>
+<li><p>…</p></li>
+<li><p>by 4 it must have atleast 2 trailing zeros in its binary representation</p></li>
+<li><p>Similarly, by <span class="math notranslate nohighlight">\(2^{k}\)</span> it must have atleast <span class="math notranslate nohighlight">\(k\)</span> trailing zeros in its binary representation</p></li>
+</ul>
+<p>Since we don’t expect any number to be divisible by <span class="math notranslate nohighlight">\(2^{k+1}\)</span>, we do not expect <span class="math notranslate nohighlight">\(k+1\)</span> trailing zeros. We expect the maximum number of trailing zeros in the input to be <span class="math notranslate nohighlight">\(k\)</span> since we have <span class="math notranslate nohighlight">\(n=2^k\)</span>.</p>
+<p>Therefore in the algorithm we find the maximum number of trailing zeros and return <span class="math notranslate nohighlight">\(2^{z+\frac{1}{2}}\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Probability that an element is divisible</p>
+<ul class="simple">
+<li><p>by <span class="math notranslate nohighlight">\(2 \text{ is } \frac{\text{number of elements divisible by 2}}{total elements} = \frac{2^{k-1}}{2^k} = 2^{-1}\)</span></p></li>
+<li><p>Similarly, by <span class="math notranslate nohighlight">\(4 \text{ is } 2^{-2}\)</span></p></li>
+<li><p>…</p></li>
+<li><p>by <span class="math notranslate nohighlight">\(2^r \text{ is } 2^{-r}\)</span></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="formalizing-our-intuition">
+<h2>Formalizing our Intuition<a class="headerlink" href="#formalizing-our-intuition" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(S\)</span> be the set of elements that appeared in the stream.</p>
+<p>Let <span class="math notranslate nohighlight">\(zeros(x)\)</span> be the number of trailing zeros <span class="math notranslate nohighlight">\(x\)</span> has.</p>
+<p>For any <span class="math notranslate nohighlight">\(r \in [l], j \in U\)</span> let <span class="math notranslate nohighlight">\(X_{rj} = \text{indicator of }zeros(h(j)) \ge r\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{equation}
+\tag{1}
+  X_{rj} =
+  \begin{cases}
+    1 &amp; \text{when $zeros(h(j)) \ge r$} \\
+    0 &amp; \text{else}
+  \end{cases}
+\end{equation}
+\end{split}\]</div>
+<p>Now, <span class="math notranslate nohighlight">\(P[zeros(h(j)) \ge r]\)</span> is same as <span class="math notranslate nohighlight">\(P[ \text{element is divisible by }2^r]\)</span>, that is, <span class="math notranslate nohighlight">\(2^{-r}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\therefore \begin{equation}
+\tag{2}
+  X_{rj} =
+  \begin{cases}
+    1 &amp; \text{w.p. $2^{-r}$} \\
+    0 &amp; \text{else}
+  \end{cases}
+\end{equation}
+\end{split}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(Y_r = \text{number of }j \in U \text{such that }zeros(h(j)) \ge r\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\therefore Y_r = \sum_{j \in S}{X_{rj}}
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\hat{z}\)</span> be the final value of <span class="math notranslate nohighlight">\(z\)</span> after algorithm has seen all the data. That is the maximum value of trailing zeros.</p>
+<p>Now, if we have <span class="math notranslate nohighlight">\(Y_r&gt;0\)</span> then, we have atleast one element <span class="math notranslate nohighlight">\(j\)</span> such that <span class="math notranslate nohighlight">\(zeros(h(j)) \ge r\)</span>. Therefore, <span class="math notranslate nohighlight">\(\hat{z} \ge r\)</span> if <span class="math notranslate nohighlight">\(Y_r&gt;0\)</span>.</p>
+<p>Equivalentely, if we have <span class="math notranslate nohighlight">\(Y_r=0\)</span>, then we do not have any element that has more than <span class="math notranslate nohighlight">\(r\)</span> trailing zeros. Therefore <span class="math notranslate nohighlight">\(\hat{z} &lt; r\)</span>  if <span class="math notranslate nohighlight">\(Y_r=0\)</span>.</p>
+<p>Now, we find <span class="math notranslate nohighlight">\(E[Y_r]\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+\therefore E[Y_r] = E[\sum_{j \in S}{X_{rj}}] \\\end{split}\\\begin{split}\therefore E[Y_r] = \sum_{j \in S}{E[X_{rj}]} \\ \end{split}\\\begin{split}\text{Now, } E[X_{rj}] = 1 \times 2^{-r} = 2^{-r} \\\end{split}\\\therefore E[Y_r] = \sum_{j \in S}{2^{-r}} = \frac{n}{2^r}
+\end{aligned}\end{align} \]</div>
+<p>Now, we find <span class="math notranslate nohighlight">\(var(Y_r)\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+\therefore var(Y_r) = \sum_{j \in S}{var(X_{rj})} \\\end{split}\\\begin{split}\therefore var(Y_r) = \sum_{j \in S}{E[(X_{rj} - E[X_{rj}])^2])} \\\end{split}\\\begin{split}\therefore var(Y_r) \le \sum_{j \in S}{E[X_{rj}^2]} \\\end{split}\\\begin{split}\text{($X_{rj}^2$ and $X_{rj}$ have the same probablity distribution.)} \\\end{split}\\\begin{split}\therefore var(Y_r) \le \sum_{j \in S}{2^{-r}} \\\end{split}\\\begin{split}\therefore var(Y_r) \le \frac{n}{2^r} \\
+\end{split}\end{aligned}\end{align} \]</div>
+<p>Therefore, we have <span class="math notranslate nohighlight">\(E[Y_r] = \frac{n}{2^r}\)</span> and <span class="math notranslate nohighlight">\(var(Y_r) \le \frac{n}{2^r}\)</span></p>
+<p>Now, we find <span class="math notranslate nohighlight">\(P[Y_r &gt; 0]\)</span> and <span class="math notranslate nohighlight">\(P[Y_r = 0]\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(Y_r\)</span> is a count of elements, <span class="math notranslate nohighlight">\(Y_r &gt; 0\)</span> means <span class="math notranslate nohighlight">\(Y_r \ge 1\)</span>.</p>
+<p>By Markov inequality,</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+P[Y_r\ge1] \le \frac{E[Y_r]}{1} \\\end{split}\\\begin{split}\therefore P[Y_r \ge 1] \le \frac{n}{2^r} \\\end{split}\\\therefore P[Y_r &gt; 0] = \frac{n}{2^r}
+\end{aligned}\end{align} \]</div>
+<p>Now, <span class="math notranslate nohighlight">\(Y_r = 0\)</span> means that it is its expectation away from its expectation. That is, <span class="math notranslate nohighlight">\(|Y_r - E[Y_r]| \ge E[Y_r]\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\therefore P[Y_r = 0] = P[|Y_r - E[Y_r]| \ge E[Y_r]]
+\]</div>
+<p>Using Chernoff bound,</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+P[|Y_r - E[Y_r]| \ge E[Y_r]] \le \frac{var(Y_r)}{E[Y_r]^2} \\\end{split}\\\begin{split}\text{Since } var(Y_r) \le \frac{n}{2^r} \\\end{split}\\\begin{split}\therefore P[|Y_r - E[Y_r]| \ge E[Y_r]] \le \frac{2^r}{n} \\\end{split}\\\therefore P[Y_r = 0] \le \frac{2^r}{n}
+\end{aligned}\end{align} \]</div>
+<div class="section" id="upper-bound">
+<h3>Upper bound<a class="headerlink" href="#upper-bound" title="Permalink to this headline">¶</a></h3>
+<p>Let the returned estimate of FM algo be <span class="math notranslate nohighlight">\(\hat{n}=2^{\hat{z}+0.5}\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(a\)</span> be the smallest integer such that <span class="math notranslate nohighlight">\(2^{a+0.5} \ge 4n\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the actual number of distinct elements.</p>
+<p>We want to find the probability that our estimate is greater that 4 times the actual value, i.e., <span class="math notranslate nohighlight">\(P[\hat{n} \ge 4n]\)</span></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+\therefore \hat{n} \ge 4n \implies \hat{z} \ge a \\\end{split}\\\begin{split}\therefore P[\hat{n} \ge 4n] = P[\hat{z} \ge a] \\
+\end{split}\end{aligned}\end{align} \]</div>
+<p><span class="math notranslate nohighlight">\(\hat{z} \ge a\)</span> means that there are one or more elements, <span class="math notranslate nohighlight">\(j\)</span>, with <span class="math notranslate nohighlight">\(zeros(h(j)) \ge a\)</span>. Therefore, <span class="math notranslate nohighlight">\(Y_a &gt; 0\)</span>. Thus, <span class="math notranslate nohighlight">\(P[\hat{z} \ge a] = P[Y_a &gt; 0]\)</span></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+\therefore P[Y_a &gt; 0] \le \frac{n}{2^a} \\\end{split}\\\begin{split}\therefore P[Y_a &gt; 0] \le \frac{\sqrt{2}}{4} \le 0.35 \\\end{split}\\\therefore P[\hat{n} \ge 4n] \le 0.35
+\end{aligned}\end{align} \]</div>
+</div>
+<div class="section" id="lower-bound">
+<h3>Lower bound<a class="headerlink" href="#lower-bound" title="Permalink to this headline">¶</a></h3>
+<p>Let the returned estimate of FM algo be <span class="math notranslate nohighlight">\(\hat{n}=2^{\hat{z}+0.5}\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(b\)</span> be the largest integer such that <span class="math notranslate nohighlight">\(2^{b+0.5} \le \frac{n}{4}\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the actual number of distinct elements.</p>
+<p>We want to find the probability that our estimate is greater that 4 times the actual value, i.e., <span class="math notranslate nohighlight">\(P[\hat{n} \le \frac{n}{4}]\)</span></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+\therefore \hat{n} \le \frac{n}{4} \implies \hat{z} \le b \\\end{split}\\\begin{split}\therefore P[\hat{n} \le \frac{n}{4}] = P[\hat{z} \le b] \\
+\end{split}\end{aligned}\end{align} \]</div>
+<p><span class="math notranslate nohighlight">\(\hat{z} \le b\)</span> means that there are no elements, <span class="math notranslate nohighlight">\(j\)</span>, with <span class="math notranslate nohighlight">\(zeros(h(j)) = b+1\)</span>. Therefore, <span class="math notranslate nohighlight">\(Y_{b+1} = 0\)</span>. Thus, <span class="math notranslate nohighlight">\(P[\hat{z} \le b] = P[Y_{b+1} = 0]\)</span></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+\therefore P[Y_{b+1} = 0] \le \frac{2^{b+1}}{n} \\\end{split}\\\begin{split}\therefore P[Y_{b+1} = 0] \le \frac{\sqrt{2}}{4} \le 0.35 \\\end{split}\\\therefore P[\hat{n} \le \frac{n}{4}] \le 0.35
+\end{aligned}\end{align} \]</div>
+</div>
+<div class="section" id="understanding-the-bounds">
+<h3>Understanding the bounds<a class="headerlink" href="#understanding-the-bounds" title="Permalink to this headline">¶</a></h3>
+<p>From union bound, we get that</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+P[\frac{n}{4} \le \hat{n} \le 4n] \ge 1 - 0.35 - 0.35 \\\end{split}\\\therefore P[\frac{n}{4} \le \hat{n} \le 4n] \ge 0.3
+\end{aligned}\end{align} \]</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="improving-the-probabilities">
+<h1>Improving the probabilities<a class="headerlink" href="#improving-the-probabilities" title="Permalink to this headline">¶</a></h1>
+<p>The probability we obtain is not very good since we only say with <span class="math notranslate nohighlight">\(30\%\)</span> certainity that our estimate lies between <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span> and <span class="math notranslate nohighlight">\(4n\)</span>.</p>
+<p>Therefore we apply the <strong>Median of Estimates</strong> trick to improve our probabilities.</p>
+<div class="section" id="median-of-estimates">
+<h2>Median of Estimates<a class="headerlink" href="#median-of-estimates" title="Permalink to this headline">¶</a></h2>
+<p>We create <span class="math notranslate nohighlight">\(\hat{z_1}, \hat{z_2}, \dots \hat{z_k}\)</span> estimates in parallel and then return the median of them.</p>
+<p>From the <span class="math notranslate nohighlight">\(k\)</span> estimates, we expect <span class="math notranslate nohighlight">\(35\%\)</span> of them to exceed <span class="math notranslate nohighlight">\(4n\)</span>. But for the median to exceed <span class="math notranslate nohighlight">\(4n\)</span> we need atleast <span class="math notranslate nohighlight">\(\frac{k}{2}\)</span> to exceed <span class="math notranslate nohighlight">\(4n\)</span>. From the Chernoff inequality, we can show that</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+P[median &gt; 4n] = exp(-\Omega(k)) \\\end{split}\\Similarly, P[median &lt; \frac{n}{4}] = exp(-\Omega(k))
+\end{aligned}\end{align} \]</div>
+<p>Therefore, <span class="math notranslate nohighlight">\(P[\frac{n}{4} \le median \le 4n] = 1-exp(-\Omega(k))\)</span></p>
+<p>Therefore, given an error probability <span class="math notranslate nohighlight">\(\delta\)</span> we choose <span class="math notranslate nohighlight">\(k=O(log(\frac{1}{\delta}))\)</span></p>
+<div class="section" id="median-of-means">
+<h3>Median of Means<a class="headerlink" href="#median-of-means" title="Permalink to this headline">¶</a></h3>
+<p>To make our estimate within <span class="math notranslate nohighlight">\(1 \pm \epsilon\)</span>, with probability <span class="math notranslate nohighlight">\(1-\delta\)</span>,</p>
+<ul class="simple">
+<li><p>We first make <span class="math notranslate nohighlight">\(\frac{1}{\epsilon^2}log(\frac{1}{\delta})\)</span> copies of our algorithm. And find <span class="math notranslate nohighlight">\(\frac{1}{\epsilon^2}log(\frac{1}{\delta})\)</span> estimates.</p></li>
+<li><p>Then find mean of <span class="math notranslate nohighlight">\(\frac{1}{\epsilon^2}\)</span> estimates.</p></li>
+<li><p>then we take median of <span class="math notranslate nohighlight">\(log(\frac{1}{\delta})\)</span> such estimates.</p></li>
+</ul>
+<footer>
+    Author(s): Eshan Gujarathi, Hitarth Gandhi, Vishal Soni
+</footer></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs328-2022/CS328-Notes",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022_03_31_Linear_Counting.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Linear Counting</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022_04_08_Locality_Sensitive_Hashing.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Locality Sensitive Hashing</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Students of CS328 2022<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
