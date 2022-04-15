@@ -18,7 +18,6 @@ parts:
       - file: notebooks/2022_01_11_markov_chebyshev_inequalities.md
       - file: notebooks/2022_01_13_chernoff_bound.md
       - file: notebooks/2022_01_13_chernoff_bound_tails.ipynb
-
   - caption: Clustering and low-rank approximations
     chapters:
       - file: notebooks/2022_01_17_Clustering.ipynb
@@ -32,18 +31,20 @@ parts:
       - file: notebooks/2022_02_14_GraphLaplacian.ipynb
       - file: notebooks/2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.ipynb
       - file: notebooks/2022_03_14_singular_value_decomposition.ipynb
-      # - file: notebooks/2022_03_15_goemetric_interpretation_of_svd.ipynb
       - file: notebooks/2022_03_15_geometric_svd.ipynb
-      # - caption: Dealing with massive data
-      #   chapters:
       - file: notebooks/2022_03_17_SVD_in_Mixture_Models.ipynb
       - file: notebooks/2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.ipynb
+      - file: notebooks/2022_02_17_Mixture_Models.ipynb
+      - file: notebooks/2022_02_21_Chi_Squared_Distribution,_Gaussian_Annulus_Theorem,_Distance_between_points_sampled_from_a_distribution.ipynb
       - file: notebooks/2022_04_07_Building_LSH_Tables.ipynb
+      - file: notebooks/2022_04_10_DistinctCount_BloomFilters
       - file: notebooks/2022_03_24_Low_rank_approximation_Mixture_Models _and_Recommendation systems.ipynb
       - file: notebooks/2022_03_25_Streamingmodels_and_answering_inclusion_queries.ipynb
+      - file: notebooks/2022_03_31_Linear_Counting.ipynb
+      - file: notebooks/2022_04_04_Flajolet_Martin_Algorithm.ipynb
 
   - caption: Selected topics from NPTEL-Scalable Data Science Course
     chapters:
-      - file: notebooks/2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.ipynb
+      - file: notebooks/2022_04_08_Locality_Sensitive_Hashing.ipynb
       - file: notebooks/2022_04_07_Near_Neighbors.ipynb
-#chapters
+      - file: notebooks/2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.ipynb
