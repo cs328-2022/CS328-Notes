@@ -58,7 +58,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Finding Near Neighbors" href="2022_04_07_Near_Neighbors.html" />
+    <link rel="prev" title="Building LSH Table" href="2022_04_07_Building_LSH_Tables.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -223,6 +223,16 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_17_Mixture_Models.html">
+   Mixture Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
+   Gaussian Annulus Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="2022_03_14_singular_value_decomposition.html">
    Singular Valued Decomposition (SVD)
   </a>
@@ -243,33 +253,25 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_17_Mixture_Models.html">
-   Mixture Models
+  <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
+   Low rank approximation in Mixture Models and Recommendation systems
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dealing with massive data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
-   Gaussian Annulus Theorem
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
-   Building LSH Table
+  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
+   Streaming Models and Answering Inclusion Queries
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2022_04_10_DistinctCount_BloomFilters.html">
    Bloom Filters
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
-   Low rank approximation in Mixture Models and Recommendation systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
-   Streaming Models and Answering Inclusion Queries
   </a>
  </li>
  <li class="toctree-l1">
@@ -290,13 +292,18 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
+   Finding Near Neighbors
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="2022_04_08_Locality_Sensitive_Hashing.html">
    Locality Sensitive Hashing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
-   Finding Near Neighbors
+  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
+   Building LSH Table
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -445,8 +452,8 @@
 </div>
 </div><h3><b>Other Constructions</b></h3><h4>Earlier Method:</h4>
 <p>We were creating the matrix <span class="math notranslate nohighlight">\(A\)</span> by creating the matrix <span class="math notranslate nohighlight">\(R\)</span> such that <span class="math notranslate nohighlight">\(R_{ij} \sim N(0, 1)\)</span>. We make sure that every column of <span class="math notranslate nohighlight">\(R\)</span> is normalized. So,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1b605687-131e-44e8-83e2-bb593b1d8cdd">
-<span class="eqno">(9)<a class="headerlink" href="#equation-1b605687-131e-44e8-83e2-bb593b1d8cdd" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7c0a272f-ccf5-4bda-814d-894c6c11a200">
+<span class="eqno">(9)<a class="headerlink" href="#equation-7c0a272f-ccf5-4bda-814d-894c6c11a200" title="Permalink to this equation">¶</a></span>\[\begin{align}
 A = \frac{1}{\sqrt{k}}R
 \end{align}\]</div>
 <p>We divide by <span class="math notranslate nohighlight">\(\sqrt{k}\)</span> so that the expected norm of each column becomes <span class="math notranslate nohighlight">\(1\)</span>.</p>
@@ -478,13 +485,13 @@ A = \frac{1}{\sqrt{k}}R
 <h3><b>Low Rank Approximation</b></h3>
 <p>We know that <span class="math notranslate nohighlight">\(A_k = P_A^kA\)</span>, where projection <span class="math notranslate nohighlight">\(P_A^k = U_kU_k^t\)</span>.</p>
 <p>Also,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3cfc1fa1-c38f-4774-bad2-6948c133b11e">
-<span class="eqno">(10)<a class="headerlink" href="#equation-3cfc1fa1-c38f-4774-bad2-6948c133b11e" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cb15522d-1192-4c39-8adf-8b53c009ae19">
+<span class="eqno">(10)<a class="headerlink" href="#equation-cb15522d-1192-4c39-8adf-8b53c009ae19" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \|A - P_A^kA\|_2 = \sigma_{k+1}
 \end{align}\]</div>
 <p>For any <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(P_B^k\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d4d3b4f8-d7d0-49ea-9a39-28738cb8ab3d">
-<span class="eqno">(11)<a class="headerlink" href="#equation-d4d3b4f8-d7d0-49ea-9a39-28738cb8ab3d" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a9b9ae39-94ce-452a-96e5-f37bf274465b">
+<span class="eqno">(11)<a class="headerlink" href="#equation-a9b9ae39-94ce-452a-96e5-f37bf274465b" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \sigma_{k+1} \leq \|A - P_B^kA\| \leq \sigma_{k+1} + \sqrt{2\|AA^t - BB^t\|}
 \end{align}\]</div>
 <p>Now, we want <span class="math notranslate nohighlight">\(B\)</span> such that,</p>
@@ -501,23 +508,23 @@ A = \frac{1}{\sqrt{k}}R
 </div>
 <h3><b>JL in Low Rank Approximation</b></h3>
 <p>Observe that,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c8eec7ed-6b51-47d8-8765-6bd0e581cad1">
-<span class="eqno">(12)<a class="headerlink" href="#equation-c8eec7ed-6b51-47d8-8765-6bd0e581cad1" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9695dae4-d5a9-46bc-8ae6-5eec8549e102">
+<span class="eqno">(12)<a class="headerlink" href="#equation-9695dae4-d5a9-46bc-8ae6-5eec8549e102" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \|AA^t - BB^t\| &amp;= \sup_{\|x\| = 1} \|\|xA\|_2^2 - \|xAR\|_2^2\| \\
 &amp;= \sup_{\|x\| = 1}\|\|y\|_2^2 - \|yR\|_2^2\| \hspace{2cm} \text{(Take } xA = y)
 \end{align}\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Remember that,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fb518fb2-c95b-4c20-8158-b8613fdebc55">
-<span class="eqno">(13)<a class="headerlink" href="#equation-fb518fb2-c95b-4c20-8158-b8613fdebc55" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f8e24f46-8c1f-43aa-8e9c-83345d437a64">
+<span class="eqno">(13)<a class="headerlink" href="#equation-f8e24f46-8c1f-43aa-8e9c-83345d437a64" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \|A\|_2 &amp;= \sup_{\|x\|_2 = 1}\|Ax\| \\
 \|A\|_2^2 &amp;= \max_{\|x\|_2 = 1} x^TAx
 \end{align}\]</div>
 </div>
 <p>Now, from the JL property,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7c0192eb-3233-450a-96e5-6baab0ae4d3f">
-<span class="eqno">(14)<a class="headerlink" href="#equation-7c0192eb-3233-450a-96e5-6baab0ae4d3f" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-71386a0d-9d94-4782-9bd4-484acbca15db">
+<span class="eqno">(14)<a class="headerlink" href="#equation-71386a0d-9d94-4782-9bd4-484acbca15db" title="Permalink to this equation">¶</a></span>\[\begin{align}
 Pr[\|yR\|^2 - \|y\|^2 &gt; \epsilon\|y\|^2] &lt; e^{-ck\epsilon^2} \hspace{2cm} \text{(Exponentially small)}
 \end{align}\]</div>
 <p>Using the union bound over a <span class="math notranslate nohighlight">\(\epsilon\)</span> - net, <span class="math notranslate nohighlight">\(k = \tilde{O}(\frac{rank(A)}{\epsilon^2})\)</span></p>
@@ -530,8 +537,8 @@ Pr[\|yR\|^2 - \|y\|^2 &gt; \epsilon\|y\|^2] &lt; e^{-ck\epsilon^2} \hspace{2cm} 
 <p><span class="math notranslate nohighlight">\(\epsilon\)</span> - net is when we choose points in unit sphere such that the union of the <span class="math notranslate nohighlight">\(\epsilon\)</span> - radius spheres of all the points give the unit sphere.</p>
 </div>
 <p>We get,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-97d28feb-1f3c-47eb-b50f-9ecf971feb8c">
-<span class="eqno">(15)<a class="headerlink" href="#equation-97d28feb-1f3c-47eb-b50f-9ecf971feb8c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cd84c879-2368-4280-8146-0458e869d744">
+<span class="eqno">(15)<a class="headerlink" href="#equation-cd84c879-2368-4280-8146-0458e869d744" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \sup_{\|x\| = 1}\|\|xA\|^2 - \|xAR\|^2\| \leq \epsilon\|AA^t\|
 \end{align}\]</div>
 <h3><b>Time taken for Projection</b></h3>
@@ -664,11 +671,11 @@ H_{2^k} &amp; -H_{2^k}
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_04_07_Near_Neighbors.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_04_07_Building_LSH_Tables.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Finding Near Neighbors</p>
+            <p class="prev-next-title">Building LSH Table</p>
         </div>
     </a>
 </div>

@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Applications of SVD" href="2022_03_15_geometric_svd.html" />
-    <link rel="prev" title="Relation between second eigenvalue of Laplacian and Spectral Clustering" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html" />
+    <link rel="prev" title="Gaussian Annulus Theorem" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -221,6 +221,16 @@
    Relation between second eigenvalue of Laplacian and Spectral Clustering
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_17_Mixture_Models.html">
+   Mixture Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
+   Gaussian Annulus Theorem
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Singular Valued Decomposition (SVD)
@@ -242,33 +252,25 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_17_Mixture_Models.html">
-   Mixture Models
+  <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
+   Low rank approximation in Mixture Models and Recommendation systems
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dealing with massive data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
-   Gaussian Annulus Theorem
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
-   Building LSH Table
+  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
+   Streaming Models and Answering Inclusion Queries
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2022_04_10_DistinctCount_BloomFilters.html">
    Bloom Filters
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
-   Low rank approximation in Mixture Models and Recommendation systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
-   Streaming Models and Answering Inclusion Queries
   </a>
  </li>
  <li class="toctree-l1">
@@ -289,13 +291,18 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
+   Finding Near Neighbors
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="2022_04_08_Locality_Sensitive_Hashing.html">
    Locality Sensitive Hashing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
-   Finding Near Neighbors
+  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
+   Building LSH Table
   </a>
  </li>
  <li class="toctree-l1">
@@ -507,9 +514,10 @@ as 𝚺 is a diagnol matrix 𝚺<sup>T</sup>=𝚺
 <h3><b>Implementation of SVD</b></h3><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
-<span class="n">U</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>                       <span class="c1"># actually V here = V (Transpose) in svd   </span>
-<span class="n">U</span><span class="p">,</span><span class="n">D</span><span class="p">,</span><span class="n">V</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>  <span class="c1"># actually V here = V (Transpose) in svd</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">V</span>
 </pre></div>
 </div>
 </div>
@@ -574,11 +582,11 @@ svd says 3 important things about this transormation</p>
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Relation between second eigenvalue of Laplacian and Spectral Clustering</p>
+            <p class="prev-next-title">Gaussian Annulus Theorem</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="2022_03_15_geometric_svd.html" title="next page">

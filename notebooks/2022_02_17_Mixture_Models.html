@@ -59,7 +59,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Gaussian Annulus Theorem" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html" />
-    <link rel="prev" title="Frobenius Norm and Low Rank Approaximation" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html" />
+    <link rel="prev" title="Relation between second eigenvalue of Laplacian and Spectral Clustering" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -223,6 +223,16 @@
    Relation between second eigenvalue of Laplacian and Spectral Clustering
   </a>
  </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Mixture Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
+   Gaussian Annulus Theorem
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2022_03_14_singular_value_decomposition.html">
    Singular Valued Decomposition (SVD)
@@ -243,34 +253,26 @@
    Frobenius Norm and Low Rank Approaximation
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Mixture Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
-   Gaussian Annulus Theorem
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
-   Building LSH Table
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_10_DistinctCount_BloomFilters.html">
-   Bloom Filters
-  </a>
- </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
    Low rank approximation in Mixture Models and Recommendation systems
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dealing with massive data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
    Streaming Models and Answering Inclusion Queries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_10_DistinctCount_BloomFilters.html">
+   Bloom Filters
   </a>
  </li>
  <li class="toctree-l1">
@@ -291,13 +293,18 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
+   Finding Near Neighbors
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="2022_04_08_Locality_Sensitive_Hashing.html">
    Locality Sensitive Hashing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
-   Finding Near Neighbors
+  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
+   Building LSH Table
   </a>
  </li>
  <li class="toctree-l1">
@@ -593,7 +600,7 @@ intensities that come from “ideal 9” query handwritten digit</p></li>
 </ul>
 <div class="figure align-default" id="directive-fig">
 <a class="reference internal image-reference" href="../_images/12.png"><img alt="../_images/12.png" src="../_images/12.png" style="height: 150px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Here is my figure caption!</span><a class="headerlink" href="#directive-fig" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">Here is my figure caption!</span><a class="headerlink" href="#directive-fig" title="Permalink to this image">¶</a></p>
 </div>
 <p>#Gaussian Mixture Model</p>
 <p>Each data point is generated first by choosing the particular Gaussian and then generating a sample from it</p>
@@ -608,7 +615,7 @@ intensities that come from “ideal 9” query handwritten digit</p></li>
 </ul>
 <div class="figure align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/Movie.gif"><img alt="../_images/Movie.gif" src="../_images/Movie.gif" style="height: 150px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text">An example of Gaussian Mixture in image segmentation with grey histogram</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">An example of Gaussian Mixture in image segmentation with grey histogram</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>Each data point is generated in the following manner:</p>
 <ul class="simple">
@@ -622,7 +629,7 @@ D_{i}(x) = N(μ_{i},σ^2_{i})
 <!-- {{{ - }}} -->
 <div class="figure align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/mixture.png"><img alt="../_images/mixture.png" src="../_images/mixture.png" style="height: 150px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">This is an example of guassian mixture model with 2 componenets</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text">This is an example of guassian mixture model with 2 componenets</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>Given the points only can we learn all the parameters, including the correct label of every point</p>
 <p><b> Combined pdf = </b>  <span class="math notranslate nohighlight">\(
@@ -630,7 +637,7 @@ D_{i}(x) = N(μ_{i},σ^2_{i})
   \)</span></p>
 <div class="figure align-default" id="id3">
 <a class="reference internal image-reference" href="../_images/34.png"><img alt="../_images/34.png" src="../_images/34.png" style="height: 150px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text">Here is my figure caption!</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">Here is my figure caption!</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -638,7 +645,7 @@ D_{i}(x) = N(μ_{i},σ^2_{i})
 </div>
 <div class="figure align-default" id="id4">
 <a class="reference internal image-reference" href="../_images/56.png"><img alt="../_images/56.png" src="../_images/56.png" style="height: 150px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 35 </span><span class="caption-text">Here is my figure caption!</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text">Here is my figure caption!</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="observation">
@@ -688,11 +695,11 @@ Author(s): Abhinav Kumar, Talari Venkata Sunny, Mekala Rishitha Ravi
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_03_22_Frobenius_Norm_and_Low_Rank_Approaximation.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_02_15_Relation_between_second_eigenvalue_of_Laplacian_and_Spectral_Clustering.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Frobenius Norm and Low Rank Approaximation</p>
+            <p class="prev-next-title">Relation between second eigenvalue of Laplacian and Spectral Clustering</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html" title="next page">

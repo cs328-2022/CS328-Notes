@@ -58,8 +58,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Bloom Filters" href="2022_04_10_DistinctCount_BloomFilters.html" />
-    <link rel="prev" title="Gaussian Annulus Theorem" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html" />
+    <link rel="next" title="Randomized Numerical Linear Algebra: Random Projection" href="2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.html" />
+    <link rel="prev" title="Locality Sensitive Hashing" href="2022_04_08_Locality_Sensitive_Hashing.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -172,7 +172,7 @@
   Clustering and low-rank approximations
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_01_17_Clustering.html">
    Clustering
@@ -224,6 +224,16 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_17_Mixture_Models.html">
+   Mixture Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
+   Gaussian Annulus Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="2022_03_14_singular_value_decomposition.html">
    Singular Valued Decomposition (SVD)
   </a>
@@ -244,33 +254,25 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_17_Mixture_Models.html">
-   Mixture Models
+  <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
+   Low rank approximation in Mixture Models and Recommendation systems
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dealing with massive data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
-   Gaussian Annulus Theorem
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Building LSH Table
+  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
+   Streaming Models and Answering Inclusion Queries
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2022_04_10_DistinctCount_BloomFilters.html">
    Bloom Filters
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
-   Low rank approximation in Mixture Models and Recommendation systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
-   Streaming Models and Answering Inclusion Queries
   </a>
  </li>
  <li class="toctree-l1">
@@ -289,15 +291,20 @@
   Selected topics from NPTEL-Scalable Data Science Course
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
+   Finding Near Neighbors
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2022_04_08_Locality_Sensitive_Hashing.html">
    Locality Sensitive Hashing
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
-   Finding Near Neighbors
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Building LSH Table
   </a>
  </li>
  <li class="toctree-l1">
@@ -680,8 +687,8 @@
 <p>This represents a mapping!</p>
 <p>We will now look at collection of sets as a {0,1} matrix</p>
 <p>$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-860b6183-6862-47b4-bd03-357ded90aeba">
-<span class="eqno">(6)<a class="headerlink" href="#equation-860b6183-6862-47b4-bd03-357ded90aeba" title="Permalink to this equation">¶</a></span>\[\begin{bmatrix}
+<div class="amsmath math notranslate nohighlight" id="equation-610e29fb-ae15-416c-9b37-b777b64b80d1">
+<span class="eqno">(6)<a class="headerlink" href="#equation-610e29fb-ae15-416c-9b37-b777b64b80d1" title="Permalink to this equation">¶</a></span>\[\begin{bmatrix}
  &amp; S_{1} &amp; S_{2} &amp; S_{3} &amp; S_{4} \\
 A &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
 B  &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
@@ -695,8 +702,8 @@ G  &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
 <p>Here, {A..G} are the elements in universe U and <span class="math notranslate nohighlight">\(S_{i}\)</span> represents the set(s)</p>
 <p>Now, we consider the following random permutation of the elements</p>
 <p>$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a5638473-7bf0-4b0d-a894-a39f1b9095fc">
-<span class="eqno">(7)<a class="headerlink" href="#equation-a5638473-7bf0-4b0d-a894-a39f1b9095fc" title="Permalink to this equation">¶</a></span>\[\begin{bmatrix}
+<div class="amsmath math notranslate nohighlight" id="equation-3b908ac8-0390-44b5-84b7-63b4d7380d8e">
+<span class="eqno">(7)<a class="headerlink" href="#equation-3b908ac8-0390-44b5-84b7-63b4d7380d8e" title="Permalink to this equation">¶</a></span>\[\begin{bmatrix}
  &amp; S_{1} &amp; S_{2} &amp; S_{3} &amp; S_{4} \\
 A &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
 C  &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
@@ -895,17 +902,17 @@ Vaibhav Dilip Khandare
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_04_08_Locality_Sensitive_Hashing.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Gaussian Annulus Theorem</p>
+            <p class="prev-next-title">Locality Sensitive Hashing</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="2022_04_10_DistinctCount_BloomFilters.html" title="next page">
+    <a class='right-next' id="next-link" href="2022_04_07_Randomized_Numerical_Linear_Algebra_Random_Projection.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bloom Filters</p>
+        <p class="prev-next-title">Randomized Numerical Linear Algebra: Random Projection</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

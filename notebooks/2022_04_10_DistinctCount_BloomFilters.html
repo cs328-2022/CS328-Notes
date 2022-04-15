@@ -58,8 +58,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Low rank approximation in Mixture Models and Recommendation systems" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html" />
-    <link rel="prev" title="Building LSH Table" href="2022_04_07_Building_LSH_Tables.html" />
+    <link rel="next" title="Linear Counting" href="2022_03_31_Linear_Counting.html" />
+    <link rel="prev" title="Streaming Models and Answering Inclusion Queries" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -172,7 +172,7 @@
   Clustering and low-rank approximations
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="2022_01_17_Clustering.html">
    Clustering
@@ -224,6 +224,16 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_17_Mixture_Models.html">
+   Mixture Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
+   Gaussian Annulus Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="2022_03_14_singular_value_decomposition.html">
    Singular Valued Decomposition (SVD)
   </a>
@@ -244,33 +254,25 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_17_Mixture_Models.html">
-   Mixture Models
+  <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
+   Low rank approximation in Mixture Models and Recommendation systems
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dealing with massive data
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
-   Gaussian Annulus Theorem
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
-   Building LSH Table
+  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
+   Streaming Models and Answering Inclusion Queries
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Bloom Filters
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
-   Low rank approximation in Mixture Models and Recommendation systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
-   Streaming Models and Answering Inclusion Queries
   </a>
  </li>
  <li class="toctree-l1">
@@ -291,13 +293,18 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
+   Finding Near Neighbors
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="2022_04_08_Locality_Sensitive_Hashing.html">
    Locality Sensitive Hashing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
-   Finding Near Neighbors
+  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
+   Building LSH Table
   </a>
  </li>
  <li class="toctree-l1">
@@ -587,7 +594,7 @@ The first idea would be to use Hashing; which reduces the space used to <span cl
 <h2>Bloom Filter:<a class="headerlink" href="#bloom-filter" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-default" id="fig1">
 <img alt="../_images/fig11.png" src="../_images/fig11.png" />
-<p class="caption"><span class="caption-number">Fig. 36 </span><span class="caption-text">Figure 1: Bloom Filter</span><a class="headerlink" href="#fig1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 37 </span><span class="caption-text">Figure 1: Bloom Filter</span><a class="headerlink" href="#fig1" title="Permalink to this image">¶</a></p>
 </div>
 <p>A bloom filter uses a bit array B of size, <span class="math notranslate nohighlight">\(m\)</span>, say, and <span class="math notranslate nohighlight">\(k\)</span> hash functions. m and k are parameters which we will look at shortly. First let us take a look at the structure and working of the BF. For every element <span class="math notranslate nohighlight">\(x\)</span> belonging to <span class="math notranslate nohighlight">\(U\)</span>, each hash function maps it to a particular location in the bit array. We start with all bits of B initialized to 0, i.e. <span class="math notranslate nohighlight">\(B[i]=0\)</span> for all 1<span class="math notranslate nohighlight">\(\leq\)</span>i<span class="math notranslate nohighlight">\(\leq\)</span>m.</p>
 <p><strong>Insertion</strong>:
@@ -597,7 +604,7 @@ For all <span class="math notranslate nohighlight">\(x⊆U\)</span>, we apply ha
 For a particular element <span class="math notranslate nohighlight">\(x\)</span>, return PRESENT if for all <span class="math notranslate nohighlight">\(i=1…k\)</span>, ^<span class="math notranslate nohighlight">\(B[hi(x)]\)</span> is <span class="math notranslate nohighlight">\(1\)</span>, where ^ denotes the BITWISE AND. Else return ABSENT.</p>
 <div class="figure align-default" id="fig2">
 <img alt="../_images/fig2.png" src="../_images/fig2.png" />
-<p class="caption"><span class="caption-number">Fig. 37 </span><span class="caption-text">Figure 2: Insertion and lookup in a BF</span><a class="headerlink" href="#fig2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 38 </span><span class="caption-text">Figure 2: Insertion and lookup in a BF</span><a class="headerlink" href="#fig2" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="analysis">
@@ -626,7 +633,7 @@ And false positive probability=<br>               �
 <p>This is clearly minimized at <span class="math notranslate nohighlight">\(p=1/2\)</span> or <span class="math notranslate nohighlight">\(k=\frac{mlog(2)}{n}\)</span></p>
 <div class="figure align-default" id="fig3">
 <img alt="../_images/fig3.png" src="../_images/fig3.png" />
-<p class="caption"><span class="caption-number">Fig. 38 </span><span class="caption-text">Figure 3: Minimizing the false positive rate</span><a class="headerlink" href="#fig3" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 39 </span><span class="caption-text">Figure 3: Minimizing the false positive rate</span><a class="headerlink" href="#fig3" title="Permalink to this image">¶</a></p>
 </div>
 <p>Doing a few mathematical manipulations, we see that the false positive rate is minimized at <span class="math notranslate nohighlight">\(k=\frac{mlog2}{n}\)</span>.</p>
 <p>This now gives us an estimate of designing a Bloom Filter efficiently. If we want a false positive rate of delta, we set <span class="math notranslate nohighlight">\(m=\lceil \frac{log\frac{1}{\delta}n}{log^2 2} \rceil\)</span></p>
@@ -708,17 +715,17 @@ Author(s): Ayush Anand, Bhoomika Mandloi, Lakshmi Ramireddy
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022_04_07_Building_LSH_Tables.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Building LSH Table</p>
+            <p class="prev-next-title">Streaming Models and Answering Inclusion Queries</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html" title="next page">
+    <a class='right-next' id="next-link" href="2022_03_31_Linear_Counting.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Low rank approximation in Mixture Models and Recommendation systems</p>
+        <p class="prev-next-title">Linear Counting</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

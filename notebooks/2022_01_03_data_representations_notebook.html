@@ -224,6 +224,16 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_17_Mixture_Models.html">
+   Mixture Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
+   Gaussian Annulus Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="2022_03_14_singular_value_decomposition.html">
    Singular Valued Decomposition (SVD)
   </a>
@@ -244,33 +254,25 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_17_Mixture_Models.html">
-   Mixture Models
+  <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
+   Low rank approximation in Mixture Models and Recommendation systems
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dealing with massive data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_02_21_Chi_Squared_Distribution%2C_Gaussian_Annulus_Theorem%2C_Distance_between_points_sampled_from_a_distribution.html">
-   Gaussian Annulus Theorem
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
-   Building LSH Table
+  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
+   Streaming Models and Answering Inclusion Queries
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2022_04_10_DistinctCount_BloomFilters.html">
    Bloom Filters
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_24_Low_rank_approximation_Mixture_Models%20_and_Recommendation%20systems.html">
-   Low rank approximation in Mixture Models and Recommendation systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="2022_03_25_Streamingmodels_and_answering_inclusion_queries.html">
-   Streaming Models and Answering Inclusion Queries
   </a>
  </li>
  <li class="toctree-l1">
@@ -291,13 +293,18 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
+   Finding Near Neighbors
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="2022_04_08_Locality_Sensitive_Hashing.html">
    Locality Sensitive Hashing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2022_04_07_Near_Neighbors.html">
-   Finding Near Neighbors
+  <a class="reference internal" href="2022_04_07_Building_LSH_Tables.html">
+   Building LSH Table
   </a>
  </li>
  <li class="toctree-l1">
@@ -494,30 +501,43 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;animation&#39;</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="s1">&#39;jshtml&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;animation&quot;</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="s2">&quot;jshtml&quot;</span><span class="p">)</span>
 
-<span class="n">frn</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># Number of frames to process in the animation</span>
-<span class="n">fps</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># Frames per second</span>
-<span class="n">mywriter</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">PillowWriter</span><span class="p">(</span><span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span> 
+<span class="n">frn</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Number of frames to process in the animation</span>
+<span class="n">fps</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># Frames per second</span>
+<span class="n">mywriter</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">PillowWriter</span><span class="p">(</span><span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mnist_dataset</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">root</span> <span class="o">=</span> <span class="s2">&quot;data/mnist&quot;</span><span class="p">,</span> <span class="n">train</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">download</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mnist_dataset</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span>
+    <span class="n">root</span><span class="o">=</span><span class="s2">&quot;data/mnist&quot;</span><span class="p">,</span>
+    <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+<span class="p">)</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;assets/gif/image0&quot;</span><span class="p">):</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;assets/gif/image0&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">loop_idx</span><span class="p">,</span> <span class="p">(</span><span class="n">image_tensor</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mnist_dataset</span><span class="p">):</span>
-    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
     <span class="n">image_tensor_gray</span> <span class="o">=</span> <span class="n">image_tensor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">image_tensor_gray</span> <span class="o">=</span> <span class="n">image_tensor_gray</span> <span class="o">*</span> <span class="mi">255</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">image_tensor_gray</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">image_tensor_gray</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">image_tensor_gray</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">image_tensor_gray</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">image_tensor_gray</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())),</span> <span class="n">va</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">ha</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="s2">&quot;small&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+                <span class="n">i</span><span class="p">,</span>
+                <span class="n">j</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">image_tensor_gray</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())),</span>
+                <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+                <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+                <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;small&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -526,19 +546,22 @@
     <span class="k">if</span> <span class="n">loop_idx</span> <span class="o">&gt;=</span> <span class="n">frn</span><span class="p">:</span>
         <span class="k">break</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="n">plot</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;assets/gif/image0/0.png&quot;</span><span class="p">))]</span>
+
+
 <span class="k">def</span> <span class="nf">change_plot</span><span class="p">(</span><span class="n">frame_number</span><span class="p">):</span>
     <span class="n">plot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
     <span class="n">plot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;assets/gif/image0/</span><span class="si">{</span><span class="n">frame_number</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">))</span>
 
+
 <span class="n">ani</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">change_plot</span><span class="p">,</span> <span class="n">frn</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1000</span> <span class="o">/</span> <span class="n">fps</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">display</span><span class="p">(</span><span class="n">ani</span><span class="p">)</span>
-<span class="n">ani</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;mnist_gray_values.gif&#39;</span><span class="p">,</span><span class="n">writer</span><span class="o">=</span><span class="n">mywriter</span><span class="p">)</span>
+<span class="n">ani</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;mnist_gray_values.gif&quot;</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="n">mywriter</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 </pre></div>
@@ -19317,31 +19340,60 @@ rkJggg==\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cifar_dataset</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span><span class="n">root</span> <span class="o">=</span> <span class="s2">&quot;data/cifar&quot;</span><span class="p">,</span> <span class="n">train</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">download</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cifar_dataset</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span>
+    <span class="n">root</span><span class="o">=</span><span class="s2">&quot;data/cifar&quot;</span><span class="p">,</span>
+    <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+<span class="p">)</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;assets/gif/image1&quot;</span><span class="p">):</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;assets/gif/image1&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">image_tensor</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">cifar_dataset</span><span class="p">:</span>
-    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
     <span class="n">image_tensor</span> <span class="o">*=</span> <span class="mi">255</span>
     <span class="n">image_tensor</span> <span class="o">=</span> <span class="n">image_tensor</span><span class="o">.</span><span class="n">int</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-    <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;Reds&quot;</span><span class="p">)</span>
-    <span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;Greens&quot;</span><span class="p">)</span>
-    <span class="n">ax3</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Greens&quot;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
     <span class="n">ax4</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_tensor</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-            <span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())),</span> <span class="n">va</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">ha</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="s2">&quot;x-small&quot;</span><span class="p">)</span>
-            <span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())),</span> <span class="n">va</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">ha</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="s2">&quot;x-small&quot;</span><span class="p">)</span>
-            <span class="n">ax3</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())),</span> <span class="n">va</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">ha</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="s2">&quot;x-small&quot;</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;assets/gif/image1/0.png&quot;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">500</span><span class="p">)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+                <span class="n">i</span><span class="p">,</span>
+                <span class="n">j</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())),</span>
+                <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+                <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+                <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;x-small&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+                <span class="n">i</span><span class="p">,</span>
+                <span class="n">j</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())),</span>
+                <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+                <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+                <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;x-small&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">ax3</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+                <span class="n">i</span><span class="p">,</span>
+                <span class="n">j</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())),</span>
+                <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+                <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+                <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;x-small&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;assets/gif/image1/0.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
     <span class="k">break</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;assets/gif/image1/0.png&quot;</span><span class="p">))</span>
@@ -19369,7 +19421,7 @@ Hence, we take individual words as the smallest unit.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchtext</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
-<span class="n">imdb_dataset</span> <span class="o">=</span> <span class="n">torchtext</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">IMDB</span><span class="p">(</span><span class="n">root</span> <span class="o">=</span> <span class="s2">&quot;./data/imdb&quot;</span><span class="p">,</span> <span class="n">split</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<span class="n">imdb_dataset</span> <span class="o">=</span> <span class="n">torchtext</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">IMDB</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s2">&quot;./data/imdb&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -19398,7 +19450,9 @@ Hence, we take individual words as the smallest unit.</p>
 <p><strong>Step 1: Breaking the text into sentences</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">review_sent_tokens</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?&lt;!\w\.\w.)(?&lt;![A-Z][a-z]\.)(?&lt;=\.|\?)\s&#39;</span><span class="p">,</span> <span class="n">review_text</span><span class="p">)</span> <span class="c1"># Use this regex instead of simple .split(&quot;.&quot;), as review contains &quot;...&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">review_sent_tokens</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">&quot;(?&lt;!\w\.\w.)(?&lt;![A-Z][a-z]\.)(?&lt;=\.|\?)\s&quot;</span><span class="p">,</span> <span class="n">review_text</span>
+<span class="p">)</span>  <span class="c1"># Use this regex instead of simple .split(&quot;.&quot;), as review contains &quot;...&quot;</span>
 <span class="n">display</span><span class="p">(</span><span class="n">review_sent_tokens</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -19427,7 +19481,9 @@ Hence, we take individual words as the smallest unit.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">review_sent_tokens</span> <span class="o">=</span> <span class="n">review_sent_tokens</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span> <span class="c1"># Take only first 3 sentences for illustration</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">review_sent_tokens</span> <span class="o">=</span> <span class="n">review_sent_tokens</span><span class="p">[</span>
+    <span class="p">:</span><span class="mi">5</span>
+<span class="p">]</span>  <span class="c1"># Take only first 3 sentences for illustration</span>
 </pre></div>
 </div>
 </div>
@@ -19437,10 +19493,11 @@ Hence, we take individual words as the smallest unit.</p>
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tokenise</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
     <span class="c1"># split the sentence into units (words or phrases)</span>
-    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;[A-Z]{2,}(?![a-z])|[A-Z][a-z]+(?=[A-Z])|[</span><span class="se">\&#39;</span><span class="s2">\w\-]+&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;[A-Z]{2,}(?![a-z])|[A-Z][a-z]+(?=[A-Z])|[&#39;\w\-]+&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
 
 <span class="n">review_word_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">tokenise</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">review_sent_tokens</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">review_word_tokens</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">review_word_tokens</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -19459,14 +19516,19 @@ Hence, we take individual words as the smallest unit.</p>
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
 <span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">PorterStemmer</span>
+
 <span class="n">ps</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
+
 
 <span class="k">def</span> <span class="nf">stem_sentence</span><span class="p">(</span><span class="n">sent_word_tokens</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">ps</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sent_word_tokens</span><span class="p">]</span>
 
-<span class="n">review_word_stem_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">stem_sentence</span><span class="p">(</span><span class="n">sent_word_tokens</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent_word_tokens</span> <span class="ow">in</span> <span class="n">review_word_tokens</span><span class="p">]</span>
+
+<span class="n">review_word_stem_tokens</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">stem_sentence</span><span class="p">(</span><span class="n">sent_word_tokens</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent_word_tokens</span> <span class="ow">in</span> <span class="n">review_word_tokens</span>
+<span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stemmer::&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">review_word_stem_tokens</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">review_word_stem_tokens</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -19485,15 +19547,20 @@ Hence, we take individual words as the smallest unit.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">)</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;wordnet&quot;</span><span class="p">)</span>
 <span class="n">wordnet_lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+
 
 <span class="k">def</span> <span class="nf">lemmatize_sentence</span><span class="p">(</span><span class="n">sent_word_tokens</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">wordnet_lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sent_word_tokens</span><span class="p">]</span>
 
-<span class="n">review_word_lemma_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">lemmatize_sentence</span><span class="p">(</span><span class="n">sent_word_tokens</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent_word_tokens</span> <span class="ow">in</span> <span class="n">review_word_tokens</span><span class="p">]</span>
+
+<span class="n">review_word_lemma_tokens</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">lemmatize_sentence</span><span class="p">(</span><span class="n">sent_word_tokens</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent_word_tokens</span> <span class="ow">in</span> <span class="n">review_word_tokens</span>
+<span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lemmatizer::&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">review_word_lemma_tokens</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">review_word_lemma_tokens</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -19514,13 +19581,18 @@ Lemmatizer::
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;stopwords&quot;</span><span class="p">)</span>
+
 
 <span class="k">def</span> <span class="nf">remove_stop_words</span><span class="p">(</span><span class="n">sent_word_tokens</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sent_word_tokens</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sent_word_tokens</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">)]</span>
 
-<span class="n">review_word_stem_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">remove_stop_words</span><span class="p">(</span><span class="n">sent_word_tokens</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent_word_tokens</span> <span class="ow">in</span> <span class="n">review_word_stem_tokens</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">review_word_stem_tokens</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">review_word_stem_tokens</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">remove_stop_words</span><span class="p">(</span><span class="n">sent_word_tokens</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent_word_tokens</span> <span class="ow">in</span> <span class="n">review_word_stem_tokens</span>
+<span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">review_word_stem_tokens</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -19549,13 +19621,17 @@ Lemmatizer::
         <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unigram_vocab</span><span class="p">:</span>
             <span class="n">unigram_vocab</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unigram_vocab</span><span class="p">)</span>
 
-<span class="n">review_sent_count_vectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">unigram_vocab</span><span class="p">)),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="n">review_sent_count_vectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+    <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">unigram_vocab</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span>
+<span class="p">)</span>
 
 <span class="k">for</span> <span class="n">sent_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">)):</span>
     <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">]:</span>
         <span class="n">review_sent_count_vectors</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">unigram_vocab</span><span class="p">[</span><span class="n">word</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">review_sent_count_vectors</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">unigram_vocab</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">unigram_vocab</span><span class="o">.</span><span class="n">get</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">review_sent_count_vectors</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">unigram_vocab</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">unigram_vocab</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+<span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -19930,14 +20006,23 @@ Lemmatizer::
         <span class="k">if</span> <span class="n">bigram</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">bigram_vocab</span><span class="p">:</span>
             <span class="n">bigram_vocab</span><span class="p">[</span><span class="n">bigram</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bigram_vocab</span><span class="p">)</span>
 
-<span class="n">review_sent_bigram_count_vectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">bigram_vocab</span><span class="p">)),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="n">review_sent_bigram_count_vectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+    <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">bigram_vocab</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span>
+<span class="p">)</span>
 
 <span class="k">for</span> <span class="n">sent_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">)):</span>
     <span class="k">for</span> <span class="n">word_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">bigram</span> <span class="o">=</span> <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">bigram</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span><span class="p">]</span>
+            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
         <span class="n">review_sent_bigram_count_vectors</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">bigram_vocab</span><span class="p">[</span><span class="n">bigram</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">review_sent_bigram_count_vectors</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">bigram_vocab</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">bigram_vocab</span><span class="o">.</span><span class="n">get</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">review_sent_bigram_count_vectors</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">bigram_vocab</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">bigram_vocab</span><span class="o">.</span><span class="n">get</span><span class="p">),</span>
+<span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -20338,18 +20423,35 @@ Lemmatizer::
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trigram_vocab</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">review_word_stem_tokens</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">word_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
-        <span class="n">trigram</span> <span class="o">=</span> <span class="n">sent</span><span class="p">[</span><span class="n">word_idx</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">sent</span><span class="p">[</span><span class="n">word_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">sent</span><span class="p">[</span><span class="n">word_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">trigram</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">sent</span><span class="p">[</span><span class="n">word_idx</span><span class="p">]</span>
+            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">sent</span><span class="p">[</span><span class="n">word_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">sent</span><span class="p">[</span><span class="n">word_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="p">)</span>
         <span class="k">if</span> <span class="n">trigram</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">trigram_vocab</span><span class="p">:</span>
             <span class="n">trigram_vocab</span><span class="p">[</span><span class="n">trigram</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">trigram_vocab</span><span class="p">)</span>
 
-<span class="n">review_sent_trigram_count_vectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">trigram_vocab</span><span class="p">)),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="n">review_sent_trigram_count_vectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+    <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">trigram_vocab</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span>
+<span class="p">)</span>
 
 <span class="k">for</span> <span class="n">sent_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">)):</span>
     <span class="k">for</span> <span class="n">word_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">])</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
-        <span class="n">trigram</span> <span class="o">=</span> <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">trigram</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span><span class="p">]</span>
+            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="p">)</span>
         <span class="n">review_sent_trigram_count_vectors</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">trigram_vocab</span><span class="p">[</span><span class="n">trigram</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">review_sent_trigram_count_vectors</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">trigram_vocab</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">trigram_vocab</span><span class="o">.</span><span class="n">get</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">review_sent_trigram_count_vectors</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">trigram_vocab</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">trigram_vocab</span><span class="o">.</span><span class="n">get</span><span class="p">),</span>
+<span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -20730,14 +20832,23 @@ Lemmatizer::
         <span class="k">if</span> <span class="n">skipgram</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">skip_1_gram_vocab</span><span class="p">:</span>
             <span class="n">skip_1_gram_vocab</span><span class="p">[</span><span class="n">skipgram</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">skip_1_gram_vocab</span><span class="p">)</span>
 
-<span class="n">review_sent_skipgram_count_vectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">skip_1_gram_vocab</span><span class="p">)),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="n">review_sent_skipgram_count_vectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+    <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">skip_1_gram_vocab</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span>
+<span class="p">)</span>
 
 <span class="k">for</span> <span class="n">sent_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">)):</span>
     <span class="k">for</span> <span class="n">word_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">])</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
-        <span class="n">skipgram</span> <span class="o">=</span> <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">skipgram</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span><span class="p">]</span>
+            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">review_word_stem_tokens</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">word_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="p">)</span>
         <span class="n">review_sent_skipgram_count_vectors</span><span class="p">[</span><span class="n">sent_idx</span><span class="p">][</span><span class="n">skip_1_gram_vocab</span><span class="p">[</span><span class="n">skipgram</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">review_sent_skipgram_count_vectors</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">skip_1_gram_vocab</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">skip_1_gram_vocab</span><span class="o">.</span><span class="n">get</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">review_sent_skipgram_count_vectors</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">skip_1_gram_vocab</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">skip_1_gram_vocab</span><span class="o">.</span><span class="n">get</span><span class="p">),</span>
+<span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
